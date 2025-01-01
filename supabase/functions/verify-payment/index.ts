@@ -1,27 +1,18 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
 const TRON_API_URL = 'https://api.trongrid.io';
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
 const MERCHANT_ADDRESS = Deno.env.get('MERCHANT_ADDRESS');
 
-interface TronTransaction {
-  transaction_id: string;
-  from: string;
-  to: string;
-  amount: number;
-  block_timestamp: number;
-}
-
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-      },
-    });
+    return new Response(null, { headers: corsHeaders })
   }
 
   try {
@@ -43,23 +34,22 @@ serve(async (req) => {
       .maybeSingle();
 
     if (fetchError) {
+      console.error('Error fetching payment:', fetchError);
       throw fetchError;
     }
 
     if (!payment) {
+      console.log('No pending payment found for email:', email);
       return new Response(
-        JSON.stringify({ error: 'Payment not found' }),
+        JSON.stringify({ status: 'no_payment_found' }),
         { 
-          status: 404,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 200,
         }
       );
     }
 
-    console.log('Found payment:', payment);
+    console.log('Found pending payment:', payment);
 
     // Check recent transactions to merchant address
     const response = await fetch(
@@ -71,13 +61,26 @@ serve(async (req) => {
       }
     );
 
-    const data = await response.json();
-    const transactions: TronTransaction[] = data.data || [];
+    if (!response.ok) {
+      console.error('Error fetching transactions:', await response.text());
+      throw new Error('Failed to fetch transactions');
+    }
 
+    const data = await response.json();
+    console.log('Fetched transactions:', data);
+
+    const transactions = data.data || [];
+    
     // Look for a matching transaction (same amount)
     const matchingTx = transactions.find(tx => {
-      const txAmount = Number(tx.amount) / 1_000_000; // Convert from TRC20 decimals
-      return txAmount === payment.amount && 
+      const txAmount = Number(tx.value) / 1_000_000; // Convert from TRC20 decimals
+      console.log('Comparing transaction:', {
+        txAmount,
+        paymentAmount: payment.amount,
+        txTo: tx.to.toLowerCase(),
+        merchantAddress: MERCHANT_ADDRESS?.toLowerCase()
+      });
+      return Math.abs(txAmount - payment.amount) < 0.01 && // Allow for small rounding differences
              tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase();
     });
 
@@ -94,27 +97,25 @@ serve(async (req) => {
         .eq('id', payment.id);
 
       if (updateError) {
+        console.error('Error updating payment:', updateError);
         throw updateError;
       }
 
       return new Response(
         JSON.stringify({ status: 'success', transaction: matchingTx }),
         { 
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 200,
         }
       );
     }
 
+    console.log('No matching transaction found');
     return new Response(
       JSON.stringify({ status: 'pending' }),
       { 
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 200,
       }
     );
 
@@ -124,10 +125,7 @@ serve(async (req) => {
       JSON.stringify({ error: error.message }),
       { 
         status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       }
     );
   }

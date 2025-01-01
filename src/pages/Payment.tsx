@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, CheckCircle2, AlertCircle } from 'lucide-react';
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from 'sonner';
 
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
 const MERCHANT_ADDRESS = 'TEWmboRA5KRovRQkEKHjCBh5rNstiCuKya';
@@ -35,6 +36,7 @@ const PaymentPage = () => {
       if (error) {
         console.error('Error creating payment:', error);
         setTransactionStatus('failed');
+        toast.error("Error creating payment record");
       }
     };
 
@@ -43,31 +45,40 @@ const PaymentPage = () => {
     // Set up polling to check for payment
     const checkPayment = async () => {
       try {
+        console.log('Checking payment status for email:', email);
         const { data, error } = await supabase.functions.invoke('verify-payment', {
           body: { email }
         });
 
         if (error) {
           console.error('Error checking payment:', error);
-          return;
+          toast.error("Error verifying payment");
+          return false;
         }
+
+        console.log('Payment verification response:', data);
 
         if (data.status === 'success') {
           setTransactionStatus('success');
-          // Stop polling once payment is successful
+          toast.success("Payment confirmed!");
+          return true;
+        } else if (data.status === 'no_payment_found') {
+          setTransactionStatus('failed');
+          toast.error("Payment record not found");
           return true;
         }
 
       } catch (error) {
         console.error('Error checking payment:', error);
+        toast.error("Error checking payment status");
       }
       return false;
     };
 
     // Check every 30 seconds
     const intervalId = setInterval(async () => {
-      const success = await checkPayment();
-      if (success) {
+      const shouldStop = await checkPayment();
+      if (shouldStop) {
         clearInterval(intervalId);
       }
     }, 30000);
