@@ -23,13 +23,7 @@ serve(async (req) => {
       payment_method_types: ['card'],
       line_items: [
         {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Trading Tournament Entry',
-            },
-            unit_amount: 15000, // $150.00
-          },
+          price: 'price_1QcOI8Gtpfuh7c42F6zb7dCJ',
           quantity: 1,
         },
       ],
@@ -47,6 +41,7 @@ serve(async (req) => {
       }
     );
   } catch (error) {
+    console.error('Error creating payment session:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
       { 
