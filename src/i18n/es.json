@@ -159,5 +159,48 @@
         "description": "Explora el trading de activos digitales con ejecución segura y eficiente"
       }
     }
+  },
+  "payment": {
+    "howItWorks": {
+      "title": "Cómo Funciona el Pago",
+      "confirmationTime": {
+        "title": "Tiempo de Confirmación",
+        "description": "Las transacciones en la red TRON (TRC20) son rápidas y generalmente se confirman en menos de 1 minuto. Sin embargo, en casos raros, pueden tardar hasta 5 minutos dependiendo del tráfico en la red."
+      },
+      "autoNotification": {
+        "title": "Notificación Automática",
+        "description": "Una vez que el pago se confirme en la blockchain, recibirás una notificación en tu correo con los detalles de tu inscripción al torneo."
+      }
+    },
+    "whyUsdt": {
+      "title": "Por Qué Usar USDT (TRC20)",
+      "networkFees": {
+        "title": "Bajas Tarifas de Red",
+        "description": "La red TRON ofrece tarifas de transacción casi inexistentes, asegurando que el monto que envíes sea el mismo que recibimos."
+      },
+      "security": {
+        "title": "Seguridad Garantizada",
+        "description": "Todas las transacciones son verificadas en la blockchain, lo que garantiza transparencia y seguridad."
+      }
+    },
+    "support": {
+      "title": "Política de Soporte",
+      "questions": {
+        "title": "¿Tienes Preguntas?",
+        "description": "Si tienes algún problema con tu transacción, nuestro equipo está aquí para ayudarte. Escríbenos a support@elitetraderhub.com."
+      },
+      "incorrectPayments": {
+        "title": "Pagos Incorrectos",
+        "description": "Asegúrate de enviar exactamente 2.5 USDT. Pagos incompletos o en redes incorrectas pueden no ser procesados."
+      }
+    },
+    "benefits": {
+      "title": "Beneficios de Participar",
+      "items": [
+        "Acceso exclusivo al Elite Trading Tournament, donde puedes ganar premios increíbles.",
+        "Conéctate con una comunidad de traders apasionados.",
+        "Una oportunidad única de probar tus habilidades en un entorno competitivo."
+      ]
+    }
   }
 }

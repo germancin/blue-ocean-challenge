@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PaymentDetailsCard } from '@/components/payment/PaymentDetailsCard';
 import { PaymentInstructionsCard } from '@/components/payment/PaymentInstructionsCard';
+import { PaymentInformationCard } from '@/components/payment/PaymentInformationCard';
 import { usePaymentVerification } from '@/hooks/use-payment-verification';
 
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
@@ -29,9 +30,14 @@ const PaymentPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Left Column - Order Details */}
-        <div className="space-y-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Left Column - Payment Information */}
+        <div className="lg:col-span-1">
+          <PaymentInformationCard />
+        </div>
+
+        {/* Middle Column - Order Details */}
+        <div className="lg:col-span-1">
           <PaymentDetailsCard 
             amount={AMOUNT}
             email={email}
@@ -39,7 +45,7 @@ const PaymentPage = () => {
         </div>
 
         {/* Right Column - Payment QR and Status */}
-        <div className="space-y-6">
+        <div className="lg:col-span-1">
           <PaymentInstructionsCard 
             amount={AMOUNT}
             merchantAddress={MERCHANT_ADDRESS}
