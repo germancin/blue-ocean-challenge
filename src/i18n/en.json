@@ -16,39 +16,57 @@
       "description": "Higher odds compared to traditional trading competitions"
     }
   },
-  "diversification": {
-    "title": "Diversification: Mandatory Strategy",
-    "forex": {
-      "title": "Forex",
-      "description": "Maximum 5 simultaneous positions in currency pairs."
+  "rules": {
+    "title": "Tournament Rules",
+    "subtitle": "Welcome to the TradingLab World Trading Tournament",
+    "generalConditions": {
+      "title": "General Conditions",
+      "demoAccount": {
+        "title": "Demo Account",
+        "description": "Each participant receives $10,000 USD"
+      },
+      "leverage": {
+        "title": "Leverage",
+        "description": "1:500 leverage allowed"
+      },
+      "duration": {
+        "title": "Duration",
+        "description": "One week (5 trading days)"
+      }
     },
-    "indices": {
-      "title": "Indices",
-      "description": "Up to 5 open positions in stock market indices at the same time."
+    "riskManagement": {
+      "title": "Risk Management: Key to Success",
+      "maxDrawdown": {
+        "title": "Maximum Drawdown",
+        "description": "45% of initial capital ($4,500)"
+      },
+      "simultaneousOperations": {
+        "title": "Simultaneous Operations",
+        "description": "Maximum 5 open positions at once"
+      },
+      "consequence": {
+        "title": "Consequence",
+        "description": "Exceeding limits results in automatic disqualification"
+      }
     },
-    "crypto": {
-      "title": "Cryptocurrencies",
-      "description": "5 simultaneous positions allowed in the crypto market."
+    "evaluationCriteria": {
+      "title": "Tournament Evaluation Criteria",
+      "finalBalance": {
+        "title": "Positive Final Balance",
+        "description": "Main criterion for determining contest winners"
+      },
+      "ruleCompliance": {
+        "title": "Rule Compliance",
+        "description": "Respect for maximum drawdown and mandatory diversification"
+      },
+      "additionalMetrics": {
+        "title": "Additional Metrics",
+        "description": "Profit Factor and Sharpe Ratio for tiebreakers"
+      },
+      "minimumRequirements": {
+        "title": "Minimum Requirements",
+        "description": "At least 15 executed trades. No trade duration less than 3 minutes"
+      }
     }
-  },
-  "stats": {
-    "prizePool": "Prize Pool",
-    "activeTraders": "Active Traders",
-    "liveTrading": "Live Trading"
-  },
-  "prizes": {
-    "first": {
-      "title": "First place",
-      "perks": ["Hall of Fame spot", "Interview"]
-    },
-    "second": {
-      "title": "Second place",
-      "perks": ["Interview"]
-    },
-    "third": {
-      "title": "Third place",
-      "perks": ["Interview"]
-    },
-    "challenge": "One-Phase challenge"
   }
 }

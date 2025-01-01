@@ -16,39 +16,57 @@
       "description": "Mejores probabilidades comparado con competencias tradicionales de trading"
     }
   },
-  "diversification": {
-    "title": "Diversificación: Estrategia Obligatoria",
-    "forex": {
-      "title": "Forex",
-      "description": "Máximo 5 posiciones simultáneas en pares de divisas."
+  "rules": {
+    "title": "Reglas del Torneo",
+    "subtitle": "Bienvenidos al TradingLab World Trading Tournament",
+    "generalConditions": {
+      "title": "Condiciones Generales",
+      "demoAccount": {
+        "title": "Cuenta Demo",
+        "description": "Cada participante recibe $10,000 USD"
+      },
+      "leverage": {
+        "title": "Apalancamiento",
+        "description": "Se permite apalancamiento 1:500"
+      },
+      "duration": {
+        "title": "Duración",
+        "description": "Una semana (5 días hábiles)"
+      }
     },
-    "indices": {
-      "title": "Índices",
-      "description": "Hasta 5 posiciones abiertas en índices bursátiles al mismo tiempo."
+    "riskManagement": {
+      "title": "Gestión de Riesgo: Clave para el Éxito",
+      "maxDrawdown": {
+        "title": "Drawdown Máximo",
+        "description": "45% del capital inicial ($4,500)"
+      },
+      "simultaneousOperations": {
+        "title": "Operaciones Simultáneas",
+        "description": "Máximo 5 operaciones abiertas a la vez"
+      },
+      "consequence": {
+        "title": "Consecuencia",
+        "description": "Superar límites resulta en descalificación automática"
+      }
     },
-    "crypto": {
-      "title": "Criptomonedas",
-      "description": "5 posiciones simultáneas permitidas en el mercado cripto."
+    "evaluationCriteria": {
+      "title": "Criterios de Evaluación del Torneo",
+      "finalBalance": {
+        "title": "Balance Final Positivo",
+        "description": "Principal criterio para determinar los ganadores del concurso"
+      },
+      "ruleCompliance": {
+        "title": "Cumplimiento de Reglas",
+        "description": "Respeto al drawdown máximo y diversificación obligatoria"
+      },
+      "additionalMetrics": {
+        "title": "Métricas Adicionales",
+        "description": "Profit Factor y Ratio de Sharpe para desempates"
+      },
+      "minimumRequirements": {
+        "title": "Requisitos Mínimos",
+        "description": "Deberá haber al menos 15 operaciones ejecutadas. Ninguna operación menor a 3 minutos"
+      }
     }
-  },
-  "stats": {
-    "prizePool": "Pozo de Premios",
-    "activeTraders": "Traders Activos",
-    "liveTrading": "Trading en Vivo"
-  },
-  "prizes": {
-    "first": {
-      "title": "Primer lugar",
-      "perks": ["Lugar en el Salón de la Fama", "Entrevista"]
-    },
-    "second": {
-      "title": "Segundo lugar",
-      "perks": ["Entrevista"]
-    },
-    "third": {
-      "title": "Tercer lugar",
-      "perks": ["Entrevista"]
-    },
-    "challenge": "Desafío de Una Fase"
   }
 }
