@@ -11,11 +11,15 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
+// Validate environment variables
 if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Missing Supabase environment variables');
+  console.error('Missing Supabase environment variables:', {
+    url: !!supabaseUrl,
+    key: !!supabaseKey
+  });
 }
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl || '', supabaseKey || '');
 
 interface SubscriptionFormData {
   name: string;
@@ -28,6 +32,10 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const { i18n } = useTranslation();
 
   const saveToSupabase = async (data: SubscriptionFormData) => {
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error('Supabase configuration is missing');
+    }
+
     const { error } = await supabase
       .from('subscribers')
       .insert([
