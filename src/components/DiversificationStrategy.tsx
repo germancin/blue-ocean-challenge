@@ -54,28 +54,30 @@ const DiversificationStrategy = () => {
           {strategies.map((strategy, index) => (
             <div
               key={index}
-              className="group relative bg-navy/50 backdrop-blur-sm border border-bright-blue/20 rounded-xl p-8 hover:border-bright-blue/50 transition-all duration-300 transform hover:-translate-y-2"
+              className="group relative bg-navy/50 backdrop-blur-sm border border-bright-blue/20 rounded-xl overflow-hidden hover:border-bright-blue/50 transition-all duration-300 transform hover:-translate-y-2"
             >
               {/* Card Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-bright-blue/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-bright-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               
-              <div className="relative space-y-6">
-                <div className="flex justify-center">
-                  {strategy.icon}
-                </div>
-                
-                <div className="text-center space-y-4">
-                  <h3 className="text-2xl font-bold text-bright-blue">
-                    {strategy.title}
-                  </h3>
+              <div className="relative">
+                <div className="p-8 space-y-6">
+                  <div className="flex justify-center">
+                    {strategy.icon}
+                  </div>
                   
-                  <p className="text-white text-lg">
-                    {strategy.description}
-                  </p>
+                  <div className="text-center space-y-4">
+                    <h3 className="text-2xl font-bold text-bright-blue">
+                      {strategy.title}
+                    </h3>
+                    
+                    <p className="text-white text-lg">
+                      {strategy.description}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Trading Chart Image */}
-                <div className="mt-6 rounded-lg overflow-hidden">
+                <div className="w-full">
                   <img
                     src={strategy.image}
                     alt={`${strategy.title} trading chart`}
