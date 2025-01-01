@@ -67,6 +67,9 @@ const Hero = () => {
                   </DialogHeader>
                   <div className="mt-4">
                     <SubscriptionForm onSuccess={() => setIsDialogOpen(false)} />
+                    <p className="text-center text-sm text-gray-500 mt-4">
+                      We respect your privacy. No spam, ever. Unsubscribe anytime.
+                    </p>
                   </div>
                 </DialogContent>
               </Dialog>
