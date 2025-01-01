@@ -65,7 +65,6 @@ const PaymentPage = () => {
     // Initialize TronWeb and transaction monitoring
     const initTronWeb = async () => {
       try {
-        // @ts-ignore - TronWeb is injected by TronLink
         if (window.tronWeb && window.tronWeb.ready) {
           // Start monitoring for transaction
           const cleanup = await checkTransaction(window.tronWeb);
