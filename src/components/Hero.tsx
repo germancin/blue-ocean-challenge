@@ -57,13 +57,6 @@ const Hero = () => {
                     <DialogTitle className="text-3xl font-bold text-center text-white mb-2">
                       Unlock Your Trading Potential Today! 🚀
                     </DialogTitle>
-                    <div className="flex justify-center mb-6">
-                      <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                    </div>
                   </DialogHeader>
                   <div className="mt-4">
                     <SubscriptionForm onSuccess={() => setIsDialogOpen(false)} />
