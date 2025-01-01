@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, CheckCircle2, AlertCircle } from 'lucide-react';
+import { supabase } from "@/integrations/supabase/client";
 
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
 const MERCHANT_ADDRESS = 'TEWmboRA5KRovRQkEKHjCBh5rNstiCuKya';
@@ -24,20 +24,53 @@ const PaymentPage = () => {
       return;
     }
 
-    // Set up polling to check for payment
-    const checkPayment = async () => {
-      try {
-        // Here you would implement your server-side transaction checking
-        // This could be done through a Supabase Edge Function that queries the TRON network
-        // For now, we'll just show the pending status
-        console.log('Checking for payment...');
-      } catch (error) {
-        console.error('Error checking payment:', error);
+    // Create initial payment record
+    const createPayment = async () => {
+      const { error } = await supabase
+        .from('payments')
+        .insert([
+          { email, amount: AMOUNT }
+        ]);
+
+      if (error) {
+        console.error('Error creating payment:', error);
+        setTransactionStatus('failed');
       }
     };
 
+    createPayment();
+
+    // Set up polling to check for payment
+    const checkPayment = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('verify-payment', {
+          body: { email }
+        });
+
+        if (error) {
+          console.error('Error checking payment:', error);
+          return;
+        }
+
+        if (data.status === 'success') {
+          setTransactionStatus('success');
+          // Stop polling once payment is successful
+          return true;
+        }
+
+      } catch (error) {
+        console.error('Error checking payment:', error);
+      }
+      return false;
+    };
+
     // Check every 30 seconds
-    const intervalId = setInterval(checkPayment, 30000);
+    const intervalId = setInterval(async () => {
+      const success = await checkPayment();
+      if (success) {
+        clearInterval(intervalId);
+      }
+    }, 30000);
     
     // Initial check
     checkPayment();
