@@ -6,7 +6,7 @@ import { Shield, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
 const MERCHANT_ADDRESS = 'TEWmboRA5KRovRQkEKHjCBh5rNstiCuKya';
-const AMOUNT = 150.00;
+const AMOUNT = 2.50;
 
 interface LocationState {
   email?: string;
