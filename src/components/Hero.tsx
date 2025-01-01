@@ -26,7 +26,7 @@ const Hero = () => {
       
       {/* Content */}
       <div className="relative container mx-auto px-4 pt-32 pb-20 z-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-128px)]">
+        <div className="grid md:grid-cols-2 gap-6 items-center min-h-[calc(100vh-128px)]">
           <div className="text-white space-y-6 animate-fade-in order-1 md:order-1 text-center md:text-left">
             <h1 className="text-4xl font-medium md:text-7xl md:font-bold leading-tight font-display tracking-tight">
               {t('hero.title')}
