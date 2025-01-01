@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "challenges": "Challenges",
+    "rewards": "Rewards",
+    "academy": "Academy",
+    "tournaments": "Tournaments",
+    "about": "About"
+  },
+  "hero": {
+    "title": "Compete With All Traders. From Anywhere!",
+    "subtitle": "Daily tournaments for trading challenges.",
+    "cta": "Join Tournament"
+  },
+  "diversification": {
+    "title": "Diversification: Mandatory Strategy",
+    "forex": {
+      "title": "Forex",
+      "description": "Maximum 5 simultaneous positions in currency pairs."
+    },
+    "indices": {
+      "title": "Indices",
+      "description": "Up to 5 open positions in stock market indices at the same time."
+    },
+    "crypto": {
+      "title": "Cryptocurrencies",
+      "description": "5 simultaneous positions allowed in the crypto market."
+    }
+  },
+  "stats": {
+    "prizePool": "Prize Pool",
+    "activeTraders": "Active Traders",
+    "liveTrading": "Live Trading"
+  },
+  "prizes": {
+    "first": {
+      "title": "First place",
+      "perks": ["Hall of Fame spot", "Interview"]
+    },
+    "second": {
+      "title": "Second place",
+      "perks": ["Interview"]
+    },
+    "third": {
+      "title": "Third place",
+      "perks": ["Interview"]
+    },
+    "challenge": "One-Phase challenge"
+  }
+}

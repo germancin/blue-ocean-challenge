@@ -1,11 +1,14 @@
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="relative min-h-screen bg-navy overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
-        <div className="absolute inset-0 bg-navy opacity-70 z-10" /> {/* Overlay */}
+        <div className="absolute inset-0 bg-navy opacity-70 z-10" />
         <video
           autoPlay
           muted
@@ -26,16 +29,14 @@ const Hero = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-128px)]">
           <div className="text-white space-y-6 animate-fade-in order-1 md:order-1 text-center md:text-left">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-              Compete <br />
-              With All Traders. <br />
-              <span className="text-bright-blue">From Anywhere!</span>
+              {t('hero.title')}
             </h1>
             <p className="text-light-gray text-xl">
-              Daily tournaments for trading challenges.
+              {t('hero.subtitle')}
             </p>
             <div className="flex justify-center md:justify-start">
               <button className="group bg-bright-blue hover:bg-bright-blue/90 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-all duration-200 animate-scale-in">
-                <span>Join Tournament</span>
+                <span>{t('hero.cta')}</span>
                 <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
               </button>
             </div>

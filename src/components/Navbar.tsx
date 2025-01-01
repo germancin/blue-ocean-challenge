@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const menuItems = [
-    { label: 'Challenges', href: '#challenges' },
-    { label: 'Rewards', href: '#rewards' },
-    { label: 'Academy', href: '#academy' },
-    { label: 'Tournaments', href: '#tournaments' },
-    { label: 'About', href: '#about' },
+    { label: t('nav.challenges'), href: '#challenges' },
+    { label: t('nav.rewards'), href: '#rewards' },
+    { label: t('nav.academy'), href: '#academy' },
+    { label: t('nav.tournaments'), href: '#tournaments' },
+    { label: t('nav.about'), href: '#about' },
   ];
 
   return (
@@ -21,7 +24,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {menuItems.map((item) => (
               <a
                 key={item.label}
@@ -31,10 +34,12 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
+            <LanguageSelector />
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-4">
+            <LanguageSelector />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-white hover:text-bright-blue"

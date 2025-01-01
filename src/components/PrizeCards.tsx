@@ -1,30 +1,33 @@
 import { Trophy, Medal, Award } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const PrizeCards = () => {
+  const { t } = useTranslation();
+
   const prizes = [
     {
       icon: <Trophy className="w-16 h-16 text-bright-blue" />,
-      place: "First place",
+      place: t('prizes.first.title'),
       cashPrize: "$2,000",
       challenge: "$100,000",
-      challengeType: "One-Phase challenge",
-      perks: ["Hall of Fame spot", "Interview"]
+      challengeType: t('prizes.challenge'),
+      perks: t('prizes.first.perks', { returnObjects: true })
     },
     {
       icon: <Medal className="w-16 h-16 text-bright-blue" />,
-      place: "Second place",
+      place: t('prizes.second.title'),
       cashPrize: "$1,000",
       challenge: "$100,000",
-      challengeType: "One-Phase challenge",
-      perks: ["Interview"]
+      challengeType: t('prizes.challenge'),
+      perks: t('prizes.second.perks', { returnObjects: true })
     },
     {
       icon: <Award className="w-16 h-16 text-bright-blue" />,
-      place: "Third place",
+      place: t('prizes.third.title'),
       cashPrize: "$500",
       challenge: "$100,000",
-      challengeType: "One-Phase challenge",
-      perks: ["Interview"]
+      challengeType: t('prizes.challenge'),
+      perks: t('prizes.third.perks', { returnObjects: true })
     }
   ];
 
@@ -87,7 +90,7 @@ const PrizeCards = () => {
                   </div>
                   
                   <div className="text-white space-y-1">
-                    {prize.perks.map((perk, perkIndex) => (
+                    {prize.perks.map((perk: string, perkIndex: number) => (
                       <p key={perkIndex} className="text-lg">
                         {perk}
                       </p>

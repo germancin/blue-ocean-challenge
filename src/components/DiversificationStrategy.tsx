@@ -1,23 +1,26 @@
 import { LineChart, Wallet, BarChart3 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const DiversificationStrategy = () => {
+  const { t } = useTranslation();
+
   const strategies = [
     {
       icon: <LineChart className="w-16 h-16 text-bright-blue" />,
-      title: "Forex",
-      description: "Maximum 5 simultaneous positions in currency pairs.",
+      title: t('diversification.forex.title'),
+      description: t('diversification.forex.description'),
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
     },
     {
       icon: <BarChart3 className="w-16 h-16 text-bright-blue" />,
-      title: "Indices",
-      description: "Up to 5 open positions in stock market indices at the same time.",
+      title: t('diversification.indices.title'),
+      description: t('diversification.indices.description'),
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
     },
     {
       icon: <Wallet className="w-16 h-16 text-bright-blue" />,
-      title: "Cryptocurrencies",
-      description: "5 simultaneous positions allowed in the crypto market.",
+      title: t('diversification.crypto.title'),
+      description: t('diversification.crypto.description'),
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
     }
   ];
@@ -42,7 +45,7 @@ const DiversificationStrategy = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Diversification: Mandatory Strategy
+            {t('diversification.title')}
           </h2>
           <div className="w-24 h-1 bg-bright-blue mx-auto rounded-full" />
         </div>
