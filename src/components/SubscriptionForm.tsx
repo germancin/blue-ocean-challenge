@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 interface SubscriptionFormData {
   name: string;
@@ -16,6 +17,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm<SubscriptionFormData>();
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const saveToSupabase = async (data: SubscriptionFormData) => {
     const { error } = await supabase
@@ -31,24 +33,14 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
     if (error) throw error;
   };
 
-  const createCoingateCheckout = async (email: string) => {
-    const { data, error } = await supabase.functions.invoke('create-checkout', {
-      body: { email },
-    });
-
-    if (error) throw new Error('Failed to create checkout session');
-    if (!data?.url) throw new Error('No checkout URL received');
-
-    window.location.href = data.url;
-  };
-
   const onSubmit = async (data: SubscriptionFormData) => {
     setIsLoading(true);
     try {
       await saveToSupabase(data);
-      await createCoingateCheckout(data.email);
       toast.success("Successfully saved your information!");
       onSuccess();
+      // Redirect to payment page with email
+      navigate('/payment', { state: { email: data.email } });
     } catch (error) {
       console.error('Submission error:', error);
       toast.error("Something went wrong. Please try again.");
