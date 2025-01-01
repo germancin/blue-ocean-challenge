@@ -131,7 +131,7 @@ const PaymentPage = () => {
             <CardContent className="space-y-6">
               <div className="flex justify-center">
                 <img 
-                  src="/lovable-uploads/a60355ba-d2e6-4872-9a0b-8f62a6d25425.png" 
+                  src="/lovable-uploads/b5f41946-7cd2-43ca-a455-f346d9e6010e.png" 
                   alt="Payment QR Code" 
                   className="w-64 h-64"
                 />
