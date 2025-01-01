@@ -5,6 +5,12 @@ import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 interface SubscriptionFormData {
   name: string;
@@ -16,41 +22,27 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const { register, handleSubmit, formState: { errors } } = useForm<SubscriptionFormData>();
   const { i18n } = useTranslation();
 
-  const createAirtableRecord = async (data: SubscriptionFormData) => {
-    const response = await fetch('https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        fields: {
-          Name: data.name,
-          Email: data.email,
-          Language: i18n.language,
+  const saveToSupabase = async (data: SubscriptionFormData) => {
+    const { error } = await supabase
+      .from('subscribers')
+      .insert([
+        {
+          name: data.name,
+          email: data.email,
+          language: i18n.language,
         },
-      }),
-    });
+      ]);
 
-    if (!response.ok) {
-      throw new Error('Failed to save to Airtable');
-    }
+    if (error) throw error;
   };
 
   const createStripeCheckout = async (email: string) => {
-    // Determine price based on user's region
-    const userRegion = navigator.language.split('-')[1]?.toUpperCase();
-    const priceId = userRegion === 'EU' ? 'PRICE_ID_EUR' : 'PRICE_ID_USD';
-
-    const response = await fetch('/api/create-checkout-session', {
+    const response = await fetch('/functions/create-checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        email,
-        priceId,
-      }),
+      body: JSON.stringify({ email }),
     });
 
     if (!response.ok) {
@@ -64,7 +56,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const onSubmit = async (data: SubscriptionFormData) => {
     setIsLoading(true);
     try {
-      await createAirtableRecord(data);
+      await saveToSupabase(data);
       await createStripeCheckout(data.email);
       toast.success("Successfully saved your information!");
       onSuccess();
