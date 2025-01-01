@@ -44,7 +44,7 @@ const DiversificationStrategy = () => {
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-display tracking-tight">
             {t('diversification.title')}
           </h2>
           <div className="w-24 h-1 bg-bright-blue mx-auto rounded-full" />
@@ -66,11 +66,11 @@ const DiversificationStrategy = () => {
                   </div>
                   
                   <div className="text-center space-y-4">
-                    <h3 className="text-2xl font-bold text-bright-blue">
+                    <h3 className="text-2xl font-bold text-bright-blue font-display tracking-tight">
                       {strategy.title}
                     </h3>
                     
-                    <p className="text-white text-lg">
+                    <p className="text-white text-lg font-sans">
                       {strategy.description}
                     </p>
                   </div>

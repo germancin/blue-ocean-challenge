@@ -28,14 +28,14 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 pt-32 pb-20 z-20">
         <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-128px)]">
           <div className="text-white space-y-6 animate-fade-in order-1 md:order-1 text-center md:text-left">
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight font-display tracking-tight">
               {t('hero.title')}
             </h1>
-            <p className="text-light-gray text-xl">
+            <p className="text-light-gray text-xl font-sans">
               {t('hero.subtitle')}
             </p>
             <div className="flex justify-center md:justify-start">
-              <button className="group bg-bright-blue hover:bg-bright-blue/90 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-all duration-200 animate-scale-in">
+              <button className="group bg-bright-blue hover:bg-bright-blue/90 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-all duration-200 animate-scale-in font-sans">
                 <span>{t('hero.cta')}</span>
                 <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
               </button>

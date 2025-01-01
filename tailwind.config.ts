@@ -26,7 +26,8 @@ export default {
         'dark-gray': '#343A40',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['SF Pro Display', 'Inter', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         "fade-in": {
