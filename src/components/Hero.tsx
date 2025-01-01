@@ -23,8 +23,8 @@ const Hero = () => {
       
       {/* Content */}
       <div className="relative container mx-auto px-4 pt-32 pb-20 z-20">
-        <div className="flex flex-col min-h-[calc(100vh-128px)]">
-          <div className="text-white space-y-6 animate-fade-in mb-8">
+        <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-128px)]">
+          <div className="text-white space-y-6 animate-fade-in order-1 md:order-1">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
               Compete <br />
               With All Traders. <br />
@@ -39,7 +39,7 @@ const Hero = () => {
             </button>
           </div>
           
-          <div className="animate-fade-in mt-4">
+          <div className="animate-fade-in order-2 md:order-2">
             <img
               src="https://cdn.prod.website-files.com/652e60598eb08a4c5d64a319/66760053164e271e7d0f935b_iweo.avif"
               alt="Trading Platform Interface"
