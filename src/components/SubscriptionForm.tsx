@@ -20,6 +20,17 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
 
+  const checkPaymentStatus = async (email: string) => {
+    const { data: payments } = await supabase
+      .from('payments')
+      .select('status')
+      .eq('email', email)
+      .order('created_at', { ascending: false })
+      .limit(1);
+
+    return payments && payments.length > 0 ? payments[0].status : null;
+  };
+
   const saveToSupabase = async (data: SubscriptionFormData) => {
     const { error } = await supabase
       .from('subscribers')
@@ -45,11 +56,25 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
     } catch (error) {
       console.error('Submission error:', error);
       if ((error as PostgrestError).code === '23505') {
-        setError('email', {
-          type: 'manual',
-          message: 'This email is already registered'
-        });
-        toast.error("This email is already registered");
+        // Check payment status for existing subscriber
+        const paymentStatus = await checkPaymentStatus(data.email);
+        
+        if (!paymentStatus) {
+          // No payment found, redirect to payment page
+          toast.info("You're already subscribed. Redirecting to complete payment.");
+          navigate('/payment', { state: { email: data.email } });
+        } else if (paymentStatus === 'completed') {
+          // Payment completed
+          setError('email', {
+            type: 'manual',
+            message: 'You are already subscribed and your payment is completed'
+          });
+          toast.error("You are already subscribed and your payment is completed");
+        } else {
+          // Payment pending or other status
+          toast.info("You're already subscribed. Redirecting to payment page.");
+          navigate('/payment', { state: { email: data.email } });
+        }
       } else {
         toast.error("Something went wrong. Please try again.");
       }
