@@ -57,6 +57,14 @@ const PrizeCards = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Title Section */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-white font-display mb-4">
+            Prizes
+          </h2>
+          <div className="w-24 h-1 bg-bright-blue mx-auto rounded-full" />
+        </div>
+
         <div className="grid md:grid-cols-3 gap-6">
           {prizes.map((prize, index) => (
             <div
