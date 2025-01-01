@@ -32,20 +32,14 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   };
 
   const createStripeCheckout = async (email: string) => {
-    const response = await fetch('/functions/create-checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
+    const { data, error } = await supabase.functions.invoke('create-checkout', {
+      body: { email },
     });
 
-    if (!response.ok) {
-      throw new Error('Failed to create checkout session');
-    }
+    if (error) throw new Error('Failed to create checkout session');
+    if (!data?.url) throw new Error('No checkout URL received');
 
-    const { url } = await response.json();
-    window.location.href = url;
+    window.location.href = data.url;
   };
 
   const onSubmit = async (data: SubscriptionFormData) => {
