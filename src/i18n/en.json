@@ -161,46 +161,25 @@
     }
   },
   "payment": {
-    "howItWorks": {
-      "title": "How Payment Works",
-      "confirmationTime": {
-        "title": "Confirmation Time",
-        "description": "Transactions on the TRON network (TRC20) are fast and usually confirm in less than 1 minute. However, in rare cases, they may take up to 5 minutes depending on network traffic."
-      },
-      "autoNotification": {
-        "title": "Automatic Notification",
-        "description": "Once the payment is confirmed on the blockchain, you'll receive an email notification with your tournament registration details."
-      }
+    "details": {
+      "title": "Elite Trading Tournament",
+      "amountDue": "Amount Due",
+      "orderDetails": "Order Details",
+      "description": "One-time entry fee for participation in the Elite Trading Tournament",
+      "email": "Email"
     },
-    "whyUsdt": {
-      "title": "Why Use USDT (TRC20)",
-      "networkFees": {
-        "title": "Low Network Fees",
-        "description": "The TRON network offers nearly non-existent transaction fees, ensuring that the amount you send is the same amount we receive."
-      },
-      "security": {
-        "title": "Guaranteed Security",
-        "description": "All transactions are verified on the blockchain, guaranteeing transparency and security."
-      }
+    "instructions": {
+      "title": "Pay with USDT (TRC20)",
+      "qrCodeAlt": "Payment QR Code",
+      "sendExactly": "Send exactly",
+      "toAddress": "to address:",
+      "memoImportant": "Important: Add this ID in your transaction memo",
+      "securePayment": "Secure USDT Payment"
     },
-    "support": {
-      "title": "Support Policy",
-      "questions": {
-        "title": "Have Questions?",
-        "description": "If you have any issues with your transaction, our team is here to help. Write to us at support@elitetraderhub.com."
-      },
-      "incorrectPayments": {
-        "title": "Incorrect Payments",
-        "description": "Make sure to send exactly 2.5 USDT. Incomplete payments or payments on incorrect networks may not be processed."
-      }
-    },
-    "benefits": {
-      "title": "Benefits of Participating",
-      "items": [
-        "Exclusive access to the Elite Trading Tournament, where you can win amazing prizes.",
-        "Connect with a passionate community of traders.",
-        "A unique opportunity to test your skills in a competitive environment."
-      ]
+    "status": {
+      "pending": "Waiting for payment...",
+      "success": "Payment confirmed!",
+      "failed": "Payment verification failed"
     }
   }
 }
