@@ -1,19 +1,27 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
-
 const TRON_API_URL = 'https://api.trongrid.io';
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
 const MERCHANT_ADDRESS = Deno.env.get('MERCHANT_ADDRESS');
 
+interface TronTransaction {
+  transaction_id: string;
+  from: string;
+  to: string;
+  amount: number;
+  block_timestamp: number;
+}
+
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response('ok', {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+      },
+    });
   }
 
   try {
@@ -26,21 +34,28 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Get the latest pending payment for this email
+    // Get pending payment for this email
     const { data: payment, error: fetchError } = await supabaseClient
       .from('payments')
       .select('*')
       .eq('email', email)
       .eq('status', 'pending')
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
+      .maybeSingle();
 
-    if (fetchError || !payment) {
-      console.error('Error fetching payment:', fetchError);
+    if (fetchError) {
+      throw fetchError;
+    }
+
+    if (!payment) {
       return new Response(
         JSON.stringify({ error: 'Payment not found' }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 404 }
+        { 
+          status: 404,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
       );
     }
 
@@ -57,14 +72,13 @@ serve(async (req) => {
     );
 
     const data = await response.json();
-    console.log('Transactions response:', data);
+    const transactions: TronTransaction[] = data.data || [];
 
-    // Look for matching transaction
-    const matchingTx = data.data?.find((tx: any) => {
-      const amount = parseFloat(tx.value) / 1e6; // Convert from TRC20 decimals
-      return amount === payment.amount && 
-             tx.to === MERCHANT_ADDRESS &&
-             (new Date(tx.block_timestamp).getTime() > new Date(payment.created_at).getTime());
+    // Look for a matching transaction (same amount)
+    const matchingTx = transactions.find(tx => {
+      const txAmount = Number(tx.amount) / 1_000_000; // Convert from TRC20 decimals
+      return txAmount === payment.amount && 
+             tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase();
     });
 
     if (matchingTx) {
@@ -75,34 +89,46 @@ serve(async (req) => {
         .from('payments')
         .update({ 
           status: 'success',
-          transaction_hash: matchingTx.transaction_id
+          transaction_hash: matchingTx.transaction_id,
         })
         .eq('id', payment.id);
 
       if (updateError) {
-        console.error('Error updating payment:', updateError);
-        return new Response(
-          JSON.stringify({ error: 'Failed to update payment status' }),
-          { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
-        );
+        throw updateError;
       }
 
       return new Response(
         JSON.stringify({ status: 'success', transaction: matchingTx }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        { 
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
       );
     }
 
     return new Response(
       JSON.stringify({ status: 'pending' }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { 
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
     );
 
   } catch (error) {
     console.error('Error:', error);
     return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
+      JSON.stringify({ error: error.message }),
+      { 
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
     );
   }
-})
+});
