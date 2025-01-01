@@ -25,10 +25,6 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 pt-32 pb-20 z-20">
         <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-128px)]">
           <div className="text-white space-y-6 animate-fade-in">
-            <div className="inline-block">
-              <h2 className="text-bright-blue font-semibold mb-2">tournaments</h2>
-              <p className="text-light-gray font-semibold">forTraders</p>
-            </div>
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
               Compete <br />
               With All Traders. <br />
