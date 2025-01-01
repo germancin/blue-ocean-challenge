@@ -5,21 +5,7 @@ import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
-import { createClient } from '@supabase/supabase-js';
-
-// Create the Supabase client with the correct environment variables
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-// Validate environment variables
-if (!supabaseUrl || !supabaseKey) {
-  console.error('Missing Supabase environment variables:', {
-    url: !!supabaseUrl,
-    key: !!supabaseKey
-  });
-}
-
-const supabase = createClient(supabaseUrl || '', supabaseKey || '');
+import { supabase } from "@/integrations/supabase/client";
 
 interface SubscriptionFormData {
   name: string;
@@ -32,10 +18,6 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const { i18n } = useTranslation();
 
   const saveToSupabase = async (data: SubscriptionFormData) => {
-    if (!supabaseUrl || !supabaseKey) {
-      throw new Error('Supabase configuration is missing');
-    }
-
     const { error } = await supabase
       .from('subscribers')
       .insert([
