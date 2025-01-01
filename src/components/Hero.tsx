@@ -46,11 +46,11 @@ const Hero = () => {
             </p>
             <div className="bg-bright-blue/20 p-4 rounded-lg border border-bright-blue/30 mb-4">
               <div className="flex items-center space-x-4">
-                <div className="text-5xl font-bold text-bright-blue">33%</div>
+                <div className="text-5xl font-bold text-bright-blue">{t('hero.winningChance.percentage')}</div>
                 <div className="text-lg">
-                  <span className="block font-semibold">Chance of Winning</span>
+                  <span className="block font-semibold">{t('hero.winningChance.title')}</span>
                   <span className="text-sm text-gray-300">
-                    Higher odds compared to traditional trading competitions
+                    {t('hero.winningChance.description')}
                   </span>
                 </div>
               </div>

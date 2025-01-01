@@ -9,7 +9,12 @@
   "hero": {
     "title": "Compete With All Traders. From Anywhere!",
     "subtitle": "Daily tournaments for trading challenges.",
-    "cta": "Join Tournament"
+    "cta": "Join Tournament",
+    "winningChance": {
+      "percentage": "33%",
+      "title": "Chance of Winning",
+      "description": "Higher odds compared to traditional trading competitions"
+    }
   },
   "diversification": {
     "title": "Diversification: Mandatory Strategy",
