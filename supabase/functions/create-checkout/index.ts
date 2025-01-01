@@ -16,23 +16,19 @@ serve(async (req) => {
     const { email } = await req.json();
     
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
-      apiVersion: '2023-10-16',
+      apiVersion: '2024-12-18.acacia',
     });
-
-    // Determine price based on user's region
-    const userRegion = req.headers.get('cf-ipcountry');
-    const priceAmount = userRegion === 'EU' ? 15000 : 15000; // Amount in cents
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
           price_data: {
-            currency: userRegion === 'EU' ? 'eur' : 'usd',
+            currency: 'usd',
             product_data: {
               name: 'Trading Tournament Entry',
             },
-            unit_amount: priceAmount,
+            unit_amount: 15000, // $150.00
           },
           quantity: 1,
         },
