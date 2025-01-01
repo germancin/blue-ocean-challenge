@@ -69,7 +69,7 @@ const PrizeCards = () => {
           {prizes.map((prize, index) => (
             <div
               key={index}
-              className="relative group bg-navy border border-bright-blue/20 rounded-xl p-8 hover:border-bright-blue/50 transition-all duration-300 transform hover:-translate-y-2"
+              className="relative group bg-black border border-bright-blue/20 rounded-xl p-8 hover:border-bright-blue/50 transition-all duration-300 transform hover:-translate-y-2"
             >
               {/* Card Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-bright-blue/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
