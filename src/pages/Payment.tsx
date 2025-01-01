@@ -4,9 +4,9 @@ import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, CheckCircle2, AlertCircle } from 'lucide-react';
 
-const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t'; // USDT Contract on Tron
-const MERCHANT_ADDRESS = 'TEWmboRA5KRovRQkEKHjCBh5rNstiCuKya'; // Your Tron wallet address
-const AMOUNT = 150.00; // Fixed amount in USDT
+const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
+const MERCHANT_ADDRESS = 'TEWmboRA5KRovRQkEKHjCBh5rNstiCuKya';
+const AMOUNT = 150.00;
 
 interface LocationState {
   email?: string;
@@ -18,76 +18,33 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   const { email } = (location.state as LocationState) || {};
 
-  const checkTransaction = async (tronWeb: any) => {
-    try {
-      // Get contract instance
-      const contract = await tronWeb.contract().at(USDT_CONTRACT);
-      
-      // Get the latest block
-      const block = await tronWeb.trx.getCurrentBlock();
-      
-      // Look for transfers to merchant address in recent transactions
-      const events = await contract.Transfer().watch((err: any, event: any) => {
-        if (err) {
-          console.error('Error watching transfers:', err);
-          return;
-        }
-
-        // Check if this is a transfer to our merchant address
-        if (event.result.to === MERCHANT_ADDRESS) {
-          const amount = tronWeb.fromSun(event.result.value);
-          console.log('Transfer detected:', amount, 'USDT');
-          
-          // Verify the amount matches what we expect
-          if (Number(amount) === AMOUNT) {
-            setTransactionStatus('success');
-            toast.success('Payment confirmed!');
-          }
-        }
-      });
-
-      return () => {
-        events.unsubscribe(); // Cleanup subscription
-      };
-    } catch (error) {
-      console.error('Error checking transaction:', error);
-      setTransactionStatus('failed');
-      toast.error('Error verifying payment');
-    }
-  };
-
   useEffect(() => {
     if (!email) {
       navigate('/');
       return;
     }
 
-    // Initialize TronWeb and transaction monitoring
-    const initTronWeb = async () => {
+    // Set up polling to check for payment
+    const checkPayment = async () => {
       try {
-        if (window.tronWeb && window.tronWeb.ready) {
-          // Start monitoring for transaction
-          const cleanup = await checkTransaction(window.tronWeb);
-          
-          // Check every 30 seconds for new transactions
-          const intervalId = setInterval(async () => {
-            await checkTransaction(window.tronWeb);
-          }, 30000);
-
-          return () => {
-            cleanup();
-            clearInterval(intervalId);
-          };
-        } else {
-          toast.error('Please install TronLink wallet');
-        }
+        // Here you would implement your server-side transaction checking
+        // This could be done through a Supabase Edge Function that queries the TRON network
+        // For now, we'll just show the pending status
+        console.log('Checking for payment...');
       } catch (error) {
-        console.error('TronWeb initialization error:', error);
-        toast.error('Failed to initialize TronWeb');
+        console.error('Error checking payment:', error);
       }
     };
 
-    initTronWeb();
+    // Check every 30 seconds
+    const intervalId = setInterval(checkPayment, 30000);
+    
+    // Initial check
+    checkPayment();
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [email, navigate]);
 
   return (
