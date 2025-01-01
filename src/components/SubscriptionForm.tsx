@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 interface SubscriptionFormData {
   name: string;
@@ -13,15 +14,62 @@ interface SubscriptionFormData {
 export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm<SubscriptionFormData>();
+  const { i18n } = useTranslation();
+
+  const createAirtableRecord = async (data: SubscriptionFormData) => {
+    const response = await fetch('https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fields: {
+          Name: data.name,
+          Email: data.email,
+          Language: i18n.language,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to save to Airtable');
+    }
+  };
+
+  const createStripeCheckout = async (email: string) => {
+    // Determine price based on user's region
+    const userRegion = navigator.language.split('-')[1]?.toUpperCase();
+    const priceId = userRegion === 'EU' ? 'PRICE_ID_EUR' : 'PRICE_ID_USD';
+
+    const response = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        priceId,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to create checkout session');
+    }
+
+    const { url } = await response.json();
+    window.location.href = url;
+  };
 
   const onSubmit = async (data: SubscriptionFormData) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      toast.success("Successfully subscribed!");
+      await createAirtableRecord(data);
+      await createStripeCheckout(data.email);
+      toast.success("Successfully saved your information!");
       onSuccess();
     } catch (error) {
+      console.error('Submission error:', error);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
@@ -73,7 +121,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
         disabled={isLoading}
         className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium text-lg py-6 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
       >
-        {isLoading ? "Securing Your Spot..." : "Start Your Trading Journey Now 🚀"}
+        {isLoading ? "Processing..." : "Start Your Trading Journey Now 🚀"}
       </Button>
     </form>
   );
