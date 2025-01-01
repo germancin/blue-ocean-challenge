@@ -68,7 +68,7 @@ const Hero = () => {
                   <div className="mt-4">
                     <SubscriptionForm onSuccess={() => setIsDialogOpen(false)} />
                     <p className="text-center text-sm text-gray-500 mt-4">
-                      We respect your privacy. No spam, ever. Unsubscribe anytime.
+                      Join our trusted community of traders. Your data is secure and we'll only send you tournament updates and essential news. ✨
                     </p>
                   </div>
                 </DialogContent>
