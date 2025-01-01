@@ -143,5 +143,20 @@
         }
       ]
     }
+  },
+  "diversification": {
+    "title": "Our Diversification Strategy",
+    "forex": {
+      "title": "Forex Trading",
+      "description": "Access global currency markets with advanced trading tools and competitive spreads"
+    },
+    "indices": {
+      "title": "Stock Indices",
+      "description": "Trade major global indices with real-time market data and analysis"
+    },
+    "crypto": {
+      "title": "Cryptocurrency",
+      "description": "Explore digital asset trading with secure and efficient execution"
+    }
   }
 }
