@@ -15,19 +15,19 @@ const DiversificationStrategy = () => {
 
   const strategies = [
     {
-      icon: <LineChart className="w-16 h-16 text-bright-blue" />,
+      icon: <LineChart className="w-16 h-16 text-white" />,
       title: t('diversification.forex.title'),
       description: t('diversification.forex.description'),
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
     },
     {
-      icon: <BarChart3 className="w-16 h-16 text-bright-blue" />,
+      icon: <BarChart3 className="w-16 h-16 text-white" />,
       title: t('diversification.indices.title'),
       description: t('diversification.indices.description'),
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
     },
     {
-      icon: <Wallet className="w-16 h-16 text-bright-blue" />,
+      icon: <Wallet className="w-16 h-16 text-white" />,
       title: t('diversification.crypto.title'),
       description: t('diversification.crypto.description'),
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
