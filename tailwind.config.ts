@@ -19,11 +19,11 @@ export default {
     },
     extend: {
       colors: {
-        'navy': '#001F3F',
+        'navy': '#001A2C', // Slightly darker navy
         'bright-blue': '#007BFF',
         'white': '#FFFFFF',
         'light-gray': '#F8F9FA',
-        'dark-gray': '#343A40',
+        'dark-gray': '#222222', // Updated to a darker shade
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
