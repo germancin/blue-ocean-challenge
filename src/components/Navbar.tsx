@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Button } from './ui/button';
 import LanguageSelector from './LanguageSelector';
 
 const Navbar = () => {
@@ -34,11 +35,25 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
+            <Button 
+              variant="default" 
+              className="bg-bright-blue hover:bg-bright-blue/90"
+              onClick={() => window.location.href = '/payment'}
+            >
+              {t('nav.joinTournament')}
+            </Button>
             <LanguageSelector />
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
+            <Button 
+              variant="default" 
+              className="bg-bright-blue hover:bg-bright-blue/90"
+              onClick={() => window.location.href = '/payment'}
+            >
+              {t('nav.joinTournament')}
+            </Button>
             <LanguageSelector />
             <button
               onClick={() => setIsOpen(!isOpen)}
