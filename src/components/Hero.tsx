@@ -3,14 +3,26 @@ import { ArrowRight } from 'lucide-react';
 const Hero = () => {
   return (
     <div className="relative min-h-screen bg-navy overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-[url('/lovable-uploads/2eca4db5-1876-4e6d-986b-871fcd2f75f2.png')] bg-cover bg-center"
-        style={{ opacity: 0.4 }}
-      />
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 bg-navy opacity-70 z-10" /> {/* Overlay */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source 
+            src="https://cdn.jsdelivr.net/gh/fortraders/web-files/world-cup-hero.mp4" 
+            type="video/mp4" 
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div>
       
       {/* Content */}
-      <div className="relative container mx-auto px-4 pt-32 pb-20">
+      <div className="relative container mx-auto px-4 pt-32 pb-20 z-20">
         <div className="grid md:grid-cols-2 gap-12 items-center min-h-[calc(100vh-128px)]">
           <div className="text-white space-y-6 animate-fade-in">
             <div className="inline-block">
