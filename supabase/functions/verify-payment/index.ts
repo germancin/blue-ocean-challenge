@@ -18,6 +18,7 @@ serve(async (req) => {
 
   try {
     const { email } = await req.json();
+    console.log('Checking payment for email:', email);
 
     // Create Supabase client
     const supabaseClient = createClient(
@@ -43,6 +44,8 @@ serve(async (req) => {
       );
     }
 
+    console.log('Found payment:', payment);
+
     // Check recent transactions to merchant address
     const response = await fetch(
       `${TRON_API_URL}/v1/accounts/${MERCHANT_ADDRESS}/transactions/trc20?limit=20&contract_address=${USDT_CONTRACT}`,
@@ -65,6 +68,8 @@ serve(async (req) => {
     });
 
     if (matchingTx) {
+      console.log('Found matching transaction:', matchingTx);
+      
       // Update payment status to success
       const { error: updateError } = await supabaseClient
         .from('payments')
