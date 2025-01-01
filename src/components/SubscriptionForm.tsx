@@ -31,7 +31,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
     if (error) throw error;
   };
 
-  const createStripeCheckout = async (email: string) => {
+  const createCoingateCheckout = async (email: string) => {
     const { data, error } = await supabase.functions.invoke('create-checkout', {
       body: { email },
     });
@@ -46,7 +46,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
     setIsLoading(true);
     try {
       await saveToSupabase(data);
-      await createStripeCheckout(data.email);
+      await createCoingateCheckout(data.email);
       toast.success("Successfully saved your information!");
       onSuccess();
     } catch (error) {

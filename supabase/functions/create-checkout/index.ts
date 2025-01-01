@@ -1,6 +1,4 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import Stripe from 'https://esm.sh/stripe@14.21.0';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.0';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -15,26 +13,39 @@ serve(async (req) => {
   try {
     const { email } = await req.json();
     
-    const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
-      apiVersion: '2024-12-18.acacia',
+    const COINGATE_API_KEY = Deno.env.get('COINGATE_API_KEY');
+    if (!COINGATE_API_KEY) {
+      throw new Error('COINGATE_API_KEY is not set');
+    }
+
+    // Create order with Coingate
+    const response = await fetch('https://api.coingate.com/v2/orders', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Token ${COINGATE_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        order_id: crypto.randomUUID(),
+        price_amount: 99.99, // Your product price
+        price_currency: 'USD',
+        receive_currency: 'USD',
+        title: 'Trading Course Subscription',
+        callback_url: `${req.headers.get('origin')}/api/coingate-webhook`,
+        cancel_url: `${req.headers.get('origin')}/`,
+        success_url: `${req.headers.get('origin')}/success`,
+        purchaser_email: email
+      })
     });
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price: 'price_1QcOZ7Gtpfuh7c42h8XXeZcy',
-          quantity: 1,
-        },
-      ],
-      mode: 'payment',
-      success_url: `${req.headers.get('origin')}/success`,
-      cancel_url: `${req.headers.get('origin')}/`,
-      customer_email: email,
-    });
+    if (!response.ok) {
+      throw new Error('Failed to create Coingate order');
+    }
+
+    const order = await response.json();
 
     return new Response(
-      JSON.stringify({ url: session.url }),
+      JSON.stringify({ url: order.payment_url }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,
