@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { PostgrestError } from "@supabase/supabase-js";
 
 interface SubscriptionFormData {
   name: string;
@@ -15,7 +16,7 @@ interface SubscriptionFormData {
 
 export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<SubscriptionFormData>();
+  const { register, handleSubmit, formState: { errors }, setError } = useForm<SubscriptionFormData>();
   const { i18n } = useTranslation();
   const navigate = useNavigate();
 
@@ -43,7 +44,15 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
       navigate('/payment', { state: { email: data.email } });
     } catch (error) {
       console.error('Submission error:', error);
-      toast.error("Something went wrong. Please try again.");
+      if ((error as PostgrestError).code === '23505') {
+        setError('email', {
+          type: 'manual',
+          message: 'This email is already registered'
+        });
+        toast.error("This email is already registered");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
