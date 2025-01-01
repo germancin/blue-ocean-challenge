@@ -30,6 +30,18 @@ const PrizeCards = () => {
 
   return (
     <div className="relative bg-navy py-20 overflow-hidden">
+      {/* Blurred Background Image */}
+      <div 
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: 'url("/lovable-uploads/2eca4db5-1876-4e6d-986b-871fcd2f75f2.png")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(8px)',
+          transform: 'scale(1.1)',
+        }}
+      />
+
       {/* Parallel Effect - Background Lines */}
       <div className="absolute inset-0 opacity-10">
         {[...Array(10)].map((_, i) => (
@@ -41,7 +53,7 @@ const PrizeCards = () => {
         ))}
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-3 gap-6">
           {prizes.map((prize, index) => (
             <div
