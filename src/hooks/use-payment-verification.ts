@@ -17,13 +17,13 @@ export function usePaymentVerification({ email, amount }: UsePaymentVerification
     // First try to find an existing pending payment for this email
     const getOrCreatePayment = async () => {
       try {
-        // Check for existing pending payment
+        // Check for existing pending payment using maybeSingle() instead of single()
         const { data: existingPayment } = await supabase
           .from('payments')
           .select('payment_id, status')
           .eq('email', email)
           .eq('status', 'pending')
-          .single();
+          .maybeSingle();
 
         if (existingPayment) {
           console.log('Found existing payment:', existingPayment);
