@@ -41,8 +41,8 @@ const Hero = () => {
           
           <div className="hidden md:block animate-fade-in">
             <img
-              src="/unsplash/photo-1498050108023-c5249f4df085"
-              alt="Modern Trading Platform Interface"
+              src="https://cdn.prod.website-files.com/652e60598eb08a4c5d64a319/66760053164e271e7d0f935b_iweo.avif"
+              alt="Trading Platform Interface"
               className="rounded-lg shadow-2xl"
             />
           </div>
