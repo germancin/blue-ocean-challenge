@@ -18,6 +18,44 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   const { email } = (location.state as LocationState) || {};
 
+  const checkTransaction = async (tronWeb: any) => {
+    try {
+      // Get contract instance
+      const contract = await tronWeb.contract().at(USDT_CONTRACT);
+      
+      // Get the latest block
+      const block = await tronWeb.trx.getCurrentBlock();
+      
+      // Look for transfers to merchant address in recent transactions
+      const events = await contract.Transfer().watch((err: any, event: any) => {
+        if (err) {
+          console.error('Error watching transfers:', err);
+          return;
+        }
+
+        // Check if this is a transfer to our merchant address
+        if (event.result.to === MERCHANT_ADDRESS) {
+          const amount = tronWeb.fromSun(event.result.value);
+          console.log('Transfer detected:', amount, 'USDT');
+          
+          // Verify the amount matches what we expect
+          if (Number(amount) === AMOUNT) {
+            setTransactionStatus('success');
+            toast.success('Payment confirmed!');
+          }
+        }
+      });
+
+      return () => {
+        events.unsubscribe(); // Cleanup subscription
+      };
+    } catch (error) {
+      console.error('Error checking transaction:', error);
+      setTransactionStatus('failed');
+      toast.error('Error verifying payment');
+    }
+  };
+
   useEffect(() => {
     if (!email) {
       navigate('/');
@@ -30,17 +68,17 @@ const PaymentPage = () => {
         // @ts-ignore - TronWeb is injected by TronLink
         if (window.tronWeb && window.tronWeb.ready) {
           // Start monitoring for transaction
-          const checkInterval = setInterval(async () => {
-            try {
-              // Here you would implement the actual transaction checking logic
-              // This is a simplified example
-              console.log('Checking transaction status...');
-            } catch (error) {
-              console.error('Error checking transaction:', error);
-            }
-          }, 5000);
+          const cleanup = await checkTransaction(window.tronWeb);
+          
+          // Check every 30 seconds for new transactions
+          const intervalId = setInterval(async () => {
+            await checkTransaction(window.tronWeb);
+          }, 30000);
 
-          return () => clearInterval(checkInterval);
+          return () => {
+            cleanup();
+            clearInterval(intervalId);
+          };
         } else {
           toast.error('Please install TronLink wallet');
         }
@@ -117,6 +155,12 @@ const PaymentPage = () => {
                   <div className="flex items-center text-green-600">
                     <CheckCircle2 className="mr-2" />
                     Payment confirmed!
+                  </div>
+                )}
+                {transactionStatus === 'failed' && (
+                  <div className="flex items-center text-red-600">
+                    <AlertCircle className="mr-2" />
+                    Payment verification failed
                   </div>
                 )}
               </div>
