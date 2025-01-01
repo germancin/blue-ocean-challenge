@@ -70,7 +70,7 @@
     }
   },
   "prizes": {
-    "title": "Prizes",
+    "title": "Awards",
     "challenge": "trading challenge",
     "first": {
       "title": "First Place",
@@ -96,13 +96,13 @@
       ]
     },
     "distribution": {
-      "title": "Prize Distribution",
-      "totalBudget": "Total Prize Budget: $8,000",
+      "title": "Award Distribution",
+      "totalBudget": "Total Award Budget: $8,000",
       "table": {
         "position": "Position",
         "winners": "Number of Winners",
-        "prize": "Individual Prize ($)",
-        "total": "Total Prize ($)"
+        "prize": "Individual Award ($)",
+        "total": "Total Award ($)"
       },
       "rows": [
         {

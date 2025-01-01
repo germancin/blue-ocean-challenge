@@ -70,7 +70,7 @@
     }
   },
   "prizes": {
-    "title": "Premios",
+    "title": "Reconocimientos",
     "challenge": "desafío de trading",
     "first": {
       "title": "Primer Lugar",
@@ -96,13 +96,13 @@
       ]
     },
     "distribution": {
-      "title": "Tabla de Premiación",
-      "totalBudget": "Presupuesto total de Premio: $8,000",
+      "title": "Tabla de Reconocimientos",
+      "totalBudget": "Presupuesto total de Reconocimientos: $8,000",
       "table": {
         "position": "Lugar",
         "winners": "Cantidad de Ganadores",
-        "prize": "Premio Individual ($)",
-        "total": "Premio Total ($)"
+        "prize": "Reconocimiento Individual ($)",
+        "total": "Reconocimiento Total ($)"
       },
       "rows": [
         {
