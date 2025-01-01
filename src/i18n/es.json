@@ -72,26 +72,52 @@
   "prizes": {
     "title": "Premios",
     "challenge": "desafío de trading",
-    "first": {
-      "title": "Primer Lugar",
-      "perks": [
-        "Acceso a mentorías exclusivas",
-        "Membresía premium de 1 año",
-        "Reconocimiento en redes sociales"
-      ]
-    },
-    "second": {
-      "title": "Segundo Lugar",
-      "perks": [
-        "Membresía premium de 6 meses",
-        "Acceso a webinars exclusivos"
-      ]
-    },
-    "third": {
-      "title": "Tercer Lugar",
-      "perks": [
-        "Membresía premium de 3 meses",
-        "Material educativo exclusivo"
+    "distribution": {
+      "title": "Tabla de Premiación",
+      "totalBudget": "Presupuesto total de Premio: $8,000",
+      "table": {
+        "position": "Lugar",
+        "winners": "Cantidad de Ganadores",
+        "prize": "Premio Individual ($)",
+        "total": "Premio Total ($)"
+      },
+      "rows": [
+        {
+          "position": "1er lugar",
+          "winners": "1",
+          "prize": "$1,500",
+          "total": "$1,500"
+        },
+        {
+          "position": "2do lugar",
+          "winners": "1",
+          "prize": "$1,000",
+          "total": "$1,000"
+        },
+        {
+          "position": "3er lugar",
+          "winners": "1",
+          "prize": "$700",
+          "total": "$700"
+        },
+        {
+          "position": "4to al 10mo lugar",
+          "winners": "7",
+          "prize": "$300",
+          "total": "$2,100"
+        },
+        {
+          "position": "11vo al 20mo lugar",
+          "winners": "10",
+          "prize": "$150",
+          "total": "$1,500"
+        },
+        {
+          "position": "21vo al 40mo lugar",
+          "winners": "20",
+          "prize": "$60",
+          "total": "$1,200"
+        }
       ]
     }
   }

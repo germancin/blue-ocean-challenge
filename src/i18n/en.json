@@ -68,5 +68,57 @@
         "description": "At least 15 executed trades. No trade duration less than 3 minutes"
       }
     }
+  },
+  "prizes": {
+    "title": "Prizes",
+    "challenge": "trading challenge",
+    "distribution": {
+      "title": "Prize Distribution",
+      "totalBudget": "Total Prize Budget: $8,000",
+      "table": {
+        "position": "Position",
+        "winners": "Number of Winners",
+        "prize": "Individual Prize ($)",
+        "total": "Total Prize ($)"
+      },
+      "rows": [
+        {
+          "position": "1st place",
+          "winners": "1",
+          "prize": "$1,500",
+          "total": "$1,500"
+        },
+        {
+          "position": "2nd place",
+          "winners": "1",
+          "prize": "$1,000",
+          "total": "$1,000"
+        },
+        {
+          "position": "3rd place",
+          "winners": "1",
+          "prize": "$700",
+          "total": "$700"
+        },
+        {
+          "position": "4th to 10th place",
+          "winners": "7",
+          "prize": "$300",
+          "total": "$2,100"
+        },
+        {
+          "position": "11th to 20th place",
+          "winners": "10",
+          "prize": "$150",
+          "total": "$1,500"
+        },
+        {
+          "position": "21st to 40th place",
+          "winners": "20",
+          "prize": "$60",
+          "total": "$1,200"
+        }
+      ]
+    }
   }
 }
