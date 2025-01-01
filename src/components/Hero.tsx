@@ -52,9 +52,9 @@ const Hero = () => {
                     <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
                   </button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px] bg-white/80 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-white/20">
+                <DialogContent className="sm:max-w-[425px] bg-bright-blue/20 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-bright-blue/20">
                   <DialogHeader>
-                    <DialogTitle className="text-3xl font-bold text-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+                    <DialogTitle className="text-3xl font-bold text-center text-white mb-2">
                       Unlock Your Trading Potential Today! 🚀
                     </DialogTitle>
                     <div className="flex justify-center mb-6">
