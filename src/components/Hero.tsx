@@ -1,8 +1,18 @@
 import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { SubscriptionForm } from './SubscriptionForm';
+import { useState } from 'react';
 
 const Hero = () => {
   const { t } = useTranslation();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
     <div className="relative min-h-screen bg-navy overflow-hidden">
@@ -35,10 +45,24 @@ const Hero = () => {
               {t('hero.subtitle')}
             </p>
             <div className="flex justify-center md:justify-start">
-              <button className="group bg-bright-blue hover:bg-bright-blue/90 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-all duration-200 animate-scale-in font-sans">
-                <span>{t('hero.cta')}</span>
-                <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <button className="group bg-bright-blue hover:bg-bright-blue/90 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-all duration-200 animate-scale-in font-sans">
+                    <span>{t('hero.cta')}</span>
+                    <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" />
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px] bg-white p-6">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl font-bold text-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                      Join Our Community
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="mt-6">
+                    <SubscriptionForm onSuccess={() => setIsDialogOpen(false)} />
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
           
