@@ -11,7 +11,7 @@ const PrizeCards = () => {
       cashPrize: "$2,000",
       challenge: "$100,000",
       challengeType: t('prizes.challenge'),
-      perks: t('prizes.first.perks', { returnObjects: true }) as string[]
+      perks: t('prizes.first.perks', { returnObjects: true }) || []
     },
     {
       icon: <Medal className="w-16 h-16 text-bright-blue" />,
@@ -19,7 +19,7 @@ const PrizeCards = () => {
       cashPrize: "$1,000",
       challenge: "$100,000",
       challengeType: t('prizes.challenge'),
-      perks: t('prizes.second.perks', { returnObjects: true }) as string[]
+      perks: t('prizes.second.perks', { returnObjects: true }) || []
     },
     {
       icon: <Award className="w-16 h-16 text-bright-blue" />,
@@ -27,7 +27,7 @@ const PrizeCards = () => {
       cashPrize: "$500",
       challenge: "$100,000",
       challengeType: t('prizes.challenge'),
-      perks: t('prizes.third.perks', { returnObjects: true }) as string[]
+      perks: t('prizes.third.perks', { returnObjects: true }) || []
     }
   ];
 
@@ -60,7 +60,7 @@ const PrizeCards = () => {
         {/* Title Section */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white font-display mb-4">
-            Prizes
+            {t('prizes.title')}
           </h2>
           <div className="w-24 h-1 bg-bright-blue mx-auto rounded-full" />
         </div>
@@ -98,7 +98,7 @@ const PrizeCards = () => {
                   </div>
                   
                   <div className="text-white space-y-1">
-                    {prize.perks.map((perk: string, perkIndex: number) => (
+                    {Array.isArray(prize.perks) && prize.perks.map((perk: string, perkIndex: number) => (
                       <p key={perkIndex} className="text-lg">
                         {perk}
                       </p>

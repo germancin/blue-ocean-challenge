@@ -68,5 +68,31 @@
         "description": "Deberá haber al menos 15 operaciones ejecutadas. Ninguna operación menor a 3 minutos"
       }
     }
+  },
+  "prizes": {
+    "title": "Premios",
+    "challenge": "desafío de trading",
+    "first": {
+      "title": "Primer Lugar",
+      "perks": [
+        "Acceso a mentorías exclusivas",
+        "Membresía premium de 1 año",
+        "Reconocimiento en redes sociales"
+      ]
+    },
+    "second": {
+      "title": "Segundo Lugar",
+      "perks": [
+        "Membresía premium de 6 meses",
+        "Acceso a webinars exclusivos"
+      ]
+    },
+    "third": {
+      "title": "Tercer Lugar",
+      "perks": [
+        "Membresía premium de 3 meses",
+        "Material educativo exclusivo"
+      ]
+    }
   }
 }
