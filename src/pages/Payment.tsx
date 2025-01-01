@@ -5,7 +5,7 @@ import { PaymentInformationCard } from '@/components/payment/PaymentInformationC
 import { usePaymentVerification } from '@/hooks/use-payment-verification';
 
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
-const MERCHANT_ADDRESS = 'TEWmboRA5KRovRQkEKHjCBh5rNstiCuKya';
+const MERCHANT_ADDRESS = 'TWM4e9QrTVUiZ67mrnC6EkaELvyQCwHb1t';
 const AMOUNT = 2.50;
 
 interface LocationState {
