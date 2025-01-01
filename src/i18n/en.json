@@ -72,6 +72,29 @@
   "prizes": {
     "title": "Prizes",
     "challenge": "trading challenge",
+    "first": {
+      "title": "First Place",
+      "perks": [
+        "Access to Premium Trading Tools",
+        "1-on-1 Mentoring Session",
+        "VIP Trading Community Access"
+      ]
+    },
+    "second": {
+      "title": "Second Place",
+      "perks": [
+        "Premium Trading Tools Access",
+        "Group Mentoring Session",
+        "Trading Community Access"
+      ]
+    },
+    "third": {
+      "title": "Third Place",
+      "perks": [
+        "Basic Trading Tools Access",
+        "Trading Community Access"
+      ]
+    },
     "distribution": {
       "title": "Prize Distribution",
       "totalBudget": "Total Prize Budget: $8,000",

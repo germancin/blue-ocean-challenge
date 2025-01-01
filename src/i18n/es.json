@@ -72,6 +72,29 @@
   "prizes": {
     "title": "Premios",
     "challenge": "desafío de trading",
+    "first": {
+      "title": "Primer Lugar",
+      "perks": [
+        "Acceso a Herramientas Premium de Trading",
+        "Sesión de Mentoría Individual",
+        "Acceso VIP a la Comunidad de Trading"
+      ]
+    },
+    "second": {
+      "title": "Segundo Lugar",
+      "perks": [
+        "Acceso a Herramientas Premium",
+        "Sesión de Mentoría Grupal",
+        "Acceso a la Comunidad de Trading"
+      ]
+    },
+    "third": {
+      "title": "Tercer Lugar",
+      "perks": [
+        "Acceso a Herramientas Básicas",
+        "Acceso a la Comunidad de Trading"
+      ]
+    },
     "distribution": {
       "title": "Tabla de Premiación",
       "totalBudget": "Presupuesto total de Premio: $8,000",
