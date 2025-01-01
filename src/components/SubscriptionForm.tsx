@@ -31,7 +31,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="name" className="text-lg font-medium text-gray-700">
+        <Label htmlFor="name" className="text-lg font-medium text-white">
           Name
         </Label>
         <Input
@@ -47,7 +47,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-lg font-medium text-gray-700">
+        <Label htmlFor="email" className="text-lg font-medium text-white">
           Email
         </Label>
         <Input
