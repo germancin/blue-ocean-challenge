@@ -40,7 +40,7 @@ const Footer = () => {
           {/* Logo Section */}
           <div>
             <Link to="/" className="text-2xl font-bold">
-              for<span className="bg-white text-navy px-2">traders</span>
+              Elite<span className="bg-white text-navy px-2">Trader</span>Hub
             </Link>
           </div>
 
