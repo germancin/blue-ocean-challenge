@@ -55,7 +55,7 @@ const Hero = () => {
                 <DialogContent className="sm:max-w-[425px] bg-gradient-to-br from-[#D3E4FD] to-[#F1F0FB] p-8 rounded-xl shadow-xl">
                   <DialogHeader>
                     <DialogTitle className="text-3xl font-bold text-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                      Join the Tournament
+                      Unlock Your Trading Potential Today! 🚀
                     </DialogTitle>
                     <div className="flex justify-center mb-6">
                       <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
