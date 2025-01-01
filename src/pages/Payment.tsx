@@ -15,6 +15,7 @@ interface LocationState {
 
 const PaymentPage = () => {
   const [transactionStatus, setTransactionStatus] = useState<'pending' | 'success' | 'failed'>('pending');
+  const [paymentId, setPaymentId] = useState<string>('');
   const location = useLocation();
   const navigate = useNavigate();
   const { email } = (location.state as LocationState) || {};
@@ -25,18 +26,25 @@ const PaymentPage = () => {
       return;
     }
 
-    // Create initial payment record
+    // Create initial payment record with a unique payment ID
     const createPayment = async () => {
+      const uniqueId = `PAY-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
       const { error } = await supabase
         .from('payments')
         .insert([
-          { email, amount: AMOUNT }
+          { 
+            email, 
+            amount: AMOUNT,
+            payment_id: uniqueId 
+          }
         ]);
 
       if (error) {
         console.error('Error creating payment:', error);
         setTransactionStatus('failed');
         toast.error("Error creating payment record");
+      } else {
+        setPaymentId(uniqueId);
       }
     };
 
@@ -44,10 +52,12 @@ const PaymentPage = () => {
 
     // Set up polling to check for payment
     const checkPayment = async () => {
+      if (!paymentId) return false;
+
       try {
-        console.log('Checking payment status for email:', email);
+        console.log('Checking payment status for payment ID:', paymentId);
         const { data, error } = await supabase.functions.invoke('verify-payment', {
-          body: { email }
+          body: { email, paymentId }
         });
 
         if (error) {
@@ -89,7 +99,7 @@ const PaymentPage = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [email, navigate]);
+  }, [email, navigate, paymentId]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -143,6 +153,12 @@ const PaymentPage = () => {
                 <p className="text-sm font-mono bg-gray-100 p-2 rounded break-all">
                   {MERCHANT_ADDRESS}
                 </p>
+                <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <p className="text-sm text-yellow-800 font-medium">Important: Add this ID in your transaction memo</p>
+                  <p className="text-sm font-mono bg-white mt-2 p-2 rounded border border-yellow-200">
+                    {paymentId}
+                  </p>
+                </div>
               </div>
               <div className="flex justify-center space-x-4 pt-4">
                 {transactionStatus === 'pending' && (

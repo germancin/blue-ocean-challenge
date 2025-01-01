@@ -16,8 +16,8 @@ serve(async (req) => {
   }
 
   try {
-    const { email } = await req.json();
-    console.log('Checking payment for email:', email);
+    const { email, paymentId } = await req.json();
+    console.log('Checking payment for email:', email, 'paymentId:', paymentId);
 
     // Create Supabase client
     const supabaseClient = createClient(
@@ -25,11 +25,12 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Get pending payment for this email
+    // Get pending payment for this email and payment ID
     const { data: payment, error: fetchError } = await supabaseClient
       .from('payments')
       .select('*')
       .eq('email', email)
+      .eq('payment_id', paymentId)
       .eq('status', 'pending')
       .maybeSingle();
 
@@ -39,7 +40,7 @@ serve(async (req) => {
     }
 
     if (!payment) {
-      console.log('No pending payment found for email:', email);
+      console.log('No pending payment found for email and payment ID:', email, paymentId);
       return new Response(
         JSON.stringify({ status: 'no_payment_found' }),
         { 
@@ -71,17 +72,22 @@ serve(async (req) => {
 
     const transactions = data.data || [];
     
-    // Look for a matching transaction (same amount)
+    // Look for a matching transaction (same amount and payment ID in memo)
     const matchingTx = transactions.find(tx => {
       const txAmount = Number(tx.value) / 1_000_000; // Convert from TRC20 decimals
       console.log('Comparing transaction:', {
         txAmount,
         paymentAmount: payment.amount,
         txTo: tx.to.toLowerCase(),
-        merchantAddress: MERCHANT_ADDRESS?.toLowerCase()
+        merchantAddress: MERCHANT_ADDRESS?.toLowerCase(),
+        memo: tx.data, // Transaction memo
+        expectedPaymentId: paymentId
       });
+      
+      // Check both amount and payment ID in memo
       return Math.abs(txAmount - payment.amount) < 0.01 && // Allow for small rounding differences
-             tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase();
+             tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase() &&
+             tx.data?.includes(paymentId); // Check if memo contains payment ID
     });
 
     if (matchingTx) {
