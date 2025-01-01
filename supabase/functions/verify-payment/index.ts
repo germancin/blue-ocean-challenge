@@ -17,6 +17,17 @@ serve(async (req) => {
 
   try {
     const { email, paymentId } = await req.json();
+    
+    if (!email || !paymentId) {
+      return new Response(
+        JSON.stringify({ error: 'Missing required parameters' }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400,
+        }
+      );
+    }
+
     console.log('Checking payment for email:', email, 'paymentId:', paymentId);
 
     // Create Supabase client
@@ -25,27 +36,38 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Get pending payment for this email and payment ID
+    // Get pending payment for this specific payment ID
+    // Using single() instead of maybeSingle() to ensure uniqueness
     const { data: payment, error: fetchError } = await supabaseClient
       .from('payments')
       .select('*')
-      .eq('email', email)
       .eq('payment_id', paymentId)
       .eq('status', 'pending')
-      .maybeSingle();
+      .single();
 
     if (fetchError) {
       console.error('Error fetching payment:', fetchError);
+      // If no rows found, return appropriate message
+      if (fetchError.code === 'PGRST116') {
+        return new Response(
+          JSON.stringify({ status: 'no_payment_found' }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            status: 200,
+          }
+        );
+      }
       throw fetchError;
     }
 
-    if (!payment) {
-      console.log('No pending payment found for email and payment ID:', email, paymentId);
+    // Verify email matches to prevent unauthorized access
+    if (payment.email !== email) {
+      console.error('Email mismatch for payment ID:', paymentId);
       return new Response(
-        JSON.stringify({ status: 'no_payment_found' }),
+        JSON.stringify({ error: 'Unauthorized' }),
         { 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 200,
+          status: 403,
         }
       );
     }
@@ -72,35 +94,38 @@ serve(async (req) => {
 
     const transactions = data.data || [];
     
-    // Look for a matching transaction (same amount and payment ID in memo)
+    // Look for a matching transaction with exact payment ID match
     const matchingTx = transactions.find(tx => {
       const txAmount = Number(tx.value) / 1_000_000; // Convert from TRC20 decimals
+      const txMemo = tx.data || '';
+      
       console.log('Comparing transaction:', {
         txAmount,
         paymentAmount: payment.amount,
         txTo: tx.to.toLowerCase(),
         merchantAddress: MERCHANT_ADDRESS?.toLowerCase(),
-        memo: tx.data, // Transaction memo
+        memo: txMemo,
         expectedPaymentId: paymentId
       });
       
-      // Check both amount and payment ID in memo
+      // Strict matching: exact amount and payment ID in memo
       return Math.abs(txAmount - payment.amount) < 0.01 && // Allow for small rounding differences
              tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase() &&
-             tx.data?.includes(paymentId); // Check if memo contains payment ID
+             txMemo.includes(paymentId); // Exact payment ID match
     });
 
     if (matchingTx) {
       console.log('Found matching transaction:', matchingTx);
       
-      // Update payment status to success
+      // Update payment status to success using payment_id for precise matching
       const { error: updateError } = await supabaseClient
         .from('payments')
         .update({ 
           status: 'success',
           transaction_hash: matchingTx.transaction_id,
         })
-        .eq('id', payment.id);
+        .eq('payment_id', paymentId)
+        .eq('status', 'pending'); // Ensure we only update if still pending
 
       if (updateError) {
         console.error('Error updating payment:', updateError);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -16,6 +16,7 @@ interface LocationState {
 const PaymentPage = () => {
   const [transactionStatus, setTransactionStatus] = useState<'pending' | 'success' | 'failed'>('pending');
   const [paymentId, setPaymentId] = useState<string>('');
+  const currentPaymentIdRef = useRef<string>('');
   const location = useLocation();
   const navigate = useNavigate();
   const { email } = (location.state as LocationState) || {};
@@ -28,7 +29,14 @@ const PaymentPage = () => {
 
     // Create initial payment record with a unique payment ID
     const createPayment = async () => {
-      const uniqueId = `PAY-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      // Generate a unique payment ID that includes a timestamp and random string
+      const timestamp = Date.now();
+      const random = Math.random().toString(36).substr(2, 9);
+      const uniqueId = `PAY-${timestamp}-${random}`;
+      
+      // Store the payment ID in the ref for safe comparison during polling
+      currentPaymentIdRef.current = uniqueId;
+
       const { error } = await supabase
         .from('payments')
         .insert([
@@ -52,17 +60,28 @@ const PaymentPage = () => {
 
     // Set up polling to check for payment
     const checkPayment = async () => {
-      if (!paymentId) return false;
+      // Ensure we're checking for the current payment session
+      const currentId = currentPaymentIdRef.current;
+      if (!currentId || currentId !== paymentId) return false;
 
       try {
-        console.log('Checking payment status for payment ID:', paymentId);
+        console.log('Checking payment status for payment ID:', currentId);
         const { data, error } = await supabase.functions.invoke('verify-payment', {
-          body: { email, paymentId }
+          body: { 
+            email, 
+            paymentId: currentId 
+          }
         });
 
         if (error) {
           console.error('Error checking payment:', error);
           toast.error("Error verifying payment");
+          return false;
+        }
+
+        // Verify we're still on the same payment session
+        if (currentId !== currentPaymentIdRef.current) {
+          console.log('Payment session changed, ignoring response');
           return false;
         }
 
@@ -98,6 +117,8 @@ const PaymentPage = () => {
 
     return () => {
       clearInterval(intervalId);
+      // Clear the current payment ID when component unmounts
+      currentPaymentIdRef.current = '';
     };
   }, [email, navigate, paymentId]);
 
