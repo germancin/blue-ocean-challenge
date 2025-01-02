@@ -6,6 +6,7 @@ import { PaymentInformationCard } from '@/components/payment/PaymentInformationC
 import { usePaymentVerification } from '@/hooks/use-payment-verification';
 import { generateUniqueAmount } from '@/utils/paymentUtils';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 const BASE_AMOUNT = 2;
 const MERCHANT_ADDRESS = 'TWM4e9QrTVUiZ67mrnC6EkaELvyQCwHb1t';
@@ -21,7 +22,6 @@ const PaymentPage = () => {
   const [uniqueAmount, setUniqueAmount] = useState<number | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Initialize verification with default values
   const { transactionStatus } = usePaymentVerification({
     email: email || '',
     amount: uniqueAmount || 0,
@@ -36,11 +36,35 @@ const PaymentPage = () => {
       }
 
       try {
-        const amount = await generateUniqueAmount(BASE_AMOUNT);
-        setUniqueAmount(amount);
+        // First, try to find an existing pending payment for this email
+        const { data: existingPayment, error: fetchError } = await supabase
+          .from('payments')
+          .select('amount')
+          .eq('email', email)
+          .eq('status', 'pending')
+          .maybeSingle();
+
+        if (fetchError) {
+          console.error('Error fetching existing payment:', fetchError);
+          toast.error('Error retrieving payment information');
+          navigate('/');
+          return;
+        }
+
+        // If there's an existing pending payment, use that amount
+        if (existingPayment) {
+          console.log('Found existing payment with amount:', existingPayment.amount);
+          setUniqueAmount(Number(existingPayment.amount));
+        } else {
+          // If no existing payment, generate a new unique amount
+          const amount = await generateUniqueAmount(BASE_AMOUNT);
+          console.log('Generated new unique amount:', amount);
+          setUniqueAmount(amount);
+        }
+        
         setIsInitialized(true);
       } catch (error) {
-        console.error('Error generating unique amount:', error);
+        console.error('Error initializing payment amount:', error);
         toast.error('Error generating payment amount');
         navigate('/');
       }
