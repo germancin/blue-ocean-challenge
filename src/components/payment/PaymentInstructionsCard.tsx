@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
 import type { PaymentStatus } from '@/hooks/use-payment-verification';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface PaymentInstructionsCardProps {
   amount: number;
@@ -51,12 +50,6 @@ export function PaymentInstructionsCard({
             </p>
           </div>
         </div>
-        <Alert>
-          <RefreshCw className="h-4 w-4" />
-          <AlertDescription>
-            This page automatically checks for payment confirmation every 30 seconds. No need to refresh.
-          </AlertDescription>
-        </Alert>
         <div className="flex justify-center space-x-4 pt-4">
           {transactionStatus === 'pending' && (
             <div className="flex items-center text-yellow-600">
