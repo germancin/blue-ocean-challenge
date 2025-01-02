@@ -26,7 +26,7 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
         // Check for any existing payment for this email
         const { data: existingPayment, error: existingError } = await supabase
           .from('payments')
-          .select('id, status')
+          .select('*') // Select all fields to see full record
           .eq('email', email)
           .maybeSingle();
 
@@ -36,15 +36,22 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           return null;
         }
 
+        console.log('Existing payment check result:', existingPayment);
+
         if (existingPayment) {
           console.log('Found existing payment:', existingPayment);
           
           // Update the existing payment with new amount if status is pending
           if (existingPayment.status === 'pending') {
+            console.log('Attempting to update payment amount to:', formattedAmount);
+            
             const { data: updatedPayment, error: updateError } = await supabase
               .from('payments')
-              .update({ amount: formattedAmount })
-              .eq('email', email)  // Changed from existingPayment.id to email
+              .update({ 
+                amount: formattedAmount,
+                updated_at: new Date().toISOString()
+              })
+              .eq('email', email)
               .select()
               .maybeSingle();
 
@@ -54,7 +61,7 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
               return null;
             }
 
-            console.log('Updated existing payment:', updatedPayment);
+            console.log('Updated payment result:', updatedPayment);
             return existingPayment.id;
           }
           

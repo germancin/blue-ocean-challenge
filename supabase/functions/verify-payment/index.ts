@@ -28,7 +28,12 @@ serve(async (req) => {
       );
     }
 
-    console.log('Checking payment for email:', email, 'amount:', amount.toFixed(3), 'paymentId:', paymentId);
+    console.log('Checking payment for:', {
+      email,
+      amount: amount.toFixed(3),
+      paymentId,
+      merchantAddress: MERCHANT_ADDRESS
+    });
 
     // Create Supabase client
     const supabaseClient = createClient(
@@ -91,17 +96,22 @@ serve(async (req) => {
     console.log('Fetched transactions:', data);
 
     const transactions = data.data || [];
+    const expectedAmount = Number(amount.toFixed(3));
     
     // Look for a matching transaction with exact amount
     const matchingTx = transactions.find(tx => {
-      const txAmount = Number((Number(tx.value) / 1_000_000).toFixed(3)); // Convert from TRC20 decimals and ensure 3 decimals
-      const expectedAmount = Number(amount.toFixed(3));
+      // Convert from USDT's smallest unit (6 decimals) to actual USDT amount
+      const txAmountRaw = Number(tx.value) / 1_000_000;
+      // Format to 3 decimal places for comparison
+      const txAmount = Number(txAmountRaw.toFixed(3));
       
       console.log('Comparing transaction:', {
+        rawValue: tx.value,
+        txAmountRaw,
         txAmount,
         expectedAmount,
-        txTo: tx.to.toLowerCase(),
-        merchantAddress: MERCHANT_ADDRESS?.toLowerCase()
+        matches: txAmount === expectedAmount,
+        addressMatch: tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase()
       });
       
       return txAmount === expectedAmount && 
