@@ -95,7 +95,7 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
         const { data, error } = await supabase.functions.invoke('verify-payment', {
           body: { 
             email,
-            amount,
+            amount: Number(amount.toFixed(3)),
             paymentId
           }
         });
