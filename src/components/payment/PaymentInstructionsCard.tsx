@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle2, AlertCircle, Shield, LockKeyhole, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Shield, LockKeyhole, ShieldCheck, Copy, Check } from 'lucide-react';
 import type { PaymentStatus } from '@/hooks/use-payment-verification';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 interface PaymentInstructionsCardProps {
   amount: number;
@@ -15,6 +17,18 @@ export function PaymentInstructionsCard({
   transactionStatus,
 }: PaymentInstructionsCardProps) {
   const { t } = useTranslation();
+  const [hasCopied, setHasCopied] = useState(false);
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(merchantAddress);
+      setHasCopied(true);
+      toast.success('Address copied to clipboard');
+      setTimeout(() => setHasCopied(false), 2000);
+    } catch (err) {
+      toast.error('Failed to copy address');
+    }
+  };
 
   return (
     <Card>
@@ -36,9 +50,22 @@ export function PaymentInstructionsCard({
           <p className="text-sm text-gray-600 mb-2">{t('payment.instructions.sendExactly')}</p>
           <p className="text-xl font-bold">{amount} USDT</p>
           <p className="text-sm text-gray-600 mt-2">{t('payment.instructions.toAddress')}</p>
-          <p className="text-sm font-mono bg-gray-100 p-2 rounded break-all">
-            {merchantAddress}
-          </p>
+          <div className="relative flex items-center justify-center gap-2">
+            <p className="text-sm font-mono bg-gray-100 p-2 rounded break-all">
+              {merchantAddress}
+            </p>
+            <button
+              onClick={copyToClipboard}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="Copy address to clipboard"
+            >
+              {hasCopied ? (
+                <Check className="h-4 w-4 text-green-500" />
+              ) : (
+                <Copy className="h-4 w-4 text-gray-500" />
+              )}
+            </button>
+          </div>
         </div>
 
         <div className="flex justify-center space-x-4 pt-4">
