@@ -29,7 +29,7 @@ serve(async (req) => {
       );
     }
 
-    console.log('Checking payment for:', {
+    console.log('Starting payment verification for:', {
       email,
       amount: amount.toFixed(3),
       paymentId,
@@ -121,6 +121,8 @@ serve(async (req) => {
     });
 
     if (matchingTx) {
+      console.log('Found matching transaction:', matchingTx);
+      
       // Update payment status to success
       const { error: updateError } = await supabaseClient
         .from('payments')
@@ -135,7 +137,22 @@ serve(async (req) => {
         throw updateError;
       }
 
-      console.log('Payment marked as success');
+      console.log('Payment marked as success, attempting to send confirmation email');
+      
+      // Call the send-confirmation-email function
+      const { error: emailError } = await supabaseClient.functions.invoke('send-confirmation-email', {
+        body: { 
+          email, 
+          amount: Number(amount.toFixed(3))
+        }
+      });
+
+      if (emailError) {
+        console.error('Error sending confirmation email:', emailError);
+      } else {
+        console.log('Confirmation email sent successfully');
+      }
+
       return new Response(
         JSON.stringify({ 
           status: 'success', 

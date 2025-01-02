@@ -30,7 +30,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
-        to: email,
+        to: [email],
         subject: 'Payment Confirmation - Elite Trading Tournament',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -67,8 +67,9 @@ serve(async (req) => {
     })
 
     if (!res.ok) {
-      console.error('Failed to send email:', await res.text())
-      throw new Error('Failed to send email')
+      const errorText = await res.text();
+      console.error('Failed to send email. Response:', errorText);
+      throw new Error(`Failed to send email: ${errorText}`);
     }
 
     const data = await res.json()
