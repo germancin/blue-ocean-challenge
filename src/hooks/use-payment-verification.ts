@@ -26,7 +26,7 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
         // Check for any existing payment for this email
         const { data: existingPayment, error: existingError } = await supabase
           .from('payments')
-          .select('*') // Select all fields to see full record
+          .select('*')
           .eq('email', email)
           .maybeSingle();
 
@@ -99,6 +99,8 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
       try {
         console.log('Checking payment status for ID:', paymentId);
+        // This is where we call the verify-payment function using the Supabase client
+        // No need to add headers or API key manually
         const { data, error } = await supabase.functions.invoke('verify-payment', {
           body: { 
             email,
