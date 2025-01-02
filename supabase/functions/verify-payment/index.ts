@@ -19,6 +19,7 @@ serve(async (req) => {
     const { email, amount, paymentId } = await req.json();
     
     if (!email || !amount || !paymentId) {
+      console.error('Missing required parameters:', { email, amount, paymentId });
       return new Response(
         JSON.stringify({ error: 'Missing required parameters' }),
         { 
@@ -126,6 +127,13 @@ serve(async (req) => {
       const txBlock = matchingTx.block;
       const blocksConfirmed = currentBlock - txBlock;
       
+      console.log('Transaction found with confirmations:', {
+        currentBlock,
+        txBlock,
+        blocksConfirmed,
+        transactionId: matchingTx.transaction_id
+      });
+
       // If we have enough confirmations (e.g., 19 blocks), mark as success
       if (blocksConfirmed >= 19) {
         const { error: updateError } = await supabaseClient
@@ -141,6 +149,7 @@ serve(async (req) => {
           throw updateError;
         }
 
+        console.log('Payment marked as success');
         return new Response(
           JSON.stringify({ 
             status: 'success', 
@@ -155,6 +164,7 @@ serve(async (req) => {
       }
 
       // If not enough confirmations, return pending with block count
+      console.log('Payment still pending, waiting for confirmations');
       return new Response(
         JSON.stringify({ 
           status: 'pending', 
@@ -167,6 +177,7 @@ serve(async (req) => {
       );
     }
 
+    console.log('No matching transaction found, payment still pending');
     return new Response(
       JSON.stringify({ status: 'pending', blocksConfirmed: 0 }),
       { 
