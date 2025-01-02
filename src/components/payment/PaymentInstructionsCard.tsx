@@ -17,16 +17,22 @@ export function PaymentInstructionsCard({
   transactionStatus,
 }: PaymentInstructionsCardProps) {
   const { t } = useTranslation();
-  const [hasCopied, setHasCopied] = useState(false);
+  const [hasCopiedAddress, setHasCopiedAddress] = useState(false);
+  const [hasCopiedAmount, setHasCopiedAmount] = useState(false);
 
-  const copyToClipboard = async () => {
+  const copyToClipboard = async (text: string, type: 'address' | 'amount') => {
     try {
-      await navigator.clipboard.writeText(merchantAddress);
-      setHasCopied(true);
-      toast.success('Address copied to clipboard');
-      setTimeout(() => setHasCopied(false), 2000);
+      await navigator.clipboard.writeText(text);
+      if (type === 'address') {
+        setHasCopiedAddress(true);
+        setTimeout(() => setHasCopiedAddress(false), 2000);
+      } else {
+        setHasCopiedAmount(true);
+        setTimeout(() => setHasCopiedAmount(false), 2000);
+      }
+      toast.success(`${type === 'address' ? 'Address' : 'Amount'} copied to clipboard`);
     } catch (err) {
-      toast.error('Failed to copy address');
+      toast.error('Failed to copy to clipboard');
     }
   };
 
@@ -48,18 +54,31 @@ export function PaymentInstructionsCard({
         </div>
         <div className="text-center">
           <p className="text-sm text-gray-600 mb-2">{t('payment.instructions.sendExactly')}</p>
-          <p className="text-xl font-bold">{amount} USDT</p>
+          <div className="flex items-center justify-center gap-2">
+            <p className="text-xl font-bold bg-gray-100 px-3 py-1 rounded">{amount} USDT</p>
+            <button
+              onClick={() => copyToClipboard(amount.toString(), 'amount')}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              aria-label="Copy amount to clipboard"
+            >
+              {hasCopiedAmount ? (
+                <Check className="h-4 w-4 text-green-500" />
+              ) : (
+                <Copy className="h-4 w-4 text-gray-500" />
+              )}
+            </button>
+          </div>
           <p className="text-sm text-gray-600 mt-2">{t('payment.instructions.toAddress')}</p>
           <div className="relative flex items-center justify-center gap-2">
             <p className="text-sm font-mono bg-gray-100 p-2 rounded break-all">
               {merchantAddress}
             </p>
             <button
-              onClick={copyToClipboard}
+              onClick={() => copyToClipboard(merchantAddress, 'address')}
               className="p-2 hover:bg-gray-100 rounded-full transition-colors"
               aria-label="Copy address to clipboard"
             >
-              {hasCopied ? (
+              {hasCopiedAddress ? (
                 <Check className="h-4 w-4 text-green-500" />
               ) : (
                 <Copy className="h-4 w-4 text-gray-500" />
