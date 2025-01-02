@@ -37,7 +37,6 @@ serve(async (req) => {
     );
 
     // Get pending payment for this specific payment ID
-    // Using single() instead of maybeSingle() to ensure uniqueness
     const { data: payment, error: fetchError } = await supabaseClient
       .from('payments')
       .select('*')
@@ -47,7 +46,6 @@ serve(async (req) => {
 
     if (fetchError) {
       console.error('Error fetching payment:', fetchError);
-      // If no rows found, return appropriate message
       if (fetchError.code === 'PGRST116') {
         return new Response(
           JSON.stringify({ status: 'no_payment_found' }),
@@ -111,29 +109,55 @@ serve(async (req) => {
       // Strict matching: exact amount and payment ID in memo
       return Math.abs(txAmount - payment.amount) < 0.01 && // Allow for small rounding differences
              tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase() &&
-             txMemo.includes(paymentId); // Exact payment ID match
+             txMemo.includes(paymentId);
     });
 
     if (matchingTx) {
       console.log('Found matching transaction:', matchingTx);
-      
-      // Update payment status to success using payment_id for precise matching
-      const { error: updateError } = await supabaseClient
-        .from('payments')
-        .update({ 
-          status: 'success',
-          transaction_hash: matchingTx.transaction_id,
-        })
-        .eq('payment_id', paymentId)
-        .eq('status', 'pending'); // Ensure we only update if still pending
 
-      if (updateError) {
-        console.error('Error updating payment:', updateError);
-        throw updateError;
+      // Get block confirmation count
+      const latestBlockResponse = await fetch(`${TRON_API_URL}/wallet/getnowblock`);
+      const latestBlockData = await latestBlockResponse.json();
+      const currentBlock = latestBlockData.block_header.raw_data.number;
+      const txBlock = matchingTx.block;
+      const blocksConfirmed = currentBlock - txBlock;
+      
+      // If we have enough confirmations (e.g., 19 blocks), mark as success
+      if (blocksConfirmed >= 19) {
+        // Update payment status to success using payment_id for precise matching
+        const { error: updateError } = await supabaseClient
+          .from('payments')
+          .update({ 
+            status: 'success',
+            transaction_hash: matchingTx.transaction_id,
+          })
+          .eq('payment_id', paymentId)
+          .eq('status', 'pending');
+
+        if (updateError) {
+          console.error('Error updating payment:', updateError);
+          throw updateError;
+        }
+
+        return new Response(
+          JSON.stringify({ 
+            status: 'success', 
+            transaction: matchingTx,
+            blocksConfirmed 
+          }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            status: 200,
+          }
+        );
       }
 
+      // If not enough confirmations, return pending with block count
       return new Response(
-        JSON.stringify({ status: 'success', transaction: matchingTx }),
+        JSON.stringify({ 
+          status: 'pending', 
+          blocksConfirmed 
+        }),
         { 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           status: 200,
@@ -143,7 +167,7 @@ serve(async (req) => {
 
     console.log('No matching transaction found');
     return new Response(
-      JSON.stringify({ status: 'pending' }),
+      JSON.stringify({ status: 'pending', blocksConfirmed: 0 }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,

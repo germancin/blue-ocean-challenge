@@ -12,6 +12,7 @@ interface UsePaymentVerificationProps {
 export function usePaymentVerification({ email, amount }: UsePaymentVerificationProps) {
   const [transactionStatus, setTransactionStatus] = useState<PaymentStatus>('pending');
   const [paymentId, setPaymentId] = useState<string>('');
+  const [blocksConfirmed, setBlocksConfirmed] = useState<number>(0);
 
   useEffect(() => {
     // First try to find an existing pending payment for this email
@@ -81,6 +82,11 @@ export function usePaymentVerification({ email, amount }: UsePaymentVerification
 
         console.log('Payment verification response:', data);
 
+        // Update blocks confirmed if available
+        if (data.blocksConfirmed !== undefined) {
+          setBlocksConfirmed(data.blocksConfirmed);
+        }
+
         if (data.status === 'success') {
           setTransactionStatus('success');
           toast.success("Payment confirmed!");
@@ -121,6 +127,7 @@ export function usePaymentVerification({ email, amount }: UsePaymentVerification
 
   return {
     transactionStatus,
-    paymentId
+    paymentId,
+    blocksConfirmed
   };
 }
