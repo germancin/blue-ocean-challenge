@@ -28,7 +28,7 @@ serve(async (req) => {
       );
     }
 
-    console.log('Checking payment for email:', email, 'amount:', amount, 'paymentId:', paymentId);
+    console.log('Checking payment for email:', email, 'amount:', amount.toFixed(3), 'paymentId:', paymentId);
 
     // Create Supabase client
     const supabaseClient = createClient(
@@ -36,26 +36,38 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Get pending payment
+    // Get payment record
     const { data: payment, error: fetchError } = await supabaseClient
       .from('payments')
       .select('*')
       .eq('id', paymentId)
-      .eq('status', 'pending')
-      .single();
+      .maybeSingle();
 
     if (fetchError) {
       console.error('Error fetching payment:', fetchError);
-      if (fetchError.code === 'PGRST116') {
-        return new Response(
-          JSON.stringify({ status: 'no_payment_found' }),
-          { 
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-            status: 200,
-          }
-        );
-      }
       throw fetchError;
+    }
+
+    if (!payment) {
+      console.log('No payment found with ID:', paymentId);
+      return new Response(
+        JSON.stringify({ status: 'no_payment_found' }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 200,
+        }
+      );
+    }
+
+    if (payment.status !== 'pending') {
+      console.log('Payment status is not pending:', payment.status);
+      return new Response(
+        JSON.stringify({ status: payment.status }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 200,
+        }
+      );
     }
 
     console.log('Found pending payment:', payment);
@@ -82,17 +94,17 @@ serve(async (req) => {
     
     // Look for a matching transaction with exact amount
     const matchingTx = transactions.find(tx => {
-      const txAmount = Number(tx.value) / 1_000_000; // Convert from TRC20 decimals
+      const txAmount = Number((Number(tx.value) / 1_000_000).toFixed(3)); // Convert from TRC20 decimals and ensure 3 decimals
+      const expectedAmount = Number(amount.toFixed(3));
       
       console.log('Comparing transaction:', {
         txAmount,
-        expectedAmount: amount,
+        expectedAmount,
         txTo: tx.to.toLowerCase(),
         merchantAddress: MERCHANT_ADDRESS?.toLowerCase()
       });
       
-      // Exact amount matching (using string comparison to avoid floating point issues)
-      return txAmount.toFixed(3) === amount.toFixed(3) && 
+      return txAmount === expectedAmount && 
              tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase();
     });
 
@@ -112,8 +124,7 @@ serve(async (req) => {
             status: 'success',
             transaction_hash: matchingTx.transaction_id,
           })
-          .eq('id', paymentId)
-          .eq('status', 'pending');
+          .eq('id', paymentId);
 
         if (updateError) {
           console.error('Error updating payment:', updateError);
