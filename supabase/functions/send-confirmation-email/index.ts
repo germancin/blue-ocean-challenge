@@ -26,18 +26,44 @@ serve(async (req) => {
       body: JSON.stringify({
         from: 'onboarding@resend.dev',
         to: email,
-        subject: 'Payment Confirmation',
+        subject: 'Payment Confirmation - Elite Trading Tournament',
         html: `
-          <h1>Payment Confirmation</h1>
-          <p>Thank you for your payment of ${amount} USDT!</p>
-          <p>Your payment has been successfully processed and confirmed.</p>
-          <p>If you have any questions, please don't hesitate to contact us.</p>
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Congratulations!</h1>
+            
+            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+              Thank you for your payment of ${amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
+            </p>
+
+            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+              You're now officially part of an exclusive group of traders who will compete for amazing prizes and recognition.
+            </p>
+
+            <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
+              <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
+              <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Check your email for tournament schedule and details</li>
+                <li style="margin-bottom: 8px;">Join our trading community</li>
+                <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
+              </ul>
+            </div>
+
+            <p style="font-size: 16px; line-height: 1.5; color: #374151;">
+              If you have any questions, feel free to reach out to our support team.
+            </p>
+
+            <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
+              Best regards,<br>
+              The Elite Trading Tournament Team
+            </p>
+          </div>
         `
       })
     })
 
     if (!res.ok) {
-      throw new Error(`Failed to send email: ${await res.text()}`)
+      console.error('Failed to send email:', await res.text())
+      throw new Error('Failed to send email')
     }
 
     const data = await res.json()
