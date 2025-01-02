@@ -17,7 +17,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
   useEffect(() => {
     if (!enabled) return;
 
-    // First try to find an existing pending payment for this email and amount
     const getOrCreatePayment = async () => {
       try {
         // Check for existing pending payment
@@ -49,9 +48,9 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
             status: 'pending'
           }])
           .select()
-          .single();
+          .maybeSingle();
 
-        if (insertError) {
+        if (insertError || !newPayment) {
           console.error('Error creating payment:', insertError);
           toast.error("Error creating payment record");
           return null;
@@ -66,7 +65,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
       }
     };
 
-    // Set up polling to check for payment
     const checkPayment = async (paymentId: string) => {
       if (!paymentId) return false;
 
@@ -88,7 +86,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
         console.log('Payment verification response:', data);
 
-        // Update blocks confirmed if available
         if (data.blocksConfirmed !== undefined) {
           setBlocksConfirmed(data.blocksConfirmed);
         }
@@ -110,7 +107,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
       return false;
     };
 
-    // Initialize payment and start polling
     let intervalId: number;
     getOrCreatePayment().then(paymentId => {
       if (paymentId) {
