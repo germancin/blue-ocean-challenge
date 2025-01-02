@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Shield, LockKeyhole, ShieldCheck } from 'lucide-react';
 import type { PaymentStatus } from '@/hooks/use-payment-verification';
 
 interface PaymentInstructionsCardProps {
@@ -50,6 +50,23 @@ export function PaymentInstructionsCard({
             </p>
           </div>
         </div>
+
+        {/* Trust Indicators Section */}
+        <div className="grid grid-cols-3 gap-4 py-4 border-t border-gray-100">
+          <div className="flex flex-col items-center text-center">
+            <Shield className="h-6 w-6 text-blue-600 mb-2" />
+            <span className="text-xs font-medium">Secure Payment</span>
+          </div>
+          <div className="flex flex-col items-center text-center">
+            <LockKeyhole className="h-6 w-6 text-blue-600 mb-2" />
+            <span className="text-xs font-medium">Encrypted</span>
+          </div>
+          <div className="flex flex-col items-center text-center">
+            <ShieldCheck className="h-6 w-6 text-blue-600 mb-2" />
+            <span className="text-xs font-medium">Verified</span>
+          </div>
+        </div>
+
         <div className="flex justify-center space-x-4 pt-4">
           {transactionStatus === 'pending' && (
             <div className="flex items-center text-yellow-600">
