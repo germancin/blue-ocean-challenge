@@ -18,7 +18,7 @@ export function PaymentDetailsCard({ amount, email }: PaymentDetailsCardProps) {
         <div className="space-y-4">
           <div>
             <h3 className="text-lg font-medium">{t('payment.details.amountDue')}</h3>
-            <p className="text-3xl font-bold">${amount.toFixed(2)} USDT</p>
+            <p className="text-3xl font-bold">${amount.toFixed(3)} USDT</p>
           </div>
           <div>
             <h3 className="text-lg font-medium">{t('payment.details.orderDetails')}</h3>
