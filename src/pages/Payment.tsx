@@ -22,7 +22,7 @@ const PaymentPage = () => {
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Initialize verification with default values
-  const { transactionStatus, blocksConfirmed } = usePaymentVerification({
+  const { transactionStatus } = usePaymentVerification({
     email: email || '',
     amount: uniqueAmount || 0,
     enabled: isInitialized && !!email && !!uniqueAmount
@@ -72,7 +72,6 @@ const PaymentPage = () => {
             amount={uniqueAmount}
             merchantAddress={MERCHANT_ADDRESS}
             transactionStatus={transactionStatus}
-            blocksConfirmed={blocksConfirmed}
           />
         </div>
       </div>

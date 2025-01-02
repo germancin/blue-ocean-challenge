@@ -121,55 +121,25 @@ serve(async (req) => {
     });
 
     if (matchingTx) {
-      // Get block confirmation count
-      const latestBlockResponse = await fetch(`${TRON_API_URL}/wallet/getnowblock`);
-      const latestBlockData = await latestBlockResponse.json();
-      const currentBlock = latestBlockData.block_header.raw_data.number;
-      const txBlock = matchingTx.block;
-      const blocksConfirmed = currentBlock - txBlock;
-      
-      console.log('Transaction found with confirmations:', {
-        currentBlock,
-        txBlock,
-        blocksConfirmed,
-        transactionId: matchingTx.transaction_id
-      });
+      // Update payment status to success
+      const { error: updateError } = await supabaseClient
+        .from('payments')
+        .update({ 
+          status: 'success',
+          transaction_hash: matchingTx.transaction_id,
+        })
+        .eq('id', paymentId);
 
-      // If we have enough confirmations (e.g., 19 blocks), mark as success
-      if (blocksConfirmed >= 19) {
-        const { error: updateError } = await supabaseClient
-          .from('payments')
-          .update({ 
-            status: 'success',
-            transaction_hash: matchingTx.transaction_id,
-          })
-          .eq('id', paymentId);
-
-        if (updateError) {
-          console.error('Error updating payment:', updateError);
-          throw updateError;
-        }
-
-        console.log('Payment marked as success');
-        return new Response(
-          JSON.stringify({ 
-            status: 'success', 
-            transaction: matchingTx,
-            blocksConfirmed 
-          }),
-          { 
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-            status: 200,
-          }
-        );
+      if (updateError) {
+        console.error('Error updating payment:', updateError);
+        throw updateError;
       }
 
-      // If not enough confirmations, return pending with block count
-      console.log('Payment still pending, waiting for confirmations');
+      console.log('Payment marked as success');
       return new Response(
         JSON.stringify({ 
-          status: 'pending', 
-          blocksConfirmed 
+          status: 'success', 
+          transaction: matchingTx
         }),
         { 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -180,7 +150,7 @@ serve(async (req) => {
 
     console.log('No matching transaction found, payment still pending');
     return new Response(
-      JSON.stringify({ status: 'pending', blocksConfirmed: 0 }),
+      JSON.stringify({ status: 'pending' }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 200,

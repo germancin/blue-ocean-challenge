@@ -12,7 +12,6 @@ interface UsePaymentVerificationProps {
 
 export function usePaymentVerification({ email, amount, enabled }: UsePaymentVerificationProps) {
   const [transactionStatus, setTransactionStatus] = useState<PaymentStatus>('pending');
-  const [blocksConfirmed, setBlocksConfirmed] = useState<number>(0);
 
   useEffect(() => {
     if (!enabled) return;
@@ -99,8 +98,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
       try {
         console.log('Checking payment status for ID:', paymentId);
-        // This is where we call the verify-payment function using the Supabase client
-        // No need to add headers or API key manually
         const { data, error } = await supabase.functions.invoke('verify-payment', {
           body: { 
             email,
@@ -116,10 +113,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
         }
 
         console.log('Payment verification response:', data);
-
-        if (data.blocksConfirmed !== undefined) {
-          setBlocksConfirmed(data.blocksConfirmed);
-        }
 
         if (data.status === 'success') {
           setTransactionStatus('success');
@@ -159,7 +152,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
   }, [email, amount, enabled]);
 
   return {
-    transactionStatus,
-    blocksConfirmed
+    transactionStatus
   };
 }

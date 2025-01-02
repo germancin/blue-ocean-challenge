@@ -7,14 +7,12 @@ interface PaymentInstructionsCardProps {
   amount: number;
   merchantAddress: string;
   transactionStatus: PaymentStatus;
-  blocksConfirmed?: number;
 }
 
 export function PaymentInstructionsCard({ 
   amount, 
   merchantAddress,
   transactionStatus,
-  blocksConfirmed = 0
 }: PaymentInstructionsCardProps) {
   const { t } = useTranslation();
 
@@ -49,11 +47,6 @@ export function PaymentInstructionsCard({
               <div className="flex items-center text-yellow-600">
                 <AlertCircle className="mr-2" />
                 {t('payment.status.pending')}
-                {blocksConfirmed > 0 && (
-                  <span className="ml-2 text-sm bg-yellow-100 px-2 py-1 rounded">
-                    {blocksConfirmed} blocks confirmed
-                  </span>
-                )}
               </div>
               
               <div className="grid grid-cols-3 gap-8 pt-4 w-full max-w-md">
