@@ -176,6 +176,13 @@
         "description": "Once the payment is confirmed on the blockchain, you will receive an email notification with your tournament registration details."
       }
     },
+    "whyUsdt": {
+      "title": "Why Use USDT",
+      "security": {
+        "title": "Secure Transactions",
+        "description": "USDT transactions are secure and traceable on the blockchain"
+      }
+    },
     "support": {
       "title": "Support Policy",
       "questions": {
