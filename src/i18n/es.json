@@ -143,65 +143,9 @@
           "total": "$1,200"
         }
       ]
-    },
-    "diversification": {
-      "title": "Nuestra Estrategia de Diversificación",
-      "forex": {
-        "title": "Trading de Forex",
-        "description": "Accede a mercados de divisas globales con herramientas avanzadas y spreads competitivos"
-      },
-      "indices": {
-        "title": "Índices Bursátiles",
-        "description": "Opera los principales índices globales con datos de mercado en tiempo real y análisis"
-      },
-      "crypto": {
-        "title": "Criptomonedas",
-        "description": "Explora el trading de activos digitales con ejecución segura y eficiente"
-      }
     }
   },
   "payment": {
-    "howItWorks": {
-      "title": "Cómo Funciona el Pago",
-      "confirmationTime": {
-        "title": "Tiempo de Confirmación",
-        "description": "Las transacciones en la red TRON (TRC20) son rápidas y generalmente se confirman en menos de 1 minuto. Sin embargo, en casos raros, pueden tardar hasta 5 minutos dependiendo del tráfico en la red."
-      },
-      "autoNotification": {
-        "title": "Notificación Automática",
-        "description": "Una vez que el pago se confirme en la blockchain, recibirás una notificación en tu correo con los detalles de tu inscripción al torneo."
-      }
-    },
-    "whyUsdt": {
-      "title": "Por Qué Usar USDT (TRC20)",
-      "networkFees": {
-        "title": "Bajas Tarifas de Red",
-        "description": "La red TRON ofrece tarifas de transacción casi inexistentes, asegurando que el monto que envíes sea el mismo que recibimos."
-      },
-      "security": {
-        "title": "Seguridad Garantizada",
-        "description": "Todas las transacciones son verificadas en la blockchain, lo que garantiza transparencia y seguridad."
-      }
-    },
-    "support": {
-      "title": "Política de Soporte",
-      "questions": {
-        "title": "¿Tienes Preguntas?",
-        "description": "Si tienes algún problema con tu transacción, nuestro equipo está aquí para ayudarte. Escríbenos a support@elitetraderhub.com."
-      },
-      "incorrectPayments": {
-        "title": "Pagos Incorrectos",
-        "description": "Asegúrate de enviar exactamente 2.5 USDT. Pagos incompletos o en redes incorrectas pueden no ser procesados."
-      }
-    },
-    "benefits": {
-      "title": "Beneficios de Participar",
-      "items": [
-        "Acceso exclusivo al Elite Trading Tournament, donde puedes ganar premios increíbles.",
-        "Conéctate con una comunidad de traders apasionados.",
-        "Una oportunidad única de probar tus habilidades en un entorno competitivo."
-      ]
-    },
     "details": {
       "title": "Torneo Elite de Trading",
       "amountDue": "Monto a Pagar",
@@ -214,13 +158,38 @@
       "qrCodeAlt": "Código QR de Pago",
       "sendExactly": "Envía exactamente",
       "toAddress": "a la dirección:",
-      "memoImportant": "Importante: Agrega este ID en el memo de tu transacción",
-      "securePayment": "Pago Seguro en USDT"
+      "memoImportant": "Importante: Agrega este ID en el memo de tu transacción"
     },
     "status": {
       "pending": "Esperando el pago...",
       "success": "¡Pago confirmado!",
       "failed": "Verificación de pago fallida"
+    },
+    "howItWorks": {
+      "title": "Cómo Funciona el Pago",
+      "confirmationTime": {
+        "title": "Tiempo de Confirmación",
+        "description": "Las transacciones en la red TRON (TRC20) son rápidas y generalmente se confirman en menos de 1 minuto. Sin embargo, en casos raros, pueden tardar hasta 5 minutos dependiendo del tráfico en la red."
+      },
+      "autoNotification": {
+        "title": "Notificación Automática",
+        "description": "Una vez que el pago se confirme en la blockchain, recibirás una notificación en tu correo con los detalles de tu inscripción al torneo."
+      }
+    },
+    "support": {
+      "title": "Política de Soporte",
+      "questions": {
+        "title": "¿Tienes Preguntas?",
+        "description": "Si tienes algún problema con tu transacción, nuestro equipo está aquí para ayudarte. Escríbenos a support@elitetraderhub.com."
+      }
+    },
+    "benefits": {
+      "title": "Beneficios de Participar",
+      "items": [
+        "Acceso exclusivo al Elite Trading Tournament, donde puedes ganar premios increíbles.",
+        "Conéctate con una comunidad de traders apasionados.",
+        "Una oportunidad única de probar tus habilidades en un entorno competitivo."
+      ]
     }
   }
 }

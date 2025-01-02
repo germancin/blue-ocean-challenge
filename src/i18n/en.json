@@ -145,21 +145,6 @@
       ]
     }
   },
-  "diversification": {
-    "title": "Our Diversification Strategy",
-    "forex": {
-      "title": "Forex Trading",
-      "description": "Access global currency markets with advanced trading tools and competitive spreads"
-    },
-    "indices": {
-      "title": "Stock Indices",
-      "description": "Trade major global indices with real-time market data and analysis"
-    },
-    "crypto": {
-      "title": "Cryptocurrency",
-      "description": "Explore digital asset trading with secure and efficient execution"
-    }
-  },
   "payment": {
     "details": {
       "title": "Elite Trading Tournament",
@@ -173,13 +158,38 @@
       "qrCodeAlt": "Payment QR Code",
       "sendExactly": "Send exactly",
       "toAddress": "to address:",
-      "memoImportant": "Important: Add this ID in your transaction memo",
-      "securePayment": "Secure USDT Payment"
+      "memoImportant": "Important: Add this ID in your transaction memo"
     },
     "status": {
       "pending": "Waiting for payment...",
       "success": "Payment confirmed!",
       "failed": "Payment verification failed"
+    },
+    "howItWorks": {
+      "title": "How Payment Works",
+      "confirmationTime": {
+        "title": "Confirmation Time",
+        "description": "Transactions on the TRON network (TRC20) are fast and usually confirm in less than 1 minute. However, in rare cases, it may take up to 5 minutes depending on network traffic."
+      },
+      "autoNotification": {
+        "title": "Automatic Notification",
+        "description": "Once the payment is confirmed on the blockchain, you will receive an email notification with your tournament registration details."
+      }
+    },
+    "support": {
+      "title": "Support Policy",
+      "questions": {
+        "title": "Have Questions?",
+        "description": "If you have any issues with your transaction, our team is here to help. Write to us at support@elitetraderhub.com."
+      }
+    },
+    "benefits": {
+      "title": "Benefits of Participating",
+      "items": [
+        "Exclusive access to the Elite Trading Tournament, where you can win amazing prizes.",
+        "Connect with a community of passionate traders.",
+        "A unique opportunity to test your skills in a competitive environment."
+      ]
     }
   }
 }
