@@ -82,10 +82,6 @@ export function PaymentInstructionsCard({
             </div>
           )}
         </div>
-        <div className="flex justify-center pt-4">
-          <Shield className="text-gray-400 mr-2" />
-          <span className="text-sm text-gray-600">{t('payment.instructions.securePayment')}</span>
-        </div>
       </CardContent>
     </Card>
   );
