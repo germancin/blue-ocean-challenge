@@ -39,7 +39,7 @@ const PaymentPage = () => {
         // First, try to find an existing pending payment for this email
         const { data: existingPayment, error: fetchError } = await supabase
           .from('payments')
-          .select('amount')
+          .select('id, amount')
           .eq('email', email)
           .eq('status', 'pending')
           .maybeSingle();
@@ -51,17 +51,27 @@ const PaymentPage = () => {
           return;
         }
 
-        // If there's an existing pending payment, use that amount
+        // Generate a new unique amount regardless of whether there's an existing payment
+        const newAmount = await generateUniqueAmount(BASE_AMOUNT);
+        console.log('Generated new unique amount:', newAmount);
+
         if (existingPayment) {
-          console.log('Found existing payment with amount:', existingPayment.amount);
-          setUniqueAmount(Number(existingPayment.amount));
-        } else {
-          // If no existing payment, generate a new unique amount
-          const amount = await generateUniqueAmount(BASE_AMOUNT);
-          console.log('Generated new unique amount:', amount);
-          setUniqueAmount(amount);
+          console.log('Found existing payment, updating amount:', existingPayment.id);
+          // Update the existing payment with the new amount
+          const { error: updateError } = await supabase
+            .from('payments')
+            .update({ amount: newAmount })
+            .eq('id', existingPayment.id);
+
+          if (updateError) {
+            console.error('Error updating payment amount:', updateError);
+            toast.error('Error updating payment amount');
+            navigate('/');
+            return;
+          }
         }
-        
+
+        setUniqueAmount(newAmount);
         setIsInitialized(true);
       } catch (error) {
         console.error('Error initializing payment amount:', error);
