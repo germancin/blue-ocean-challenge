@@ -44,7 +44,7 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
             const { data: updatedPayment, error: updateError } = await supabase
               .from('payments')
               .update({ amount: formattedAmount })
-              .eq('id', existingPayment.id)
+              .eq('email', email)  // Changed from existingPayment.id to email
               .select()
               .maybeSingle();
 
