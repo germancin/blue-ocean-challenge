@@ -93,6 +93,26 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
       }
     };
 
+    const sendConfirmationEmail = async () => {
+      try {
+        console.log('Sending confirmation email to:', email);
+        const { error } = await supabase.functions.invoke('send-confirmation-email', {
+          body: { email, amount: Number(amount.toFixed(3)) }
+        });
+
+        if (error) {
+          console.error('Error sending confirmation email:', error);
+          toast.error("Failed to send confirmation email");
+        } else {
+          console.log('Confirmation email sent successfully');
+          toast.success("Confirmation email sent!");
+        }
+      } catch (error) {
+        console.error('Error sending confirmation email:', error);
+        toast.error("Failed to send confirmation email");
+      }
+    };
+
     const checkPayment = async (paymentId: string) => {
       if (!paymentId) return false;
 
@@ -117,6 +137,8 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
         if (data.status === 'success') {
           setTransactionStatus('success');
           toast.success("Payment confirmed!");
+          // Send confirmation email when payment is successful
+          await sendConfirmationEmail();
           return true;
         } else if (data.status === 'no_payment_found') {
           setTransactionStatus('failed');
