@@ -14,6 +14,11 @@ serve(async (req) => {
   }
 
   try {
+    if (!RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set');
+      throw new Error('RESEND_API_KEY is not configured');
+    }
+
     const { email, amount } = await req.json()
     console.log('Sending confirmation email to:', email, 'for amount:', amount)
 

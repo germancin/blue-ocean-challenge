@@ -97,19 +97,23 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
       try {
         console.log('Sending confirmation email to:', email);
         const { error } = await supabase.functions.invoke('send-confirmation-email', {
-          body: { email, amount: Number(amount.toFixed(3)) }
+          body: { 
+            email, 
+            amount: Number(amount.toFixed(3))
+          }
         });
 
         if (error) {
           console.error('Error sending confirmation email:', error);
-          toast.error("Failed to send confirmation email");
+          // Don't show error toast for email failure to avoid confusing the user
+          // The payment was still successful
         } else {
           console.log('Confirmation email sent successfully');
           toast.success("Confirmation email sent!");
         }
       } catch (error) {
         console.error('Error sending confirmation email:', error);
-        toast.error("Failed to send confirmation email");
+        // Don't show error toast for email failure
       }
     };
 
