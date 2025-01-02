@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Shield, CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
+import { CheckCircle2, AlertCircle, RefreshCw } from 'lucide-react';
 import type { PaymentStatus } from '@/hooks/use-payment-verification';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
