@@ -29,7 +29,7 @@ serve(async (req) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'Elite Trading Tournament <tournament@elitetraderhub.com>',
+        from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
         to: email,
         subject: 'Payment Confirmation - Elite Trading Tournament',
         html: `
@@ -54,7 +54,7 @@ serve(async (req) => {
             </div>
 
             <p style="font-size: 16px; line-height: 1.5; color: #374151;">
-              If you have any questions, feel free to reach out to our support team at support@elitetraderhub.com.
+              If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co.
             </p>
 
             <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
