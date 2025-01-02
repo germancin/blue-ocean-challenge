@@ -15,7 +15,6 @@ export type Database = {
           created_at: string
           email: string
           id: string
-          payment_id: string | null
           status: string
           transaction_hash: string | null
           updated_at: string
@@ -25,7 +24,6 @@ export type Database = {
           created_at?: string
           email: string
           id?: string
-          payment_id?: string | null
           status?: string
           transaction_hash?: string | null
           updated_at?: string
@@ -35,7 +33,6 @@ export type Database = {
           created_at?: string
           email?: string
           id?: string
-          payment_id?: string | null
           status?: string
           transaction_hash?: string | null
           updated_at?: string

@@ -6,15 +6,13 @@ import type { PaymentStatus } from '@/hooks/use-payment-verification';
 interface PaymentInstructionsCardProps {
   amount: number;
   merchantAddress: string;
-  paymentId: string;
   transactionStatus: PaymentStatus;
   blocksConfirmed?: number;
 }
 
 export function PaymentInstructionsCard({ 
   amount, 
-  merchantAddress, 
-  paymentId,
+  merchantAddress,
   transactionStatus,
   blocksConfirmed = 0
 }: PaymentInstructionsCardProps) {
@@ -43,12 +41,6 @@ export function PaymentInstructionsCard({
           <p className="text-sm font-mono bg-gray-100 p-2 rounded break-all">
             {merchantAddress}
           </p>
-          <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <p className="text-sm text-yellow-800 font-medium">{t('payment.instructions.memoImportant')}</p>
-            <p className="text-sm font-mono bg-white mt-2 p-2 rounded border border-yellow-200">
-              {paymentId}
-            </p>
-          </div>
         </div>
 
         <div className="flex justify-center space-x-4 pt-4">
@@ -64,7 +56,6 @@ export function PaymentInstructionsCard({
                 )}
               </div>
               
-              {/* Trust Indicators Section - Moved here */}
               <div className="grid grid-cols-3 gap-8 pt-4 w-full max-w-md">
                 <div className="flex flex-col items-center text-center">
                   <Shield className="h-6 w-6 text-blue-600 mb-2" />

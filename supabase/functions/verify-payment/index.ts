@@ -16,9 +16,9 @@ serve(async (req) => {
   }
 
   try {
-    const { email, paymentId } = await req.json();
+    const { email, amount, paymentId } = await req.json();
     
-    if (!email || !paymentId) {
+    if (!email || !amount || !paymentId) {
       return new Response(
         JSON.stringify({ error: 'Missing required parameters' }),
         { 
@@ -28,7 +28,7 @@ serve(async (req) => {
       );
     }
 
-    console.log('Checking payment for email:', email, 'paymentId:', paymentId);
+    console.log('Checking payment for email:', email, 'amount:', amount);
 
     // Create Supabase client
     const supabaseClient = createClient(
@@ -36,11 +36,11 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Get pending payment for this specific payment ID
+    // Get pending payment
     const { data: payment, error: fetchError } = await supabaseClient
       .from('payments')
       .select('*')
-      .eq('payment_id', paymentId)
+      .eq('id', paymentId)
       .eq('status', 'pending')
       .single();
 
@@ -58,9 +58,9 @@ serve(async (req) => {
       throw fetchError;
     }
 
-    // Verify email matches to prevent unauthorized access
-    if (payment.email !== email) {
-      console.error('Email mismatch for payment ID:', paymentId);
+    // Verify email and amount match to prevent unauthorized access
+    if (payment.email !== email || payment.amount !== amount) {
+      console.error('Email or amount mismatch for payment ID:', paymentId);
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         { 
@@ -92,24 +92,20 @@ serve(async (req) => {
 
     const transactions = data.data || [];
     
-    // Look for a matching transaction with exact payment ID match
+    // Look for a matching transaction with exact amount
     const matchingTx = transactions.find(tx => {
       const txAmount = Number(tx.value) / 1_000_000; // Convert from TRC20 decimals
-      const txMemo = tx.data || '';
       
       console.log('Comparing transaction:', {
         txAmount,
         paymentAmount: payment.amount,
         txTo: tx.to.toLowerCase(),
-        merchantAddress: MERCHANT_ADDRESS?.toLowerCase(),
-        memo: txMemo,
-        expectedPaymentId: paymentId
+        merchantAddress: MERCHANT_ADDRESS?.toLowerCase()
       });
       
-      // Strict matching: exact amount and payment ID in memo
+      // Match only by amount and recipient address
       return Math.abs(txAmount - payment.amount) < 0.01 && // Allow for small rounding differences
-             tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase() &&
-             txMemo.includes(paymentId);
+             tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase();
     });
 
     if (matchingTx) {
@@ -124,14 +120,14 @@ serve(async (req) => {
       
       // If we have enough confirmations (e.g., 19 blocks), mark as success
       if (blocksConfirmed >= 19) {
-        // Update payment status to success using payment_id for precise matching
+        // Update payment status to success
         const { error: updateError } = await supabaseClient
           .from('payments')
           .update({ 
             status: 'success',
             transaction_hash: matchingTx.transaction_id,
           })
-          .eq('payment_id', paymentId)
+          .eq('id', paymentId)
           .eq('status', 'pending');
 
         if (updateError) {

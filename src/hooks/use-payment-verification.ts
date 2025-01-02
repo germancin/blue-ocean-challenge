@@ -11,40 +11,36 @@ interface UsePaymentVerificationProps {
 
 export function usePaymentVerification({ email, amount }: UsePaymentVerificationProps) {
   const [transactionStatus, setTransactionStatus] = useState<PaymentStatus>('pending');
-  const [paymentId, setPaymentId] = useState<string>('');
   const [blocksConfirmed, setBlocksConfirmed] = useState<number>(0);
 
   useEffect(() => {
-    // First try to find an existing pending payment for this email
+    // First try to find an existing pending payment for this email and amount
     const getOrCreatePayment = async () => {
       try {
-        // Check for existing pending payment using maybeSingle() instead of single()
+        // Check for existing pending payment
         const { data: existingPayment } = await supabase
           .from('payments')
-          .select('payment_id, status')
+          .select('id, status')
           .eq('email', email)
+          .eq('amount', amount)
           .eq('status', 'pending')
           .maybeSingle();
 
         if (existingPayment) {
           console.log('Found existing payment:', existingPayment);
-          setPaymentId(existingPayment.payment_id);
-          return existingPayment.payment_id;
+          return existingPayment.id;
         }
 
         // If no pending payment exists, create a new one
-        const timestamp = Date.now();
-        const random = Math.random().toString(36).substr(2, 9);
-        const uniqueId = `PAY-${timestamp}-${random}`;
-
-        const { error: insertError } = await supabase
+        const { data: newPayment, error: insertError } = await supabase
           .from('payments')
           .insert([{ 
             email, 
             amount,
-            payment_id: uniqueId,
             status: 'pending'
-          }]);
+          }])
+          .select()
+          .single();
 
         if (insertError) {
           console.error('Error creating payment:', insertError);
@@ -52,8 +48,7 @@ export function usePaymentVerification({ email, amount }: UsePaymentVerification
           return null;
         }
 
-        setPaymentId(uniqueId);
-        return uniqueId;
+        return newPayment.id;
       } catch (error) {
         console.error('Error in getOrCreatePayment:', error);
         toast.error("Error setting up payment");
@@ -62,15 +57,16 @@ export function usePaymentVerification({ email, amount }: UsePaymentVerification
     };
 
     // Set up polling to check for payment
-    const checkPayment = async (currentPaymentId: string) => {
-      if (!currentPaymentId) return false;
+    const checkPayment = async (paymentId: string) => {
+      if (!paymentId) return false;
 
       try {
-        console.log('Checking payment status for payment ID:', currentPaymentId);
+        console.log('Checking payment status for ID:', paymentId);
         const { data, error } = await supabase.functions.invoke('verify-payment', {
           body: { 
-            email, 
-            paymentId: currentPaymentId 
+            email,
+            amount,
+            paymentId
           }
         });
 
@@ -127,7 +123,6 @@ export function usePaymentVerification({ email, amount }: UsePaymentVerification
 
   return {
     transactionStatus,
-    paymentId,
     blocksConfirmed
   };
 }

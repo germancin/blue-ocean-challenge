@@ -23,7 +23,7 @@ const PaymentPage = () => {
     return null;
   }
 
-  const { transactionStatus, paymentId } = usePaymentVerification({
+  const { transactionStatus, blocksConfirmed } = usePaymentVerification({
     email,
     amount: AMOUNT
   });
@@ -49,8 +49,8 @@ const PaymentPage = () => {
           <PaymentInstructionsCard 
             amount={AMOUNT}
             merchantAddress={MERCHANT_ADDRESS}
-            paymentId={paymentId}
             transactionStatus={transactionStatus}
+            blocksConfirmed={blocksConfirmed}
           />
         </div>
       </div>
