@@ -107,6 +107,7 @@ serve(async (req) => {
       const txAmount = Number(txAmountRaw.toFixed(3));
       
       console.log('Comparing transaction:', {
+        txHash: tx.transaction_id,
         rawValue: tx.value,
         txAmountRaw,
         txAmount,
