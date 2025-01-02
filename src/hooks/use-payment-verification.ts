@@ -21,13 +21,19 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
     const getOrCreatePayment = async () => {
       try {
         // Check for existing pending payment
-        const { data: existingPayment } = await supabase
+        const { data: existingPayment, error: existingError } = await supabase
           .from('payments')
           .select('id, status')
           .eq('email', email)
           .eq('amount', amount)
           .eq('status', 'pending')
           .maybeSingle();
+
+        if (existingError) {
+          console.error('Error checking existing payment:', existingError);
+          toast.error("Error checking payment status");
+          return null;
+        }
 
         if (existingPayment) {
           console.log('Found existing payment:', existingPayment);
@@ -51,6 +57,7 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           return null;
         }
 
+        console.log('Created new payment:', newPayment);
         return newPayment.id;
       } catch (error) {
         console.error('Error in getOrCreatePayment:', error);
