@@ -7,13 +7,16 @@ export type PaymentStatus = 'pending' | 'success' | 'failed';
 interface UsePaymentVerificationProps {
   email: string;
   amount: number;
+  enabled: boolean;
 }
 
-export function usePaymentVerification({ email, amount }: UsePaymentVerificationProps) {
+export function usePaymentVerification({ email, amount, enabled }: UsePaymentVerificationProps) {
   const [transactionStatus, setTransactionStatus] = useState<PaymentStatus>('pending');
   const [blocksConfirmed, setBlocksConfirmed] = useState<number>(0);
 
   useEffect(() => {
+    if (!enabled) return;
+
     // First try to find an existing pending payment for this email and amount
     const getOrCreatePayment = async () => {
       try {
@@ -119,7 +122,7 @@ export function usePaymentVerification({ email, amount }: UsePaymentVerification
         clearInterval(intervalId);
       }
     };
-  }, [email, amount]);
+  }, [email, amount, enabled]);
 
   return {
     transactionStatus,
