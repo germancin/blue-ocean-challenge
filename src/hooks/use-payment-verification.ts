@@ -73,7 +73,8 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           .insert([{ 
             email, 
             amount: formattedAmount,
-            status: 'pending'
+            status: 'pending',
+            email_sent: false
           }])
           .select()
           .maybeSingle();
@@ -93,27 +94,48 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
       }
     };
 
-    const sendConfirmationEmail = async () => {
+    const sendConfirmationEmail = async (paymentId: string) => {
       try {
+        // Check if email was already sent
+        const { data: payment } = await supabase
+          .from('payments')
+          .select('email_sent')
+          .eq('id', paymentId)
+          .single();
+
+        if (payment?.email_sent) {
+          console.log('Email was already sent for this payment');
+          return;
+        }
+
         console.log('Sending confirmation email to:', email);
-        const { error } = await supabase.functions.invoke('send-confirmation-email', {
+        const { error: emailError } = await supabase.functions.invoke('send-confirmation-email', {
           body: { 
             email, 
             amount: Number(amount.toFixed(3))
           }
         });
 
-        if (error) {
-          console.error('Error sending confirmation email:', error);
-          // Don't show error toast for email failure to avoid confusing the user
-          // The payment was still successful
-        } else {
-          console.log('Confirmation email sent successfully');
-          toast.success("Confirmation email sent!");
+        if (emailError) {
+          console.error('Error sending confirmation email:', emailError);
+          return;
         }
+
+        // Mark email as sent
+        const { error: updateError } = await supabase
+          .from('payments')
+          .update({ email_sent: true })
+          .eq('id', paymentId);
+
+        if (updateError) {
+          console.error('Error updating email_sent status:', updateError);
+          return;
+        }
+
+        console.log('Confirmation email sent successfully and status updated');
+        toast.success("Confirmation email sent!");
       } catch (error) {
-        console.error('Error sending confirmation email:', error);
-        // Don't show error toast for email failure
+        console.error('Error in sendConfirmationEmail:', error);
       }
     };
 
@@ -142,7 +164,7 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           setTransactionStatus('success');
           toast.success("Payment confirmed!");
           // Send confirmation email when payment is successful
-          await sendConfirmationEmail();
+          await sendConfirmationEmail(paymentId);
           return true;
         } else if (data.status === 'no_payment_found') {
           setTransactionStatus('failed');

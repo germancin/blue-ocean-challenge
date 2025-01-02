@@ -14,6 +14,7 @@ export type Database = {
           amount: number
           created_at: string
           email: string
+          email_sent: boolean | null
           id: string
           status: string
           transaction_hash: string | null
@@ -23,6 +24,7 @@ export type Database = {
           amount: number
           created_at?: string
           email: string
+          email_sent?: boolean | null
           id?: string
           status?: string
           transaction_hash?: string | null
@@ -32,6 +34,7 @@ export type Database = {
           amount?: number
           created_at?: string
           email?: string
+          email_sent?: boolean | null
           id?: string
           status?: string
           transaction_hash?: string | null

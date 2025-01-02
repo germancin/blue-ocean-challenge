@@ -137,22 +137,6 @@ serve(async (req) => {
         throw updateError;
       }
 
-      console.log('Payment marked as success, attempting to send confirmation email');
-      
-      // Call the send-confirmation-email function
-      const { error: emailError } = await supabaseClient.functions.invoke('send-confirmation-email', {
-        body: { 
-          email, 
-          amount: Number(amount.toFixed(3))
-        }
-      });
-
-      if (emailError) {
-        console.error('Error sending confirmation email:', emailError);
-      } else {
-        console.log('Confirmation email sent successfully');
-      }
-
       return new Response(
         JSON.stringify({ 
           status: 'success', 
