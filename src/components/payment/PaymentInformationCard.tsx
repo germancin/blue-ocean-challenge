@@ -5,8 +5,9 @@ import { Clock, Shield, HelpCircle, Trophy, Bell } from 'lucide-react';
 export function PaymentInformationCard() {
   const { t } = useTranslation();
 
-  // Cast the benefits items to string array since we know it will be an array
-  const benefitItems = t('payment.benefits.items', { returnObjects: true }) as string[];
+  // Get benefits items and ensure it's an array
+  const benefitItems = t('payment.benefits.items', { returnObjects: true });
+  const benefitItemsArray = Array.isArray(benefitItems) ? benefitItems : [];
 
   return (
     <Card className="h-full">
@@ -60,7 +61,7 @@ export function PaymentInformationCard() {
             <Trophy className="h-5 w-5 text-bright-blue mt-1 flex-shrink-0" />
             <div>
               <ul className="space-y-2 text-sm text-gray-600">
-                {benefitItems.map((item: string, index: number) => (
+                {benefitItemsArray.map((item: string, index: number) => (
                   <li key={index} className="list-disc ml-4">{item}</li>
                 ))}
               </ul>
