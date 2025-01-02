@@ -16,9 +16,9 @@ serve(async (req) => {
   }
 
   try {
-    const { email, amount } = await req.json();
+    const { email, amount, paymentId } = await req.json();
     
-    if (!email || !amount) {
+    if (!email || !amount || !paymentId) {
       return new Response(
         JSON.stringify({ error: 'Missing required parameters' }),
         { 
@@ -28,7 +28,7 @@ serve(async (req) => {
       );
     }
 
-    console.log('Checking payment for email:', email, 'amount:', amount);
+    console.log('Checking payment for email:', email, 'amount:', amount, 'paymentId:', paymentId);
 
     // Create Supabase client
     const supabaseClient = createClient(
@@ -40,8 +40,7 @@ serve(async (req) => {
     const { data: payment, error: fetchError } = await supabaseClient
       .from('payments')
       .select('*')
-      .eq('email', email)
-      .eq('amount', amount)
+      .eq('id', paymentId)
       .eq('status', 'pending')
       .single();
 
@@ -113,7 +112,7 @@ serve(async (req) => {
             status: 'success',
             transaction_hash: matchingTx.transaction_id,
           })
-          .eq('id', payment.id)
+          .eq('id', paymentId)
           .eq('status', 'pending');
 
         if (updateError) {
