@@ -16,9 +16,9 @@ serve(async (req) => {
   }
 
   try {
-    const { email, amount, paymentId } = await req.json();
+    const { email, amount } = await req.json();
     
-    if (!email || !amount || !paymentId) {
+    if (!email || !amount) {
       return new Response(
         JSON.stringify({ error: 'Missing required parameters' }),
         { 
@@ -40,7 +40,8 @@ serve(async (req) => {
     const { data: payment, error: fetchError } = await supabaseClient
       .from('payments')
       .select('*')
-      .eq('id', paymentId)
+      .eq('email', email)
+      .eq('amount', amount)
       .eq('status', 'pending')
       .single();
 
@@ -56,18 +57,6 @@ serve(async (req) => {
         );
       }
       throw fetchError;
-    }
-
-    // Verify email and amount match to prevent unauthorized access
-    if (payment.email !== email || payment.amount !== amount) {
-      console.error('Email or amount mismatch for payment ID:', paymentId);
-      return new Response(
-        JSON.stringify({ error: 'Unauthorized' }),
-        { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 403,
-        }
-      );
     }
 
     console.log('Found pending payment:', payment);
@@ -98,19 +87,17 @@ serve(async (req) => {
       
       console.log('Comparing transaction:', {
         txAmount,
-        paymentAmount: payment.amount,
+        expectedAmount: amount,
         txTo: tx.to.toLowerCase(),
         merchantAddress: MERCHANT_ADDRESS?.toLowerCase()
       });
       
-      // Match only by amount and recipient address
-      return Math.abs(txAmount - payment.amount) < 0.01 && // Allow for small rounding differences
+      // Exact amount matching (using string comparison to avoid floating point issues)
+      return txAmount.toFixed(3) === amount.toFixed(3) && 
              tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase();
     });
 
     if (matchingTx) {
-      console.log('Found matching transaction:', matchingTx);
-
       // Get block confirmation count
       const latestBlockResponse = await fetch(`${TRON_API_URL}/wallet/getnowblock`);
       const latestBlockData = await latestBlockResponse.json();
@@ -120,14 +107,13 @@ serve(async (req) => {
       
       // If we have enough confirmations (e.g., 19 blocks), mark as success
       if (blocksConfirmed >= 19) {
-        // Update payment status to success
         const { error: updateError } = await supabaseClient
           .from('payments')
           .update({ 
             status: 'success',
             transaction_hash: matchingTx.transaction_id,
           })
-          .eq('id', paymentId)
+          .eq('id', payment.id)
           .eq('status', 'pending');
 
         if (updateError) {
@@ -161,7 +147,6 @@ serve(async (req) => {
       );
     }
 
-    console.log('No matching transaction found');
     return new Response(
       JSON.stringify({ status: 'pending', blocksConfirmed: 0 }),
       { 

@@ -1,12 +1,15 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { PaymentDetailsCard } from '@/components/payment/PaymentDetailsCard';
 import { PaymentInstructionsCard } from '@/components/payment/PaymentInstructionsCard';
 import { PaymentInformationCard } from '@/components/payment/PaymentInformationCard';
 import { usePaymentVerification } from '@/hooks/use-payment-verification';
+import { generateUniqueAmount } from '@/utils/paymentUtils';
+import { toast } from 'sonner';
 
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
 const MERCHANT_ADDRESS = 'TWM4e9QrTVUiZ67mrnC6EkaELvyQCwHb1t';
-const AMOUNT = 2.50;
+const BASE_AMOUNT = 2;
 
 interface LocationState {
   email?: string;
@@ -16,16 +19,33 @@ const PaymentPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { email } = (location.state as LocationState) || {};
+  const [uniqueAmount, setUniqueAmount] = useState<number | null>(null);
 
-  // Redirect if no email is provided
-  if (!email) {
-    navigate('/');
+  useEffect(() => {
+    const initializeAmount = async () => {
+      try {
+        const amount = await generateUniqueAmount(BASE_AMOUNT);
+        setUniqueAmount(amount);
+      } catch (error) {
+        console.error('Error generating unique amount:', error);
+        toast.error('Error generating payment amount');
+        navigate('/');
+      }
+    };
+
+    if (email) {
+      initializeAmount();
+    }
+  }, [email, navigate]);
+
+  // Redirect if no email is provided or amount not generated
+  if (!email || !uniqueAmount) {
     return null;
   }
 
   const { transactionStatus, blocksConfirmed } = usePaymentVerification({
     email,
-    amount: AMOUNT
+    amount: uniqueAmount
   });
 
   return (
@@ -39,7 +59,7 @@ const PaymentPage = () => {
         {/* Middle Column - Order Details */}
         <div className="lg:col-span-1">
           <PaymentDetailsCard 
-            amount={AMOUNT}
+            amount={uniqueAmount}
             email={email}
           />
         </div>
@@ -47,7 +67,7 @@ const PaymentPage = () => {
         {/* Right Column - Payment QR and Status */}
         <div className="lg:col-span-1">
           <PaymentInstructionsCard 
-            amount={AMOUNT}
+            amount={uniqueAmount}
             merchantAddress={MERCHANT_ADDRESS}
             transactionStatus={transactionStatus}
             blocksConfirmed={blocksConfirmed}
