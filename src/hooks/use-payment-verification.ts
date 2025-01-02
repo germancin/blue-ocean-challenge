@@ -19,13 +19,15 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
     const getOrCreatePayment = async () => {
       try {
-        // Check for existing pending payment
+        // Format amount to exactly 3 decimal places
+        const formattedAmount = Number(amount.toFixed(3));
+        console.log('Formatted amount:', formattedAmount);
+
+        // Check for any existing payment for this email
         const { data: existingPayment, error: existingError } = await supabase
           .from('payments')
           .select('id, status')
           .eq('email', email)
-          .eq('amount', amount)
-          .eq('status', 'pending')
           .maybeSingle();
 
         if (existingError) {
@@ -36,15 +38,35 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
         if (existingPayment) {
           console.log('Found existing payment:', existingPayment);
+          
+          // Update the existing payment with new amount if status is pending
+          if (existingPayment.status === 'pending') {
+            const { data: updatedPayment, error: updateError } = await supabase
+              .from('payments')
+              .update({ amount: formattedAmount })
+              .eq('id', existingPayment.id)
+              .select()
+              .maybeSingle();
+
+            if (updateError) {
+              console.error('Error updating payment:', updateError);
+              toast.error("Error updating payment record");
+              return null;
+            }
+
+            console.log('Updated existing payment:', updatedPayment);
+            return existingPayment.id;
+          }
+          
           return existingPayment.id;
         }
 
-        // If no pending payment exists, create a new one
+        // If no payment exists, create a new one
         const { data: newPayment, error: insertError } = await supabase
           .from('payments')
           .insert([{ 
             email, 
-            amount,
+            amount: formattedAmount,
             status: 'pending'
           }])
           .select()
