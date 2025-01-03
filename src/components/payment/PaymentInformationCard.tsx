@@ -9,6 +9,9 @@ interface PaymentInformationCardProps {
 export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCardProps) {
   const { t } = useTranslation();
   
+  // Cast the benefits to string array to ensure proper typing
+  const benefits = t('payment.benefits.items', { returnObjects: true }) as string[];
+  
   return (
     <Card>
       <CardHeader>
@@ -70,7 +73,7 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
               <Trophy className="h-5 w-5 text-blue-500 mt-1" />
               <div>
                 <ul className="space-y-2 text-sm text-gray-600">
-                  {t('payment.benefits.items', { returnObjects: true }).map((benefit: string, index: number) => (
+                  {benefits.map((benefit: string, index: number) => (
                     <li key={index}>{benefit}</li>
                   ))}
                 </ul>
