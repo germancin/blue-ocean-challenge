@@ -11,6 +11,7 @@ import { checkPaymentStatus, saveSubscriber } from "@/utils/paymentUtils";
 interface SubscriptionFormData {
   name: string;
   email: string;
+  acceptTerms: boolean;
 }
 
 export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
@@ -20,6 +21,14 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const navigate = useNavigate();
 
   const onSubmit = async (data: SubscriptionFormData) => {
+    if (!data.acceptTerms) {
+      setError('acceptTerms', {
+        type: 'manual',
+        message: 'You must accept the terms and conditions'
+      });
+      return;
+    }
+
     setIsLoading(true);
     try {
       await saveSubscriber(data.name, data.email, i18n.language);

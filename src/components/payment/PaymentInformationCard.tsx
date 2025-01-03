@@ -1,72 +1,51 @@
-import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Clock, Shield, HelpCircle, Trophy, Bell } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useForm } from "react-hook-form";
 
-export function PaymentInformationCard() {
-  const { t } = useTranslation();
+interface PaymentInformationCardProps {
+  onAcceptTerms?: (accepted: boolean) => void;
+}
 
-  // Get benefits items and ensure it's an array
-  const benefitItems = t('payment.benefits.items', { returnObjects: true });
-  const benefitItemsArray = Array.isArray(benefitItems) ? benefitItems : [];
+export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCardProps) {
+  const { register, formState: { errors } } = useForm();
 
   return (
-    <Card className="h-full">
+    <Card>
       <CardHeader>
-        <CardTitle>{t('payment.howItWorks.title')}</CardTitle>
+        <CardTitle>Payment Information</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-4">
-          <div className="flex items-start space-x-3">
-            <Clock className="h-5 w-5 text-bright-blue mt-1 flex-shrink-0" />
-            <div>
-              <h3 className="font-medium">{t('payment.howItWorks.confirmationTime.title')}</h3>
-              <p className="text-sm text-gray-600">{t('payment.howItWorks.confirmationTime.description')}</p>
-            </div>
-          </div>
+          <p className="text-sm text-gray-600">
+            Please review your payment information carefully before proceeding with the transaction.
+          </p>
           
-          <div className="flex items-start space-x-3">
-            <Bell className="h-5 w-5 text-bright-blue mt-1 flex-shrink-0" />
-            <div>
-              <h3 className="font-medium">{t('payment.howItWorks.autoNotification.title')}</h3>
-              <p className="text-sm text-gray-600">{t('payment.howItWorks.autoNotification.description')}</p>
-            </div>
+          <div className="bg-yellow-50 p-4 rounded-lg">
+            <h3 className="font-medium text-yellow-800">Important Notice</h3>
+            <p className="text-sm text-yellow-700 mt-1">
+              Make sure to send the exact amount specified to complete your registration.
+            </p>
           </div>
-        </div>
 
-        <div className="space-y-4">
-          <h3 className="font-semibold text-lg">{t('payment.whyUsdt.title')}</h3>
-          <div className="flex items-start space-x-3">
-            <Shield className="h-5 w-5 text-bright-blue mt-1 flex-shrink-0" />
-            <div>
-              <h3 className="font-medium">{t('payment.whyUsdt.security.title')}</h3>
-              <p className="text-sm text-gray-600">{t('payment.whyUsdt.security.description')}</p>
-            </div>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="acceptTerms"
+              {...register("acceptTerms", {
+                required: "You must accept the terms and conditions",
+              })}
+              onCheckedChange={(checked) => onAcceptTerms?.(checked as boolean)}
+            />
+            <Label
+              htmlFor="acceptTerms"
+              className="text-sm font-medium leading-none"
+            >
+              I accept the terms and conditions
+            </Label>
           </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-semibold text-lg">{t('payment.support.title')}</h3>
-          <div className="flex items-start space-x-3">
-            <HelpCircle className="h-5 w-5 text-bright-blue mt-1 flex-shrink-0" />
-            <div>
-              <h3 className="font-medium">{t('payment.support.questions.title')}</h3>
-              <p className="text-sm text-gray-600">{t('payment.support.questions.description')}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-semibold text-lg">{t('payment.benefits.title')}</h3>
-          <div className="flex items-start space-x-3">
-            <Trophy className="h-5 w-5 text-bright-blue mt-1 flex-shrink-0" />
-            <div>
-              <ul className="space-y-2 text-sm text-gray-600">
-                {benefitItemsArray.map((item: string, index: number) => (
-                  <li key={index} className="list-disc ml-4">{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          {errors.acceptTerms && (
+            <p className="text-red-500 text-sm">{errors.acceptTerms?.message?.toString()}</p>
+          )}
         </div>
       </CardContent>
     </Card>

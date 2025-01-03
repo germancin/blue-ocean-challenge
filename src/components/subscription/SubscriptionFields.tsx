@@ -1,10 +1,12 @@
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface SubscriptionFormData {
   name: string;
   email: string;
+  acceptTerms: boolean;
 }
 
 interface SubscriptionFieldsProps {
@@ -52,6 +54,24 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
           <p className="text-red-500 text-sm">{errors.email.message}</p>
         )}
       </div>
+
+      <div className="flex items-center space-x-2">
+        <Checkbox
+          id="acceptTerms"
+          {...register("acceptTerms", {
+            required: "You must accept the terms and conditions",
+          })}
+        />
+        <Label
+          htmlFor="acceptTerms"
+          className="text-sm font-medium leading-none text-white"
+        >
+          I accept the terms and conditions
+        </Label>
+      </div>
+      {errors.acceptTerms && (
+        <p className="text-red-500 text-sm">{errors.acceptTerms.message}</p>
+      )}
     </>
   );
 }

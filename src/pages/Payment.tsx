@@ -21,11 +21,12 @@ const PaymentPage = () => {
   const { email } = (location.state as LocationState) || {};
   const [uniqueAmount, setUniqueAmount] = useState<number | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const { transactionStatus } = usePaymentVerification({
     email: email || '',
     amount: uniqueAmount || 0,
-    enabled: isInitialized && !!email && !!uniqueAmount
+    enabled: isInitialized && !!email && !!uniqueAmount && termsAccepted
   });
 
   useEffect(() => {
@@ -36,7 +37,6 @@ const PaymentPage = () => {
       }
 
       try {
-        // First, try to find an existing pending payment for this email
         const { data: existingPayment, error: fetchError } = await supabase
           .from('payments')
           .select('id, amount')
@@ -51,13 +51,11 @@ const PaymentPage = () => {
           return;
         }
 
-        // Generate a new unique amount regardless of whether there's an existing payment
         const newAmount = await generateUniqueAmount(BASE_AMOUNT);
         console.log('Generated new unique amount:', newAmount);
 
         if (existingPayment) {
           console.log('Found existing payment, updating amount:', existingPayment.id);
-          // Update the existing payment with the new amount
           const { error: updateError } = await supabase
             .from('payments')
             .update({ amount: newAmount })
@@ -83,6 +81,13 @@ const PaymentPage = () => {
     initializeAmount();
   }, [email, navigate]);
 
+  const handleTermsAcceptance = (accepted: boolean) => {
+    setTermsAccepted(accepted);
+    if (accepted) {
+      toast.success("Terms and conditions accepted");
+    }
+  };
+
   if (!email || !uniqueAmount) {
     return null;
   }
@@ -91,7 +96,7 @@ const PaymentPage = () => {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1">
-          <PaymentInformationCard />
+          <PaymentInformationCard onAcceptTerms={handleTermsAcceptance} />
         </div>
 
         <div className="lg:col-span-1">
@@ -111,6 +116,6 @@ const PaymentPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default PaymentPage;
