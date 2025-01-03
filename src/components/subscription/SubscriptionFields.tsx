@@ -58,13 +58,19 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
       <div className="flex items-center space-x-2">
         <Checkbox
           id="acceptTerms"
-          {...register("acceptTerms", {
-            required: "You must accept the terms and conditions",
-          })}
+          onCheckedChange={(checked) => {
+            const event = {
+              target: {
+                name: "acceptTerms",
+                value: checked,
+              },
+            };
+            register("acceptTerms").onChange(event);
+          }}
         />
         <Label
           htmlFor="acceptTerms"
-          className="text-sm font-medium leading-none text-white"
+          className="text-sm font-medium leading-none text-white cursor-pointer"
         >
           I accept the terms and conditions
         </Label>

@@ -31,14 +31,13 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
           <div className="flex items-center space-x-2">
             <Checkbox
               id="acceptTerms"
-              {...register("acceptTerms", {
-                required: "You must accept the terms and conditions",
-              })}
-              onCheckedChange={(checked) => onAcceptTerms?.(checked as boolean)}
+              onCheckedChange={(checked) => {
+                onAcceptTerms?.(checked as boolean);
+              }}
             />
             <Label
               htmlFor="acceptTerms"
-              className="text-sm font-medium leading-none"
+              className="text-sm font-medium leading-none cursor-pointer"
             >
               I accept the terms and conditions
             </Label>
