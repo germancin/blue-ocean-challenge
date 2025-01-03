@@ -1,15 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useForm } from "react-hook-form";
 
-interface PaymentInformationCardProps {
-  onAcceptTerms?: (accepted: boolean) => void;
-}
-
-export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCardProps) {
-  const { register, formState: { errors } } = useForm();
-
+export function PaymentInformationCard() {
   return (
     <Card>
       <CardHeader>
@@ -27,25 +18,6 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
               Make sure to send the exact amount specified to complete your registration.
             </p>
           </div>
-
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="acceptTerms"
-              className="h-5 w-5 border-2 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
-              onCheckedChange={(checked) => {
-                onAcceptTerms?.(checked as boolean);
-              }}
-            />
-            <Label
-              htmlFor="acceptTerms"
-              className="text-sm font-medium leading-none cursor-pointer"
-            >
-              I accept the terms and conditions
-            </Label>
-          </div>
-          {errors.acceptTerms && (
-            <p className="text-red-500 text-sm">{errors.acceptTerms?.message?.toString()}</p>
-          )}
         </div>
       </CardContent>
     </Card>
