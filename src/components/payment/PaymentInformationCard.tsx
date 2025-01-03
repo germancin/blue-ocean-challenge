@@ -2,7 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Clock, Bell, Shield, HelpCircle, Trophy } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export function PaymentInformationCard() {
+interface PaymentInformationCardProps {
+  onAcceptTerms?: (accepted: boolean) => void;
+}
+
+export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCardProps) {
   const { t } = useTranslation();
   
   // Cast the benefits to string array to ensure proper typing
