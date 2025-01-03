@@ -1,6 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export function PaymentInformationCard() {
+interface PaymentInformationCardProps {
+  onAcceptTerms?: (accepted: boolean) => void;
+}
+
+export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCardProps) {
   return (
     <Card>
       <CardHeader>
