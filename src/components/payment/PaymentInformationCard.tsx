@@ -31,6 +31,7 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
           <div className="flex items-center space-x-2">
             <Checkbox
               id="acceptTerms"
+              className="h-5 w-5 border-2 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
               onCheckedChange={(checked) => {
                 onAcceptTerms?.(checked as boolean);
               }}

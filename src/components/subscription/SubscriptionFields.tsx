@@ -1,6 +1,7 @@
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
+import { Check } from "lucide-react";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface SubscriptionFormData {
@@ -58,6 +59,7 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
       <div className="flex items-center space-x-2">
         <Checkbox
           id="acceptTerms"
+          className="h-5 w-5 border-2 border-white data-[state=checked]:bg-white data-[state=checked]:text-navy"
           onCheckedChange={(checked) => {
             const event = {
               target: {
