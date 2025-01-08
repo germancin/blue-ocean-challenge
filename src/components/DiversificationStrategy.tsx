@@ -59,11 +59,11 @@ const DiversificationStrategy = () => {
         </div>
 
         {/* Trading Chart Image */}
-        <div className="w-full">
+        <div className="w-full h-48">
           <img
             src={strategy.image}
             alt={`${strategy.title} trading chart`}
-            className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
           />
         </div>
       </div>
