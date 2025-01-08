@@ -42,6 +42,16 @@
   "prizes": {
     "title": "Distribución del Premio",
     "challenge": "Cuenta de Trading Challenge",
+    "distribution": {
+      "title": "Distribución de Premios",
+      "totalBudget": "Premio Total: $6,250",
+      "table": {
+        "position": "Posición",
+        "winners": "Ganadores",
+        "prize": "Premio",
+        "total": "Total"
+      }
+    },
     "first": {
       "title": "Primer Lugar",
       "perks": [

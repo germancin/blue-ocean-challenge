@@ -42,6 +42,16 @@
   "prizes": {
     "title": "Prize Pool Distribution",
     "challenge": "Trading Challenge Account",
+    "distribution": {
+      "title": "Prize Distribution",
+      "totalBudget": "Total Prize Pool: $6,250",
+      "table": {
+        "position": "Position",
+        "winners": "Winners",
+        "prize": "Prize",
+        "total": "Total"
+      }
+    },
     "first": {
       "title": "First Place",
       "perks": [
