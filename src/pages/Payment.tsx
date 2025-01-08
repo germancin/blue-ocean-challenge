@@ -4,7 +4,7 @@ import { PaymentDetailsCard } from '@/components/payment/PaymentDetailsCard';
 import { PaymentInstructionsCard } from '@/components/payment/PaymentInstructionsCard';
 import { PaymentInformationCard } from '@/components/payment/PaymentInformationCard';
 import { usePaymentVerification } from '@/hooks/use-payment-verification';
-import { generateUniqueAmount, checkPaymentStatus } from '@/utils/paymentUtils';
+import { generateUniqueAmount } from '@/utils/paymentUtils';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -49,10 +49,9 @@ const PaymentPage = () => {
           console.log('Found successful payment:', payment);
           setInitialPaymentStatus('success');
           toast.success('Payment already completed!');
-          return;
         }
 
-        // If no successful payment, check for pending payment
+        // If no successful payment or if checking for pending payment
         const { data: existingPayment, error: fetchError } = await supabase
           .from('payments')
           .select('id, amount')
@@ -107,10 +106,6 @@ const PaymentPage = () => {
     }
   };
 
-  if (!email || !uniqueAmount) {
-    return null;
-  }
-
   // Use initialPaymentStatus if it's success, otherwise use the transactionStatus from verification
   const displayStatus = initialPaymentStatus === 'success' ? 'success' : transactionStatus;
 
@@ -123,14 +118,14 @@ const PaymentPage = () => {
 
         <div className="lg:col-span-1">
           <PaymentDetailsCard 
-            amount={uniqueAmount}
-            email={email}
+            amount={uniqueAmount || 0}
+            email={email || ''}
           />
         </div>
 
         <div className="lg:col-span-1">
           <PaymentInstructionsCard 
-            amount={uniqueAmount}
+            amount={uniqueAmount || 0}
             merchantAddress={MERCHANT_ADDRESS}
             transactionStatus={displayStatus}
           />
@@ -138,6 +133,6 @@ const PaymentPage = () => {
       </div>
     </div>
   );
-}
+};
 
 export default PaymentPage;
