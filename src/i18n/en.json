@@ -18,5 +18,184 @@
       "question": "How do I join a trading competition?",
       "answer": "Joining is easy! Simply create an account, select a competition you want to participate in, pay the entry fee, and you'll receive your demo trading account. Make sure to read the competition rules and requirements before starting."
     }
+  },
+  "nav": {
+    "challenges": "Challenges",
+    "rewards": "Rewards",
+    "academy": "Academy",
+    "tournaments": "Tournaments",
+    "about": "About",
+    "joinTournament": "Join Tournament"
+  },
+  "stats": {
+    "prizePool": "Total Prize Pool",
+    "activeTraders": "Active Traders",
+    "liveTrading": "Live Trading"
+  },
+  "prizes": {
+    "title": "Tournament Prizes",
+    "challenge": "Trading Challenge",
+    "first": {
+      "title": "First Place",
+      "perks": [
+        "1-on-1 Mentoring Session",
+        "VIP Trading Room Access",
+        "Premium Analysis Tools"
+      ]
+    },
+    "second": {
+      "title": "Second Place",
+      "perks": [
+        "Group Mentoring Session",
+        "Premium Analysis Tools",
+        "3-Month VIP Access"
+      ]
+    },
+    "third": {
+      "title": "Third Place",
+      "perks": [
+        "Premium Analysis Tools",
+        "1-Month VIP Access",
+        "Strategy Guide Pack"
+      ]
+    },
+    "distribution": {
+      "title": "Prize Distribution",
+      "totalBudget": "Total Prize Budget: $100,000",
+      "table": {
+        "position": "Position",
+        "winners": "Winners",
+        "prize": "Prize",
+        "total": "Total"
+      },
+      "rows": [
+        {
+          "position": "1st Place",
+          "winners": "1",
+          "prize": "$2,000",
+          "total": "$2,000"
+        },
+        {
+          "position": "2nd Place",
+          "winners": "1",
+          "prize": "$1,000",
+          "total": "$1,000"
+        },
+        {
+          "position": "3rd Place",
+          "winners": "1",
+          "prize": "$500",
+          "total": "$500"
+        }
+      ]
+    }
+  },
+  "rules": {
+    "title": "Tournament Rules",
+    "subtitle": "Everything you need to know to participate fairly",
+    "generalConditions": {
+      "title": "General Conditions",
+      "demoAccount": {
+        "title": "Demo Account",
+        "description": "Each participant receives a $100,000 demo account"
+      },
+      "leverage": {
+        "title": "Maximum Leverage",
+        "description": "1:100 leverage available on all instruments"
+      },
+      "duration": {
+        "title": "Tournament Duration",
+        "description": "30 days of active trading period"
+      }
+    },
+    "riskManagement": {
+      "title": "Risk Management",
+      "maxDrawdown": {
+        "title": "Maximum Drawdown",
+        "description": "Daily drawdown limit of 5% applies"
+      },
+      "simultaneousOperations": {
+        "title": "Simultaneous Operations",
+        "description": "Maximum of 5 open positions at once"
+      },
+      "consequence": {
+        "title": "Rule Violation",
+        "description": "Breaking rules leads to disqualification"
+      }
+    },
+    "evaluationCriteria": {
+      "title": "Evaluation Criteria",
+      "finalBalance": {
+        "title": "Final Balance",
+        "description": "Highest account balance at tournament end"
+      },
+      "ruleCompliance": {
+        "title": "Rule Compliance",
+        "description": "Must follow all trading rules throughout"
+      },
+      "additionalMetrics": {
+        "title": "Additional Metrics",
+        "description": "Risk management and consistency evaluated"
+      },
+      "minimumRequirements": {
+        "title": "Minimum Requirements",
+        "description": "At least 20 trades during the period"
+      }
+    }
+  },
+  "payment": {
+    "details": {
+      "title": "Payment Details",
+      "amountDue": "Amount Due",
+      "orderDetails": "Order Details",
+      "description": "Tournament Entry Fee",
+      "email": "Email"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "confirmationTime": {
+        "title": "Confirmation Time",
+        "description": "Payment confirmation usually takes 1-2 minutes"
+      },
+      "autoNotification": {
+        "title": "Automatic Notification",
+        "description": "You'll receive an email once payment is confirmed"
+      }
+    },
+    "whyUsdt": {
+      "title": "Why USDT?",
+      "security": {
+        "title": "Secure & Fast",
+        "description": "USDT transactions are secure and process quickly"
+      }
+    },
+    "support": {
+      "title": "Need Help?",
+      "questions": {
+        "title": "Questions?",
+        "description": "Our support team is here to help 24/7"
+      }
+    },
+    "benefits": {
+      "title": "What You Get",
+      "items": [
+        "Instant access to tournament platform",
+        "Real-time trading analytics",
+        "Community access",
+        "Professional trading tools"
+      ]
+    },
+    "instructions": {
+      "title": "Payment Instructions",
+      "qrCodeAlt": "USDT Payment QR Code",
+      "sendExactly": "Please send exactly",
+      "toAddress": "to this address",
+      "note": "Important: Send only USDT (TRC20)"
+    },
+    "status": {
+      "pending": "Payment Pending",
+      "success": "Payment Confirmed",
+      "failed": "Payment Failed"
+    }
   }
 }
