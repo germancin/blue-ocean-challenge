@@ -1,41 +1,40 @@
 {
-  "title": "Reglas del Torneo de Trading",
-  "subtitle": "Únete a los traders de élite y compite por la gloria en nuestro desafío de trading de alto nivel",
+  "title": "Reglas y Directrices del Torneo",
   "generalConditions": {
     "title": "Condiciones Generales",
     "demoAccount": {
-      "title": "Cuenta Demo",
-      "description": "Cada participante recibe $10,000 USD"
+      "title": "Configuración de Cuenta Demo",
+      "description": "Todos los participantes recibirán una cuenta demo con $100,000 de capital virtual para operar durante el período del torneo."
     },
     "duration": {
-      "title": "Duración",
-      "description": "Una semana (5 días de trading)"
+      "title": "Duración del Torneo",
+      "description": "El torneo dura 30 días, dando a los traders tiempo suficiente para demostrar su estrategia y habilidades."
     }
   },
   "riskManagement": {
-    "title": "Gestión de Riesgo: Clave del Éxito",
+    "title": "Reglas de Gestión de Riesgo",
     "maxDrawdown": {
       "title": "Drawdown Máximo",
-      "description": "45% del capital inicial ($4,500)"
+      "description": "Los traders deben mantener el drawdown dentro del 10% del capital inicial. Exceder este límite resulta en descalificación automática."
     }
   },
   "evaluationCriteria": {
-    "title": "Criterios de Evaluación del Torneo",
+    "title": "Criterios de Evaluación",
     "finalBalance": {
-      "title": "Balance Final Positivo",
-      "description": "Principal criterio para determinar los ganadores del concurso"
+      "title": "Balance Final",
+      "description": "Tu balance final de cuenta será la métrica principal para el ranking."
     },
     "ruleCompliance": {
       "title": "Cumplimiento de Reglas",
-      "description": "Respeto al drawdown máximo"
+      "description": "Es obligatorio el cumplimiento estricto de todas las reglas y directrices de trading."
     },
     "additionalMetrics": {
-      "title": "Métricas Adicionales",
-      "description": "Profit Factor y D.D. para desempates"
+      "title": "Métricas de Rendimiento",
+      "description": "Los retornos ajustados al riesgo y la consistencia serán considerados en los rankings finales."
     },
     "minimumRequirements": {
       "title": "Requisitos Mínimos",
-      "description": "Deberá haber al menos 15 operaciones ejecutadas. Ninguna operación menor a 3 minutos"
+      "description": "Debe completar al menos 20 operaciones durante el período del torneo."
     }
   }
 }

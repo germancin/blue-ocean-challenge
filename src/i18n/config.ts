@@ -2,30 +2,25 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Import all translation files
-import translationEN from './en.json';
-import translationES from './es.json';
-import heroEN from './hero/en.json';
-import heroES from './hero/es.json';
-import diversificationEN from './diversification.en.json';
-import diversificationES from './diversification.es.json';
+// Import translations
+import enRules from './rules/en.json';
+import esRules from './rules/es.json';
+import en from './en.json';
+import es from './es.json';
+import enHero from './hero/en.json';
+import esHero from './hero/es.json';
 
-// Merge all translations
 const resources = {
   en: {
-    translation: {
-      ...translationEN,
-      ...heroEN,
-      ...diversificationEN
-    }
+    translation: en,
+    rules: enRules,
+    hero: enHero,
   },
   es: {
-    translation: {
-      ...translationES,
-      ...heroES,
-      ...diversificationES
-    }
-  }
+    translation: es,
+    rules: esRules,
+    hero: esHero,
+  },
 };
 
 i18n
@@ -34,9 +29,11 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
+    debug: true,
     interpolation: {
-      escapeValue: false
-    }
+      escapeValue: false,
+    },
+    defaultNS: 'translation',
   });
 
 export default i18n;

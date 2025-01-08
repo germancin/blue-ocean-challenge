@@ -1,41 +1,40 @@
 {
-  "title": "Trading Tournament Rules",
-  "subtitle": "Join the elite traders and compete for glory in our high-stakes trading challenge",
+  "title": "Tournament Rules & Guidelines",
   "generalConditions": {
     "title": "General Conditions",
     "demoAccount": {
-      "title": "Demo Account",
-      "description": "Each participant receives $10,000 USD"
+      "title": "Demo Account Setup",
+      "description": "All participants will receive a demo account with $100,000 virtual capital for trading during the tournament period."
     },
     "duration": {
-      "title": "Duration",
-      "description": "One week (5 trading days)"
+      "title": "Tournament Duration",
+      "description": "The tournament runs for 30 days, giving traders ample time to demonstrate their strategy and skills."
     }
   },
   "riskManagement": {
-    "title": "Risk Management: Key to Success",
+    "title": "Risk Management Rules",
     "maxDrawdown": {
       "title": "Maximum Drawdown",
-      "description": "45% of initial capital ($4,500)"
+      "description": "Traders must maintain drawdown within 10% of initial capital. Exceeding this limit results in automatic disqualification."
     }
   },
   "evaluationCriteria": {
-    "title": "Tournament Evaluation Criteria",
+    "title": "Evaluation Criteria",
     "finalBalance": {
-      "title": "Positive Final Balance",
-      "description": "Main criterion for determining contest winners"
+      "title": "Final Balance",
+      "description": "Your final account balance will be the primary metric for ranking."
     },
     "ruleCompliance": {
       "title": "Rule Compliance",
-      "description": "Respect for maximum drawdown"
+      "description": "Strict adherence to all trading rules and guidelines is mandatory."
     },
     "additionalMetrics": {
-      "title": "Additional Metrics",
-      "description": "Profit Factor and D.D. for tiebreakers"
+      "title": "Performance Metrics",
+      "description": "Risk-adjusted returns and consistency will be considered in final rankings."
     },
     "minimumRequirements": {
       "title": "Minimum Requirements",
-      "description": "At least 15 executed trades. No trades less than 3 minutes"
+      "description": "Must complete at least 20 trades during the tournament period."
     }
   }
 }
