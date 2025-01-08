@@ -38,10 +38,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
       if ((error as PostgrestError).code === '23505') {
         const paymentStatus = await checkPaymentStatus(data.email);
         
-        if (!paymentStatus) {
-          toast.info("You're already subscribed. Redirecting to complete payment.");
-          navigate('/payment', { state: { email: data.email } });
-        } else if (paymentStatus === 'completed') {
+        if (paymentStatus === 'success') {
           setError('email', {
             type: 'manual',
             message: 'You are already subscribed and your payment is completed'
