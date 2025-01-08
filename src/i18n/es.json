@@ -1,4 +1,12 @@
 {
+  "nav": {
+    "challenges": "Desafíos",
+    "rewards": "Recompensas",
+    "academy": "Academia",
+    "tournaments": "Torneos",
+    "about": "Acerca de",
+    "joinTournament": "Unirse al Torneo"
+  },
   "diversification": {
     "title": "Nuestra Estrategia de Diversificación",
     "forex": {
