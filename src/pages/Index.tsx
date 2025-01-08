@@ -1,6 +1,5 @@
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import Stats from '../components/Stats';
 import PrizeCards from '../components/PrizeCards';
 import PrizeDistributionTable from '../components/PrizeDistributionTable';
 import DiversificationStrategy from '../components/DiversificationStrategy';
@@ -16,7 +15,6 @@ const Index = () => {
       <PrizeCards />
       <PrizeDistributionTable />
       <DiversificationStrategy />
-      <Stats />
       <Footer />
     </main>
   );
