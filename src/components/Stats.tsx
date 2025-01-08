@@ -1,24 +1,21 @@
 import { Trophy, Users, TrendingUp } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 const Stats = () => {
-  const { t } = useTranslation();
-
   const stats = [
     {
       icon: <Trophy className="w-8 h-8 text-bright-blue" />,
       value: "$100K+",
-      label: t('stats.prizePool'),
+      label: "Prize Pool",
     },
     {
       icon: <Users className="w-8 h-8 text-bright-blue" />,
       value: "10K+",
-      label: t('stats.activeTraders'),
+      label: "Active Traders",
     },
     {
       icon: <TrendingUp className="w-8 h-8 text-bright-blue" />,
       value: "24/7",
-      label: t('stats.liveTrading'),
+      label: "Live Trading",
     },
   ];
 
