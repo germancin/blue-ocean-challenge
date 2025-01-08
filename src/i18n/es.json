@@ -38,5 +38,33 @@
         "description": "Ejecuta al menos 15 operaciones, con cada posición mantenida por mínimo 3 minutos"
       }
     }
+  },
+  "prizes": {
+    "title": "Distribución del Premio",
+    "challenge": "Cuenta de Trading Challenge",
+    "first": {
+      "title": "Primer Lugar",
+      "perks": [
+        "Acceso directo a trading en vivo",
+        "Mentor personal de trading",
+        "Herramientas premium de análisis"
+      ]
+    },
+    "second": {
+      "title": "Segundo Lugar",
+      "perks": [
+        "Vía rápida a trading en vivo",
+        "Sesiones grupales de mentoría",
+        "Paquete básico de análisis"
+      ]
+    },
+    "third": {
+      "title": "Tercer Lugar",
+      "perks": [
+        "Evaluación acelerada",
+        "Acceso a talleres de trading",
+        "Paquete básico de herramientas"
+      ]
+    }
   }
 }
