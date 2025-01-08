@@ -1,5 +1,4 @@
 import { ArrowRight } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import {
   Dialog,
   DialogContent,
@@ -11,7 +10,6 @@ import { SubscriptionForm } from './SubscriptionForm';
 import { useState } from 'react';
 
 const Hero = () => {
-  const { t } = useTranslation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
@@ -43,14 +41,14 @@ const Hero = () => {
                 <span className="text-bright-blue font-semibold">🏆 Trading Tournament 2024</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-bright-blue to-white bg-clip-text text-transparent animate-pulse">
-                {t('hero.mainMessage')}
+                150 traders, 33% chance of success, and the rest is up to you!
               </h1>
             </div>
             <div className="flex justify-center md:justify-start space-x-4">
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
                   <button className="group relative overflow-hidden bg-bright-blue hover:bg-bright-blue/90 text-white px-8 py-4 rounded-xl flex items-center space-x-2 transition-all duration-300 animate-scale-in font-sans shadow-lg shadow-bright-blue/20">
-                    <span className="relative z-10 font-semibold">{t('hero.cta')}</span>
+                    <span className="relative z-10 font-semibold">Join Tournament</span>
                     <ArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform duration-200" />
                     <div className="absolute inset-0 bg-gradient-to-r from-bright-blue via-bright-blue/80 to-bright-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </button>
@@ -58,13 +56,13 @@ const Hero = () => {
                 <DialogContent className="sm:max-w-[425px] bg-gradient-to-b from-bright-blue/30 to-navy/95 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-bright-blue/20">
                   <DialogHeader>
                     <DialogTitle className="text-3xl font-bold text-center text-white mb-2">
-                      {t('hero.dialog.title')}
+                      Unlock Your Trading Potential Today! 🚀
                     </DialogTitle>
                   </DialogHeader>
                   <div className="mt-4">
                     <SubscriptionForm onSuccess={() => setIsDialogOpen(false)} />
                     <p className="text-center text-sm text-gray-400 mt-4">
-                      {t('hero.dialog.description')}
+                      Join our trusted community of traders. Your data is secure and we'll only send you tournament updates and essential news. ✨
                     </p>
                   </div>
                 </DialogContent>

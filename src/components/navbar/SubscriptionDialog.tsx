@@ -6,7 +6,6 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { SubscriptionForm } from '../SubscriptionForm';
-import { useTranslation } from 'react-i18next';
 
 interface SubscriptionDialogProps {
   open: boolean;
@@ -14,8 +13,6 @@ interface SubscriptionDialogProps {
 }
 
 const SubscriptionDialog = ({ open, onOpenChange }: SubscriptionDialogProps) => {
-  const { t } = useTranslation();
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px] bg-dark-blue text-white">

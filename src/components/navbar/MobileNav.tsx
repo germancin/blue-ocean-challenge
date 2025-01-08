@@ -1,7 +1,5 @@
 import { Menu, X } from 'lucide-react';
 import { Button } from '../ui/button';
-import LanguageSelector from '../LanguageSelector';
-import { useTranslation } from 'react-i18next';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -11,8 +9,6 @@ interface MobileNavProps {
 }
 
 const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps) => {
-  const { t } = useTranslation();
-
   return (
     <>
       <div className="md:hidden flex items-center space-x-4">
@@ -21,9 +17,8 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
           className="bg-bright-blue hover:bg-bright-blue/90"
           onClick={onSubscribe}
         >
-          {t('nav.joinTournament')}
+          Join Tournament
         </Button>
-        <LanguageSelector />
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="text-white hover:text-bright-blue"

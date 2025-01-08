@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import {
   Table,
   TableBody,
@@ -9,8 +8,6 @@ import {
 } from "@/components/ui/table";
 
 const PrizeDistributionTable = () => {
-  const { t } = useTranslation();
-
   const distributionData = [
     {
       position: "1st - 3rd Place",
@@ -37,10 +34,10 @@ const PrizeDistributionTable = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white font-display mb-4">
-            {t('prizes.distribution.title', 'Prize Distribution')}
+            Prize Distribution
           </h2>
           <p className="text-white text-xl mb-8">
-            {t('prizes.distribution.totalBudget', 'Total Prize Pool: $6,250')}
+            Total Prize Pool: $6,250
           </p>
           <div className="w-24 h-1 bg-bright-blue mx-auto rounded-full mb-12" />
         </div>
@@ -49,18 +46,10 @@ const PrizeDistributionTable = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-white">
-                  {t('prizes.distribution.table.position', 'Position')}
-                </TableHead>
-                <TableHead className="text-white">
-                  {t('prizes.distribution.table.winners', 'Winners')}
-                </TableHead>
-                <TableHead className="text-white">
-                  {t('prizes.distribution.table.prize', 'Prize')}
-                </TableHead>
-                <TableHead className="text-white">
-                  {t('prizes.distribution.table.total', 'Total')}
-                </TableHead>
+                <TableHead className="text-white">Position</TableHead>
+                <TableHead className="text-white">Winners</TableHead>
+                <TableHead className="text-white">Prize</TableHead>
+                <TableHead className="text-white">Total</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

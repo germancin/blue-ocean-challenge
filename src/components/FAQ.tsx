@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import {
   Accordion,
   AccordionContent,
@@ -7,24 +6,22 @@ import {
 } from "@/components/ui/accordion";
 
 const FAQ = () => {
-  const { t } = useTranslation();
-
   const faqs = [
     {
-      question: t('faq.trading.question'),
-      answer: t('faq.trading.answer'),
+      question: "What trading instruments are available?",
+      answer: "You'll have access to major forex pairs, popular cryptocurrencies, and leading stock indices. All trading is done with virtual funds on a demo account.",
     },
     {
-      question: t('faq.fees.question'),
-      answer: t('faq.fees.answer'),
+      question: "Are there any participation fees?",
+      answer: "Yes, there is a small entry fee to ensure serious participation. This fee contributes to the prize pool and helps maintain the quality of the competition.",
     },
     {
-      question: t('faq.prizes.question'),
-      answer: t('faq.prizes.answer'),
+      question: "How are winners determined?",
+      answer: "Winners are ranked based on their final account balance, while adhering to all trading rules and risk management guidelines. Additional metrics like risk-adjusted returns may be considered for tiebreakers.",
     },
     {
-      question: t('faq.join.question'),
-      answer: t('faq.join.answer'),
+      question: "How can I join the tournament?",
+      answer: "Simply click the 'Join Tournament' button, complete the registration process, and pay the entry fee. You'll receive your demo account credentials immediately after confirmation.",
     },
   ];
 
@@ -33,8 +30,8 @@ const FAQ = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
-            <p className="text-white/70 text-sm uppercase tracking-wider mb-4">{t('faq.wondering')}</p>
-            <h2 className="text-5xl font-bold text-white mb-8">{t('faq.title')}</h2>
+            <p className="text-white/70 text-sm uppercase tracking-wider mb-4">Got Questions?</p>
+            <h2 className="text-5xl font-bold text-white mb-8">Frequently Asked Questions</h2>
           </div>
 
           <Accordion type="single" collapsible className="space-y-4">

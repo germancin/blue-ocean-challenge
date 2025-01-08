@@ -1,46 +1,43 @@
 import { Trophy, Medal, Award } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import PrizeCard from './prizes/PrizeCard';
 import BackgroundEffects from './prizes/BackgroundEffects';
 
 const PrizeCards = () => {
-  const { t } = useTranslation();
-
   const prizes = [
     {
       icon: <Trophy className="w-16 h-16 text-bright-blue" />,
-      place: t('prizes.first.title', 'First Place'),
+      place: "First Place",
       cashPrize: "$2,000",
       challenge: "$100,000",
-      challengeType: t('prizes.challenge', 'Trading Challenge Account'),
+      challengeType: "Trading Challenge Account",
       perks: [
-        t('prizes.first.perks.0', 'Direct access to live trading'),
-        t('prizes.first.perks.1', 'Personal trading mentor'),
-        t('prizes.first.perks.2', 'Premium analytics tools')
+        "Direct access to live trading",
+        "Personal trading mentor",
+        "Premium analytics tools"
       ]
     },
     {
       icon: <Medal className="w-16 h-16 text-bright-blue" />,
-      place: t('prizes.second.title', 'Second Place'),
+      place: "Second Place",
       cashPrize: "$1,000",
       challenge: "$100,000",
-      challengeType: t('prizes.challenge', 'Trading Challenge Account'),
+      challengeType: "Trading Challenge Account",
       perks: [
-        t('prizes.second.perks.0', 'Fast-track to live trading'),
-        t('prizes.second.perks.1', 'Group mentoring sessions'),
-        t('prizes.second.perks.2', 'Basic analytics package')
+        "Fast-track to live trading",
+        "Group mentoring sessions",
+        "Basic analytics package"
       ]
     },
     {
       icon: <Award className="w-16 h-16 text-bright-blue" />,
-      place: t('prizes.third.title', 'Third Place'),
+      place: "Third Place",
       cashPrize: "$500",
       challenge: "$100,000",
-      challengeType: t('prizes.challenge', 'Trading Challenge Account'),
+      challengeType: "Trading Challenge Account",
       perks: [
-        t('prizes.third.perks.0', 'Accelerated evaluation'),
-        t('prizes.third.perks.1', 'Trading workshop access'),
-        t('prizes.third.perks.2', 'Basic tools package')
+        "Accelerated evaluation",
+        "Trading workshop access",
+        "Basic tools package"
       ]
     }
   ];
@@ -52,7 +49,7 @@ const PrizeCards = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-white font-display mb-4">
-            {t('prizes.title', 'Prize Pool Distribution')}
+            Prize Pool Distribution
           </h2>
           <div className="w-24 h-1 bg-bright-blue mx-auto rounded-full" />
         </div>

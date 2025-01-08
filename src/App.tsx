@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Payment from "./pages/Payment";
-import './i18n/config';
 
 const queryClient = new QueryClient();
 
