@@ -39,7 +39,7 @@ const Hero = () => {
         <div className="grid md:grid-cols-2 gap-6 items-center min-h-[calc(100vh-128px)]">
           <div className="text-white space-y-6 animate-fade-in order-1 md:order-1 text-center md:text-left">
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              150 traders, 33% de probabilidad de éxito, ¡y el resto depende de ti!
+              {t('hero.mainMessage')}
             </h1>
             <div className="flex justify-center md:justify-start">
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -52,13 +52,13 @@ const Hero = () => {
                 <DialogContent className="sm:max-w-[425px] bg-bright-blue/20 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-bright-blue/20">
                   <DialogHeader>
                     <DialogTitle className="text-3xl font-bold text-center text-white mb-2">
-                      Unlock Your Trading Potential Today! 🚀
+                      {t('hero.dialog.title')}
                     </DialogTitle>
                   </DialogHeader>
                   <div className="mt-4">
                     <SubscriptionForm onSuccess={() => setIsDialogOpen(false)} />
                     <p className="text-center text-sm text-gray-500 mt-4">
-                      Join our trusted community of traders. Your data is secure and we'll only send you tournament updates and essential news. ✨
+                      {t('hero.dialog.description')}
                     </p>
                   </div>
                 </DialogContent>
