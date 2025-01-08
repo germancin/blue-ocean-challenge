@@ -11,10 +11,10 @@ export const checkPaymentStatus = async (email: string) => {
   return payments && payments.length > 0 ? payments[0].status : null;
 };
 
-export const saveSubscriber = async (name: string, email: string, language: string) => {
+export const saveSubscriber = async (name: string, email: string) => {
   const { error } = await supabase
     .from('subscribers')
-    .insert([{ name, email, language }]);
+    .insert([{ name, email }]);
 
   if (error) throw error;
 };

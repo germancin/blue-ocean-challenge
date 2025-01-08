@@ -29,7 +29,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
 
     setIsLoading(true);
     try {
-      await saveSubscriber(data.name, data.email, 'en');
+      await saveSubscriber(data.name, data.email);
       toast.success("Successfully saved your information!");
       onSuccess();
       navigate('/payment', { state: { email: data.email } });
