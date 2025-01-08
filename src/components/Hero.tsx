@@ -77,7 +77,7 @@ const Hero = () => {
             <img
               src="https://cdn.prod.website-files.com/652e60598eb08a4c5d64a319/66760053164e271e7d0f935b_iweo.avif"
               alt="Trading Platform Interface"
-              className="relative rounded-lg shadow-2xl w-full transform hover:scale-105 transition-transform duration-300 border border-bright-blue/20"
+              className="relative rounded-lg shadow-2xl w-full transform hover:scale-105 transition-transform duration-300"
             />
           </div>
         </div>
