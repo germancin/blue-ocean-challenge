@@ -42,12 +42,16 @@ const FAQ = () => {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="border-b border-white/10"
+                className="border-b border-white/10 transition-all duration-300 ease-in-out"
               >
-                <AccordionTrigger className="text-[#0EA5E9] hover:text-[#0EA5E9]/80 text-xl py-6">
-                  {faq.question}
+                <AccordionTrigger 
+                  className="text-[#0EA5E9] hover:text-[#0EA5E9]/80 text-xl py-6 transition-all duration-300 ease-in-out group"
+                >
+                  <span className="group-data-[state=open]:scale-105 transition-transform duration-300">
+                    {faq.question}
+                  </span>
                 </AccordionTrigger>
-                <AccordionContent className="text-white/80 text-lg leading-relaxed">
+                <AccordionContent className="text-white/80 text-lg leading-relaxed overflow-hidden transition-all duration-500 ease-in-out data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -56,7 +60,6 @@ const FAQ = () => {
         </div>
       </div>
       
-      {/* Background wave effect */}
       <div 
         className="absolute inset-0 opacity-10"
         style={{
