@@ -22,12 +22,7 @@ const PaymentPage = () => {
   const [uniqueAmount, setUniqueAmount] = useState<number | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
-
-  const { transactionStatus } = usePaymentVerification({
-    email: email || '',
-    amount: uniqueAmount || 0,
-    enabled: isInitialized && !!email && !!uniqueAmount && termsAccepted
-  });
+  const [initialPaymentStatus, setInitialPaymentStatus] = useState<'pending' | 'success' | 'failed'>('pending');
 
   useEffect(() => {
     const checkExistingPayment = async () => {
@@ -37,6 +32,27 @@ const PaymentPage = () => {
       }
 
       try {
+        // First check if there's a successful payment
+        const { data: payment, error } = await supabase
+          .from('payments')
+          .select('status')
+          .eq('email', email)
+          .eq('status', 'success')
+          .maybeSingle();
+
+        if (error) {
+          console.error('Error checking payment:', error);
+          return;
+        }
+
+        if (payment) {
+          console.log('Found successful payment:', payment);
+          setInitialPaymentStatus('success');
+          toast.success('Payment already completed!');
+          return;
+        }
+
+        // If no successful payment, check for pending payment
         const { data: existingPayment, error: fetchError } = await supabase
           .from('payments')
           .select('id, amount')
@@ -47,7 +63,6 @@ const PaymentPage = () => {
         if (fetchError) {
           console.error('Error fetching existing payment:', fetchError);
           toast.error('Error retrieving payment information');
-          navigate('/');
           return;
         }
 
@@ -64,7 +79,6 @@ const PaymentPage = () => {
           if (updateError) {
             console.error('Error updating payment amount:', updateError);
             toast.error('Error updating payment amount');
-            navigate('/');
             return;
           }
         }
@@ -74,12 +88,17 @@ const PaymentPage = () => {
       } catch (error) {
         console.error('Error initializing payment amount:', error);
         toast.error('Error generating payment amount');
-        navigate('/');
       }
     };
 
     checkExistingPayment();
   }, [email, navigate]);
+
+  const { transactionStatus } = usePaymentVerification({
+    email: email || '',
+    amount: uniqueAmount || 0,
+    enabled: isInitialized && !!email && !!uniqueAmount && termsAccepted && initialPaymentStatus !== 'success'
+  });
 
   const handleTermsAcceptance = (accepted: boolean) => {
     setTermsAccepted(accepted);
@@ -91,6 +110,9 @@ const PaymentPage = () => {
   if (!email || !uniqueAmount) {
     return null;
   }
+
+  // Use initialPaymentStatus if it's success, otherwise use the transactionStatus from verification
+  const displayStatus = initialPaymentStatus === 'success' ? 'success' : transactionStatus;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -110,7 +132,7 @@ const PaymentPage = () => {
           <PaymentInstructionsCard 
             amount={uniqueAmount}
             merchantAddress={MERCHANT_ADDRESS}
-            transactionStatus={transactionStatus}
+            transactionStatus={displayStatus}
           />
         </div>
       </div>
