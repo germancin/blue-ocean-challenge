@@ -1,7 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, Bell, Shield, HelpCircle, Trophy } from 'lucide-react';
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 
 interface PaymentInformationCardProps {
   onAcceptTerms: (accepted: boolean) => void;
@@ -72,28 +70,28 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
   return (
     <Card>
       <CardContent className="pt-4">
-        <div className="space-y-4">
+        <div className="space-y-6">
           {sections.map((section) => (
-            <div key={section.id} className="space-y-2">
-              <h2 className="text-lg font-semibold">{section.title}</h2>
-              <div className="space-y-3">
+            <div key={section.id} className="space-y-3">
+              <h2 className="text-xl font-semibold">{section.title}</h2>
+              <div className="space-y-4">
                 {section.items.map((item, index) => {
                   const IconComponent = item.icon;
                   return (
                     <div key={index} className="flex items-start space-x-3">
-                      <div className={`${item.color} p-1.5 rounded-full bg-gray-50 flex-shrink-0`}>
-                        <IconComponent className="h-4 w-4" />
+                      <div className={`${item.color} p-2 rounded-full bg-gray-50 flex-shrink-0`}>
+                        <IconComponent className="h-5 w-5" />
                       </div>
-                      <div className="space-y-0.5">
-                        <h3 className="text-sm font-medium">{item.title}</h3>
+                      <div className="space-y-1">
+                        <h3 className="text-base font-medium">{item.title}</h3>
                         {Array.isArray(item.description) ? (
-                          <ul className="text-xs text-gray-600 space-y-1 list-disc pl-3">
+                          <ul className="text-sm text-gray-600 space-y-1 list-disc pl-3">
                             {item.description.map((bullet, idx) => (
-                              <li key={idx}>{bullet}</li>
+                              <li key={idx} className="text-base">{bullet}</li>
                             ))}
                           </ul>
                         ) : (
-                          <p className="text-xs text-gray-600">{item.description}</p>
+                          <p className="text-base text-gray-600">{item.description}</p>
                         )}
                       </div>
                     </div>
@@ -102,21 +100,6 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-4 flex items-center space-x-2">
-          <Checkbox
-            id="terms"
-            onCheckedChange={(checked) => {
-              onAcceptTerms(checked as boolean);
-            }}
-          />
-          <Label
-            htmlFor="terms"
-            className="text-sm font-medium leading-none cursor-pointer"
-          >
-            I accept the terms and conditions
-          </Label>
         </div>
       </CardContent>
     </Card>
