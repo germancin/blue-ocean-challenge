@@ -16,17 +16,14 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
   useEffect(() => {
     if (!enabled) return;
 
-    const getOrCreatePayment = async () => {
+    const checkExistingPayment = async () => {
       try {
-        // Format amount to exactly 3 decimal places
-        const formattedAmount = Number(amount.toFixed(3));
-        console.log('Formatted amount:', formattedAmount);
-
-        // Check for any existing payment for this email
-        const { data: existingPayment, error: existingError } = await supabase
+        // First check if there's already a successful payment for this email
+        const { data: existingSuccessfulPayment, error: existingError } = await supabase
           .from('payments')
           .select('*')
           .eq('email', email)
+          .eq('status', 'success')
           .maybeSingle();
 
         if (existingError) {
@@ -35,35 +32,47 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           return null;
         }
 
-        console.log('Existing payment check result:', existingPayment);
+        if (existingSuccessfulPayment) {
+          console.log('Found existing successful payment:', existingSuccessfulPayment);
+          setTransactionStatus('success');
+          return existingSuccessfulPayment.id;
+        }
+
+        // Format amount to exactly 3 decimal places
+        const formattedAmount = Number(amount.toFixed(3));
+        console.log('Formatted amount:', formattedAmount);
+
+        // Check for any pending payment
+        const { data: existingPayment, error: pendingError } = await supabase
+          .from('payments')
+          .select('*')
+          .eq('email', email)
+          .eq('status', 'pending')
+          .maybeSingle();
+
+        if (pendingError) {
+          console.error('Error checking pending payment:', pendingError);
+          return null;
+        }
 
         if (existingPayment) {
-          console.log('Found existing payment:', existingPayment);
+          console.log('Found existing pending payment:', existingPayment);
           
-          // Update the existing payment with new amount if status is pending
-          if (existingPayment.status === 'pending') {
-            console.log('Attempting to update payment amount to:', formattedAmount);
-            
-            const { data: updatedPayment, error: updateError } = await supabase
-              .from('payments')
-              .update({ 
-                amount: formattedAmount,
-                updated_at: new Date().toISOString()
-              })
-              .eq('email', email)
-              .select()
-              .maybeSingle();
+          const { data: updatedPayment, error: updateError } = await supabase
+            .from('payments')
+            .update({ 
+              amount: formattedAmount,
+              updated_at: new Date().toISOString()
+            })
+            .eq('id', existingPayment.id)
+            .select()
+            .maybeSingle();
 
-            if (updateError) {
-              console.error('Error updating payment:', updateError);
-              toast.error("Error updating payment record");
-              return null;
-            }
-
-            console.log('Updated payment result:', updatedPayment);
-            return existingPayment.id;
+          if (updateError) {
+            console.error('Error updating payment:', updateError);
+            return null;
           }
-          
+
           return existingPayment.id;
         }
 
@@ -81,22 +90,19 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
         if (insertError || !newPayment) {
           console.error('Error creating payment:', insertError);
-          toast.error("Error creating payment record");
           return null;
         }
 
         console.log('Created new payment:', newPayment);
         return newPayment.id;
       } catch (error) {
-        console.error('Error in getOrCreatePayment:', error);
-        toast.error("Error setting up payment");
+        console.error('Error in checkExistingPayment:', error);
         return null;
       }
     };
 
     const sendConfirmationEmail = async (paymentId: string) => {
       try {
-        // Check if email was already sent
         const { data: payment } = await supabase
           .from('payments')
           .select('email_sent')
@@ -108,7 +114,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           return;
         }
 
-        console.log('Sending confirmation email to:', email);
         const { error: emailError } = await supabase.functions.invoke('send-confirmation-email', {
           body: { 
             email, 
@@ -121,7 +126,6 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           return;
         }
 
-        // Mark email as sent
         const { error: updateError } = await supabase
           .from('payments')
           .update({ email_sent: true })
@@ -139,11 +143,11 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
       }
     };
 
-    const checkPayment = async (paymentId: string) => {
+    const verifyPayment = async (paymentId: string) => {
       if (!paymentId) return false;
 
       try {
-        console.log('Checking payment status for ID:', paymentId);
+        console.log('Verifying payment status for ID:', paymentId);
         const { data, error } = await supabase.functions.invoke('verify-payment', {
           body: { 
             email,
@@ -153,8 +157,7 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
         });
 
         if (error) {
-          console.error('Error checking payment:', error);
-          toast.error("Error verifying payment");
+          console.error('Error verifying payment:', error);
           return false;
         }
 
@@ -163,31 +166,28 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
         if (data.status === 'success') {
           setTransactionStatus('success');
           toast.success("Payment confirmed!");
-          // Send confirmation email when payment is successful
           await sendConfirmationEmail(paymentId);
           return true;
         } else if (data.status === 'no_payment_found') {
           setTransactionStatus('failed');
-          toast.error("Payment record not found");
           return true;
         }
 
       } catch (error) {
         console.error('Error checking payment:', error);
-        toast.error("Error checking payment status");
       }
       return false;
     };
 
     let intervalId: number;
-    getOrCreatePayment().then(paymentId => {
+    checkExistingPayment().then(paymentId => {
       if (paymentId) {
-        // Initial check
-        checkPayment(paymentId);
+        // Initial verification
+        verifyPayment(paymentId);
         
         // Set up polling every 30 seconds
         intervalId = window.setInterval(() => {
-          checkPayment(paymentId);
+          verifyPayment(paymentId);
         }, 30000);
       }
     });
