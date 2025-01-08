@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { PostgrestError } from "@supabase/supabase-js";
 import { SubscriptionFields } from "./subscription/SubscriptionFields";
@@ -17,7 +16,6 @@ interface SubscriptionFormData {
 export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, formState: { errors }, setError } = useForm<SubscriptionFormData>();
-  const { i18n } = useTranslation();
   const navigate = useNavigate();
 
   const onSubmit = async (data: SubscriptionFormData) => {
@@ -31,7 +29,7 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
 
     setIsLoading(true);
     try {
-      await saveSubscriber(data.name, data.email, i18n.language);
+      await saveSubscriber(data.name, data.email, 'en');
       toast.success("Successfully saved your information!");
       onSuccess();
       navigate('/payment', { state: { email: data.email } });
