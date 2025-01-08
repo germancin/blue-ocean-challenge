@@ -4,7 +4,7 @@ import { PaymentDetailsCard } from '@/components/payment/PaymentDetailsCard';
 import { PaymentInstructionsCard } from '@/components/payment/PaymentInstructionsCard';
 import { PaymentInformationCard } from '@/components/payment/PaymentInformationCard';
 import { usePaymentVerification } from '@/hooks/use-payment-verification';
-import { generateUniqueAmount } from '@/utils/paymentUtils';
+import { generateUniqueAmount, checkPaymentStatus } from '@/utils/paymentUtils';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -30,8 +30,15 @@ const PaymentPage = () => {
   });
 
   useEffect(() => {
-    const initializeAmount = async () => {
+    const checkExistingPayment = async () => {
       if (!email) {
+        navigate('/');
+        return;
+      }
+
+      const paymentStatus = await checkPaymentStatus(email);
+      if (paymentStatus === 'success') {
+        toast.error('You are already subscribed and your payment is completed');
         navigate('/');
         return;
       }
@@ -78,7 +85,7 @@ const PaymentPage = () => {
       }
     };
 
-    initializeAmount();
+    checkExistingPayment();
   }, [email, navigate]);
 
   const handleTermsAcceptance = (accepted: boolean) => {
@@ -96,7 +103,7 @@ const PaymentPage = () => {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1">
-          <PaymentInformationCard onAcceptTerms={handleTermsAcceptance} />
+          <PaymentInformationCard onAcceptTerms={handleTermsAccepted} />
         </div>
 
         <div className="lg:col-span-1">

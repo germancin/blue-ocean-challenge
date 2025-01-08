@@ -36,18 +36,8 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
     } catch (error) {
       console.error('Submission error:', error);
       if ((error as PostgrestError).code === '23505') {
-        const paymentStatus = await checkPaymentStatus(data.email);
-        
-        if (paymentStatus === 'success') {
-          setError('email', {
-            type: 'manual',
-            message: 'You are already subscribed and your payment is completed'
-          });
-          toast.error("You are already subscribed and your payment is completed");
-        } else {
-          toast.info("You're already subscribed. Redirecting to payment page.");
-          navigate('/payment', { state: { email: data.email } });
-        }
+        toast.info("You're already subscribed. Redirecting to payment page.");
+        navigate('/payment', { state: { email: data.email } });
       } else {
         toast.error("Something went wrong. Please try again.");
       }
