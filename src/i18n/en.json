@@ -44,42 +44,14 @@
       "description": "Must complete at least 20 trades during the tournament period."
     }
   },
-  "diversification": {
-    "title": "Our Diversification Strategy",
-    "forex": {
-      "title": "Forex Trading",
-      "description": "Access global currency markets with advanced trading tools and real-time market analysis"
-    },
-    "indices": {
-      "title": "Stock Indices",
-      "description": "Trade major world indices with competitive spreads and reliable execution"
-    },
-    "crypto": {
-      "title": "Cryptocurrency",
-      "description": "Explore digital asset trading with secure and innovative trading solutions"
-    }
-  },
-  "hero": {
-    "mainMessage": "150 traders, 33% chance of success, and the rest is up to you!",
-    "cta": "Join Tournament",
-    "dialog": {
-      "title": "Unlock Your Trading Potential Today! 🚀",
-      "description": "Join our trusted community of traders. Your data is secure and we'll only send you tournament updates and essential news. ✨"
-    }
+  "stats": {
+    "prizePool": "Prize Pool",
+    "activeTraders": "Active Traders",
+    "liveTrading": "Live Trading"
   },
   "prizes": {
     "title": "Prize Pool Distribution",
     "challenge": "Trading Challenge Account",
-    "distribution": {
-      "title": "Prize Distribution",
-      "totalBudget": "Total Prize Pool: $6,250",
-      "table": {
-        "position": "Position",
-        "winners": "Winners",
-        "prize": "Prize",
-        "total": "Total"
-      }
-    },
     "first": {
       "title": "First Place",
       "perks": [

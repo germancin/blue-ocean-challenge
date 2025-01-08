@@ -44,42 +44,14 @@
       "description": "Debe completar al menos 20 operaciones durante el período del torneo."
     }
   },
-  "diversification": {
-    "title": "Nuestra Estrategia de Diversificación",
-    "forex": {
-      "title": "Trading de Forex",
-      "description": "Accede a los mercados de divisas globales con herramientas de trading avanzadas y análisis de mercado en tiempo real"
-    },
-    "indices": {
-      "title": "Índices Bursátiles",
-      "description": "Opera los principales índices mundiales con spreads competitivos y ejecución confiable"
-    },
-    "crypto": {
-      "title": "Criptomonedas",
-      "description": "Explora el trading de activos digitales con soluciones de trading seguras e innovadoras"
-    }
-  },
-  "hero": {
-    "mainMessage": "150 traders, 33% de probabilidad de éxito, ¡y el resto depende de ti!",
-    "cta": "Unirse al Torneo",
-    "dialog": {
-      "title": "¡Desbloquea tu Potencial de Trading Hoy! 🚀",
-      "description": "Únete a nuestra comunidad de traders de confianza. Tus datos están seguros y solo te enviaremos actualizaciones del torneo y noticias esenciales. ✨"
-    }
+  "stats": {
+    "prizePool": "Pozo de Premios",
+    "activeTraders": "Traders Activos",
+    "liveTrading": "Trading en Vivo"
   },
   "prizes": {
     "title": "Distribución del Premio",
     "challenge": "Cuenta de Trading Challenge",
-    "distribution": {
-      "title": "Distribución de Premios",
-      "totalBudget": "Premio Total: $6,250",
-      "table": {
-        "position": "Posición",
-        "winners": "Ganadores",
-        "prize": "Premio",
-        "total": "Total"
-      }
-    },
     "first": {
       "title": "Primer Lugar",
       "perks": [
