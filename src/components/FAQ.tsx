@@ -58,7 +58,7 @@ const FAQ = () => {
       
       {/* Background wave effect */}
       <div 
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: "url('/lovable-uploads/3be0bad4-1cec-4a0a-9124-c48618edcdb8.png')",
           backgroundSize: 'cover',
