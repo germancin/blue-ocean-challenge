@@ -1,0 +1,41 @@
+{
+  "title": "Reglas del Torneo",
+  "subtitle": "Tu camino hacia la excelencia en trading comienza aquí",
+  "generalConditions": {
+    "title": "Condiciones Generales",
+    "demoAccount": {
+      "title": "Cuenta Demo",
+      "description": "Cada participante recibe $10,000 USD"
+    },
+    "duration": {
+      "title": "Duración",
+      "description": "Una semana (5 días de trading)"
+    }
+  },
+  "riskManagement": {
+    "title": "Gestión de Riesgo: Clave del Éxito",
+    "maxDrawdown": {
+      "title": "Drawdown Máximo",
+      "description": "45% del capital inicial ($4,500)"
+    }
+  },
+  "evaluationCriteria": {
+    "title": "Criterios de Evaluación del Torneo",
+    "finalBalance": {
+      "title": "Balance Final Positivo",
+      "description": "Principal criterio para determinar los ganadores del concurso"
+    },
+    "ruleCompliance": {
+      "title": "Cumplimiento de Reglas",
+      "description": "Respeto al drawdown máximo"
+    },
+    "additionalMetrics": {
+      "title": "Métricas Adicionales",
+      "description": "Profit Factor y D.D. para desempates"
+    },
+    "minimumRequirements": {
+      "title": "Requisitos Mínimos",
+      "description": "Deberá haber al menos 15 operaciones ejecutadas. Ninguna operación menor a 3 minutos"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Tournament Rules",
+  "subtitle": "Your path to trading excellence starts here",
+  "generalConditions": {
+    "title": "General Conditions",
+    "demoAccount": {
+      "title": "Demo Account",
+      "description": "Each participant receives $10,000 USD"
+    },
+    "duration": {
+      "title": "Duration",
+      "description": "One week (5 trading days)"
+    }
+  },
+  "riskManagement": {
+    "title": "Risk Management: Key to Success",
+    "maxDrawdown": {
+      "title": "Maximum Drawdown",
+      "description": "45% of initial capital ($4,500)"
+    }
+  },
+  "evaluationCriteria": {
+    "title": "Tournament Evaluation Criteria",
+    "finalBalance": {
+      "title": "Positive Final Balance",
+      "description": "Main criterion for determining contest winners"
+    },
+    "ruleCompliance": {
+      "title": "Rule Compliance",
+      "description": "Respect for maximum drawdown"
+    },
+    "additionalMetrics": {
+      "title": "Additional Metrics",
+      "description": "Profit Factor and D.D. for tiebreakers"
+    },
+    "minimumRequirements": {
+      "title": "Minimum Requirements",
+      "description": "At least 15 executed trades. No trades less than 3 minutes"
+    }
+  }
+}
