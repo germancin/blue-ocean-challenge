@@ -1,11 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { Trophy, Target, BarChart3, Clock, DollarSign, Award, Sparkles } from 'lucide-react';
+import { Trophy, Target, BarChart3, Clock, DollarSign, Award } from 'lucide-react';
 
 const Rules = () => {
   const { t } = useTranslation('rules');
 
   return (
-    <section className="relative py-24 overflow-hidden bg-navy">
+    <section className="relative py-16 overflow-hidden bg-navy">
       {/* Trading chart background with overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
@@ -19,14 +19,10 @@ const Rules = () => {
       {/* Content Container */}
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <Sparkles className="w-16 h-16 mx-auto mb-6 text-[#00ff94] animate-pulse" />
-          <h2 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00ff94] via-[#00c8ff] to-[#ff4d4d]">
+        <div className="text-center mb-12">
+          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00ff94] via-[#00c8ff] to-[#ff4d4d]">
             {t('title')}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            {t('subtitle')}
-          </p>
         </div>
 
         {/* Rules Timeline */}
