@@ -1,202 +1,22 @@
 {
-  "nav": {
-    "challenges": "Desafíos",
-    "rewards": "Recompensas",
-    "academy": "Academia",
-    "tournaments": "Torneos",
-    "about": "Acerca de",
-    "joinTournament": "Unirse al Torneo"
-  },
-  "hero": {
-    "title": "Compite con Todos los Traders. ¡Desde Cualquier Lugar!",
-    "subtitle": "Torneos diarios para desafíos de trading.",
-    "cta": "Unirse al Torneo",
-    "winningChance": {
-      "percentage": "33%",
-      "title": "Probabilidad de Ganar",
-      "description": "Mejores probabilidades comparado con competencias tradicionales de trading"
-    }
-  },
-  "rules": {
-    "title": "Reglas del Torneo",
-    "subtitle": "Bienvenidos al TradingLab World Trading Tournament",
-    "generalConditions": {
-      "title": "Condiciones Generales",
-      "demoAccount": {
-        "title": "Cuenta Demo",
-        "description": "Cada participante recibe $10,000 USD"
-      },
-      "leverage": {
-        "title": "Apalancamiento",
-        "description": "Se permite apalancamiento 1:500"
-      },
-      "duration": {
-        "title": "Duración",
-        "description": "Una semana (5 días hábiles)"
-      }
+  "faq": {
+    "wondering": "PROBABLEMENTE TE PREGUNTES LO MISMO",
+    "title": "PREGUNTAS FRECUENTES",
+    "trading": {
+      "question": "¿Qué son las Competencias de Trading?",
+      "answer": "Una competencia de trading es una competición donde los traders compiten para ver quién es el mejor trader. Cada participante recibe una cuenta demo de trading con $100,000. Todos los participantes operan durante un período establecido y los traders con el mayor % de retorno en su cuenta son coronados como ganadores."
     },
-    "riskManagement": {
-      "title": "Gestión de Riesgo: Clave para el Éxito",
-      "maxDrawdown": {
-        "title": "Drawdown Máximo",
-        "description": "45% del capital inicial ($4,500)"
-      },
-      "simultaneousOperations": {
-        "title": "Operaciones Simultáneas",
-        "description": "Máximo 5 operaciones abiertas a la vez"
-      },
-      "consequence": {
-        "title": "Consecuencia",
-        "description": "Superar límites resulta en descalificación automática"
-      }
+    "fees": {
+      "question": "¿Hay alguna tarifa para participar?",
+      "answer": "Sí, hay una pequeña tarifa de entrada para participar en nuestras competencias de trading. Esta tarifa nos ayuda a mantener la plataforma y contribuye al pozo de premios. La tarifa exacta varía según el tipo de competencia y el tamaño del pozo de premios."
     },
-    "evaluationCriteria": {
-      "title": "Criterios de Evaluación del Torneo",
-      "finalBalance": {
-        "title": "Balance Final Positivo",
-        "description": "Principal criterio para determinar los ganadores del concurso"
-      },
-      "ruleCompliance": {
-        "title": "Cumplimiento de Reglas",
-        "description": "Respeto al drawdown máximo y diversificación obligatoria"
-      },
-      "additionalMetrics": {
-        "title": "Métricas Adicionales",
-        "description": "Profit Factor y Ratio de Sharpe para desempates"
-      },
-      "minimumRequirements": {
-        "title": "Requisitos Mínimos",
-        "description": "Deberá haber al menos 15 operaciones ejecutadas. Ninguna operación menor a 3 minutos"
-      }
-    }
-  },
-  "prizes": {
-    "title": "Reconocimientos",
-    "challenge": "desafío de trading",
-    "first": {
-      "title": "Primer Lugar",
-      "perks": [
-        "Acceso a Herramientas Premium de Trading",
-        "Sesión de Mentoría Individual",
-        "Acceso VIP a la Comunidad de Trading"
-      ]
+    "prizes": {
+      "question": "¿Cómo gano premios?",
+      "answer": "Para ganar premios, necesitas alcanzar una de las posiciones superiores en el ranking de la competencia. Los ganadores se determinan según su porcentaje de retorno de inversión (ROI) al final del período de competencia. ¡Cuanto más alto sea tu ranking, mayor será tu premio!"
     },
-    "second": {
-      "title": "Segundo Lugar",
-      "perks": [
-        "Acceso a Herramientas Premium",
-        "Sesión de Mentoría Grupal",
-        "Acceso a la Comunidad de Trading"
-      ]
-    },
-    "third": {
-      "title": "Tercer Lugar",
-      "perks": [
-        "Acceso a Herramientas Básicas",
-        "Acceso a la Comunidad de Trading"
-      ]
-    },
-    "distribution": {
-      "title": "Tabla de Reconocimientos",
-      "totalBudget": "Presupuesto total de Reconocimientos: $8,000",
-      "table": {
-        "position": "Lugar",
-        "winners": "Cantidad de Ganadores",
-        "prize": "Reconocimiento Individual ($)",
-        "total": "Reconocimiento Total ($)"
-      },
-      "rows": [
-        {
-          "position": "1er lugar",
-          "winners": "1",
-          "prize": "$1,500",
-          "total": "$1,500"
-        },
-        {
-          "position": "2do lugar",
-          "winners": "1",
-          "prize": "$1,000",
-          "total": "$1,000"
-        },
-        {
-          "position": "3er lugar",
-          "winners": "1",
-          "prize": "$700",
-          "total": "$700"
-        },
-        {
-          "position": "4to al 10mo lugar",
-          "winners": "7",
-          "prize": "$300",
-          "total": "$2,100"
-        },
-        {
-          "position": "11vo al 20mo lugar",
-          "winners": "10",
-          "prize": "$150",
-          "total": "$1,500"
-        },
-        {
-          "position": "21vo al 40mo lugar",
-          "winners": "20",
-          "prize": "$60",
-          "total": "$1,200"
-        }
-      ]
-    }
-  },
-  "payment": {
-    "howItWorks": {
-      "title": "Cómo Funciona el Pago",
-      "confirmationTime": {
-        "title": "Tiempo de Confirmación",
-        "description": "Las transacciones en la red TRON (TRC20) son rápidas y generalmente se confirman en menos de 1 minuto. Sin embargo, en casos raros, pueden tardar hasta 5 minutos dependiendo del tráfico en la red."
-      },
-      "autoNotification": {
-        "title": "Notificación Automática",
-        "description": "Una vez que el pago se confirme en la blockchain, recibirás una notificación en tu correo con los detalles de tu inscripción al torneo."
-      }
-    },
-    "whyUsdt": {
-      "title": "Por qué Usar USDT",
-      "security": {
-        "title": "Transacciones Seguras",
-        "description": "Las transacciones USDT son seguras y rastreables en la blockchain"
-      }
-    },
-    "support": {
-      "title": "Política de Soporte",
-      "questions": {
-        "title": "¿Tienes Preguntas?",
-        "description": "Si tienes algún problema con tu transacción, nuestro equipo está aquí para ayudarte. Escríbenos a support@elitetraderhub.com."
-      }
-    },
-    "benefits": {
-      "title": "Beneficios de Participar",
-      "items": [
-        "Acceso exclusivo al Elite Trading Tournament, donde puedes ganar premios increíbles.",
-        "Conéctate con una comunidad de traders apasionados.",
-        "Una oportunidad única de probar tus habilidades en un entorno competitivo."
-      ]
-    },
-    "details": {
-      "title": "Torneo Elite de Trading",
-      "amountDue": "Monto a Pagar",
-      "orderDetails": "Detalles del Pedido",
-      "description": "Cuota única de entrada para participar en el Torneo Elite de Trading",
-      "email": "Correo Electrónico"
-    },
-    "instructions": {
-      "title": "Pagar con USDT (TRC20)",
-      "qrCodeAlt": "Código QR de Pago",
-      "sendExactly": "Envía exactamente",
-      "toAddress": "a la dirección:",
-      "memoImportant": "Importante: Agrega este ID en el memo de tu transacción"
-    },
-    "status": {
-      "pending": "Esperando el pago...",
-      "success": "¡Pago confirmado!",
-      "failed": "Verificación de pago fallida"
+    "join": {
+      "question": "¿Cómo me uno a una competencia de trading?",
+      "answer": "¡Unirse es fácil! Simplemente crea una cuenta, selecciona una competencia en la que quieras participar, paga la tarifa de entrada y recibirás tu cuenta demo de trading. Asegúrate de leer las reglas y requisitos de la competencia antes de comenzar."
     }
   }
 }

@@ -1,202 +1,22 @@
 {
-  "nav": {
-    "challenges": "Challenges",
-    "rewards": "Rewards",
-    "academy": "Academy",
-    "tournaments": "Tournaments",
-    "about": "About",
-    "joinTournament": "Join Tournament"
-  },
-  "hero": {
-    "title": "Compete With All Traders. From Anywhere!",
-    "subtitle": "Daily tournaments for trading challenges.",
-    "cta": "Join Tournament",
-    "winningChance": {
-      "percentage": "33%",
-      "title": "Chance of Winning",
-      "description": "Higher odds compared to traditional trading competitions"
-    }
-  },
-  "rules": {
-    "title": "Tournament Rules",
-    "subtitle": "Welcome to the TradingLab World Trading Tournament",
-    "generalConditions": {
-      "title": "General Conditions",
-      "demoAccount": {
-        "title": "Demo Account",
-        "description": "Each participant receives $10,000 USD"
-      },
-      "leverage": {
-        "title": "Leverage",
-        "description": "1:500 leverage allowed"
-      },
-      "duration": {
-        "title": "Duration",
-        "description": "One week (5 trading days)"
-      }
+  "faq": {
+    "wondering": "YOU'RE PROBABLY WONDERING THE SAME",
+    "title": "FREQUENTLY ASKED QUESTIONS",
+    "trading": {
+      "question": "What are Trading Competitions?",
+      "answer": "A trading competition is a competition where traders compete to see who is the best trader. Each participant receives a demo trading account with $100,000. Participants all trade for a set duration and the traders with the highest % return in their account are crowned the winners."
     },
-    "riskManagement": {
-      "title": "Risk Management: Key to Success",
-      "maxDrawdown": {
-        "title": "Maximum Drawdown",
-        "description": "45% of initial capital ($4,500)"
-      },
-      "simultaneousOperations": {
-        "title": "Simultaneous Operations",
-        "description": "Maximum 5 open positions at once"
-      },
-      "consequence": {
-        "title": "Consequence",
-        "description": "Exceeding limits results in automatic disqualification"
-      }
+    "fees": {
+      "question": "Are there any fees to participate?",
+      "answer": "Yes, there is a small entry fee to participate in our trading competitions. This fee helps us maintain the platform and contribute to the prize pool. The exact fee varies depending on the competition type and prize pool size."
     },
-    "evaluationCriteria": {
-      "title": "Tournament Evaluation Criteria",
-      "finalBalance": {
-        "title": "Positive Final Balance",
-        "description": "Main criterion for determining contest winners"
-      },
-      "ruleCompliance": {
-        "title": "Rule Compliance",
-        "description": "Respect for maximum drawdown and mandatory diversification"
-      },
-      "additionalMetrics": {
-        "title": "Additional Metrics",
-        "description": "Profit Factor and Sharpe Ratio for tiebreakers"
-      },
-      "minimumRequirements": {
-        "title": "Minimum Requirements",
-        "description": "At least 15 executed trades. No trade duration less than 3 minutes"
-      }
-    }
-  },
-  "prizes": {
-    "title": "Awards",
-    "challenge": "trading challenge",
-    "first": {
-      "title": "First Place",
-      "perks": [
-        "Access to Premium Trading Tools",
-        "1-on-1 Mentoring Session",
-        "VIP Trading Community Access"
-      ]
+    "prizes": {
+      "question": "How do I win prizes?",
+      "answer": "To win prizes, you need to achieve one of the top positions in the competition rankings. Winners are determined based on their percentage return on investment (ROI) at the end of the competition period. The higher your ranking, the bigger your prize!"
     },
-    "second": {
-      "title": "Second Place",
-      "perks": [
-        "Premium Trading Tools Access",
-        "Group Mentoring Session",
-        "Trading Community Access"
-      ]
-    },
-    "third": {
-      "title": "Third Place",
-      "perks": [
-        "Basic Trading Tools Access",
-        "Trading Community Access"
-      ]
-    },
-    "distribution": {
-      "title": "Award Distribution",
-      "totalBudget": "Total Award Budget: $8,000",
-      "table": {
-        "position": "Position",
-        "winners": "Number of Winners",
-        "prize": "Individual Award ($)",
-        "total": "Total Award ($)"
-      },
-      "rows": [
-        {
-          "position": "1st place",
-          "winners": "1",
-          "prize": "$1,500",
-          "total": "$1,500"
-        },
-        {
-          "position": "2nd place",
-          "winners": "1",
-          "prize": "$1,000",
-          "total": "$1,000"
-        },
-        {
-          "position": "3rd place",
-          "winners": "1",
-          "prize": "$700",
-          "total": "$700"
-        },
-        {
-          "position": "4th to 10th place",
-          "winners": "7",
-          "prize": "$300",
-          "total": "$2,100"
-        },
-        {
-          "position": "11th to 20th place",
-          "winners": "10",
-          "prize": "$150",
-          "total": "$1,500"
-        },
-        {
-          "position": "21st to 40th place",
-          "winners": "20",
-          "prize": "$60",
-          "total": "$1,200"
-        }
-      ]
-    }
-  },
-  "payment": {
-    "howItWorks": {
-      "title": "How Payment Works",
-      "confirmationTime": {
-        "title": "Confirmation Time",
-        "description": "Transactions on the TRON network (TRC20) are fast and usually confirm in less than 1 minute. However, in rare cases, it may take up to 5 minutes depending on network traffic."
-      },
-      "autoNotification": {
-        "title": "Automatic Notification",
-        "description": "Once the payment is confirmed on the blockchain, you will receive an email notification with your tournament registration details."
-      }
-    },
-    "whyUsdt": {
-      "title": "Why Use USDT",
-      "security": {
-        "title": "Secure Transactions",
-        "description": "USDT transactions are secure and traceable on the blockchain"
-      }
-    },
-    "support": {
-      "title": "Support Policy",
-      "questions": {
-        "title": "Have Questions?",
-        "description": "If you have any issues with your transaction, our team is here to help. Write to us at support@elitetraderhub.com."
-      }
-    },
-    "benefits": {
-      "title": "Benefits of Participating",
-      "items": [
-        "Exclusive access to the Elite Trading Tournament, where you can win amazing prizes.",
-        "Connect with a community of passionate traders.",
-        "A unique opportunity to test your skills in a competitive environment."
-      ]
-    },
-    "details": {
-      "title": "Elite Trading Tournament",
-      "amountDue": "Amount Due",
-      "orderDetails": "Order Details",
-      "description": "One-time entry fee for participation in the Elite Trading Tournament",
-      "email": "Email"
-    },
-    "instructions": {
-      "title": "Pay with USDT (TRC20)",
-      "qrCodeAlt": "Payment QR Code",
-      "sendExactly": "Send exactly",
-      "toAddress": "to address:",
-      "memoImportant": "Important: Add this ID in your transaction memo"
-    },
-    "status": {
-      "pending": "Waiting for payment...",
-      "success": "Payment confirmed!",
-      "failed": "Payment verification failed"
+    "join": {
+      "question": "How do I join a trading competition?",
+      "answer": "Joining is easy! Simply create an account, select a competition you want to participate in, pay the entry fee, and you'll receive your demo trading account. Make sure to read the competition rules and requirements before starting."
     }
   }
 }

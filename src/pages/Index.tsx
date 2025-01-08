@@ -4,6 +4,7 @@ import PrizeCards from '../components/PrizeCards';
 import PrizeDistributionTable from '../components/PrizeDistributionTable';
 import DiversificationStrategy from '../components/DiversificationStrategy';
 import Rules from '../components/Rules';
+import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
 
 const Index = () => {
@@ -15,6 +16,7 @@ const Index = () => {
       <PrizeCards />
       <PrizeDistributionTable />
       <DiversificationStrategy />
+      <FAQ />
       <Footer />
     </main>
   );
