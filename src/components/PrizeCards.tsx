@@ -13,7 +13,7 @@ const PrizeCards = () => {
       cashPrize: "$2,000",
       challenge: "$100,000",
       challengeType: t('prizes.challenge'),
-      perks: t('prizes.first.perks', { returnObjects: true }) || []
+      perks: (t('prizes.first.perks', { returnObjects: true }) as string[]) || []
     },
     {
       icon: <Medal className="w-16 h-16 text-bright-blue" />,
@@ -21,7 +21,7 @@ const PrizeCards = () => {
       cashPrize: "$1,000",
       challenge: "$100,000",
       challengeType: t('prizes.challenge'),
-      perks: t('prizes.second.perks', { returnObjects: true }) || []
+      perks: (t('prizes.second.perks', { returnObjects: true }) as string[]) || []
     },
     {
       icon: <Award className="w-16 h-16 text-bright-blue" />,
@@ -29,7 +29,7 @@ const PrizeCards = () => {
       cashPrize: "$500",
       challenge: "$100,000",
       challengeType: t('prizes.challenge'),
-      perks: t('prizes.third.perks', { returnObjects: true }) || []
+      perks: (t('prizes.third.perks', { returnObjects: true }) as string[]) || []
     }
   ];
 
