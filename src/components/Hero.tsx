@@ -38,23 +38,9 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 pt-32 pb-20 z-20">
         <div className="grid md:grid-cols-2 gap-6 items-center min-h-[calc(100vh-128px)]">
           <div className="text-white space-y-6 animate-fade-in order-1 md:order-1 text-center md:text-left">
-            <h1 className="text-4xl font-medium md:text-7xl md:font-bold leading-tight font-display tracking-tight">
-              {t('hero.title')}
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              150 traders, 33% de probabilidad de éxito, ¡y el resto depende de ti!
             </h1>
-            <p className="text-light-gray text-xl font-sans">
-              {t('hero.subtitle')}
-            </p>
-            <div className="bg-bright-blue/20 p-4 rounded-lg border border-bright-blue/30 mb-4">
-              <div className="flex items-center space-x-4">
-                <div className="text-5xl font-bold text-bright-blue">{t('hero.winningChance.percentage')}</div>
-                <div className="text-lg">
-                  <span className="block font-semibold">{t('hero.winningChance.title')}</span>
-                  <span className="text-sm text-gray-300">
-                    {t('hero.winningChance.description')}
-                  </span>
-                </div>
-              </div>
-            </div>
             <div className="flex justify-center md:justify-start">
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
