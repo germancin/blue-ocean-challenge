@@ -1,201 +1,42 @@
 {
-  "faq": {
-    "wondering": "PROBABLEMENTE TE PREGUNTES LO MISMO",
-    "title": "PREGUNTAS FRECUENTES",
-    "trading": {
-      "question": "¿Qué son las Competencias de Trading?",
-      "answer": "Una competencia de trading es una competición donde los traders compiten para ver quién es el mejor trader. Cada participante recibe una cuenta demo de trading con $100,000. Todos los participantes operan durante un período establecido y los traders con el mayor % de retorno en su cuenta son coronados como ganadores."
-    },
-    "fees": {
-      "question": "¿Hay alguna tarifa para participar?",
-      "answer": "Sí, hay una pequeña tarifa de entrada para participar en nuestras competencias de trading. Esta tarifa nos ayuda a mantener la plataforma y contribuye al pozo de premios. La tarifa exacta varía según el tipo de competencia y el tamaño del pozo de premios."
-    },
-    "prizes": {
-      "question": "¿Cómo gano premios?",
-      "answer": "Para ganar premios, necesitas alcanzar una de las posiciones superiores en el ranking de la competencia. Los ganadores se determinan según su porcentaje de retorno de inversión (ROI) al final del período de competencia. ¡Cuanto más alto sea tu ranking, mayor será tu premio!"
-    },
-    "join": {
-      "question": "¿Cómo me uno a una competencia de trading?",
-      "answer": "¡Unirse es fácil! Simplemente crea una cuenta, selecciona una competencia en la que quieras participar, paga la tarifa de entrada y recibirás tu cuenta demo de trading. Asegúrate de leer las reglas y requisitos de la competencia antes de comenzar."
-    }
-  },
-  "nav": {
-    "challenges": "Desafíos",
-    "rewards": "Recompensas",
-    "academy": "Academia",
-    "tournaments": "Torneos",
-    "about": "Acerca de",
-    "joinTournament": "Unirse al Torneo"
-  },
-  "stats": {
-    "prizePool": "Pozo Total de Premios",
-    "activeTraders": "Traders Activos",
-    "liveTrading": "Trading en Vivo"
-  },
-  "prizes": {
-    "title": "Premios del Torneo",
-    "challenge": "Desafío de Trading",
-    "first": {
-      "title": "Primer Lugar",
-      "perks": [
-        "Sesión de Mentoría 1 a 1",
-        "Acceso a Sala VIP de Trading",
-        "Herramientas Premium de Análisis"
-      ]
-    },
-    "second": {
-      "title": "Segundo Lugar",
-      "perks": [
-        "Sesión de Mentoría Grupal",
-        "Herramientas Premium de Análisis",
-        "Acceso VIP por 3 Meses"
-      ]
-    },
-    "third": {
-      "title": "Tercer Lugar",
-      "perks": [
-        "Herramientas Premium de Análisis",
-        "Acceso VIP por 1 Mes",
-        "Pack de Guías de Estrategia"
-      ]
-    },
-    "distribution": {
-      "title": "Distribución de Premios",
-      "totalBudget": "Presupuesto Total de Premios: $100,000",
-      "table": {
-        "position": "Posición",
-        "winners": "Ganadores",
-        "prize": "Premio",
-        "total": "Total"
-      },
-      "rows": [
-        {
-          "position": "1er Lugar",
-          "winners": "1",
-          "prize": "$2,000",
-          "total": "$2,000"
-        },
-        {
-          "position": "2do Lugar",
-          "winners": "1",
-          "prize": "$1,000",
-          "total": "$1,000"
-        },
-        {
-          "position": "3er Lugar",
-          "winners": "1",
-          "prize": "$500",
-          "total": "$500"
-        }
-      ]
-    }
-  },
   "rules": {
-    "title": "Reglas del Torneo",
-    "subtitle": "Todo lo que necesitas saber para participar justamente",
+    "title": "Reglas del Torneo de Trading",
     "generalConditions": {
       "title": "Condiciones Generales",
       "demoAccount": {
         "title": "Cuenta Demo",
-        "description": "Cada participante recibe una cuenta demo de $100,000"
-      },
-      "leverage": {
-        "title": "Apalancamiento Máximo",
-        "description": "Apalancamiento 1:100 disponible en todos los instrumentos"
+        "description": "Cada participante recibe $10,000 USD en fondos virtuales para operar"
       },
       "duration": {
-        "title": "Duración del Torneo",
-        "description": "30 días de período de trading activo"
+        "title": "Duración",
+        "description": "Una semana (5 días de trading) para demostrar tus habilidades"
       }
     },
     "riskManagement": {
       "title": "Gestión de Riesgo",
       "maxDrawdown": {
         "title": "Drawdown Máximo",
-        "description": "Límite de drawdown diario del 5%"
-      },
-      "simultaneousOperations": {
-        "title": "Operaciones Simultáneas",
-        "description": "Máximo 5 posiciones abiertas a la vez"
-      },
-      "consequence": {
-        "title": "Violación de Reglas",
-        "description": "Romper las reglas lleva a la descalificación"
+        "description": "Mantén tus pérdidas por debajo del 45% del capital inicial ($4,500) para seguir en competencia"
       }
     },
     "evaluationCriteria": {
       "title": "Criterios de Evaluación",
       "finalBalance": {
         "title": "Balance Final",
-        "description": "Mayor balance de cuenta al final del torneo"
+        "description": "Tu balance final de cuenta es el factor principal para determinar los ganadores"
       },
       "ruleCompliance": {
         "title": "Cumplimiento de Reglas",
-        "description": "Debe seguir todas las reglas durante el torneo"
+        "description": "Se requiere estricto cumplimiento del drawdown máximo y reglas de trading"
       },
       "additionalMetrics": {
-        "title": "Métricas Adicionales",
-        "description": "Se evalúa gestión de riesgo y consistencia"
+        "title": "Métricas de Rendimiento",
+        "description": "El factor de beneficio y retornos ajustados al riesgo serán considerados para desempates"
       },
       "minimumRequirements": {
-        "title": "Requisitos Mínimos",
-        "description": "Al menos 20 operaciones durante el período"
+        "title": "Requisitos de Trading",
+        "description": "Ejecuta al menos 15 operaciones, con cada posición mantenida por mínimo 3 minutos"
       }
-    }
-  },
-  "payment": {
-    "details": {
-      "title": "Detalles del Pago",
-      "amountDue": "Monto a Pagar",
-      "orderDetails": "Detalles del Pedido",
-      "description": "Tarifa de Entrada al Torneo",
-      "email": "Correo Electrónico"
-    },
-    "howItWorks": {
-      "title": "Cómo Funciona",
-      "confirmationTime": {
-        "title": "Tiempo de Confirmación",
-        "description": "La confirmación del pago suele tardar 1-2 minutos"
-      },
-      "autoNotification": {
-        "title": "Notificación Automática",
-        "description": "Recibirás un email cuando se confirme el pago"
-      }
-    },
-    "whyUsdt": {
-      "title": "¿Por qué USDT?",
-      "security": {
-        "title": "Seguro y Rápido",
-        "description": "Las transacciones en USDT son seguras y se procesan rápidamente"
-      }
-    },
-    "support": {
-      "title": "¿Necesitas Ayuda?",
-      "questions": {
-        "title": "¿Preguntas?",
-        "description": "Nuestro equipo de soporte está disponible 24/7"
-      }
-    },
-    "benefits": {
-      "title": "Lo que Obtienes",
-      "items": [
-        "Acceso instantáneo a la plataforma del torneo",
-        "Análisis de trading en tiempo real",
-        "Acceso a la comunidad",
-        "Herramientas profesionales de trading"
-      ]
-    },
-    "instructions": {
-      "title": "Instrucciones de Pago",
-      "qrCodeAlt": "Código QR de Pago USDT",
-      "sendExactly": "Por favor envía exactamente",
-      "toAddress": "a esta dirección",
-      "note": "Importante: Envía solo USDT (TRC20)"
-    },
-    "status": {
-      "pending": "Pago Pendiente",
-      "success": "Pago Confirmado",
-      "failed": "Pago Fallido"
     }
   }
 }

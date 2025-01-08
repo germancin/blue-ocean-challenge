@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { Trophy, Target, BarChart3, Clock, DollarSign, Award } from 'lucide-react';
+import { Trophy, Target, BarChart3 } from 'lucide-react';
 
 const Rules = () => {
-  const { t } = useTranslation('rules');
+  const { t } = useTranslation();
 
   return (
     <section className="relative py-16 overflow-hidden bg-navy">
@@ -21,7 +21,7 @@ const Rules = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00ff94] via-[#00c8ff] to-[#ff4d4d]">
-            {t('title')}
+            {t('rules.title')}
           </h2>
         </div>
 
@@ -34,15 +34,15 @@ const Rules = () => {
             
             <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#00ff94]/20 group-hover:border-[#00ff94]/40 transition-all duration-300">
               <Trophy className="w-12 h-12 text-[#00ff94] mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">{t('generalConditions.title')}</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">{t('rules.generalConditions.title')}</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <h4 className="text-[#00ff94] font-semibold">{t('generalConditions.demoAccount.title')}</h4>
-                  <p className="text-gray-300">{t('generalConditions.demoAccount.description')}</p>
+                  <h4 className="text-[#00ff94] font-semibold">{t('rules.generalConditions.demoAccount.title')}</h4>
+                  <p className="text-gray-300">{t('rules.generalConditions.demoAccount.description')}</p>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="text-[#00ff94] font-semibold">{t('generalConditions.duration.title')}</h4>
-                  <p className="text-gray-300">{t('generalConditions.duration.description')}</p>
+                  <h4 className="text-[#00ff94] font-semibold">{t('rules.generalConditions.duration.title')}</h4>
+                  <p className="text-gray-300">{t('rules.generalConditions.duration.description')}</p>
                 </div>
               </div>
             </div>
@@ -55,10 +55,10 @@ const Rules = () => {
             
             <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#00c8ff]/20 group-hover:border-[#00c8ff]/40 transition-all duration-300">
               <Target className="w-12 h-12 text-[#00c8ff] mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">{t('riskManagement.title')}</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">{t('rules.riskManagement.title')}</h3>
               <div className="space-y-2">
-                <h4 className="text-[#00c8ff] font-semibold">{t('riskManagement.maxDrawdown.title')}</h4>
-                <p className="text-gray-300">{t('riskManagement.maxDrawdown.description')}</p>
+                <h4 className="text-[#00c8ff] font-semibold">{t('rules.riskManagement.maxDrawdown.title')}</h4>
+                <p className="text-gray-300">{t('rules.riskManagement.maxDrawdown.description')}</p>
               </div>
             </div>
           </div>
@@ -70,26 +70,26 @@ const Rules = () => {
             
             <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#ff4d4d]/20 group-hover:border-[#ff4d4d]/40 transition-all duration-300">
               <BarChart3 className="w-12 h-12 text-[#ff4d4d] mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">{t('evaluationCriteria.title')}</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">{t('rules.evaluationCriteria.title')}</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <h4 className="text-[#ff4d4d] font-semibold">{t('evaluationCriteria.finalBalance.title')}</h4>
-                    <p className="text-gray-300">{t('evaluationCriteria.finalBalance.description')}</p>
+                    <h4 className="text-[#ff4d4d] font-semibold">{t('rules.evaluationCriteria.finalBalance.title')}</h4>
+                    <p className="text-gray-300">{t('rules.evaluationCriteria.finalBalance.description')}</p>
                   </div>
                   <div>
-                    <h4 className="text-[#ff4d4d] font-semibold">{t('evaluationCriteria.ruleCompliance.title')}</h4>
-                    <p className="text-gray-300">{t('evaluationCriteria.ruleCompliance.description')}</p>
+                    <h4 className="text-[#ff4d4d] font-semibold">{t('rules.evaluationCriteria.ruleCompliance.title')}</h4>
+                    <p className="text-gray-300">{t('rules.evaluationCriteria.ruleCompliance.description')}</p>
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="text-[#ff4d4d] font-semibold">{t('evaluationCriteria.additionalMetrics.title')}</h4>
-                    <p className="text-gray-300">{t('evaluationCriteria.additionalMetrics.description')}</p>
+                    <h4 className="text-[#ff4d4d] font-semibold">{t('rules.evaluationCriteria.additionalMetrics.title')}</h4>
+                    <p className="text-gray-300">{t('rules.evaluationCriteria.additionalMetrics.description')}</p>
                   </div>
                   <div>
-                    <h4 className="text-[#ff4d4d] font-semibold">{t('evaluationCriteria.minimumRequirements.title')}</h4>
-                    <p className="text-gray-300">{t('evaluationCriteria.minimumRequirements.description')}</p>
+                    <h4 className="text-[#ff4d4d] font-semibold">{t('rules.evaluationCriteria.minimumRequirements.title')}</h4>
+                    <p className="text-gray-300">{t('rules.evaluationCriteria.minimumRequirements.description')}</p>
                   </div>
                 </div>
               </div>
