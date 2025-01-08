@@ -39,8 +39,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           {/* Logo Section */}
           <div>
-            <Link to="/" className="text-2xl font-bold">
-              Elite<span className="bg-white text-navy px-2">Trader</span>Hub
+            <Link to="/" className="text-2xl font-bold text-neon-green">
+              Elite<span className="bg-white text-cyber-black px-2">Trader</span>Hub
             </Link>
           </div>
 
