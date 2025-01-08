@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useState } from 'react';
@@ -8,7 +7,6 @@ interface PaymentInformationCardProps {
 }
 
 export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCardProps) {
-  const { t } = useTranslation();
   const [accepted, setAccepted] = useState(false);
 
   const handleCheckboxChange = (checked: boolean) => {
@@ -19,25 +17,25 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
   const paymentInfo = [
     {
       id: 1,
-      title: t('payment.info.secure'),
-      description: t('payment.info.secureDesc')
+      title: 'Secure Payment',
+      description: 'Your payment is protected by industry-standard security measures.'
     },
     {
       id: 2,
-      title: t('payment.info.fast'),
-      description: t('payment.info.fastDesc')
+      title: 'Fast Processing',
+      description: 'Quick and efficient transaction processing for your convenience.'
     },
     {
       id: 3,
-      title: t('payment.info.support'),
-      description: t('payment.info.supportDesc')
+      title: '24/7 Support',
+      description: 'Our support team is available around the clock to assist you.'
     }
   ];
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t('payment.info.title')}</CardTitle>
+        <CardTitle>Payment Information</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-4">
@@ -59,7 +57,7 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
             htmlFor="terms"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            {t('payment.info.acceptTerms')}
+            I accept the terms and conditions
           </label>
         </div>
       </CardContent>

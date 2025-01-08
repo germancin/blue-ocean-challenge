@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Copy, Check } from 'lucide-react';
 import { useState } from 'react';
@@ -10,7 +9,6 @@ interface PaymentDetailsCardProps {
 }
 
 export function PaymentDetailsCard({ amount, email }: PaymentDetailsCardProps) {
-  const { t } = useTranslation();
   const [hasCopiedAmount, setHasCopiedAmount] = useState(false);
 
   const copyToClipboard = async (text: string) => {
@@ -27,12 +25,12 @@ export function PaymentDetailsCard({ amount, email }: PaymentDetailsCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{t('payment.details.title')}</CardTitle>
+        <CardTitle>Payment Details</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-medium">{t('payment.details.amountDue')}</h3>
+            <h3 className="text-lg font-medium">Amount Due</h3>
             <div className="flex items-center gap-2">
               <p className="text-3xl font-bold bg-gray-100 px-3 py-1 rounded">${amount.toFixed(3)} USDT</p>
               <button
@@ -49,11 +47,11 @@ export function PaymentDetailsCard({ amount, email }: PaymentDetailsCardProps) {
             </div>
           </div>
           <div>
-            <h3 className="text-lg font-medium">{t('payment.details.orderDetails')}</h3>
-            <p className="text-gray-600">{t('payment.details.description')}</p>
+            <h3 className="text-lg font-medium">Order Details</h3>
+            <p className="text-gray-600">Your payment will be processed securely via USDT on the TRON network.</p>
           </div>
           <div>
-            <h3 className="text-lg font-medium">{t('payment.details.email')}</h3>
+            <h3 className="text-lg font-medium">Email</h3>
             <p className="text-gray-600">{email}</p>
           </div>
         </div>
