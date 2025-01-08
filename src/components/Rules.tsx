@@ -1,62 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent } from './ui/card';
-import { Trophy, Target, BarChart3, Sparkles } from 'lucide-react';
+import { Trophy, Target, BarChart3, Clock, DollarSign, Award, Sparkles } from 'lucide-react';
 
 const Rules = () => {
   const { t } = useTranslation('rules');
 
-  const sections = [
-    {
-      title: t('generalConditions.title'),
-      icon: <Trophy className="w-12 h-12 text-[#00ff94] animate-pulse" />,
-      items: [
-        {
-          title: t('generalConditions.demoAccount.title'),
-          description: t('generalConditions.demoAccount.description'),
-        },
-        {
-          title: t('generalConditions.duration.title'),
-          description: t('generalConditions.duration.description'),
-        },
-      ],
-    },
-    {
-      title: t('riskManagement.title'),
-      icon: <Target className="w-12 h-12 text-[#ff4d4d] animate-pulse" />,
-      items: [
-        {
-          title: t('riskManagement.maxDrawdown.title'),
-          description: t('riskManagement.maxDrawdown.description'),
-        },
-      ],
-    },
-    {
-      title: t('evaluationCriteria.title'),
-      icon: <BarChart3 className="w-12 h-12 text-[#00c8ff] animate-pulse" />,
-      items: [
-        {
-          title: t('evaluationCriteria.finalBalance.title'),
-          description: t('evaluationCriteria.finalBalance.description'),
-        },
-        {
-          title: t('evaluationCriteria.ruleCompliance.title'),
-          description: t('evaluationCriteria.ruleCompliance.description'),
-        },
-        {
-          title: t('evaluationCriteria.additionalMetrics.title'),
-          description: t('evaluationCriteria.additionalMetrics.description'),
-        },
-        {
-          title: t('evaluationCriteria.minimumRequirements.title'),
-          description: t('evaluationCriteria.minimumRequirements.description'),
-        },
-      ],
-    },
-  ];
-
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Trading chart background */}
+    <section className="relative py-24 overflow-hidden bg-navy">
+      {/* Trading chart background with overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{ 
@@ -64,70 +14,91 @@ const Rules = () => {
           filter: 'brightness(0.7) contrast(1.2)'
         }}
       />
-      
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#000B14]/95 via-[#001A2C]/90 to-[#003366]/85" />
+      <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/90 to-[#001F3F]/85" />
 
-      {/* Animated particles */}
-      <div className="absolute inset-0">
-        <div className="absolute h-2 w-2 bg-[#00ff94] rounded-full top-1/4 left-1/4 animate-ping" />
-        <div className="absolute h-2 w-2 bg-[#ff4d4d] rounded-full top-3/4 right-1/4 animate-ping delay-300" />
-        <div className="absolute h-2 w-2 bg-[#00c8ff] rounded-full bottom-1/4 left-1/2 animate-ping delay-700" />
-      </div>
-
+      {/* Content Container */}
       <div className="container mx-auto px-4 relative z-10">
-        {/* Header section with glowing effect */}
-        <div className="text-center mb-16 relative">
+        {/* Header */}
+        <div className="text-center mb-16">
           <Sparkles className="w-16 h-16 mx-auto mb-6 text-[#00ff94] animate-pulse" />
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00ff94] via-[#00c8ff] to-[#ff4d4d] animate-pulse">
+          <h2 className="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00ff94] via-[#00c8ff] to-[#ff4d4d]">
             {t('title')}
           </h2>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             {t('subtitle')}
           </p>
-          
-          {/* Decorative line */}
-          <div className="w-24 h-1 bg-gradient-to-r from-[#00ff94] via-[#00c8ff] to-[#ff4d4d] mx-auto mt-8 rounded-full" />
         </div>
 
-        {/* Cards grid with glassmorphism effect */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {sections.map((section, index) => (
-            <Card 
-              key={index}
-              className="group relative overflow-hidden transition-all duration-500 hover:scale-105 hover:-translate-y-2 bg-black/20 backdrop-blur-xl border-[#00ff94]/20 hover:border-[#00ff94]/40"
-            >
-              {/* Animated gradient border */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#00ff94]/20 via-[#00c8ff]/20 to-[#ff4d4d]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <CardContent className="p-8 relative z-10">
-                <div className="flex flex-col items-center text-center">
-                  <div className="mb-6 transform transition-transform duration-500 group-hover:scale-110">
-                    {section.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold mb-6 text-white group-hover:text-[#00ff94] transition-colors duration-300">
-                    {section.title}
-                  </h3>
-                  <ul className="space-y-4">
-                    {section.items.map((item, itemIndex) => (
-                      <li 
-                        key={itemIndex}
-                        className="animate-fade-in"
-                        style={{ animationDelay: `${itemIndex * 100}ms` }}
-                      >
-                        <h4 className="font-semibold text-[#00c8ff] mb-2 group-hover:text-[#00ff94] transition-colors duration-300">
-                          {item.title}
-                        </h4>
-                        <p className="text-gray-300 text-sm leading-relaxed">
-                          {item.description}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
+        {/* Rules Timeline */}
+        <div className="max-w-4xl mx-auto">
+          {/* General Conditions */}
+          <div className="relative pl-8 mb-16 group">
+            <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00ff94] to-[#00c8ff] rounded-full" />
+            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#00ff94] rounded-full animate-pulse" />
+            
+            <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#00ff94]/20 group-hover:border-[#00ff94]/40 transition-all duration-300">
+              <Trophy className="w-12 h-12 text-[#00ff94] mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">{t('generalConditions.title')}</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <h4 className="text-[#00ff94] font-semibold">{t('generalConditions.demoAccount.title')}</h4>
+                  <p className="text-gray-300">{t('generalConditions.demoAccount.description')}</p>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+                <div className="space-y-2">
+                  <h4 className="text-[#00ff94] font-semibold">{t('generalConditions.duration.title')}</h4>
+                  <p className="text-gray-300">{t('generalConditions.duration.description')}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Risk Management */}
+          <div className="relative pl-8 mb-16 group">
+            <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00c8ff] to-[#ff4d4d] rounded-full" />
+            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#00c8ff] rounded-full animate-pulse" />
+            
+            <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#00c8ff]/20 group-hover:border-[#00c8ff]/40 transition-all duration-300">
+              <Target className="w-12 h-12 text-[#00c8ff] mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">{t('riskManagement.title')}</h3>
+              <div className="space-y-2">
+                <h4 className="text-[#00c8ff] font-semibold">{t('riskManagement.maxDrawdown.title')}</h4>
+                <p className="text-gray-300">{t('riskManagement.maxDrawdown.description')}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Evaluation Criteria */}
+          <div className="relative pl-8 group">
+            <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#ff4d4d] to-[#00ff94] rounded-full" />
+            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#ff4d4d] rounded-full animate-pulse" />
+            
+            <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#ff4d4d]/20 group-hover:border-[#ff4d4d]/40 transition-all duration-300">
+              <BarChart3 className="w-12 h-12 text-[#ff4d4d] mb-4" />
+              <h3 className="text-2xl font-bold text-white mb-4">{t('evaluationCriteria.title')}</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-[#ff4d4d] font-semibold">{t('evaluationCriteria.finalBalance.title')}</h4>
+                    <p className="text-gray-300">{t('evaluationCriteria.finalBalance.description')}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#ff4d4d] font-semibold">{t('evaluationCriteria.ruleCompliance.title')}</h4>
+                    <p className="text-gray-300">{t('evaluationCriteria.ruleCompliance.description')}</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-[#ff4d4d] font-semibold">{t('evaluationCriteria.additionalMetrics.title')}</h4>
+                    <p className="text-gray-300">{t('evaluationCriteria.additionalMetrics.description')}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-[#ff4d4d] font-semibold">{t('evaluationCriteria.minimumRequirements.title')}</h4>
+                    <p className="text-gray-300">{t('evaluationCriteria.minimumRequirements.description')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
