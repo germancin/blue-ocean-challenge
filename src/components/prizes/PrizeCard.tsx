@@ -1,5 +1,3 @@
-import { LucideIcon } from 'lucide-react';
-
 interface PrizeCardProps {
   icon: React.ReactNode;
   place: string;
