@@ -60,7 +60,7 @@ const FAQ = () => {
       <div 
         className="absolute inset-0 opacity-20"
         style={{
-          backgroundImage: "url('/lovable-uploads/eea68a6c-ea81-4774-a9e7-3b72f6e42949.png')",
+          backgroundImage: "url('/lovable-uploads/3be0bad4-1cec-4a0a-9124-c48618edcdb8.png')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
