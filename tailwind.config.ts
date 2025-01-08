@@ -19,16 +19,11 @@ export default {
     },
     extend: {
       colors: {
-        'neon-green': '#39FF14',
-        'cyber-blue': '#00FF9F',
-        'electric-purple': '#9D00FF',
-        'neon-pink': '#FF00E4',
-        'dark-cyber': '#0A0A0A',
-        'cyber-black': '#000000',
-        'bright-blue': '#00FFFF',
+        'navy': '#001A2C', // Slightly darker navy
+        'bright-blue': '#007BFF',
         'white': '#FFFFFF',
         'light-gray': '#F8F9FA',
-        'dark-gray': '#222222',
+        'dark-gray': '#222222', // Updated to a darker shade
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -43,23 +38,10 @@ export default {
           "0%": { transform: "scale(0.95)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "1" },
         },
-        "glow": {
-          "0%, 100%": { 
-            filter: "drop-shadow(0 0 2em #39FF14)",
-          },
-          "50%": { 
-            filter: "drop-shadow(0 0 0.5em #39FF14)",
-          },
-        }
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
-        "glow": "glow 3s ease-in-out infinite",
-      },
-      backgroundImage: {
-        'cyber-gradient': 'linear-gradient(to right, #39FF14, #00FF9F)',
-        'neon-gradient': 'linear-gradient(to right, #FF00E4, #9D00FF)',
       },
     },
   },

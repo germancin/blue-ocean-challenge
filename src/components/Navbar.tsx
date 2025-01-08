@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0 text-white font-bold text-xl">
-              Elite<span className="bg-white text-cyber-black px-2">Trader</span>Hub
+              Elite<span className="bg-white text-navy px-2">Trader</span>Hub
             </div>
 
             {/* Desktop Menu */}
@@ -95,7 +95,7 @@ const Navbar = () => {
       </nav>
 
       <Dialog open={showSubscriptionModal} onOpenChange={setShowSubscriptionModal}>
-        <DialogContent className="sm:max-w-[425px] bg-dark-cyber text-white">
+        <DialogContent className="sm:max-w-[425px] bg-dark-blue text-white">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-center">Join Tournament</DialogTitle>
             <DialogDescription className="text-light-gray text-center">
