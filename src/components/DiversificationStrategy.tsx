@@ -1,5 +1,4 @@
 import { LineChart, Wallet, BarChart3 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   Carousel,
@@ -10,26 +9,25 @@ import {
 } from "@/components/ui/carousel";
 
 const DiversificationStrategy = () => {
-  const { t } = useTranslation();
   const isMobile = useIsMobile();
 
   const strategies = [
     {
       icon: <LineChart className="w-16 h-16 text-white" />,
-      title: t('diversification.forex.title'),
-      description: t('diversification.forex.description'),
+      title: "Forex Trading",
+      description: "Trade major currency pairs with advanced technical analysis and risk management strategies",
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
     },
     {
       icon: <BarChart3 className="w-16 h-16 text-white" />,
-      title: t('diversification.indices.title'),
-      description: t('diversification.indices.description'),
+      title: "Stock Indices",
+      description: "Access global markets through major stock indices with comprehensive market analysis",
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
     },
     {
       icon: <Wallet className="w-16 h-16 text-white" />,
-      title: t('diversification.crypto.title'),
-      description: t('diversification.crypto.description'),
+      title: "Cryptocurrency",
+      description: "Trade digital assets with cutting-edge blockchain technology and market insights",
       image: "/lovable-uploads/3989779a-ba8e-4c99-8c5c-94da1f9b246a.png"
     }
   ];
@@ -90,7 +88,7 @@ const DiversificationStrategy = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-display tracking-tight">
-            {t('diversification.title')}
+            Diversified Trading Strategies
           </h2>
           <div className="w-24 h-1 bg-bright-blue mx-auto rounded-full" />
         </div>
