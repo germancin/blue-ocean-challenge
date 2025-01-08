@@ -1,4 +1,27 @@
 {
+  "diversification": {
+    "title": "Nuestra Estrategia de Diversificación",
+    "forex": {
+      "title": "Trading de Forex",
+      "description": "Accede a los mercados de divisas globales con herramientas de trading avanzadas y análisis de mercado en tiempo real"
+    },
+    "indices": {
+      "title": "Índices Bursátiles",
+      "description": "Opera los principales índices mundiales con spreads competitivos y ejecución confiable"
+    },
+    "crypto": {
+      "title": "Criptomonedas",
+      "description": "Explora el trading de activos digitales con soluciones de trading seguras e innovadoras"
+    }
+  },
+  "hero": {
+    "mainMessage": "150 traders, 33% de probabilidad de éxito, ¡y el resto depende de ti!",
+    "cta": "Unirse al Torneo",
+    "dialog": {
+      "title": "¡Desbloquea tu Potencial de Trading Hoy! 🚀",
+      "description": "Únete a nuestra comunidad de traders de confianza. Tus datos están seguros y solo te enviaremos actualizaciones del torneo y noticias esenciales. ✨"
+    }
+  },
   "rules": {
     "title": "Reglas del Torneo de Trading",
     "generalConditions": {
@@ -75,6 +98,26 @@
         "Acceso a talleres de trading",
         "Paquete básico de herramientas"
       ]
+    }
+  },
+  "faq": {
+    "wondering": "¿Tienes Preguntas?",
+    "title": "Preguntas Frecuentes",
+    "trading": {
+      "question": "¿Qué instrumentos de trading están disponibles?",
+      "answer": "Tendrás acceso a los principales pares de forex, criptomonedas populares y los principales índices bursátiles. Todo el trading se realiza con fondos virtuales en una cuenta demo."
+    },
+    "fees": {
+      "question": "¿Hay alguna tarifa de participación?",
+      "answer": "Sí, hay una pequeña cuota de entrada para asegurar una participación seria. Esta tarifa contribuye al premio total y ayuda a mantener la calidad de la competencia."
+    },
+    "prizes": {
+      "question": "¿Cómo se determinan los ganadores?",
+      "answer": "Los ganadores se clasifican según su balance final de cuenta, mientras cumplen con todas las reglas de trading y pautas de gestión de riesgo. Se pueden considerar métricas adicionales como los retornos ajustados al riesgo para los desempates."
+    },
+    "join": {
+      "question": "¿Cómo puedo unirme al torneo?",
+      "answer": "Simplemente haz clic en el botón 'Unirse al Torneo', completa el proceso de registro y paga la cuota de entrada. Recibirás las credenciales de tu cuenta demo inmediatamente después de la confirmación."
     }
   }
 }

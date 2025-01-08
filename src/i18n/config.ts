@@ -3,23 +3,15 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Import translations
-import enRules from './rules/en.json';
-import esRules from './rules/es.json';
 import en from './en.json';
 import es from './es.json';
-import enHero from './hero/en.json';
-import esHero from './hero/es.json';
 
 const resources = {
   en: {
-    translation: en,
-    rules: enRules,
-    hero: enHero,
+    translation: en
   },
   es: {
-    translation: es,
-    rules: esRules,
-    hero: esHero,
+    translation: es
   },
 };
 
