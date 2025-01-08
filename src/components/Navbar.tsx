@@ -30,7 +30,7 @@ const Navbar = () => {
       <nav className="fixed w-full bg-black/95 backdrop-blur-sm z-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-16">
-            <div className="flex-shrink-0 text-neon-green font-bold text-xl">
+            <div className="flex-shrink-0 text-white font-bold text-xl">
               Elite<span className="bg-white text-cyber-black px-2">Trader</span>Hub
             </div>
 
