@@ -7,6 +7,43 @@
     "about": "About",
     "joinTournament": "Join Tournament"
   },
+  "generalConditions": {
+    "title": "General Conditions",
+    "demoAccount": {
+      "title": "Demo Account Setup",
+      "description": "All participants will receive a demo account with $100,000 virtual capital for trading during the tournament period."
+    },
+    "duration": {
+      "title": "Tournament Duration",
+      "description": "The tournament runs for 30 days, giving traders ample time to demonstrate their strategy and skills."
+    }
+  },
+  "riskManagement": {
+    "title": "Risk Management Rules",
+    "maxDrawdown": {
+      "title": "Maximum Drawdown",
+      "description": "Traders must maintain drawdown within 10% of initial capital. Exceeding this limit results in automatic disqualification."
+    }
+  },
+  "evaluationCriteria": {
+    "title": "Evaluation Criteria",
+    "finalBalance": {
+      "title": "Final Balance",
+      "description": "Your final account balance will be the primary metric for ranking."
+    },
+    "ruleCompliance": {
+      "title": "Rule Compliance",
+      "description": "Strict adherence to all trading rules and guidelines is mandatory."
+    },
+    "additionalMetrics": {
+      "title": "Performance Metrics",
+      "description": "Risk-adjusted returns and consistency will be considered in final rankings."
+    },
+    "minimumRequirements": {
+      "title": "Minimum Requirements",
+      "description": "Must complete at least 20 trades during the tournament period."
+    }
+  },
   "diversification": {
     "title": "Our Diversification Strategy",
     "forex": {
@@ -28,46 +65,6 @@
     "dialog": {
       "title": "Unlock Your Trading Potential Today! 🚀",
       "description": "Join our trusted community of traders. Your data is secure and we'll only send you tournament updates and essential news. ✨"
-    }
-  },
-  "rules": {
-    "title": "Trading Tournament Rules",
-    "generalConditions": {
-      "title": "General Conditions",
-      "demoAccount": {
-        "title": "Demo Account",
-        "description": "Each participant receives $10,000 USD in virtual funds to trade"
-      },
-      "duration": {
-        "title": "Duration",
-        "description": "One week (5 trading days) to showcase your trading skills"
-      }
-    },
-    "riskManagement": {
-      "title": "Risk Management",
-      "maxDrawdown": {
-        "title": "Maximum Drawdown",
-        "description": "Keep your losses under 45% of initial capital ($4,500) to stay in the competition"
-      }
-    },
-    "evaluationCriteria": {
-      "title": "Evaluation Criteria",
-      "finalBalance": {
-        "title": "Final Balance",
-        "description": "Your ending account balance is the primary factor in determining winners"
-      },
-      "ruleCompliance": {
-        "title": "Rule Compliance",
-        "description": "Strict adherence to maximum drawdown and trading rules is required"
-      },
-      "additionalMetrics": {
-        "title": "Performance Metrics",
-        "description": "Profit factor and risk-adjusted returns will be considered for tiebreakers"
-      },
-      "minimumRequirements": {
-        "title": "Trading Requirements",
-        "description": "Execute at least 15 trades, with each position held for minimum 3 minutes"
-      }
     }
   },
   "prizes": {

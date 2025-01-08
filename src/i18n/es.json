@@ -7,6 +7,43 @@
     "about": "Acerca de",
     "joinTournament": "Unirse al Torneo"
   },
+  "generalConditions": {
+    "title": "Condiciones Generales",
+    "demoAccount": {
+      "title": "Configuración de Cuenta Demo",
+      "description": "Todos los participantes recibirán una cuenta demo con $100,000 de capital virtual para operar durante el período del torneo."
+    },
+    "duration": {
+      "title": "Duración del Torneo",
+      "description": "El torneo dura 30 días, dando a los traders tiempo suficiente para demostrar su estrategia y habilidades."
+    }
+  },
+  "riskManagement": {
+    "title": "Reglas de Gestión de Riesgo",
+    "maxDrawdown": {
+      "title": "Drawdown Máximo",
+      "description": "Los traders deben mantener el drawdown dentro del 10% del capital inicial. Exceder este límite resulta en descalificación automática."
+    }
+  },
+  "evaluationCriteria": {
+    "title": "Criterios de Evaluación",
+    "finalBalance": {
+      "title": "Balance Final",
+      "description": "Tu balance final de cuenta será la métrica principal para el ranking."
+    },
+    "ruleCompliance": {
+      "title": "Cumplimiento de Reglas",
+      "description": "Es obligatorio el cumplimiento estricto de todas las reglas y directrices de trading."
+    },
+    "additionalMetrics": {
+      "title": "Métricas de Rendimiento",
+      "description": "Los retornos ajustados al riesgo y la consistencia serán considerados en los rankings finales."
+    },
+    "minimumRequirements": {
+      "title": "Requisitos Mínimos",
+      "description": "Debe completar al menos 20 operaciones durante el período del torneo."
+    }
+  },
   "diversification": {
     "title": "Nuestra Estrategia de Diversificación",
     "forex": {
@@ -28,46 +65,6 @@
     "dialog": {
       "title": "¡Desbloquea tu Potencial de Trading Hoy! 🚀",
       "description": "Únete a nuestra comunidad de traders de confianza. Tus datos están seguros y solo te enviaremos actualizaciones del torneo y noticias esenciales. ✨"
-    }
-  },
-  "rules": {
-    "title": "Reglas del Torneo de Trading",
-    "generalConditions": {
-      "title": "Condiciones Generales",
-      "demoAccount": {
-        "title": "Cuenta Demo",
-        "description": "Cada participante recibe $10,000 USD en fondos virtuales para operar"
-      },
-      "duration": {
-        "title": "Duración",
-        "description": "Una semana (5 días de trading) para demostrar tus habilidades"
-      }
-    },
-    "riskManagement": {
-      "title": "Gestión de Riesgo",
-      "maxDrawdown": {
-        "title": "Drawdown Máximo",
-        "description": "Mantén tus pérdidas por debajo del 45% del capital inicial ($4,500) para seguir en competencia"
-      }
-    },
-    "evaluationCriteria": {
-      "title": "Criterios de Evaluación",
-      "finalBalance": {
-        "title": "Balance Final",
-        "description": "Tu balance final de cuenta es el factor principal para determinar los ganadores"
-      },
-      "ruleCompliance": {
-        "title": "Cumplimiento de Reglas",
-        "description": "Se requiere estricto cumplimiento del drawdown máximo y reglas de trading"
-      },
-      "additionalMetrics": {
-        "title": "Métricas de Rendimiento",
-        "description": "El factor de beneficio y retornos ajustados al riesgo serán considerados para desempates"
-      },
-      "minimumRequirements": {
-        "title": "Requisitos de Trading",
-        "description": "Ejecuta al menos 15 operaciones, con cada posición mantenida por mínimo 3 minutos"
-      }
     }
   },
   "prizes": {
