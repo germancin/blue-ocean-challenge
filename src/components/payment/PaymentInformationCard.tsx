@@ -73,7 +73,7 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
         <div className="space-y-6">
           {sections.map((section) => (
             <div key={section.id} className="space-y-3">
-              <h2 className="text-xl font-semibold">{section.title}</h2>
+              <h2 className="text-xl font-semibold" style={{ fontSize: '1.1rem', lineHeight: '1.4rem' }}>{section.title}</h2>
               <div className="space-y-4">
                 {section.items.map((item, index) => {
                   const IconComponent = item.icon;
@@ -83,15 +83,15 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
                         <IconComponent className="h-5 w-5" />
                       </div>
                       <div className="space-y-1">
-                        <h3 className="text-base font-medium">{item.title}</h3>
+                        <h3 className="font-medium" style={{ fontSize: '0.9rem', lineHeight: '1.2rem' }}>{item.title}</h3>
                         {Array.isArray(item.description) ? (
-                          <ul className="text-sm text-gray-600 space-y-1 list-disc pl-3">
+                          <ul className="space-y-1 list-disc pl-3">
                             {item.description.map((bullet, idx) => (
-                              <li key={idx} className="text-base">{bullet}</li>
+                              <li key={idx} style={{ fontSize: '0.9rem', lineHeight: '1.2rem' }} className="text-gray-600">{bullet}</li>
                             ))}
                           </ul>
                         ) : (
-                          <p className="text-base text-gray-600">{item.description}</p>
+                          <p className="text-gray-600" style={{ fontSize: '0.9rem', lineHeight: '1.2rem' }}>{item.description}</p>
                         )}
                       </div>
                     </div>
