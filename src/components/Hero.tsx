@@ -19,7 +19,6 @@ const Hero = () => {
       {/* Video Background with Cyber Overlay */}
       <div className="absolute inset-0 w-full h-full">
         <div className="absolute inset-0 bg-gradient-to-b from-cyber-black/90 via-cyber-black/70 to-cyber-black/90 z-10" />
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/817e184b-18df-4d93-a6ea-902fb47b7399.png')] bg-cover bg-center opacity-40" />
         <video
           autoPlay
           muted
