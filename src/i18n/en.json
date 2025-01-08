@@ -146,25 +146,6 @@
     }
   },
   "payment": {
-    "details": {
-      "title": "Elite Trading Tournament",
-      "amountDue": "Amount Due",
-      "orderDetails": "Order Details",
-      "description": "One-time entry fee for participation in the Elite Trading Tournament",
-      "email": "Email"
-    },
-    "instructions": {
-      "title": "Pay with USDT (TRC20)",
-      "qrCodeAlt": "Payment QR Code",
-      "sendExactly": "Send exactly",
-      "toAddress": "to address:",
-      "memoImportant": "Important: Add this ID in your transaction memo"
-    },
-    "status": {
-      "pending": "Waiting for payment...",
-      "success": "Payment confirmed!",
-      "failed": "Payment verification failed"
-    },
     "howItWorks": {
       "title": "How Payment Works",
       "confirmationTime": {
@@ -197,6 +178,25 @@
         "Connect with a community of passionate traders.",
         "A unique opportunity to test your skills in a competitive environment."
       ]
+    },
+    "details": {
+      "title": "Elite Trading Tournament",
+      "amountDue": "Amount Due",
+      "orderDetails": "Order Details",
+      "description": "One-time entry fee for participation in the Elite Trading Tournament",
+      "email": "Email"
+    },
+    "instructions": {
+      "title": "Pay with USDT (TRC20)",
+      "qrCodeAlt": "Payment QR Code",
+      "sendExactly": "Send exactly",
+      "toAddress": "to address:",
+      "memoImportant": "Important: Add this ID in your transaction memo"
+    },
+    "status": {
+      "pending": "Waiting for payment...",
+      "success": "Payment confirmed!",
+      "failed": "Payment verification failed"
     }
   }
 }

@@ -146,25 +146,6 @@
     }
   },
   "payment": {
-    "details": {
-      "title": "Torneo Elite de Trading",
-      "amountDue": "Monto a Pagar",
-      "orderDetails": "Detalles del Pedido",
-      "description": "Cuota única de entrada para participar en el Torneo Elite de Trading",
-      "email": "Correo Electrónico"
-    },
-    "instructions": {
-      "title": "Pagar con USDT (TRC20)",
-      "qrCodeAlt": "Código QR de Pago",
-      "sendExactly": "Envía exactamente",
-      "toAddress": "a la dirección:",
-      "memoImportant": "Importante: Agrega este ID en el memo de tu transacción"
-    },
-    "status": {
-      "pending": "Esperando el pago...",
-      "success": "¡Pago confirmado!",
-      "failed": "Verificación de pago fallida"
-    },
     "howItWorks": {
       "title": "Cómo Funciona el Pago",
       "confirmationTime": {
@@ -197,6 +178,25 @@
         "Conéctate con una comunidad de traders apasionados.",
         "Una oportunidad única de probar tus habilidades en un entorno competitivo."
       ]
+    },
+    "details": {
+      "title": "Torneo Elite de Trading",
+      "amountDue": "Monto a Pagar",
+      "orderDetails": "Detalles del Pedido",
+      "description": "Cuota única de entrada para participar en el Torneo Elite de Trading",
+      "email": "Correo Electrónico"
+    },
+    "instructions": {
+      "title": "Pagar con USDT (TRC20)",
+      "qrCodeAlt": "Código QR de Pago",
+      "sendExactly": "Envía exactamente",
+      "toAddress": "a la dirección:",
+      "memoImportant": "Importante: Agrega este ID en el memo de tu transacción"
+    },
+    "status": {
+      "pending": "Esperando el pago...",
+      "success": "¡Pago confirmado!",
+      "failed": "Verificación de pago fallida"
     }
   }
 }
