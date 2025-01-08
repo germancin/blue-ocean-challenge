@@ -1,0 +1,17 @@
+{
+  "diversification": {
+    "title": "Nuestra Estrategia de Diversificación",
+    "forex": {
+      "title": "Trading de Forex",
+      "description": "Accede a los mercados de divisas globales con herramientas de trading avanzadas y análisis de mercado en tiempo real"
+    },
+    "indices": {
+      "title": "Índices Bursátiles",
+      "description": "Opera los principales índices mundiales con spreads competitivos y ejecución confiable"
+    },
+    "crypto": {
+      "title": "Criptomonedas",
+      "description": "Explora el trading de activos digitales con soluciones de trading seguras e innovadoras"
+    }
+  }
+}
