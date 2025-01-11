@@ -19,6 +19,7 @@ export type Database = {
           status: string
           transaction_hash: string | null
           updated_at: string
+          user_id: string | null
         }
         Insert: {
           amount: number
@@ -29,6 +30,7 @@ export type Database = {
           status?: string
           transaction_hash?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
           amount?: number
@@ -39,8 +41,17 @@ export type Database = {
           status?: string
           transaction_hash?: string | null
           updated_at?: string
+          user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "payments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subscribers: {
         Row: {
@@ -60,6 +71,30 @@ export type Database = {
           email?: string
           id?: string
           name?: string
+        }
+        Relationships: []
+      }
+      users: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          password_hash: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          password_hash: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          password_hash?: string
+          updated_at?: string
         }
         Relationships: []
       }
