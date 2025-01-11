@@ -36,14 +36,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<AuthPage />} />
-            <Route 
-              path="/payment" 
-              element={
-                <ProtectedRoute>
-                  <Payment />
-                </ProtectedRoute>
-              } 
-            />
+            <Route path="/payment" element={<Payment />} />
             <Route 
               path="/profile" 
               element={
