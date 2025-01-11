@@ -5,6 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
+import { PasswordUpdateForm } from '@/components/profile/PasswordUpdateForm';
 
 interface Payment {
   amount: number;
@@ -59,6 +60,15 @@ const ProfilePage = () => {
                 <p className="mt-1 text-lg">${totalPaid.toFixed(3)} USDT</p>
               </div>
             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Update Password</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <PasswordUpdateForm />
           </CardContent>
         </Card>
 
