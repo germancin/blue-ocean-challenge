@@ -7,6 +7,11 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
+interface EmailRequest {
+  email: string;
+  amount: number;
+}
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -19,8 +24,8 @@ serve(async (req) => {
       throw new Error('RESEND_API_KEY is not configured');
     }
 
-    const { email, amount } = await req.json()
-    console.log('Sending confirmation email to:', email, 'for amount:', amount)
+    const { email, amount } = await req.json() as EmailRequest;
+    console.log('Sending confirmation email to:', email, 'for amount:', amount);
 
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -64,7 +69,7 @@ serve(async (req) => {
           </div>
         `
       })
-    })
+    });
 
     if (!res.ok) {
       const errorText = await res.text();
@@ -72,18 +77,18 @@ serve(async (req) => {
       throw new Error(`Failed to send email: ${errorText}`);
     }
 
-    const data = await res.json()
-    console.log('Email sent successfully:', data)
+    const data = await res.json();
+    console.log('Email sent successfully:', data);
 
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 200
-    })
+    });
   } catch (error) {
-    console.error('Error sending confirmation email:', error)
+    console.error('Error sending confirmation email:', error);
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 500
-    })
+    });
   }
 })
