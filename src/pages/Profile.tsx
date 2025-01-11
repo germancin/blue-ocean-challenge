@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { PasswordUpdateForm } from '@/components/profile/PasswordUpdateForm';
+import { toast } from 'sonner';
 
 interface Payment {
   amount: number;
@@ -17,6 +18,16 @@ interface Payment {
 const ProfilePage = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const shouldShowPasswordForm = searchParams.get('changePassword') === 'true';
+
+  useEffect(() => {
+    if (shouldShowPasswordForm) {
+      toast.info("Please set your password to secure your account", {
+        duration: 5000,
+      });
+    }
+  }, [shouldShowPasswordForm]);
 
   const { data: payments, isLoading } = useQuery({
     queryKey: ['payments', user?.id],
@@ -63,14 +74,27 @@ const ProfilePage = () => {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Update Password</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <PasswordUpdateForm />
-          </CardContent>
-        </Card>
+        {shouldShowPasswordForm && (
+          <Card className="border-2 border-blue-500">
+            <CardHeader>
+              <CardTitle>Set Your Password</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <PasswordUpdateForm />
+            </CardContent>
+          </Card>
+        )}
+
+        {!shouldShowPasswordForm && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Update Password</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <PasswordUpdateForm />
+            </CardContent>
+          </Card>
+        )}
 
         <Card>
           <CardHeader>
