@@ -44,7 +44,13 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
         if (data.status === 'success') {
           setTransactionStatus('success');
           toast.success("Payment confirmed!");
-          await sendPaymentConfirmationEmail(email, amount, paymentId);
+          
+          // Call the check-and-send-emails function
+          const { error: emailError } = await supabase.functions.invoke('check-and-send-emails');
+          if (emailError) {
+            console.error('Error triggering email check:', emailError);
+          }
+          
           return true;
         } else if (data.status === 'no_payment_found') {
           setTransactionStatus('failed');
