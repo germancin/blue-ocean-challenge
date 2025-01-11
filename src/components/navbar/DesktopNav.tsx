@@ -42,6 +42,13 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
             Join Tournament
           </Button>
           <Button 
+            variant="ghost"
+            onClick={() => navigate('/profile')}
+            className="text-bright-blue hover:bg-bright-blue/10"
+          >
+            Profile
+          </Button>
+          <Button 
             variant="outline" 
             onClick={handleLogout}
             className="border-bright-blue text-bright-blue hover:bg-bright-blue/10"

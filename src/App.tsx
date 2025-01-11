@@ -7,6 +7,7 @@ import { AuthProvider } from "./components/AuthProvider";
 import Index from "./pages/Index";
 import Payment from "./pages/Payment";
 import AuthPage from "./pages/Auth";
+import ProfilePage from "./pages/Profile";
 import { useAuth } from "./components/AuthProvider";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Payment />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
                 </ProtectedRoute>
               } 
             />
