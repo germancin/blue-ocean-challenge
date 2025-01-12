@@ -13,34 +13,16 @@ const corsHeaders = {
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 serve(async (req) => {
-  // Handle CORS preflight requests
+  // Handle CORS
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    // Log the raw request body for debugging
-    const rawBody = await req.text();
-    console.log('Raw request body:', rawBody);
+    const body = await req.json();
+    const { email, paymentId } = body;
 
-    // Parse the JSON body
-    let email, paymentId;
-    try {
-      const body = JSON.parse(rawBody);
-      email = body.email;
-      paymentId = body.paymentId;
-    } catch (parseError) {
-      console.error('Error parsing request body:', parseError);
-      return new Response(
-        JSON.stringify({ error: 'Invalid JSON body' }),
-        { 
-          status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
-    console.log('Processing email request for:', { email, paymentId });
+    console.log('Processing request for:', { email, paymentId });
 
     if (!email || !paymentId) {
       console.error('Missing required fields:', { email, paymentId });
@@ -53,40 +35,15 @@ serve(async (req) => {
       );
     }
 
-    // Verify RESEND_API_KEY is configured
-    if (!RESEND_API_KEY) {
-      console.error('RESEND_API_KEY not configured');
-      return new Response(
-        JSON.stringify({ error: 'Email service not configured' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
-    // Get the payment details
-    console.log('Fetching payment details for:', { email, paymentId });
+    // Get payment details
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
       .eq('id', paymentId)
-      .eq('email', email)
       .single();
 
     if (fetchError) {
       console.error('Error fetching payment:', fetchError);
-      return new Response(
-        JSON.stringify({ error: 'Error fetching payment details', details: fetchError }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
-    if (!payment) {
-      console.error('No payment found:', { email, paymentId });
       return new Response(
         JSON.stringify({ error: 'Payment not found' }),
         { 
@@ -109,7 +66,17 @@ serve(async (req) => {
     }
 
     // Send email via Resend
-    console.log('Sending confirmation email to:', email);
+    if (!RESEND_API_KEY) {
+      console.error('RESEND_API_KEY not configured');
+      return new Response(
+        JSON.stringify({ error: 'Email service not configured' }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
     try {
       const emailRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -123,19 +90,12 @@ serve(async (req) => {
           subject: 'Payment Confirmation - Elite Trading Tournament',
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Payment Confirmed!</h1>
-              
+              <h1 style="color: #2563eb; margin-bottom: 24px;">Payment Confirmed!</h1>
               <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
                 Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
               </p>
-
               <p style="font-size: 16px; line-height: 1.5; color: #374151;">
-                If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
-              </p>
-
-              <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
-                Best regards,<br>
-                The Elite Trading Tournament Team
+                If you have any questions, feel free to reach out to our support team.
               </p>
             </div>
           `
@@ -143,10 +103,9 @@ serve(async (req) => {
       });
 
       const emailData = await emailRes.json();
-      console.log('Resend API response:', emailData);
-
+      
       if (!emailRes.ok) {
-        console.error('Failed to send email:', emailData);
+        console.error('Resend API error:', emailData);
         return new Response(
           JSON.stringify({ error: 'Failed to send email', details: emailData }),
           { 
@@ -160,8 +119,7 @@ serve(async (req) => {
       const { error: updateError } = await supabase
         .from('payments')
         .update({ email_sent: true })
-        .eq('id', paymentId)
-        .eq('email', email);
+        .eq('id', paymentId);
 
       if (updateError) {
         console.error('Error updating email_sent status:', updateError);
@@ -174,7 +132,6 @@ serve(async (req) => {
         );
       }
 
-      console.log('Email sent and status updated successfully');
       return new Response(
         JSON.stringify({ success: true, emailId: emailData.id }),
         { 
@@ -195,7 +152,7 @@ serve(async (req) => {
     }
 
   } catch (error) {
-    console.error('Unexpected error in check-and-send-emails function:', error);
+    console.error('Unexpected error:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
       { 
