@@ -11,7 +11,6 @@ const corsHeaders = {
 }
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
@@ -24,7 +23,6 @@ serve(async (req) => {
       throw new Error('RESEND_API_KEY is not configured');
     }
 
-    // Create Supabase client with service role key for admin operations
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
       auth: {
         autoRefreshToken: false,
@@ -32,7 +30,6 @@ serve(async (req) => {
       }
     });
 
-    // Double-check to get only payments that need emails
     const { data: payments, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -69,35 +66,34 @@ serve(async (req) => {
           return { success: true, paymentId: payment.id, skipped: true };
         }
 
-        // Check if user exists and create if not
-        const { data: { users }, error: userError } = await supabase.auth
-          .admin.listUsers();
-        
-        const existingUser = users.find(u => u.email === payment.email);
+        // Update payment record to mark email as sent BEFORE any other operations
+        const { error: updateError } = await supabase
+          .from('payments')
+          .update({ email_sent: true })
+          .eq('id', payment.id);
 
-        if (userError) {
-          console.error('Error checking user:', userError);
-          throw userError;
+        if (updateError) {
+          console.error('Error updating payment:', updateError);
+          throw updateError;
         }
 
-        if (!existingUser) {
-          console.log('Creating new user for:', payment.email);
-          const tempPassword = crypto.randomUUID();
-          const { error: createError } = await supabase.auth
+        // Create user if doesn't exist
+        try {
+          const { data: { user }, error: createError } = await supabase.auth
             .admin.createUser({
               email: payment.email,
-              password: tempPassword,
+              password: crypto.randomUUID(),
               email_confirm: true
             });
 
-          if (createError) {
-            console.error('Error creating user:', createError);
+          if (createError && !createError.message.includes('User already registered')) {
             throw createError;
           }
+        } catch (error) {
+          console.log('User creation skipped (might already exist):', error.message);
         }
 
         // Generate recovery link
-        console.log('Generating recovery link for:', payment.email);
         const { data, error: linkError } = await supabase.auth
           .admin.generateLink({
             type: 'recovery',
@@ -115,18 +111,6 @@ serve(async (req) => {
         const recoveryLink = data?.properties?.action_link;
         if (!recoveryLink) {
           throw new Error('Failed to generate recovery link');
-        }
-
-        // Update payment record to mark email as sent BEFORE sending email
-        // This prevents duplicate emails if the email sending fails
-        const { error: updateError } = await supabase
-          .from('payments')
-          .update({ email_sent: true })
-          .eq('id', payment.id);
-
-        if (updateError) {
-          console.error('Error updating payment:', updateError);
-          throw updateError;
         }
 
         // Send email via Resend
