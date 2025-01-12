@@ -44,14 +44,23 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           setTransactionStatus('success');
           toast.success("Payment confirmed!");
           
-          // Call the check-and-send-emails function
-          console.log('Triggering email check after successful payment');
-          const { error: emailError } = await supabase.functions.invoke('check-and-send-emails');
-          if (emailError) {
-            console.error('Error triggering email check:', emailError);
-            toast.error('Failed to send confirmation email');
-          } else {
-            console.log('Email check triggered successfully');
+          // Call the check-and-send-emails function with proper error handling
+          try {
+            console.log('Triggering email check after successful payment');
+            const { data: emailData, error: emailError } = await supabase.functions.invoke('check-and-send-emails');
+            
+            if (emailError) {
+              console.error('Error triggering email check:', emailError);
+              toast.error('Failed to send confirmation email');
+            } else {
+              console.log('Email check response:', emailData);
+              if (emailData?.results?.some((result: any) => result.success)) {
+                toast.success('Confirmation email sent!');
+              }
+            }
+          } catch (emailError) {
+            console.error('Error in email sending process:', emailError);
+            toast.error('Failed to process confirmation email');
           }
           
           return true;
