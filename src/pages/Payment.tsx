@@ -33,66 +33,51 @@ const PaymentPage = () => {
       }
 
       try {
-        // First check if there's a successful payment
-        const { data: payment, error } = await supabase
+        // First check if there's ANY existing payment for this email
+        const { data: existingPayment, error: existingError } = await supabase
           .from('payments')
-          .select('id, status, email_sent')
+          .select('id, status, amount, email_sent')
           .eq('email', email)
-          .eq('status', 'success')
           .maybeSingle();
 
-        if (error) {
-          console.error('Error checking payment:', error);
+        if (existingError) {
+          console.error('Error checking existing payment:', existingError);
+          toast.error('Error checking payment status');
           return;
         }
-
-        if (payment) {
-          console.log('Found successful payment:', payment);
-          setInitialPaymentStatus('success');
-          setCurrentPaymentId(payment.id);
-          toast.success('Payment already completed!');
-
-          // Only trigger email check if email hasn't been sent
-          if (!payment.email_sent) {
-            console.log('Found payment with unsent email, triggering email send');
-            try {
-              const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
-                body: { 
-                  email,
-                  paymentId: payment.id
-                }
-              });
-              
-              if (emailError) {
-                console.error('Error triggering email check:', emailError);
-                toast.error('Failed to send confirmation email');
-              }
-            } catch (emailError) {
-              console.error('Error in email sending process:', emailError);
-              toast.error('Failed to process confirmation email');
-            }
-          }
-        }
-
-        // If no successful payment or if checking for pending payment
-        const { data: existingPayment, error: fetchError } = await supabase
-          .from('payments')
-          .select('id, amount')
-          .eq('email', email)
-          .eq('status', 'pending')
-          .maybeSingle();
-
-        if (fetchError) {
-          console.error('Error fetching existing payment:', fetchError);
-          toast.error('Error retrieving payment information');
-          return;
-        }
-
-        const newAmount = await generateUniqueAmount(BASE_AMOUNT);
-        console.log('Generated new unique amount:', newAmount);
 
         if (existingPayment) {
-          console.log('Found existing payment, updating amount:', existingPayment.id);
+          console.log('Found existing payment:', existingPayment);
+          setCurrentPaymentId(existingPayment.id);
+
+          if (existingPayment.status === 'success') {
+            setInitialPaymentStatus('success');
+            setUniqueAmount(existingPayment.amount);
+            toast.success('Payment already completed!');
+
+            if (!existingPayment.email_sent) {
+              try {
+                const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
+                  body: { 
+                    email,
+                    paymentId: existingPayment.id
+                  }
+                });
+                
+                if (emailError) {
+                  console.error('Error triggering email check:', emailError);
+                  toast.error('Failed to send confirmation email');
+                }
+              } catch (emailError) {
+                console.error('Error in email sending process:', emailError);
+                toast.error('Failed to process confirmation email');
+              }
+            }
+            return;
+          }
+
+          // If payment exists but is pending, update its amount
+          const newAmount = await generateUniqueAmount(BASE_AMOUNT);
           const { error: updateError } = await supabase
             .from('payments')
             .update({ amount: newAmount })
@@ -103,32 +88,37 @@ const PaymentPage = () => {
             toast.error('Error updating payment amount');
             return;
           }
-          setCurrentPaymentId(existingPayment.id);
-        } else {
-          // Create new payment
-          const { data: newPayment, error: createError } = await supabase
-            .from('payments')
-            .insert([{ 
-              email, 
-              amount: newAmount,
-              status: 'pending',
-              email_sent: false
-            }])
-            .select()
-            .single();
 
-          if (createError) {
-            console.error('Error creating payment:', createError);
-            toast.error('Error creating payment');
-            return;
-          }
-          setCurrentPaymentId(newPayment.id);
+          setUniqueAmount(newAmount);
+          setIsInitialized(true);
+          return;
         }
 
+        // Only create new payment if no payment exists at all
+        const newAmount = await generateUniqueAmount(BASE_AMOUNT);
+        const { data: newPayment, error: createError } = await supabase
+          .from('payments')
+          .insert([{ 
+            email, 
+            amount: newAmount,
+            status: 'pending',
+            email_sent: false
+          }])
+          .select()
+          .single();
+
+        if (createError) {
+          console.error('Error creating payment:', createError);
+          toast.error('Error creating payment');
+          return;
+        }
+
+        setCurrentPaymentId(newPayment.id);
         setUniqueAmount(newAmount);
         setIsInitialized(true);
+
       } catch (error) {
-        console.error('Error initializing payment amount:', error);
+        console.error('Error initializing payment:', error);
         toast.error('Error generating payment amount');
       }
     };
