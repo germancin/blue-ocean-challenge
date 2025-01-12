@@ -25,7 +25,12 @@ serve(async (req) => {
     }
 
     // Create Supabase client with service role key for admin operations
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    });
 
     // Double-check to get only payments that need emails
     const { data: payments, error: fetchError } = await supabase
@@ -64,20 +69,19 @@ serve(async (req) => {
           return { success: true, paymentId: payment.id, skipped: true };
         }
 
-        // Check if user exists
-        const { data: existingUser, error: userCheckError } = await supabase.auth
-          .admin.getUserByEmail(payment.email);
+        // Check if user exists and create if not
+        const { data: user, error: userError } = await supabase.auth.admin
+          .getUserByEmail(payment.email);
 
-        if (userCheckError && userCheckError.message !== 'User not found') {
-          console.error('Error checking user:', userCheckError);
-          throw userCheckError;
+        if (userError && userError.message !== 'User not found') {
+          console.error('Error checking user:', userError);
+          throw userError;
         }
 
-        // If user doesn't exist, create them
-        if (!existingUser) {
+        if (!user) {
           console.log('Creating new user for:', payment.email);
           const tempPassword = crypto.randomUUID();
-          const { data: newUser, error: createError } = await supabase.auth.admin
+          const { error: createError } = await supabase.auth.admin
             .createUser({
               email: payment.email,
               password: tempPassword,
