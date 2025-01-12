@@ -54,19 +54,7 @@ serve(async (req) => {
       try {
         console.log('Processing payment:', payment.id);
 
-        // Extra safety check to ensure email hasn't been sent
-        const { data: currentPayment } = await supabase
-          .from('payments')
-          .select('email_sent')
-          .eq('id', payment.id)
-          .single();
-
-        if (currentPayment?.email_sent) {
-          console.log('Email already sent for payment:', payment.id);
-          return { success: true, paymentId: payment.id, skipped: true };
-        }
-
-        // Update payment record to mark email as sent BEFORE any other operations
+        // Mark email as sent first to prevent duplicates
         const { error: updateError } = await supabase
           .from('payments')
           .update({ email_sent: true })
@@ -77,23 +65,7 @@ serve(async (req) => {
           throw updateError;
         }
 
-        // Create user if doesn't exist
-        try {
-          const { data: { user }, error: createError } = await supabase.auth
-            .admin.createUser({
-              email: payment.email,
-              password: crypto.randomUUID(),
-              email_confirm: true
-            });
-
-          if (createError && !createError.message.includes('User already registered')) {
-            throw createError;
-          }
-        } catch (error) {
-          console.log('User creation skipped (might already exist):', error.message);
-        }
-
-        // Generate recovery link
+        // Generate password reset link
         const { data, error: linkError } = await supabase.auth
           .admin.generateLink({
             type: 'recovery',
