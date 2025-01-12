@@ -17,22 +17,25 @@ interface EmailRequest {
 }
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    if (!RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not set');
-      throw new Error('RESEND_API_KEY is not configured');
-    }
-
     const { email, amount } = await req.json() as EmailRequest;
     console.log('Sending confirmation email to:', email, 'for amount:', amount);
 
-    // Create Supabase client with service role key for admin operations
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    if (!RESEND_API_KEY) {
+      throw new Error('RESEND_API_KEY is not configured');
+    }
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+        detectSessionInUrl: false
+      }
+    });
 
     // Generate recovery link with production URL
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
@@ -55,7 +58,7 @@ serve(async (req) => {
 
     console.log('Generated recovery link:', recoveryLink);
 
-    const res = await fetch('https://api.resend.com/emails', {
+    const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -107,13 +110,13 @@ serve(async (req) => {
       })
     });
 
-    if (!res.ok) {
-      const errorText = await res.text();
+    if (!emailRes.ok) {
+      const errorText = await emailRes.text();
       console.error('Failed to send email:', errorText);
       throw new Error(`Failed to send email: ${errorText}`);
     }
 
-    const data = await res.json();
+    const data = await emailRes.json();
     console.log('Email sent successfully:', data);
 
     return new Response(JSON.stringify(data), {
@@ -128,4 +131,4 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     });
   }
-})
+});
