@@ -120,6 +120,7 @@ serve(async (req) => {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 200
     });
+
   } catch (error) {
     console.error('Error sending confirmation email:', error);
     return new Response(JSON.stringify({ error: error.message }), {

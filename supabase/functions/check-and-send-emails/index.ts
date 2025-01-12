@@ -135,7 +135,7 @@ serve(async (req) => {
           .eq('id', payment.id);
 
         if (updateError) {
-          console.error('Error updating payment:', updateError);
+          console.error('Error updating email_sent status:', updateError);
           throw updateError;
         }
 
