@@ -18,14 +18,7 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Incoming request:', {
-      method: req.method,
-      headers: Object.fromEntries(req.headers.entries())
-    });
-
-    const body = await req.json();
-    const { email, paymentId } = body;
-
+    const { email, paymentId } = await req.json();
     console.log('Processing request for:', { email, paymentId });
 
     if (!email || !paymentId) {
@@ -39,24 +32,14 @@ serve(async (req) => {
       );
     }
 
-    if (!RESEND_API_KEY) {
-      console.error('RESEND_API_KEY not configured');
-      return new Response(
-        JSON.stringify({ error: 'Email service not configured - RESEND_API_KEY missing' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
+    // 1. First check if payment exists and is valid
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
       .eq('id', paymentId)
       .single();
 
-    if (fetchError) {
+    if (fetchError || !payment) {
       console.error('Error fetching payment:', fetchError);
       return new Response(
         JSON.stringify({ error: 'Payment not found' }),
@@ -67,6 +50,7 @@ serve(async (req) => {
       );
     }
 
+    // 2. Check if email was already sent
     if (payment.email_sent) {
       console.log('Email already sent for payment:', paymentId);
       return new Response(
@@ -78,7 +62,33 @@ serve(async (req) => {
       );
     }
 
-    // Generate recovery link
+    // 3. Check if user exists
+    const { data: { users }, error: userError } = await supabase.auth.admin.listUsers();
+    const existingUser = users?.find(u => u.email === email);
+
+    // 4. If user doesn't exist, create one
+    if (!existingUser) {
+      console.log('Creating new user for:', email);
+      const tempPassword = Math.random().toString(36).slice(-8);
+      const { error: createError } = await supabase.auth.admin.createUser({
+        email: email,
+        password: tempPassword,
+        email_confirm: true
+      });
+
+      if (createError) {
+        console.error('Error creating user:', createError);
+        return new Response(
+          JSON.stringify({ error: 'Failed to create user account' }),
+          { 
+            status: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          }
+        );
+      }
+    }
+
+    // 5. Generate recovery link
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'recovery',
       email: email,
@@ -103,10 +113,9 @@ serve(async (req) => {
       throw new Error('Failed to generate recovery link');
     }
 
-    console.log('Generated recovery link:', recoveryLink);
-
+    // 6. Send email with recovery link
     try {
-      console.log('Attempting to send email via Resend');
+      console.log('Sending email to:', email);
       const emailRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -173,7 +182,7 @@ serve(async (req) => {
         );
       }
 
-      // Mark email as sent
+      // 7. Mark email as sent
       const { error: updateError } = await supabase
         .from('payments')
         .update({ email_sent: true })
