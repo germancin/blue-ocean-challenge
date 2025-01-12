@@ -30,6 +30,7 @@ serve(async (req) => {
       }
     });
 
+    // Get all successful payments where email hasn't been sent
     const { data: payments, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -54,19 +55,8 @@ serve(async (req) => {
       try {
         console.log('Processing payment:', payment.id);
 
-        // Mark email as sent first to prevent duplicates
-        const { error: updateError } = await supabase
-          .from('payments')
-          .update({ email_sent: true })
-          .eq('id', payment.id);
-
-        if (updateError) {
-          console.error('Error updating payment:', updateError);
-          throw updateError;
-        }
-
-        // Generate password reset link
-        const { data, error: linkError } = await supabase.auth
+        // Generate recovery link first
+        const { data: linkData, error: linkError } = await supabase.auth
           .admin.generateLink({
             type: 'recovery',
             email: payment.email,
@@ -80,7 +70,7 @@ serve(async (req) => {
           throw linkError;
         }
 
-        const recoveryLink = data?.properties?.action_link;
+        const recoveryLink = linkData?.properties?.action_link;
         if (!recoveryLink) {
           throw new Error('Failed to generate recovery link');
         }
@@ -133,6 +123,17 @@ serve(async (req) => {
           const errorText = await emailRes.text();
           console.error('Failed to send email:', errorText);
           throw new Error(`Failed to send email: ${errorText}`);
+        }
+
+        // Only mark email as sent after successful sending
+        const { error: updateError } = await supabase
+          .from('payments')
+          .update({ email_sent: true })
+          .eq('id', payment.id);
+
+        if (updateError) {
+          console.error('Error updating payment:', updateError);
+          throw updateError;
         }
 
         console.log('Email sent successfully for payment:', payment.id);
