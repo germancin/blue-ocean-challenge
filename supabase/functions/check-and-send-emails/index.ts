@@ -4,7 +4,6 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3"
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-const PRODUCTION_URL = 'https://elitetraderhub.co';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -18,12 +17,12 @@ serve(async (req) => {
   }
 
   try {
-    const { email } = await req.json();
-    console.log('Processing email for:', email);
+    const { email, paymentId } = await req.json();
+    console.log('Processing email for:', email, 'paymentId:', paymentId);
 
-    if (!email) {
+    if (!email || !paymentId) {
       return new Response(
-        JSON.stringify({ error: 'Email is required' }),
+        JSON.stringify({ error: 'Email and paymentId are required' }),
         { 
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -33,12 +32,12 @@ serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    // Get the successful payment
+    // Get the specific payment
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
+      .eq('id', paymentId)
       .eq('email', email)
-      .eq('status', 'success')
       .single();
 
     if (fetchError) {
@@ -56,7 +55,7 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ message: 'No payment found' }),
         { 
-          status: 200,
+          status: 404,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       );
@@ -107,11 +106,12 @@ serve(async (req) => {
       );
     }
 
-    // Mark email as sent
+    // Mark email as sent for this specific payment
     const { error: updateError } = await supabase
       .from('payments')
       .update({ email_sent: true })
-      .eq('id', payment.id);
+      .eq('id', paymentId)
+      .eq('email', email);
 
     if (updateError) {
       console.error('Error updating email_sent status:', updateError);
