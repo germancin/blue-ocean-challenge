@@ -51,7 +51,21 @@ serve(async (req) => {
     const results = await Promise.all(payments.map(async (payment) => {
       try {
         console.log('Sending email for payment:', payment.id);
-        
+
+        // Generate magic link for the user
+        const { data: { user }, error: signUpError } = await supabase.auth.admin.generateLink({
+          type: 'magiclink',
+          email: payment.email,
+          options: {
+            redirectTo: `${req.headers.get('origin')}/profile?changePassword=true`
+          }
+        });
+
+        if (signUpError) {
+          console.error('Error generating magic link:', signUpError);
+          throw signUpError;
+        }
+
         // Send email via Resend
         const emailRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
@@ -70,6 +84,17 @@ serve(async (req) => {
                 <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
                   Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
                 </p>
+
+                <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+                  To complete your registration and set up your account, please click the secure link below:
+                </p>
+
+                <div style="text-align: center; margin: 32px 0;">
+                  <a href="${user?.confirmation_sent_at}" 
+                     style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                    Complete Registration
+                  </a>
+                </div>
 
                 <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
                   <h2 style="color: #1f2937; margin-bottom: 12px;">Transaction Details:</h2>
