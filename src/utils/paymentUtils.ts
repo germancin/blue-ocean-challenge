@@ -127,7 +127,7 @@ export const createOrUpdatePendingPayment = async (email: string, amount: number
   return newPayment;
 };
 
-export const sendPaymentConfirmationEmail = async (email: string, amount: number) => {
+export const sendPaymentConfirmationEmail = async (email: string) => {
   try {
     console.log('Sending confirmation email for:', email);
     
@@ -137,18 +137,18 @@ export const sendPaymentConfirmationEmail = async (email: string, amount: number
 
     if (error) {
       console.error('Error sending confirmation email:', error);
-      toast.error("Failed to send confirmation email");
-      return;
+      throw error;
     }
 
-    if (data.success) {
+    if (data?.success) {
       console.log('Confirmation email sent successfully');
       toast.success("Confirmation email sent!");
-    } else if (data.message) {
-      console.log('No email needed:', data.message);
+    } else if (data?.message) {
+      console.log('Email status:', data.message);
     }
   } catch (error) {
     console.error('Error in sendConfirmationEmail:', error);
     toast.error("Failed to send confirmation email");
+    throw error;
   }
 };

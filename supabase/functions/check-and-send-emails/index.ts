@@ -18,13 +18,10 @@ serve(async (req) => {
   }
 
   try {
-    console.log('Starting check-and-send-emails function');
-    
     const { email } = await req.json();
     console.log('Processing email for:', email);
 
     if (!email) {
-      console.error('No email provided');
       return new Response(
         JSON.stringify({ error: 'Email is required' }),
         { 
@@ -34,26 +31,14 @@ serve(async (req) => {
       );
     }
 
-    if (!RESEND_API_KEY) {
-      console.error('RESEND_API_KEY not configured');
-      return new Response(
-        JSON.stringify({ error: 'Email service not configured' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    // Get the successful payment that hasn't had email sent
+    // Get the successful payment
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
       .eq('email', email)
       .eq('status', 'success')
-      .eq('email_sent', false)
       .single();
 
     if (fetchError) {
@@ -68,9 +53,8 @@ serve(async (req) => {
     }
 
     if (!payment) {
-      console.log('No pending email to send for:', email);
       return new Response(
-        JSON.stringify({ message: 'No pending email to send' }),
+        JSON.stringify({ message: 'No payment found' }),
         { 
           status: 200,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -78,40 +62,8 @@ serve(async (req) => {
       );
     }
 
-    // Generate recovery link
-    const { data: linkData, error: linkError } = await supabase.auth
-      .admin.generateLink({
-        type: 'recovery',
-        email: payment.email,
-        options: {
-          redirectTo: `${PRODUCTION_URL}/profile?changePassword=true`
-        }
-      });
-
-    if (linkError) {
-      console.error('Error generating recovery link:', linkError);
-      return new Response(
-        JSON.stringify({ error: 'Error generating recovery link' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
-    const recoveryLink = linkData?.properties?.action_link;
-    if (!recoveryLink) {
-      return new Response(
-        JSON.stringify({ error: 'Failed to generate recovery link' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
     // Send email via Resend
-    console.log('Sending email to:', payment.email);
+    console.log('Sending email to:', email);
     const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -120,7 +72,7 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
-        to: [payment.email],
+        to: [email],
         subject: 'Payment Confirmation - Elite Trading Tournament',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -129,17 +81,6 @@ serve(async (req) => {
             <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
               Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
             </p>
-
-            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-              To complete your registration and set up your account, please click the secure link below:
-            </p>
-
-            <div style="text-align: center; margin: 32px 0;">
-              <a href="${recoveryLink}" 
-                 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                Set Your Password
-              </a>
-            </div>
 
             <p style="font-size: 16px; line-height: 1.5; color: #374151;">
               If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
@@ -158,7 +99,7 @@ serve(async (req) => {
       const errorText = await emailRes.text();
       console.error('Failed to send email:', errorText);
       return new Response(
-        JSON.stringify({ error: `Failed to send email: ${errorText}` }),
+        JSON.stringify({ error: 'Failed to send email' }),
         { 
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -183,9 +124,8 @@ serve(async (req) => {
       );
     }
 
-    console.log('Email sent successfully for payment:', payment.id);
     return new Response(
-      JSON.stringify({ success: true, email: payment.email }),
+      JSON.stringify({ success: true }),
       { 
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
