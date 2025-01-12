@@ -27,7 +27,7 @@ serve(async (req) => {
     // Create Supabase client with service role key for admin operations
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    // Get all successful payments where email hasn't been sent
+    // Double-check to get only payments that need emails
     const { data: payments, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -51,6 +51,18 @@ serve(async (req) => {
     const results = await Promise.all(payments.map(async (payment) => {
       try {
         console.log('Processing payment:', payment.id);
+
+        // Extra safety check to ensure email hasn't been sent
+        const { data: currentPayment } = await supabase
+          .from('payments')
+          .select('email_sent')
+          .eq('id', payment.id)
+          .single();
+
+        if (currentPayment?.email_sent) {
+          console.log('Email already sent for payment:', payment.id);
+          return { success: true, paymentId: payment.id, skipped: true };
+        }
 
         // Check if user exists
         const { data: existingUser, error: userCheckError } = await supabase.auth
@@ -78,9 +90,9 @@ serve(async (req) => {
           }
         }
 
-        // Generate magic link for password reset
-        console.log('Generating magic link for:', payment.email);
-        const { data: { user }, error: signUpError } = await supabase.auth.admin
+        // Generate recovery link
+        console.log('Generating recovery link for:', payment.email);
+        const { data, error: linkError } = await supabase.auth.admin
           .generateLink({
             type: 'recovery',
             email: payment.email,
@@ -89,9 +101,26 @@ serve(async (req) => {
             }
           });
 
-        if (signUpError) {
-          console.error('Error generating magic link:', signUpError);
-          throw signUpError;
+        if (linkError) {
+          console.error('Error generating recovery link:', linkError);
+          throw linkError;
+        }
+
+        const recoveryLink = data?.properties?.action_link;
+        if (!recoveryLink) {
+          throw new Error('Failed to generate recovery link');
+        }
+
+        // Update payment record to mark email as sent BEFORE sending email
+        // This prevents duplicate emails if the email sending fails
+        const { error: updateError } = await supabase
+          .from('payments')
+          .update({ email_sent: true })
+          .eq('id', payment.id);
+
+        if (updateError) {
+          console.error('Error updating payment:', updateError);
+          throw updateError;
         }
 
         // Send email via Resend
@@ -119,19 +148,10 @@ serve(async (req) => {
                 </p>
 
                 <div style="text-align: center; margin: 32px 0;">
-                  <a href="${user?.totp}" 
+                  <a href="${recoveryLink}" 
                      style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                     Set Your Password
                   </a>
-                </div>
-
-                <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
-                  <h2 style="color: #1f2937; margin-bottom: 12px;">Transaction Details:</h2>
-                  <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
-                    <li>Amount: ${payment.amount} USDT</li>
-                    <li>Transaction Hash: ${payment.transaction_hash}</li>
-                    <li>Date: ${new Date(payment.created_at).toLocaleDateString()}</li>
-                  </ul>
                 </div>
 
                 <p style="font-size: 16px; line-height: 1.5; color: #374151;">
@@ -154,19 +174,6 @@ serve(async (req) => {
         }
 
         console.log('Email sent successfully for payment:', payment.id);
-
-        // Update payment record to mark email as sent
-        const { error: updateError } = await supabase
-          .from('payments')
-          .update({ email_sent: true })
-          .eq('id', payment.id);
-
-        if (updateError) {
-          console.error('Error updating payment:', updateError);
-          throw updateError;
-        }
-
-        console.log('Payment updated, email_sent set to true for:', payment.id);
         return { success: true, paymentId: payment.id };
 
       } catch (error) {
