@@ -35,7 +35,7 @@ const PaymentPage = () => {
         // First check if there's a successful payment
         const { data: payment, error } = await supabase
           .from('payments')
-          .select('status')
+          .select('status, email_sent')
           .eq('email', email)
           .eq('status', 'success')
           .maybeSingle();
@@ -49,6 +49,27 @@ const PaymentPage = () => {
           console.log('Found successful payment:', payment);
           setInitialPaymentStatus('success');
           toast.success('Payment already completed!');
+
+          // Check if email needs to be sent
+          if (payment.email_sent === false) {
+            console.log('Found payment with unsent email, triggering email send');
+            try {
+              const { data: emailData, error: emailError } = await supabase.functions.invoke('check-and-send-emails');
+              
+              if (emailError) {
+                console.error('Error triggering email check:', emailError);
+                toast.error('Failed to send confirmation email');
+              } else {
+                console.log('Email check response:', emailData);
+                if (emailData?.results?.some((result: any) => result.success)) {
+                  toast.success('Confirmation email sent!');
+                }
+              }
+            } catch (emailError) {
+              console.error('Error in email sending process:', emailError);
+              toast.error('Failed to process confirmation email');
+            }
+          }
         }
 
         // If no successful payment or if checking for pending payment
