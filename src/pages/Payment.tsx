@@ -50,20 +50,15 @@ const PaymentPage = () => {
           setInitialPaymentStatus('success');
           toast.success('Payment already completed!');
 
-          // Check if email needs to be sent
-          if (payment.email_sent === false) {
+          // Only trigger email check if email hasn't been sent
+          if (!payment.email_sent) {
             console.log('Found payment with unsent email, triggering email send');
             try {
-              const { data: emailData, error: emailError } = await supabase.functions.invoke('check-and-send-emails');
+              const { error: emailError } = await supabase.functions.invoke('check-and-send-emails');
               
               if (emailError) {
                 console.error('Error triggering email check:', emailError);
                 toast.error('Failed to send confirmation email');
-              } else {
-                console.log('Email check response:', emailData);
-                if (emailData?.results?.some((result: any) => result.success)) {
-                  toast.success('Confirmation email sent!');
-                }
               }
             } catch (emailError) {
               console.error('Error in email sending process:', emailError);
@@ -119,6 +114,25 @@ const PaymentPage = () => {
     amount: uniqueAmount || 0,
     enabled: isInitialized && !!email && !!uniqueAmount && termsAccepted && initialPaymentStatus !== 'success'
   });
+
+  useEffect(() => {
+    // Only trigger email check when transaction status changes to success
+    if (transactionStatus === 'success') {
+      const sendEmail = async () => {
+        try {
+          const { error: emailError } = await supabase.functions.invoke('check-and-send-emails');
+          if (emailError) {
+            console.error('Error triggering email check:', emailError);
+            toast.error('Failed to send confirmation email');
+          }
+        } catch (error) {
+          console.error('Error in email sending process:', error);
+          toast.error('Failed to process confirmation email');
+        }
+      };
+      sendEmail();
+    }
+  }, [transactionStatus]);
 
   const handleTermsAcceptance = (accepted: boolean) => {
     setTermsAccepted(accepted);
