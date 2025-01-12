@@ -131,18 +131,22 @@ export const sendPaymentConfirmationEmail = async (email: string, amount: number
   try {
     console.log('Sending confirmation email for:', email);
     
-    const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
+    const { data, error } = await supabase.functions.invoke('check-and-send-emails', {
       body: { email }
     });
 
-    if (emailError) {
-      console.error('Error sending confirmation email:', emailError);
+    if (error) {
+      console.error('Error sending confirmation email:', error);
       toast.error("Failed to send confirmation email");
       return;
     }
 
-    console.log('Confirmation email sent successfully');
-    toast.success("Confirmation email sent!");
+    if (data.success) {
+      console.log('Confirmation email sent successfully');
+      toast.success("Confirmation email sent!");
+    } else if (data.message) {
+      console.log('No email needed:', data.message);
+    }
   } catch (error) {
     console.error('Error in sendConfirmationEmail:', error);
     toast.error("Failed to send confirmation email");

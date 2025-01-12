@@ -11,35 +11,43 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-interface EmailRequest {
-  email: string;
-}
-
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
     console.log('Starting check-and-send-emails function');
     
-    const { email } = await req.json() as EmailRequest;
+    const { email } = await req.json();
     console.log('Processing email for:', email);
 
-    if (!RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not set');
-      throw new Error('RESEND_API_KEY is not configured');
+    if (!email) {
+      console.error('No email provided');
+      return new Response(
+        JSON.stringify({ error: 'Email is required' }),
+        { 
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
     }
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-        detectSessionInUrl: false
-      }
-    });
+    if (!RESEND_API_KEY) {
+      console.error('RESEND_API_KEY not configured');
+      return new Response(
+        JSON.stringify({ error: 'Email service not configured' }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
 
-    // Get the specific successful payment for this email that hasn't had email sent
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+    // Get the successful payment that hasn't had email sent
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -50,20 +58,27 @@ serve(async (req) => {
 
     if (fetchError) {
       console.error('Error fetching payment:', fetchError);
-      throw fetchError;
-    }
-
-    if (!payment) {
-      console.log('No pending email to send or payment already processed for:', email);
       return new Response(
-        JSON.stringify({ message: 'No pending email to send or payment already processed' }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: 'Error fetching payment details' }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
       );
     }
 
-    console.log('Found payment requiring email:', payment.id);
+    if (!payment) {
+      console.log('No pending email to send for:', email);
+      return new Response(
+        JSON.stringify({ message: 'No pending email to send' }),
+        { 
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
 
-    // Generate recovery link with production URL
+    // Generate recovery link
     const { data: linkData, error: linkError } = await supabase.auth
       .admin.generateLink({
         type: 'recovery',
@@ -75,15 +90,25 @@ serve(async (req) => {
 
     if (linkError) {
       console.error('Error generating recovery link:', linkError);
-      throw linkError;
+      return new Response(
+        JSON.stringify({ error: 'Error generating recovery link' }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
     }
 
     const recoveryLink = linkData?.properties?.action_link;
     if (!recoveryLink) {
-      throw new Error('Failed to generate recovery link');
+      return new Response(
+        JSON.stringify({ error: 'Failed to generate recovery link' }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
     }
-
-    console.log('Generated recovery link:', recoveryLink);
 
     // Send email via Resend
     console.log('Sending email to:', payment.email);
@@ -91,7 +116,7 @@ serve(async (req) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${RESEND_API_KEY}`,
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
         from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
@@ -126,16 +151,22 @@ serve(async (req) => {
             </p>
           </div>
         `
-      })
+      }),
     });
 
     if (!emailRes.ok) {
       const errorText = await emailRes.text();
       console.error('Failed to send email:', errorText);
-      throw new Error(`Failed to send email: ${errorText}`);
+      return new Response(
+        JSON.stringify({ error: `Failed to send email: ${errorText}` }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
     }
 
-    // Mark email as sent after successful sending
+    // Mark email as sent
     const { error: updateError } = await supabase
       .from('payments')
       .update({ email_sent: true })
@@ -143,14 +174,22 @@ serve(async (req) => {
 
     if (updateError) {
       console.error('Error updating email_sent status:', updateError);
-      throw updateError;
+      return new Response(
+        JSON.stringify({ error: 'Failed to update email status' }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
     }
 
     console.log('Email sent successfully for payment:', payment.id);
-
     return new Response(
       JSON.stringify({ success: true, email: payment.email }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      { 
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
     );
 
   } catch (error) {
@@ -163,4 +202,4 @@ serve(async (req) => {
       }
     );
   }
-})
+});
