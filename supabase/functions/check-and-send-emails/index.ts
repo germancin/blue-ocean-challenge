@@ -4,6 +4,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3"
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+const PRODUCTION_URL = 'https://elitetraderhub.co';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -55,13 +56,13 @@ serve(async (req) => {
       try {
         console.log('Processing payment:', payment.id);
 
-        // Generate recovery link first
+        // Generate recovery link with production URL
         const { data: linkData, error: linkError } = await supabase.auth
           .admin.generateLink({
             type: 'recovery',
             email: payment.email,
             options: {
-              redirectTo: `${req.headers.get('origin')}/profile?changePassword=true`
+              redirectTo: `${PRODUCTION_URL}/profile?changePassword=true`
             }
           });
 
@@ -75,13 +76,15 @@ serve(async (req) => {
           throw new Error('Failed to generate recovery link');
         }
 
+        console.log('Generated recovery link:', recoveryLink);
+
         // Send email via Resend
         console.log('Sending email to:', payment.email);
         const emailRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${RESEND_API_KEY}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${RESEND_API_KEY}`,
           },
           body: JSON.stringify({
             from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
@@ -125,7 +128,7 @@ serve(async (req) => {
           throw new Error(`Failed to send email: ${errorText}`);
         }
 
-        // Only mark email as sent after successful sending
+        // Mark email as sent after successful sending
         const { error: updateError } = await supabase
           .from('payments')
           .update({ email_sent: true })
