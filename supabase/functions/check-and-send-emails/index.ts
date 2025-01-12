@@ -11,6 +11,11 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
+interface EmailRequest {
+  email: string;
+  paymentId: string;
+}
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
@@ -19,6 +24,9 @@ serve(async (req) => {
   try {
     console.log('Starting check-and-send-emails function');
     
+    const { email, paymentId } = await req.json() as EmailRequest;
+    console.log('Processing email for payment:', paymentId);
+
     if (!RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not set');
       throw new Error('RESEND_API_KEY is not configured');
@@ -32,125 +40,116 @@ serve(async (req) => {
       }
     });
 
-    // Get all successful payments where email hasn't been sent
-    const { data: payments, error: fetchError } = await supabase
+    // Get the specific payment
+    const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
+      .eq('id', paymentId)
       .eq('status', 'success')
-      .eq('email_sent', false);
+      .eq('email_sent', false)
+      .single();
 
     if (fetchError) {
-      console.error('Error fetching payments:', fetchError);
+      console.error('Error fetching payment:', fetchError);
       throw fetchError;
     }
 
-    console.log('Found payments requiring emails:', payments?.length);
-
-    if (!payments || payments.length === 0) {
+    if (!payment) {
       return new Response(
-        JSON.stringify({ message: 'No pending emails to send' }),
+        JSON.stringify({ message: 'No pending email to send or payment already processed' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    const results = await Promise.all(payments.map(async (payment) => {
-      try {
-        console.log('Processing payment:', payment.id);
+    console.log('Found payment requiring email:', payment.id);
 
-        // Generate recovery link with production URL
-        const { data: linkData, error: linkError } = await supabase.auth
-          .admin.generateLink({
-            type: 'recovery',
-            email: payment.email,
-            options: {
-              redirectTo: `${PRODUCTION_URL}/profile?changePassword=true`
-            }
-          });
-
-        if (linkError) {
-          console.error('Error generating recovery link:', linkError);
-          throw linkError;
+    // Generate recovery link with production URL
+    const { data: linkData, error: linkError } = await supabase.auth
+      .admin.generateLink({
+        type: 'recovery',
+        email: payment.email,
+        options: {
+          redirectTo: `${PRODUCTION_URL}/profile?changePassword=true`
         }
+      });
 
-        const recoveryLink = linkData?.properties?.action_link;
-        if (!recoveryLink) {
-          throw new Error('Failed to generate recovery link');
-        }
+    if (linkError) {
+      console.error('Error generating recovery link:', linkError);
+      throw linkError;
+    }
 
-        console.log('Generated recovery link:', recoveryLink);
+    const recoveryLink = linkData?.properties?.action_link;
+    if (!recoveryLink) {
+      throw new Error('Failed to generate recovery link');
+    }
 
-        // Send email via Resend
-        console.log('Sending email to:', payment.email);
-        const emailRes = await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${RESEND_API_KEY}`,
-          },
-          body: JSON.stringify({
-            from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
-            to: [payment.email],
-            subject: 'Payment Confirmation - Elite Trading Tournament',
-            html: `
-              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-                <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Payment Confirmed!</h1>
-                
-                <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-                  Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
-                </p>
+    console.log('Generated recovery link:', recoveryLink);
 
-                <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-                  To complete your registration and set up your account, please click the secure link below:
-                </p>
+    // Send email via Resend
+    console.log('Sending email to:', payment.email);
+    const emailRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
+        to: [payment.email],
+        subject: 'Payment Confirmation - Elite Trading Tournament',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Payment Confirmed!</h1>
+            
+            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+              Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
+            </p>
 
-                <div style="text-align: center; margin: 32px 0;">
-                  <a href="${recoveryLink}" 
-                     style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                    Set Your Password
-                  </a>
-                </div>
+            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+              To complete your registration and set up your account, please click the secure link below:
+            </p>
 
-                <p style="font-size: 16px; line-height: 1.5; color: #374151;">
-                  If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
-                </p>
+            <div style="text-align: center; margin: 32px 0;">
+              <a href="${recoveryLink}" 
+                 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Set Your Password
+              </a>
+            </div>
 
-                <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
-                  Best regards,<br>
-                  The Elite Trading Tournament Team
-                </p>
-              </div>
-            `
-          })
-        });
+            <p style="font-size: 16px; line-height: 1.5; color: #374151;">
+              If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
+            </p>
 
-        if (!emailRes.ok) {
-          const errorText = await emailRes.text();
-          console.error('Failed to send email:', errorText);
-          throw new Error(`Failed to send email: ${errorText}`);
-        }
+            <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
+              Best regards,<br>
+              The Elite Trading Tournament Team
+            </p>
+          </div>
+        `
+      })
+    });
 
-        // Mark email as sent after successful sending
-        const { error: updateError } = await supabase
-          .from('payments')
-          .update({ email_sent: true })
-          .eq('id', payment.id);
+    if (!emailRes.ok) {
+      const errorText = await emailRes.text();
+      console.error('Failed to send email:', errorText);
+      throw new Error(`Failed to send email: ${errorText}`);
+    }
 
-        if (updateError) {
-          console.error('Error updating email_sent status:', updateError);
-          throw updateError;
-        }
+    // Mark email as sent after successful sending
+    const { error: updateError } = await supabase
+      .from('payments')
+      .update({ email_sent: true })
+      .eq('id', payment.id);
 
-        console.log('Email sent successfully for payment:', payment.id);
-        return { success: true, paymentId: payment.id };
+    if (updateError) {
+      console.error('Error updating email_sent status:', updateError);
+      throw updateError;
+    }
 
-      } catch (error) {
-        console.error(`Failed to process payment ${payment.id}:`, error);
-        return { success: false, paymentId: payment.id, error: error.message };
-      }
-    }));
+    console.log('Email sent successfully for payment:', payment.id);
 
     return new Response(
-      JSON.stringify({ results }),
+      JSON.stringify({ success: true, paymentId: payment.id }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 

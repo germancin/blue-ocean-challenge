@@ -23,6 +23,7 @@ const PaymentPage = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [initialPaymentStatus, setInitialPaymentStatus] = useState<'pending' | 'success' | 'failed'>('pending');
+  const [currentPaymentId, setCurrentPaymentId] = useState<string | null>(null);
 
   useEffect(() => {
     const checkExistingPayment = async () => {
@@ -35,7 +36,7 @@ const PaymentPage = () => {
         // First check if there's a successful payment
         const { data: payment, error } = await supabase
           .from('payments')
-          .select('status, email_sent')
+          .select('id, status, email_sent')
           .eq('email', email)
           .eq('status', 'success')
           .maybeSingle();
@@ -48,13 +49,19 @@ const PaymentPage = () => {
         if (payment) {
           console.log('Found successful payment:', payment);
           setInitialPaymentStatus('success');
+          setCurrentPaymentId(payment.id);
           toast.success('Payment already completed!');
 
           // Only trigger email check if email hasn't been sent
           if (!payment.email_sent) {
             console.log('Found payment with unsent email, triggering email send');
             try {
-              const { error: emailError } = await supabase.functions.invoke('check-and-send-emails');
+              const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
+                body: { 
+                  email,
+                  paymentId: payment.id
+                }
+              });
               
               if (emailError) {
                 console.error('Error triggering email check:', emailError);
@@ -96,6 +103,26 @@ const PaymentPage = () => {
             toast.error('Error updating payment amount');
             return;
           }
+          setCurrentPaymentId(existingPayment.id);
+        } else {
+          // Create new payment
+          const { data: newPayment, error: createError } = await supabase
+            .from('payments')
+            .insert([{ 
+              email, 
+              amount: newAmount,
+              status: 'pending',
+              email_sent: false
+            }])
+            .select()
+            .single();
+
+          if (createError) {
+            console.error('Error creating payment:', createError);
+            toast.error('Error creating payment');
+            return;
+          }
+          setCurrentPaymentId(newPayment.id);
         }
 
         setUniqueAmount(newAmount);
@@ -116,11 +143,16 @@ const PaymentPage = () => {
   });
 
   useEffect(() => {
-    // Only trigger email check when transaction status changes to success
-    if (transactionStatus === 'success') {
+    // Only trigger email check when transaction status changes to success and we have a payment ID
+    if (transactionStatus === 'success' && currentPaymentId) {
       const sendEmail = async () => {
         try {
-          const { error: emailError } = await supabase.functions.invoke('check-and-send-emails');
+          const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
+            body: { 
+              email,
+              paymentId: currentPaymentId
+            }
+          });
           if (emailError) {
             console.error('Error triggering email check:', emailError);
             toast.error('Failed to send confirmation email');
@@ -132,7 +164,7 @@ const PaymentPage = () => {
       };
       sendEmail();
     }
-  }, [transactionStatus]);
+  }, [transactionStatus, currentPaymentId, email]);
 
   const handleTermsAcceptance = (accepted: boolean) => {
     setTermsAccepted(accepted);
