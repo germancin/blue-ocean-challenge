@@ -1,14 +1,16 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3"
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 
-const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+};
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -18,7 +20,7 @@ serve(async (req) => {
 
   try {
     const { email, paymentId } = await req.json();
-    console.log('Processing email for:', email, 'paymentId:', paymentId);
+    console.log('Processing email request for:', { email, paymentId });
 
     if (!email || !paymentId) {
       console.error('Missing required fields:', { email, paymentId });
@@ -31,9 +33,7 @@ serve(async (req) => {
       );
     }
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-
-    // Get the specific payment
+    // Get the payment details
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -53,9 +53,9 @@ serve(async (req) => {
     }
 
     if (!payment) {
-      console.error('No payment found for:', { email, paymentId });
+      console.error('No payment found:', { email, paymentId });
       return new Response(
-        JSON.stringify({ error: 'No payment found' }),
+        JSON.stringify({ error: 'Payment not found' }),
         { 
           status: 404,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -63,10 +63,11 @@ serve(async (req) => {
       );
     }
 
+    // Check if email was already sent
     if (payment.email_sent) {
       console.log('Email already sent for payment:', paymentId);
       return new Response(
-        JSON.stringify({ message: 'Email already sent' }),
+        JSON.stringify({ message: 'Email already sent', success: true }),
         { 
           status: 200,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -74,8 +75,19 @@ serve(async (req) => {
       );
     }
 
+    if (!RESEND_API_KEY) {
+      console.error('RESEND_API_KEY not configured');
+      return new Response(
+        JSON.stringify({ error: 'Email service not configured' }),
+        { 
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
     // Send email via Resend
-    console.log('Sending email to:', email);
+    console.log('Sending confirmation email to:', email);
     const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -107,11 +119,12 @@ serve(async (req) => {
       }),
     });
 
+    const emailData = await emailRes.json();
+
     if (!emailRes.ok) {
-      const errorText = await emailRes.text();
-      console.error('Failed to send email:', errorText);
+      console.error('Failed to send email:', emailData);
       return new Response(
-        JSON.stringify({ error: 'Failed to send email', details: errorText }),
+        JSON.stringify({ error: 'Failed to send email', details: emailData }),
         { 
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -137,8 +150,9 @@ serve(async (req) => {
       );
     }
 
+    console.log('Email sent and status updated successfully');
     return new Response(
-      JSON.stringify({ success: true }),
+      JSON.stringify({ success: true, emailId: emailData.id }),
       { 
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -146,7 +160,7 @@ serve(async (req) => {
     );
 
   } catch (error) {
-    console.error('Error in check-and-send-emails function:', error);
+    console.error('Unexpected error in check-and-send-emails function:', error);
     return new Response(
       JSON.stringify({ error: error.message }),
       { 
