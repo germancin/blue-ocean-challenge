@@ -70,19 +70,21 @@ serve(async (req) => {
         }
 
         // Check if user exists and create if not
-        const { data: user, error: userError } = await supabase.auth.admin
-          .getUserByEmail(payment.email);
+        const { data: { users }, error: userError } = await supabase.auth
+          .admin.listUsers();
+        
+        const existingUser = users.find(u => u.email === payment.email);
 
-        if (userError && userError.message !== 'User not found') {
+        if (userError) {
           console.error('Error checking user:', userError);
           throw userError;
         }
 
-        if (!user) {
+        if (!existingUser) {
           console.log('Creating new user for:', payment.email);
           const tempPassword = crypto.randomUUID();
-          const { error: createError } = await supabase.auth.admin
-            .createUser({
+          const { error: createError } = await supabase.auth
+            .admin.createUser({
               email: payment.email,
               password: tempPassword,
               email_confirm: true
@@ -96,8 +98,8 @@ serve(async (req) => {
 
         // Generate recovery link
         console.log('Generating recovery link for:', payment.email);
-        const { data, error: linkError } = await supabase.auth.admin
-          .generateLink({
+        const { data, error: linkError } = await supabase.auth
+          .admin.generateLink({
             type: 'recovery',
             email: payment.email,
             options: {
