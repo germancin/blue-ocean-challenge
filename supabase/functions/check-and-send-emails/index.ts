@@ -17,6 +17,8 @@ serve(async (req) => {
   }
 
   try {
+    console.log('Starting check-and-send-emails function');
+    
     if (!RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not set');
       throw new Error('RESEND_API_KEY is not configured');
@@ -48,6 +50,8 @@ serve(async (req) => {
 
     const results = await Promise.all(payments.map(async (payment) => {
       try {
+        console.log('Sending email for payment:', payment.id);
+        
         // Send email via Resend
         const emailRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
@@ -90,8 +94,12 @@ serve(async (req) => {
         });
 
         if (!emailRes.ok) {
-          throw new Error(`Failed to send email: ${await emailRes.text()}`);
+          const errorText = await emailRes.text();
+          console.error('Failed to send email:', errorText);
+          throw new Error(`Failed to send email: ${errorText}`);
         }
+
+        console.log('Email sent successfully for payment:', payment.id);
 
         // Update payment record to mark email as sent
         const { error: updateError } = await supabase
@@ -100,10 +108,11 @@ serve(async (req) => {
           .eq('id', payment.id);
 
         if (updateError) {
+          console.error('Error updating payment:', updateError);
           throw updateError;
         }
 
-        console.log(`Successfully sent email for payment ${payment.id}`);
+        console.log('Payment updated, email_sent set to true for:', payment.id);
         return { success: true, paymentId: payment.id };
 
       } catch (error) {

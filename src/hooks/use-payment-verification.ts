@@ -4,7 +4,6 @@ import { toast } from 'sonner';
 import { 
   checkExistingSuccessfulPayment, 
   createOrUpdatePendingPayment,
-  sendPaymentConfirmationEmail 
 } from '@/utils/paymentUtils';
 
 export type PaymentStatus = 'pending' | 'success' | 'failed';
@@ -46,9 +45,13 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
           toast.success("Payment confirmed!");
           
           // Call the check-and-send-emails function
+          console.log('Triggering email check after successful payment');
           const { error: emailError } = await supabase.functions.invoke('check-and-send-emails');
           if (emailError) {
             console.error('Error triggering email check:', emailError);
+            toast.error('Failed to send confirmation email');
+          } else {
+            console.log('Email check triggered successfully');
           }
           
           return true;
