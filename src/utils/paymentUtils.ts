@@ -30,11 +30,9 @@ export const saveSubscriber = async (name: string, email: string) => {
 };
 
 export const generateUniqueAmount = async (baseAmount: number): Promise<number> => {
-  // Generate a random amount between baseAmount and baseAmount + 0.999
   const randomDecimal = Math.floor(Math.random() * 1000) / 1000;
   const uniqueAmount = baseAmount + randomDecimal;
   
-  // Check if this amount already exists in pending payments
   const { data: existingPayment, error } = await supabase
     .from('payments')
     .select('id')
@@ -47,7 +45,6 @@ export const generateUniqueAmount = async (baseAmount: number): Promise<number> 
     throw error;
   }
 
-  // If amount already exists, recursively try again
   if (existingPayment) {
     return generateUniqueAmount(baseAmount);
   }
@@ -108,7 +105,7 @@ export const createOrUpdatePendingPayment = async (email: string, amount: number
       return null;
     }
 
-    return existingPayment;
+    return updatedPayment || existingPayment;
   }
 
   const { data: newPayment, error: insertError } = await supabase
@@ -132,42 +129,25 @@ export const createOrUpdatePendingPayment = async (email: string, amount: number
 
 export const sendPaymentConfirmationEmail = async (email: string, amount: number, paymentId: string) => {
   try {
-    const { data: payment } = await supabase
-      .from('payments')
-      .select('email_sent')
-      .eq('id', paymentId)
-      .single();
-
-    if (payment?.email_sent) {
-      console.log('Email was already sent for this payment');
-      return;
-    }
-
-    const { error: emailError } = await supabase.functions.invoke('send-confirmation-email', {
+    console.log('Sending confirmation email for payment:', paymentId);
+    
+    const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
       body: { 
-        email, 
-        amount: Number(amount.toFixed(3))
+        email,
+        paymentId
       }
     });
 
     if (emailError) {
       console.error('Error sending confirmation email:', emailError);
+      toast.error("Failed to send confirmation email");
       return;
     }
 
-    const { error: updateError } = await supabase
-      .from('payments')
-      .update({ email_sent: true })
-      .eq('id', paymentId);
-
-    if (updateError) {
-      console.error('Error updating email_sent status:', updateError);
-      return;
-    }
-
-    console.log('Confirmation email sent successfully and status updated');
+    console.log('Confirmation email sent successfully');
     toast.success("Confirmation email sent!");
   } catch (error) {
     console.error('Error in sendConfirmationEmail:', error);
+    toast.error("Failed to send confirmation email");
   }
 };

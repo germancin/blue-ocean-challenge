@@ -40,7 +40,7 @@ serve(async (req) => {
       }
     });
 
-    // Get the specific payment
+    // Get the specific payment using the paymentId
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -55,6 +55,7 @@ serve(async (req) => {
     }
 
     if (!payment) {
+      console.log('No pending email to send or payment already processed');
       return new Response(
         JSON.stringify({ message: 'No pending email to send or payment already processed' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

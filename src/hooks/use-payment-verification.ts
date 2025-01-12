@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 import { 
   checkExistingSuccessfulPayment, 
   createOrUpdatePendingPayment,
+  sendPaymentConfirmationEmail
 } from '@/utils/paymentUtils';
 
 export type PaymentStatus = 'pending' | 'success' | 'failed';
@@ -42,7 +43,8 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
         if (data.status === 'success') {
           setTransactionStatus('success');
-          toast.success("Payment confirmed!");
+          // Send confirmation email with the payment ID
+          await sendPaymentConfirmationEmail(email, amount, paymentId);
           return true;
         } else if (data.status === 'no_payment_found') {
           setTransactionStatus('failed');
