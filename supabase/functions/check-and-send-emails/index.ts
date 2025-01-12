@@ -19,17 +19,36 @@ serve(async (req) => {
   }
 
   try {
+    // Log the raw request for debugging
+    console.log('Incoming request:', {
+      method: req.method,
+      headers: Object.fromEntries(req.headers.entries())
+    });
+
     const body = await req.json();
     const { email, paymentId } = body;
 
     console.log('Processing request for:', { email, paymentId });
 
+    // Validate required fields
     if (!email || !paymentId) {
       console.error('Missing required fields:', { email, paymentId });
       return new Response(
         JSON.stringify({ error: 'Email and paymentId are required' }),
         { 
           status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    // Validate RESEND_API_KEY
+    if (!RESEND_API_KEY) {
+      console.error('RESEND_API_KEY not configured');
+      return new Response(
+        JSON.stringify({ error: 'Email service not configured - RESEND_API_KEY missing' }),
+        { 
+          status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       );
@@ -65,19 +84,8 @@ serve(async (req) => {
       );
     }
 
-    // Send email via Resend
-    if (!RESEND_API_KEY) {
-      console.error('RESEND_API_KEY not configured');
-      return new Response(
-        JSON.stringify({ error: 'Email service not configured' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
-
     try {
+      console.log('Attempting to send email via Resend');
       const emailRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -103,6 +111,7 @@ serve(async (req) => {
       });
 
       const emailData = await emailRes.json();
+      console.log('Resend API response:', emailData);
       
       if (!emailRes.ok) {
         console.error('Resend API error:', emailData);
