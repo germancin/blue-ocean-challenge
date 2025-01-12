@@ -17,34 +17,20 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // First check if RESEND_API_KEY exists
-  if (!RESEND_API_KEY) {
-    console.error('RESEND_API_KEY not configured');
-    return new Response(
-      JSON.stringify({ error: 'Email service not configured' }),
-      { 
-        status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      }
-    );
-  }
-
   try {
+    if (!RESEND_API_KEY) {
+      console.error('RESEND_API_KEY not configured');
+      throw new Error('Email service not configured');
+    }
+
     const { email, paymentId } = await req.json();
     console.log('Processing request for:', { email, paymentId });
 
     if (!email || !paymentId) {
-      console.error('Missing required fields:', { email, paymentId });
-      return new Response(
-        JSON.stringify({ error: 'Email and paymentId are required' }),
-        { 
-          status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
+      throw new Error('Email and paymentId are required');
     }
 
-    // Check if payment exists and is valid
+    // Check if payment exists
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -53,13 +39,7 @@ serve(async (req) => {
 
     if (fetchError || !payment) {
       console.error('Error fetching payment:', fetchError);
-      return new Response(
-        JSON.stringify({ error: 'Payment not found' }),
-        { 
-          status: 404,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
+      throw new Error('Payment not found');
     }
 
     // Check if email was already sent
@@ -74,11 +54,14 @@ serve(async (req) => {
       );
     }
 
-    // Check if user exists in auth.users
+    // Create user if doesn't exist
     const { data: { users }, error: userError } = await supabase.auth.admin.listUsers();
-    const existingUser = users?.find(u => u.email === email);
+    if (userError) {
+      console.error('Error listing users:', userError);
+      throw new Error('Failed to check existing users');
+    }
 
-    // If user doesn't exist, create one
+    const existingUser = users?.find(u => u.email === email);
     if (!existingUser) {
       console.log('Creating new user for:', email);
       const tempPassword = Math.random().toString(36).slice(-8);
@@ -90,17 +73,11 @@ serve(async (req) => {
 
       if (createError) {
         console.error('Error creating user:', createError);
-        return new Response(
-          JSON.stringify({ error: 'Failed to create user account' }),
-          { 
-            status: 500,
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-          }
-        );
+        throw new Error('Failed to create user account');
       }
     }
 
-    // Generate recovery link for password reset
+    // Generate password reset link
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'recovery',
       email: email,
@@ -109,133 +86,100 @@ serve(async (req) => {
       }
     });
 
-    if (linkError) {
+    if (linkError || !linkData?.properties?.action_link) {
       console.error('Error generating recovery link:', linkError);
-      return new Response(
-        JSON.stringify({ error: 'Failed to generate password reset link' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
+      throw new Error('Failed to generate password reset link');
     }
 
-    const recoveryLink = linkData?.properties?.action_link;
-    if (!recoveryLink) {
-      throw new Error('Failed to generate recovery link');
-    }
-
+    const recoveryLink = linkData.properties.action_link;
     console.log('Generated recovery link successfully');
 
-    // Send email with payment confirmation and password reset link
-    try {
-      console.log('Sending email to:', email);
-      const emailRes = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
-          to: [email],
-          subject: 'Payment Confirmation - Elite Trading Tournament',
-          html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
-              
-              <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-                Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
-              </p>
+    // Send email
+    const emailRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
+        to: [email],
+        subject: 'Payment Confirmation - Elite Trading Tournament',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
+            
+            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+              Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
+            </p>
 
-              <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-                To complete your registration and set up your account, please click the secure link below:
-              </p>
+            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+              To complete your registration and set up your account, please click the secure link below:
+            </p>
 
-              <div style="text-align: center; margin: 32px 0;">
-                <a href="${recoveryLink}" 
-                   style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                  Set Your Password
-                </a>
-              </div>
-
-              <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
-                <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
-                <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
-                  <li style="margin-bottom: 8px;">Click the link above to access your account</li>
-                  <li style="margin-bottom: 8px;">Set up your secure password</li>
-                  <li style="margin-bottom: 8px;">Join our trading community</li>
-                  <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
-                </ul>
-              </div>
-
-              <p style="font-size: 16px; line-height: 1.5; color: #374151;">
-                If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
-              </p>
-
-              <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
-                Best regards,<br>
-                The Elite Trading Tournament Team
-              </p>
+            <div style="text-align: center; margin: 32px 0;">
+              <a href="${recoveryLink}" 
+                 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Set Your Password
+              </a>
             </div>
-          `
-        }),
-      });
 
-      const emailData = await emailRes.json();
-      console.log('Resend API response:', emailData);
-      
-      if (!emailRes.ok) {
-        console.error('Resend API error:', emailData);
-        return new Response(
-          JSON.stringify({ error: 'Failed to send email', details: emailData }),
-          { 
-            status: 500,
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-          }
-        );
-      }
+            <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
+              <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
+              <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Click the link above to access your account</li>
+                <li style="margin-bottom: 8px;">Set up your secure password</li>
+                <li style="margin-bottom: 8px;">Join our trading community</li>
+                <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
+              </ul>
+            </div>
 
-      // Mark email as sent in database
-      const { error: updateError } = await supabase
-        .from('payments')
-        .update({ email_sent: true })
-        .eq('id', paymentId);
+            <p style="font-size: 16px; line-height: 1.5; color: #374151;">
+              If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
+            </p>
 
-      if (updateError) {
-        console.error('Error updating email_sent status:', updateError);
-        return new Response(
-          JSON.stringify({ error: 'Failed to update email status' }),
-          { 
-            status: 500,
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-          }
-        );
-      }
+            <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
+              Best regards,<br>
+              The Elite Trading Tournament Team
+            </p>
+          </div>
+        `
+      }),
+    });
 
-      return new Response(
-        JSON.stringify({ success: true, emailId: emailData.id }),
-        { 
-          status: 200,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-
-    } catch (emailError) {
-      console.error('Error sending email:', emailError);
-      return new Response(
-        JSON.stringify({ error: 'Failed to send email', details: emailError.message }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
+    const emailData = await emailRes.json();
+    
+    if (!emailRes.ok) {
+      console.error('Resend API error:', emailData);
+      throw new Error(`Failed to send email: ${JSON.stringify(emailData)}`);
     }
 
-  } catch (error) {
-    console.error('Unexpected error:', error);
+    // Update payment record
+    const { error: updateError } = await supabase
+      .from('payments')
+      .update({ email_sent: true })
+      .eq('id', paymentId);
+
+    if (updateError) {
+      console.error('Error updating email_sent status:', updateError);
+      throw new Error('Failed to update email status');
+    }
+
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ success: true, emailId: emailData.id }),
+      { 
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
+    );
+
+  } catch (error) {
+    console.error('Error in check-and-send-emails:', error);
+    return new Response(
+      JSON.stringify({ 
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
+        details: error
+      }),
       { 
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
