@@ -13,14 +13,12 @@ const corsHeaders = {
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 serve(async (req) => {
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
     if (!RESEND_API_KEY) {
-      console.error('RESEND_API_KEY not configured');
       throw new Error('Email service not configured');
     }
 
@@ -31,7 +29,7 @@ serve(async (req) => {
       throw new Error('Email and paymentId are required');
     }
 
-    // Check if payment exists and get its details
+    // Get payment details in a single query
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -47,153 +45,106 @@ serve(async (req) => {
       throw new Error('Payment not found');
     }
 
-    // Check if email was already sent
     if (payment.email_sent) {
-      console.log('Email already sent for payment:', paymentId);
       return new Response(
         JSON.stringify({ message: 'Email already sent', success: true }),
-        { 
-          status: 200,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    try {
-      // Check if user exists
-      const { data: { users }, error: userError } = await supabase.auth.admin.listUsers();
-      
-      if (userError) {
-        console.error('Error checking users:', userError);
-        throw new Error('Failed to check existing users');
+    // Generate recovery link
+    const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
+      type: 'recovery',
+      email: email,
+      options: {
+        redirectTo: `${SUPABASE_URL}/profile?changePassword=true`
       }
+    });
 
-      const existingUser = users?.find(u => u.email === email);
-      let userId = existingUser?.id;
+    if (linkError || !linkData?.properties?.action_link) {
+      console.error('Error generating recovery link:', linkError);
+      throw new Error('Failed to generate password reset link');
+    }
 
-      // If user doesn't exist, create one
-      if (!existingUser) {
-        console.log('Creating new user for:', email);
-        const tempPassword = Math.random().toString(36).slice(-8);
-        const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
-          email: email,
-          password: tempPassword,
-          email_confirm: true
-        });
+    const recoveryLink = linkData.properties.action_link;
 
-        if (createError) {
-          console.error('Error creating user:', createError);
-          throw new Error('Failed to create user account');
-        }
+    // Send email with Resend
+    const emailRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
+        to: [email],
+        subject: 'Payment Confirmation - Elite Trading Tournament',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
+            
+            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+              Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
+            </p>
 
-        userId = newUser.user.id;
-      }
+            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+              To complete your registration and set up your account, please click the secure link below:
+            </p>
 
-      // Generate password reset link
-      const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
-        type: 'recovery',
-        email: email,
-        options: {
-          redirectTo: `${SUPABASE_URL}/profile?changePassword=true`
-        }
-      });
-
-      if (linkError || !linkData?.properties?.action_link) {
-        console.error('Error generating recovery link:', linkError);
-        throw new Error('Failed to generate password reset link');
-      }
-
-      const recoveryLink = linkData.properties.action_link;
-      console.log('Generated recovery link successfully');
-
-      // Send email with Resend
-      const emailRes = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
-          from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
-          to: [email],
-          subject: 'Payment Confirmation - Elite Trading Tournament',
-          html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
-              
-              <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-                Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
-              </p>
-
-              <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-                To complete your registration and set up your account, please click the secure link below:
-              </p>
-
-              <div style="text-align: center; margin: 32px 0;">
-                <a href="${recoveryLink}" 
-                   style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                  Set Your Password
-                </a>
-              </div>
-
-              <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
-                <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
-                <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
-                  <li style="margin-bottom: 8px;">Click the link above to access your account</li>
-                  <li style="margin-bottom: 8px;">Set up your secure password</li>
-                  <li style="margin-bottom: 8px;">Join our trading community</li>
-                  <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
-                </ul>
-              </div>
-
-              <p style="font-size: 16px; line-height: 1.5; color: #374151;">
-                If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
-              </p>
-
-              <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
-                Best regards,<br>
-                The Elite Trading Tournament Team
-              </p>
+            <div style="text-align: center; margin: 32px 0;">
+              <a href="${recoveryLink}" 
+                 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Set Your Password
+              </a>
             </div>
-          `
-        }),
-      });
 
-      const emailData = await emailRes.json();
-      
-      if (!emailRes.ok) {
-        console.error('Resend API error:', emailData);
-        throw new Error(`Failed to send email: ${JSON.stringify(emailData)}`);
-      }
+            <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
+              <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
+              <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Click the link above to access your account</li>
+                <li style="margin-bottom: 8px;">Set up your secure password</li>
+                <li style="margin-bottom: 8px;">Join our trading community</li>
+                <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
+              </ul>
+            </div>
 
-      console.log('Email sent successfully:', emailData);
+            <p style="font-size: 16px; line-height: 1.5; color: #374151;">
+              If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
+            </p>
 
-      // Update payment record to mark email as sent
-      const { error: updateError } = await supabase
-        .from('payments')
-        .update({ 
-          email_sent: true,
-          user_id: userId 
-        })
-        .eq('id', paymentId);
+            <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
+              Best regards,<br>
+              The Elite Trading Tournament Team
+            </p>
+          </div>
+        `
+      }),
+    });
 
-      if (updateError) {
-        console.error('Error updating email_sent status:', updateError);
-        throw new Error('Failed to update email status');
-      }
-
-      return new Response(
-        JSON.stringify({ success: true, emailId: emailData.id }),
-        { 
-          status: 200,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-
-    } catch (innerError) {
-      console.error('Inner try-catch error:', innerError);
-      throw innerError;
+    if (!emailRes.ok) {
+      const emailError = await emailRes.text();
+      console.error('Resend API error:', emailError);
+      throw new Error(`Failed to send email: ${emailError}`);
     }
+
+    // Update payment record to mark email as sent
+    const { error: updateError } = await supabase
+      .from('payments')
+      .update({ email_sent: true })
+      .eq('id', paymentId);
+
+    if (updateError) {
+      console.error('Error updating email_sent status:', updateError);
+      throw new Error('Failed to update email status');
+    }
+
+    return new Response(
+      JSON.stringify({ success: true }),
+      { 
+        status: 200,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
+    );
 
   } catch (error) {
     console.error('Error in check-and-send-emails:', error);
