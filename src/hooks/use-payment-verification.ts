@@ -40,8 +40,8 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
         if (data.status === 'success') {
           setTransactionStatus('success');
-          // Send confirmation email
-          await sendPaymentConfirmationEmail(email, amount);
+          // Send confirmation email with just the email parameter
+          await sendPaymentConfirmationEmail(email);
           return true;
         } else if (data.status === 'no_payment_found') {
           setTransactionStatus('failed');
