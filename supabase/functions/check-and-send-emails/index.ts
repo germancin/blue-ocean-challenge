@@ -21,6 +21,7 @@ serve(async (req) => {
     console.log('Processing email for:', email, 'paymentId:', paymentId);
 
     if (!email || !paymentId) {
+      console.error('Missing required fields:', { email, paymentId });
       return new Response(
         JSON.stringify({ error: 'Email and paymentId are required' }),
         { 
@@ -52,10 +53,22 @@ serve(async (req) => {
     }
 
     if (!payment) {
+      console.error('No payment found for:', { email, paymentId });
       return new Response(
-        JSON.stringify({ message: 'No payment found' }),
+        JSON.stringify({ error: 'No payment found' }),
         { 
           status: 404,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
+    if (payment.email_sent) {
+      console.log('Email already sent for payment:', paymentId);
+      return new Response(
+        JSON.stringify({ message: 'Email already sent' }),
+        { 
+          status: 200,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         }
       );
@@ -98,7 +111,7 @@ serve(async (req) => {
       const errorText = await emailRes.text();
       console.error('Failed to send email:', errorText);
       return new Response(
-        JSON.stringify({ error: 'Failed to send email' }),
+        JSON.stringify({ error: 'Failed to send email', details: errorText }),
         { 
           status: 500,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -106,7 +119,7 @@ serve(async (req) => {
       );
     }
 
-    // Mark email as sent for this specific payment
+    // Mark email as sent
     const { error: updateError } = await supabase
       .from('payments')
       .update({ email_sent: true })

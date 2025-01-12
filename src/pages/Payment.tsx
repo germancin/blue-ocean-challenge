@@ -33,7 +33,7 @@ const PaymentPage = () => {
       }
 
       try {
-        // First check if there's ANY existing payment for this email
+        // Check for any existing payment for this email
         const { data: existingPayment, error: existingError } = await supabase
           .from('payments')
           .select('id, status, amount, email_sent')
@@ -55,6 +55,7 @@ const PaymentPage = () => {
             setUniqueAmount(existingPayment.amount);
             toast.success('Payment already completed!');
 
+            // Only try to send email if it hasn't been sent yet
             if (!existingPayment.email_sent) {
               try {
                 const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
@@ -65,7 +66,7 @@ const PaymentPage = () => {
                 });
                 
                 if (emailError) {
-                  console.error('Error triggering email check:', emailError);
+                  console.error('Error sending confirmation email:', emailError);
                   toast.error('Failed to send confirmation email');
                 }
               } catch (emailError) {
@@ -76,20 +77,8 @@ const PaymentPage = () => {
             return;
           }
 
-          // If payment exists but is pending, update its amount
-          const newAmount = await generateUniqueAmount(BASE_AMOUNT);
-          const { error: updateError } = await supabase
-            .from('payments')
-            .update({ amount: newAmount })
-            .eq('id', existingPayment.id);
-
-          if (updateError) {
-            console.error('Error updating payment amount:', updateError);
-            toast.error('Error updating payment amount');
-            return;
-          }
-
-          setUniqueAmount(newAmount);
+          // If payment exists but is pending, use the same amount
+          setUniqueAmount(existingPayment.amount);
           setIsInitialized(true);
           return;
         }
@@ -133,19 +122,22 @@ const PaymentPage = () => {
   });
 
   useEffect(() => {
-    // Only trigger email check when transaction status changes to success and we have a payment ID
-    if (transactionStatus === 'success' && currentPaymentId) {
+    if (transactionStatus === 'success' && currentPaymentId && email) {
       const sendEmail = async () => {
         try {
+          console.log('Attempting to send confirmation email for payment:', currentPaymentId);
           const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
             body: { 
               email,
               paymentId: currentPaymentId
             }
           });
+
           if (emailError) {
-            console.error('Error triggering email check:', emailError);
+            console.error('Error sending confirmation email:', emailError);
             toast.error('Failed to send confirmation email');
+          } else {
+            console.log('Email sent successfully');
           }
         } catch (error) {
           console.error('Error in email sending process:', error);
@@ -170,7 +162,7 @@ const PaymentPage = () => {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1">
-          <PaymentInformationCard onAcceptTerms={handleTermsAcceptance} />
+          <PaymentInformationCard onAcceptTerms={handleTermsAccepted} />
         </div>
 
         <div className="lg:col-span-1">
