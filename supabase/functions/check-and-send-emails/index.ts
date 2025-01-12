@@ -13,7 +13,6 @@ const corsHeaders = {
 
 interface EmailRequest {
   email: string;
-  paymentId: string;
 }
 
 serve(async (req) => {
@@ -24,8 +23,8 @@ serve(async (req) => {
   try {
     console.log('Starting check-and-send-emails function');
     
-    const { email, paymentId } = await req.json() as EmailRequest;
-    console.log('Processing email for payment:', paymentId);
+    const { email } = await req.json() as EmailRequest;
+    console.log('Processing email for:', email);
 
     if (!RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not set');
@@ -40,11 +39,11 @@ serve(async (req) => {
       }
     });
 
-    // Get the specific payment using the paymentId
+    // Get the specific successful payment for this email that hasn't had email sent
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
-      .eq('id', paymentId)
+      .eq('email', email)
       .eq('status', 'success')
       .eq('email_sent', false)
       .single();
@@ -55,7 +54,7 @@ serve(async (req) => {
     }
 
     if (!payment) {
-      console.log('No pending email to send or payment already processed');
+      console.log('No pending email to send or payment already processed for:', email);
       return new Response(
         JSON.stringify({ message: 'No pending email to send or payment already processed' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -150,7 +149,7 @@ serve(async (req) => {
     console.log('Email sent successfully for payment:', payment.id);
 
     return new Response(
-      JSON.stringify({ success: true, paymentId: payment.id }),
+      JSON.stringify({ success: true, email: payment.email }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
 

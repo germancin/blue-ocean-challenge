@@ -21,16 +21,13 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
   useEffect(() => {
     if (!enabled) return;
 
-    const verifyPayment = async (paymentId: string) => {
-      if (!paymentId) return false;
-
+    const verifyPayment = async () => {
       try {
-        console.log('Verifying payment status for ID:', paymentId);
+        console.log('Verifying payment status for email:', email);
         const { data, error } = await supabase.functions.invoke('verify-payment', {
           body: { 
             email,
-            amount: Number(amount.toFixed(3)),
-            paymentId
+            amount: Number(amount.toFixed(3))
           }
         });
 
@@ -43,8 +40,8 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
         if (data.status === 'success') {
           setTransactionStatus('success');
-          // Send confirmation email with the payment ID
-          await sendPaymentConfirmationEmail(email, amount, paymentId);
+          // Send confirmation email
+          await sendPaymentConfirmationEmail(email, amount);
           return true;
         } else if (data.status === 'no_payment_found') {
           setTransactionStatus('failed');
@@ -62,32 +59,24 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
       const successfulPayment = await checkExistingSuccessfulPayment(email);
       if (successfulPayment) {
         setTransactionStatus('success');
-        return null;
+        return;
       }
 
       // If no successful payment, create or update pending payment
-      const payment = await createOrUpdatePendingPayment(email, amount);
-      return payment?.id;
-    };
-
-    let intervalId: number;
-    initializePaymentCheck().then(paymentId => {
-      if (paymentId) {
-        // Initial verification
-        verifyPayment(paymentId);
-        
-        // Set up polling every 30 seconds
-        intervalId = window.setInterval(() => {
-          verifyPayment(paymentId);
-        }, 30000);
-      }
-    });
-
-    return () => {
-      if (intervalId) {
+      await createOrUpdatePendingPayment(email, amount);
+      
+      // Initial verification
+      await verifyPayment();
+      
+      // Set up polling every 30 seconds
+      const intervalId = window.setInterval(verifyPayment, 30000);
+      
+      return () => {
         clearInterval(intervalId);
-      }
+      };
     };
+
+    initializePaymentCheck();
   }, [email, amount, enabled]);
 
   return {
