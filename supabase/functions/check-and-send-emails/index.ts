@@ -17,6 +17,18 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // First check if RESEND_API_KEY exists
+  if (!RESEND_API_KEY) {
+    console.error('RESEND_API_KEY not configured');
+    return new Response(
+      JSON.stringify({ error: 'Email service not configured' }),
+      { 
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
+    );
+  }
+
   try {
     const { email, paymentId } = await req.json();
     console.log('Processing request for:', { email, paymentId });
@@ -32,7 +44,7 @@ serve(async (req) => {
       );
     }
 
-    // 1. First check if payment exists and is valid
+    // Check if payment exists and is valid
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -50,7 +62,7 @@ serve(async (req) => {
       );
     }
 
-    // 2. Check if email was already sent
+    // Check if email was already sent
     if (payment.email_sent) {
       console.log('Email already sent for payment:', paymentId);
       return new Response(
@@ -62,11 +74,11 @@ serve(async (req) => {
       );
     }
 
-    // 3. Check if user exists
+    // Check if user exists in auth.users
     const { data: { users }, error: userError } = await supabase.auth.admin.listUsers();
     const existingUser = users?.find(u => u.email === email);
 
-    // 4. If user doesn't exist, create one
+    // If user doesn't exist, create one
     if (!existingUser) {
       console.log('Creating new user for:', email);
       const tempPassword = Math.random().toString(36).slice(-8);
@@ -88,7 +100,7 @@ serve(async (req) => {
       }
     }
 
-    // 5. Generate recovery link
+    // Generate recovery link for password reset
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'recovery',
       email: email,
@@ -113,7 +125,9 @@ serve(async (req) => {
       throw new Error('Failed to generate recovery link');
     }
 
-    // 6. Send email with recovery link
+    console.log('Generated recovery link successfully');
+
+    // Send email with payment confirmation and password reset link
     try {
       console.log('Sending email to:', email);
       const emailRes = await fetch('https://api.resend.com/emails', {
@@ -182,7 +196,7 @@ serve(async (req) => {
         );
       }
 
-      // 7. Mark email as sent
+      // Mark email as sent in database
       const { error: updateError } = await supabase
         .from('payments')
         .update({ email_sent: true })
