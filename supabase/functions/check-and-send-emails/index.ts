@@ -10,8 +10,6 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -29,7 +27,9 @@ serve(async (req) => {
       throw new Error('Email and paymentId are required');
     }
 
-    // Get payment details in a single query
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+    // Get payment details
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
       .select('*')
@@ -66,8 +66,6 @@ serve(async (req) => {
       throw new Error('Failed to generate password reset link');
     }
 
-    const recoveryLink = linkData.properties.action_link;
-
     // Send email with Resend
     const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -92,7 +90,7 @@ serve(async (req) => {
             </p>
 
             <div style="text-align: center; margin: 32px 0;">
-              <a href="${recoveryLink}" 
+              <a href="${linkData.properties.action_link}" 
                  style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                 Set Your Password
               </a>
@@ -141,7 +139,6 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ success: true }),
       { 
-        status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       }
     );
@@ -150,8 +147,7 @@ serve(async (req) => {
     console.error('Error in check-and-send-emails:', error);
     return new Response(
       JSON.stringify({ 
-        error: error instanceof Error ? error.message : 'Unknown error occurred',
-        details: error
+        error: error instanceof Error ? error.message : 'Unknown error occurred'
       }),
       { 
         status: 500,
