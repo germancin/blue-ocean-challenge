@@ -50,16 +50,44 @@ serve(async (req) => {
 
     const results = await Promise.all(payments.map(async (payment) => {
       try {
-        console.log('Sending email for payment:', payment.id);
+        console.log('Processing payment:', payment.id);
 
-        // Generate magic link for the user
-        const { data: { user }, error: signUpError } = await supabase.auth.admin.generateLink({
-          type: 'magiclink',
-          email: payment.email,
-          options: {
-            redirectTo: `${req.headers.get('origin')}/profile?changePassword=true`
+        // Check if user exists
+        const { data: existingUser, error: userCheckError } = await supabase.auth
+          .admin.getUserByEmail(payment.email);
+
+        if (userCheckError && userCheckError.message !== 'User not found') {
+          console.error('Error checking user:', userCheckError);
+          throw userCheckError;
+        }
+
+        // If user doesn't exist, create them
+        if (!existingUser) {
+          console.log('Creating new user for:', payment.email);
+          const tempPassword = crypto.randomUUID();
+          const { data: newUser, error: createError } = await supabase.auth.admin
+            .createUser({
+              email: payment.email,
+              password: tempPassword,
+              email_confirm: true
+            });
+
+          if (createError) {
+            console.error('Error creating user:', createError);
+            throw createError;
           }
-        });
+        }
+
+        // Generate magic link for password reset
+        console.log('Generating magic link for:', payment.email);
+        const { data: { user }, error: signUpError } = await supabase.auth.admin
+          .generateLink({
+            type: 'recovery',
+            email: payment.email,
+            options: {
+              redirectTo: `${req.headers.get('origin')}/profile?changePassword=true`
+            }
+          });
 
         if (signUpError) {
           console.error('Error generating magic link:', signUpError);
@@ -67,6 +95,7 @@ serve(async (req) => {
         }
 
         // Send email via Resend
+        console.log('Sending email to:', payment.email);
         const emailRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
@@ -90,9 +119,9 @@ serve(async (req) => {
                 </p>
 
                 <div style="text-align: center; margin: 32px 0;">
-                  <a href="${user?.confirmation_sent_at}" 
+                  <a href="${user?.totp}" 
                      style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                    Complete Registration
+                    Set Your Password
                   </a>
                 </div>
 
