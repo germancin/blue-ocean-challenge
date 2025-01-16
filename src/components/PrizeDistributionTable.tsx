@@ -30,9 +30,9 @@ const PrizeDistributionTable = () => {
 
   return (
     <div className="bg-navy py-20 relative overflow-hidden">
-      {/* Background image with blur and opacity */}
+      {/* Background image with opacity */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 blur-sm"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
         style={{
           backgroundImage: "url('/lovable-uploads/f72cf336-f7f5-4f48-b178-7503ef515628.png')",
         }}
