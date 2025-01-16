@@ -2,6 +2,7 @@ import { Button } from '../ui/button';
 import { useAuth } from '../AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface DesktopNavProps {
   menuItems: Array<{ label: string; href: string }>;
@@ -21,6 +22,16 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
   const handleLogin = () => {
     navigate('/auth');
   };
+
+  useEffect(() => {
+    // Check if there's a hash in the URL and scroll to that section
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
 
   const handleNavigation = (href: string) => {
     if (location.pathname !== '/') {
