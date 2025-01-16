@@ -2,7 +2,7 @@ import { Trophy, Target, BarChart3 } from 'lucide-react';
 
 const Rules = () => {
   return (
-    <section className="relative py-16 overflow-hidden bg-navy">
+    <section id="rules" className="relative py-16 overflow-hidden bg-navy">
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
         style={{ 

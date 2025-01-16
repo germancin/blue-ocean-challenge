@@ -43,7 +43,7 @@ const PrizeCards = () => {
   ];
 
   return (
-    <div className="relative bg-navy py-20 overflow-hidden">
+    <div id="prizes" className="relative bg-navy py-20 overflow-hidden">
       <BackgroundEffects />
 
       <div className="container mx-auto px-4 relative z-10">

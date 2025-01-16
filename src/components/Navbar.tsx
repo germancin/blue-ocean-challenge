@@ -9,11 +9,11 @@ const Navbar = () => {
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
 
   const menuItems = [
-    { label: 'Challenges', href: '#challenges' },
-    { label: 'Rewards', href: '#rewards' },
-    { label: 'Academy', href: '#academy' },
-    { label: 'Tournaments', href: '#tournaments' },
-    { label: 'About', href: '#about' },
+    { label: 'Rules', href: '#rules' },
+    { label: 'Prizes', href: '#prizes' },
+    { label: 'Distribution', href: '#distribution' },
+    { label: 'Strategy', href: '#strategy' },
+    { label: 'FAQ', href: '#faq' },
   ];
 
   return (

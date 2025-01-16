@@ -29,7 +29,7 @@ const PrizeDistributionTable = () => {
   ];
 
   return (
-    <div className="bg-navy py-20 relative overflow-hidden">
+    <div id="distribution" className="bg-navy py-20 relative overflow-hidden">
       {/* Background image with opacity */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
