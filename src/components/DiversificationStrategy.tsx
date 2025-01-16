@@ -29,10 +29,11 @@ const DiversificationStrategy = () => {
         }}
       />
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-6xl font-bold text-white text-center mb-16 animate-fade-in">
+        <h2 className="text-5xl md:text-6xl font-display font-bold text-white text-center mb-16 animate-fade-in">
           <span className="relative">
             Diversified Trading Strategies
-            <span className="absolute -inset-1 bg-bright-blue opacity-20 blur-lg"></span>
+            <span className="absolute -bottom-2 left-0 right-0 h-1 bg-bright-blue blur-sm"></span>
+            <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-bright-blue"></span>
           </span>
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
