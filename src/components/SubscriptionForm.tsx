@@ -29,15 +29,36 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
 
     setIsLoading(true);
     try {
+      const paymentStatus = await checkPaymentStatus(data.email);
+      
+      if (paymentStatus === 'success') {
+        toast.info("You've already completed payment. Redirecting to dashboard...");
+        onSuccess();
+        navigate('/dashboard');
+        return;
+      }
+
       await saveSubscriber(data.name, data.email);
       toast.success("Successfully saved your information!");
       onSuccess();
       navigate('/payment', { state: { email: data.email } });
     } catch (error) {
       console.error('Submission error:', error);
-      if ((error as PostgrestError).code === '23505') {
-        toast.info("You're already subscribed. Redirecting to payment page.");
-        navigate('/payment', { state: { email: data.email } });
+      const postgrestError = error as PostgrestError;
+      
+      if (postgrestError.code === '23505') {
+        // This email is already registered
+        const paymentStatus = await checkPaymentStatus(data.email);
+        
+        if (paymentStatus === 'success') {
+          toast.info("You've already completed payment. Redirecting to dashboard...");
+          onSuccess();
+          navigate('/dashboard');
+        } else {
+          toast.info("You're already registered. Redirecting to payment...");
+          onSuccess();
+          navigate('/payment', { state: { email: data.email } });
+        }
       } else {
         toast.error("Something went wrong. Please try again.");
       }

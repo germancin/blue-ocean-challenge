@@ -7,7 +7,7 @@ export const checkPaymentStatus = async (email: string): Promise<string | null> 
       .from('payments')
       .select('status')
       .eq('email', email)
-      .single();
+      .maybeSingle();
 
     if (error) {
       console.error('Error checking payment status:', error);
