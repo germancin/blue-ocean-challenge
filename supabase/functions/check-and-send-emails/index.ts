@@ -5,19 +5,13 @@ const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-  'Access-Control-Max-Age': '86400',
 };
 
 serve(async (req) => {
-  console.log('Got into the check and send email', req);
+  console.log('Got into check-and-send-emails function');
 
-  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    console.log('Handling OPTIONS request');
-    return new Response(null, {
-      status: 204,
-      headers: corsHeaders
-    });
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
@@ -59,24 +53,25 @@ serve(async (req) => {
       );
     }
 
-    // Generate recovery link for password setup
-    console.log('Generating password reset link for:', email);
+    // Generate recovery link for first-time password setup
+    console.log('Generating password recovery link for:', email);
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'recovery',
       email: email,
       options: {
-        redirectTo: `${Deno.env.get('SUPABASE_URL')}/profile?changePassword=true`,
+        // Let Supabase handle appending the token and type parameters
+        redirectTo: `${Deno.env.get('SUPABASE_URL')}/profile`,
       },
     });
 
     if (linkError || !linkData?.properties?.action_link) {
       console.error('Error generating recovery link:', linkError);
-      throw new Error('Failed to generate password reset link');
+      throw new Error('Failed to generate password recovery link');
     }
 
-    console.log('Generated password reset link successfully');
+    console.log('Generated recovery link successfully');
 
-    // Send email with Resend
+    // Send welcome email with password setup link via Resend
     const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -86,7 +81,7 @@ serve(async (req) => {
       body: JSON.stringify({
         from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
         to: [email],
-        subject: 'Payment Confirmation - Elite Trading Tournament',
+        subject: 'Welcome to Elite Trading Tournament - Set Up Your Password',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
@@ -96,21 +91,21 @@ serve(async (req) => {
             </p>
 
             <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-              To complete your registration and set up your account, please click the secure link below:
+              To access your account, please click the secure link below to set up your password:
             </p>
 
             <div style="text-align: center; margin: 32px 0;">
               <a href="${linkData.properties.action_link}"
                  style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                Set Your Password
+                Set Up Your Password
               </a>
             </div>
 
             <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
               <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
               <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Click the link above to access your account</li>
-                <li style="margin-bottom: 8px;">Set up your secure password</li>
+                <li style="margin-bottom: 8px;">Click the link above to set up your password</li>
+                <li style="margin-bottom: 8px;">Access your tournament dashboard</li>
                 <li style="margin-bottom: 8px;">Join our trading community</li>
                 <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
               </ul>
@@ -135,7 +130,7 @@ serve(async (req) => {
       throw new Error(`Failed to send email: ${error}`);
     }
 
-    console.log('Email sent successfully, updating payment record');
+    console.log('Welcome email sent successfully');
 
     // Update payment record to mark email as sent
     const { error: updateError } = await supabase
@@ -151,7 +146,7 @@ serve(async (req) => {
     console.log('Payment record updated successfully');
 
     return new Response(
-      JSON.stringify({ success: true, message: 'Email sent successfully' }),
+      JSON.stringify({ success: true, message: 'Welcome email sent successfully' }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
