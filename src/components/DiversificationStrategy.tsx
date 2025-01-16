@@ -31,17 +31,17 @@ const DiversificationStrategy = () => {
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {strategies.map((strategy, index) => (
-            <div key={index} className="bg-navy/50 p-8 rounded-lg border border-white/10 backdrop-blur-sm hover:border-bright-blue/50 transition-all duration-300">
+            <div key={index} className="bg-navy/50 p-8 pt-8 pb-0 rounded-lg border border-white/10 backdrop-blur-sm hover:border-bright-blue/50 transition-all duration-300">
               <div className="flex flex-col items-center text-center">
                 {strategy.icon}
                 <h3 className="text-2xl font-semibold mb-4 text-bright-blue">{strategy.title}</h3>
-                <p className="text-white/80">{strategy.description}</p>
+                <p className="text-white/80 mb-8">{strategy.description}</p>
               </div>
-              <div className="mt-8">
+              <div className="-mx-8">
                 <img 
-                  src="/lovable-uploads/3603db40-5f1f-4eb5-9b42-bc86b65d732a.png" 
+                  src="/lovable-uploads/e1a1adda-f688-4160-9548-0535dbf1afd2.png" 
                   alt="Trading Interface" 
-                  className="w-full rounded-lg opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  className="w-full rounded-b-lg hover:opacity-90 transition-opacity duration-300"
                 />
               </div>
             </div>
