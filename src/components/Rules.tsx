@@ -7,7 +7,7 @@ const Rules = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
         style={{ 
           backgroundImage: 'url("/lovable-uploads/7cec8cef-9c5b-423c-9299-4f44b4430fb1.png")',
-          filter: 'brightness(1.2) contrast(1.1)'
+          filter: 'brightness(0.4) contrast(1.1)'
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-br from-navy/90 via-navy/85 to-[#001F3F]/80" />
@@ -30,7 +30,7 @@ const Rules = () => {
         <div className="max-w-4xl mx-auto">
           <div className="relative pl-8 mb-16 group">
             <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00ff94] to-[#00c8ff] rounded-full" />
-            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#00ff94] rounded-full animate-pulse" />
+            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#00ff94] rounded-full transition-opacity duration-1000 opacity-75 hover:opacity-100" />
             
             <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#00ff94]/20 group-hover:border-[#00ff94]/40 transition-all duration-300">
               <Trophy className="w-12 h-12 text-[#00ff94] mb-4" />
@@ -50,7 +50,7 @@ const Rules = () => {
 
           <div className="relative pl-8 mb-16 group">
             <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00c8ff] to-[#ff4d4d] rounded-full" />
-            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#00c8ff] rounded-full animate-pulse" />
+            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#00c8ff] rounded-full transition-opacity duration-1000 opacity-75 hover:opacity-100" />
             
             <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#00c8ff]/20 group-hover:border-[#00c8ff]/40 transition-all duration-300">
               <Target className="w-12 h-12 text-[#00c8ff] mb-4" />
@@ -64,7 +64,7 @@ const Rules = () => {
 
           <div className="relative pl-8 group">
             <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#ff4d4d] to-[#00ff94] rounded-full" />
-            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#ff4d4d] rounded-full animate-pulse" />
+            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#ff4d4d] rounded-full transition-opacity duration-1000 opacity-75 hover:opacity-100" />
             
             <div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#ff4d4d]/20 group-hover:border-[#ff4d4d]/40 transition-all duration-300">
               <BarChart3 className="w-12 h-12 text-[#ff4d4d] mb-4" />
