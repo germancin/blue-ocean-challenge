@@ -1,7 +1,7 @@
 import { Button } from '../ui/button';
 import { useAuth } from '../AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface DesktopNavProps {
   menuItems: Array<{ label: string; href: string }>;
@@ -11,6 +11,7 @@ interface DesktopNavProps {
 const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -21,16 +22,24 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
     navigate('/auth');
   };
 
+  const handleNavigation = (href: string) => {
+    if (location.pathname !== '/') {
+      navigate('/' + href);
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="hidden md:flex items-center space-x-8">
       {menuItems.map((item) => (
-        <a
+        <button
           key={item.label}
-          href={item.href}
+          onClick={() => handleNavigation(item.href)}
           className="text-light-gray hover:text-bright-blue transition-colors duration-200"
         >
           {item.label}
-        </a>
+        </button>
       ))}
       {user ? (
         <div className="flex items-center space-x-4">
