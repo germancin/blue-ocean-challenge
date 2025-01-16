@@ -34,47 +34,28 @@ export function PasswordUpdateForm() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // Get the full URL to parse parameters
-  const fullUrl = window.location.href;
-  console.log('Full URL:', fullUrl);
-  
-  // Parse URL parameters
-  const urlParams = new URL(fullUrl).searchParams;
-  const token = urlParams.get('token');
-  const type = urlParams.get('type');
-  const changePassword = urlParams.get('changePassword');
+  // Get URL parameters
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token');
+  const type = searchParams.get('type');
 
-  console.log('URL Parameters:', { token, type, changePassword });
+  console.log('URL Parameters:', { token, type });
 
   useEffect(() => {
     const initializeForm = async () => {
       try {
-        console.log('Initializing password form with params:', { token, type, changePassword });
-
-        // Case 1: Direct password change (after payment)
-        if (changePassword === 'true') {
-          if (!user) {
-            console.error('No authenticated user found for password change');
-            throw new Error('Please log in to change your password');
-          }
-          console.log('Direct password change for user:', user.email);
-          setUserEmail(user.email);
-          setVerifying(false);
-          return;
-        }
-
-        // Case 2: Recovery flow with token
+        console.log('Initializing password form with token:', token);
+        
+        // Recovery flow with token
         if (token && type === 'recovery') {
           console.log('Starting token verification process');
           
-          // Verify the OTP token
+          // Verify the recovery token
           const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
             token_hash: token,
             type: 'recovery',
           });
 
-          console.log('Verify OTP response:', verifyData);
-          
           if (verifyError) {
             console.error('Error verifying token:', verifyError);
             throw new Error('Invalid or expired recovery link');
@@ -85,11 +66,11 @@ export function PasswordUpdateForm() {
             throw new Error('Could not retrieve email from recovery token');
           }
 
-          console.log('Successfully retrieved email:', verifyData.user.email);
+          console.log('Successfully verified token for email:', verifyData.user.email);
           setUserEmail(verifyData.user.email);
         } else {
-          console.error('No valid parameters found for password update');
-          throw new Error('Invalid password update request');
+          console.error('No valid recovery token found');
+          throw new Error('Invalid password reset request');
         }
       } catch (error: any) {
         console.error('Error in initializeForm:', error);
@@ -101,7 +82,7 @@ export function PasswordUpdateForm() {
     };
 
     initializeForm();
-  }, [token, type, changePassword, user, navigate]);
+  }, [token, type, navigate]);
 
   const form = useForm({
     resolver: zodResolver(passwordSchema),
