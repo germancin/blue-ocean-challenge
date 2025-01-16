@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,48 +15,48 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-// Different schema based on whether it's initial setup or password update
-const getPasswordSchema = (isInitialSetup: boolean) => {
-  const baseSchema = {
-    newPassword: z.string().min(6, 'Password must be at least 6 characters'),
-    confirmPassword: z.string().min(6, 'Password must be at least 6 characters'),
-  };
-
-  if (!isInitialSetup) {
-    return z.object({
-      currentPassword: z.string().min(6, 'Password must be at least 6 characters'),
-      ...baseSchema,
-    }).refine((data) => data.newPassword === data.confirmPassword, {
-      message: "Passwords don't match",
-      path: ["confirmPassword"],
-    });
-  }
-
-  return z.object(baseSchema).refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
-};
+const passwordSchema = z.object({
+  newPassword: z.string().min(6, 'Password must be at least 6 characters'),
+  confirmPassword: z.string().min(6, 'Password must be at least 6 characters'),
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
 
 export function PasswordUpdateForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
-  const isInitialSetup = searchParams.get('changePassword') === 'true';
-  const email = searchParams.get('email') || '';
+  const token = searchParams.get('token');
+  const type = searchParams.get('type');
+
+  useEffect(() => {
+    const getEmailFromSession = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user?.email) {
+        setUserEmail(user.email);
+      }
+    };
+
+    // If we have a recovery token, get the email from it
+    if (token && type === 'recovery') {
+      getEmailFromSession();
+    }
+  }, [token, type]);
 
   const form = useForm({
-    resolver: zodResolver(getPasswordSchema(isInitialSetup)),
+    resolver: zodResolver(passwordSchema),
     defaultValues: {
-      ...(isInitialSetup ? {} : { currentPassword: '' }),
       newPassword: '',
       confirmPassword: '',
     },
   });
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: z.infer<typeof passwordSchema>) => {
     setIsLoading(true);
     try {
       const { error } = await supabase.auth.updateUser({ 
@@ -67,6 +67,9 @@ export function PasswordUpdateForm() {
 
       toast.success('Password set successfully! You can now log in.');
       form.reset();
+      
+      // Redirect to login page after successful password update
+      navigate('/auth');
     } catch (error: any) {
       toast.error(error.message || 'Failed to set password');
     } finally {
@@ -74,38 +77,28 @@ export function PasswordUpdateForm() {
     }
   };
 
+  if (!userEmail) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loader2 className="h-6 w-6 animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        {email && (
-          <div className="space-y-2">
-            <FormLabel>Email</FormLabel>
-            <Input type="email" value={email} disabled />
-          </div>
-        )}
-        
-        {!isInitialSetup && (
-          <FormField
-            control={form.control}
-            name="currentPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Current Password</FormLabel>
-                <FormControl>
-                  <Input type="password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
+        <div className="space-y-2">
+          <FormLabel>Email</FormLabel>
+          <Input type="email" value={userEmail} disabled />
+        </div>
 
         <FormField
           control={form.control}
           name="newPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{isInitialSetup ? 'Password' : 'New Password'}</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <Input type="password" {...field} />
               </FormControl>
@@ -132,10 +125,10 @@ export function PasswordUpdateForm() {
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              {isInitialSetup ? 'Setting Password...' : 'Updating Password...'}
+              Setting Password...
             </>
           ) : (
-            isInitialSetup ? 'Set Password' : 'Update Password'
+            'Set Password'
           )}
         </Button>
       </form>
