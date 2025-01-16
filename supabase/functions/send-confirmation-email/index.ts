@@ -37,12 +37,13 @@ serve(async (req) => {
       }
     });
 
-    // Generate recovery link with production URL
+    // Generate recovery link - now we use type: 'recovery' to ensure we get a proper token
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'recovery',
       email: email,
       options: {
-        redirectTo: `${PRODUCTION_URL}/profile?changePassword=true`
+        // The token will be automatically appended to this URL by Supabase
+        redirectTo: `${PRODUCTION_URL}/profile`
       }
     });
 
