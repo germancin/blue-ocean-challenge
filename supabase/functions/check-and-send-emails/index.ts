@@ -26,10 +26,17 @@ serve(async (req) => {
 			throw new Error('Email and paymentId are required');
 		}
 
-		const supabase = createClient(Deno.env.get('SUPABASE_URL') ?? '', Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '');
+		const supabase = createClient(
+			Deno.env.get('SUPABASE_URL') ?? '',
+			Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+		);
 
 		// First check if email was already sent
-		const { data: payment, error: fetchError } = await supabase.from('payments').select('email_sent').eq('id', paymentId).single();
+		const { data: payment, error: fetchError } = await supabase
+			.from('payments')
+			.select('email_sent')
+			.eq('id', paymentId)
+			.single();
 
 		if (fetchError) {
 			console.error('Error fetching payment:', fetchError);
@@ -40,27 +47,44 @@ serve(async (req) => {
 
 		if (payment.email_sent) {
 			console.log('Email was already sent for payment:', paymentId);
-			return new Response(JSON.stringify({ message: 'Email already sent', success: true }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+			return new Response(
+				JSON.stringify({ message: 'Email already sent', success: true }),
+				{ headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+			);
 		}
 
 		// Generate recovery link for first-time password setup
 		console.log('Generating password recovery link for:', email);
-		const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
+		
+		// First, create the user if they don't exist
+		const { data: userData, error: createUserError } = await supabase.auth.admin.createUser({
+			email: email,
+			email_confirm: true,
+			password: crypto.randomUUID(), // temporary password
+		});
+
+		if (createUserError) {
+			console.error('Error creating user:', createUserError);
+			throw new Error('Failed to create user account');
+		}
+
+		console.log('User created or exists:', userData);
+
+		// Generate password reset link
+		const { data: resetData, error: resetError } = await supabase.auth.admin.generateLink({
 			type: 'recovery',
 			email: email,
 			options: {
-				redirectTo: 'https://elitetraderhub.co/profile'
+				redirectTo: 'https://elitetraderhub.co/profile?changePassword=true'
 			}
 		});
 
-		console.log('Generated link data:', linkData);
-
-		if (linkError || !linkData?.properties?.action_link) {
-			console.error('Error generating recovery link:', linkError);
-			throw new Error('Failed to generate password recovery link');
+		if (resetError || !resetData?.properties?.action_link) {
+			console.error('Error generating reset link:', resetError);
+			throw new Error('Failed to generate password reset link');
 		}
 
-		const recoveryLink = linkData.properties.action_link;
+		const recoveryLink = resetData.properties.action_link;
 		console.log('Generated recovery link:', recoveryLink);
 
 		// Send welcome email with password setup link via Resend
@@ -125,7 +149,10 @@ serve(async (req) => {
 		console.log('Welcome email sent successfully');
 
 		// Update payment record to mark email as sent
-		const { error: updateError } = await supabase.from('payments').update({ email_sent: true }).eq('id', paymentId);
+		const { error: updateError } = await supabase
+			.from('payments')
+			.update({ email_sent: true })
+			.eq('id', paymentId);
 
 		if (updateError) {
 			console.error('Error updating email_sent status:', updateError);
@@ -134,7 +161,10 @@ serve(async (req) => {
 
 		console.log('Payment record updated successfully');
 
-		return new Response(JSON.stringify({ success: true, message: 'Welcome email sent successfully' }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+		return new Response(
+			JSON.stringify({ success: true, message: 'Welcome email sent successfully' }),
+			{ headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+		);
 	} catch (error) {
 		console.error('Error in check-and-send-emails:', error);
 		return new Response(
@@ -144,7 +174,7 @@ serve(async (req) => {
 			{
 				status: 500,
 				headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-			},
+			}
 		);
 	}
 });
