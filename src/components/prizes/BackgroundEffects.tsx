@@ -4,7 +4,7 @@ const BackgroundEffects = () => {
       <div 
         className="absolute inset-0 opacity-50"
         style={{
-          backgroundImage: 'url("/lovable-uploads/db3c09dc-87e2-4a05-8402-c46511f89887.png")',
+          backgroundImage: 'url("/lovable-uploads/97c974e4-2d82-40fc-a04b-5ae30964bcb6.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           filter: 'brightness(1.1) contrast(1.1)',
