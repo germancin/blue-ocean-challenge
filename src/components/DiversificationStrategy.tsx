@@ -70,19 +70,6 @@ const DiversificationStrategy = () => {
 
   return (
     <div className="relative bg-navy py-20 overflow-hidden">
-      {/* Parallax Background */}
-      <div className="absolute inset-0">
-        <div 
-          className="absolute inset-0 bg-gradient-to-b from-navy/90 to-navy"
-          style={{
-            backgroundImage: 'url("/lovable-uploads/2eca4db5-1876-4e6d-986b-871fcd2f75f2.png")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'blur(4px)',
-          }}
-        />
-      </div>
-
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
