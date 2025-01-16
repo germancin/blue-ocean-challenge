@@ -2,13 +2,14 @@ const BackgroundEffects = () => {
   return (
     <>
       <div 
-        className="absolute inset-0 opacity-50"
+        className="absolute inset-0"
         style={{
-          backgroundImage: 'url("/lovable-uploads/97c974e4-2d82-40fc-a04b-5ae30964bcb6.png")',
+          backgroundImage: 'url("/lovable-uploads/5afc0bf4-60fc-4269-bbb3-bdafb47a4a7c.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           filter: 'brightness(1.1) contrast(1.1)',
           transform: 'scale(1.1)',
+          opacity: '0.8',
         }}
       />
 
