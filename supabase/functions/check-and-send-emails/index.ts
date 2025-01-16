@@ -55,20 +55,6 @@ serve(async (req) => {
 
 		// Generate recovery link for first-time password setup
 		console.log('Generating password recovery link for:', email);
-		
-		// First, create the user if they don't exist
-		const { data: userData, error: createUserError } = await supabase.auth.admin.createUser({
-			email: email,
-			email_confirm: true,
-			password: crypto.randomUUID(), // temporary password
-		});
-
-		if (createUserError) {
-			console.error('Error creating user:', createUserError);
-			throw new Error('Failed to create user account');
-		}
-
-		console.log('User created or exists:', userData);
 
 		// Generate password reset link
 		const { data: resetData, error: resetError } = await supabase.auth.admin.generateLink({
@@ -79,9 +65,14 @@ serve(async (req) => {
 			}
 		});
 
-		if (resetError || !resetData?.properties?.action_link) {
+		if (resetError) {
 			console.error('Error generating reset link:', resetError);
 			throw new Error('Failed to generate password reset link');
+		}
+
+		if (!resetData?.properties?.action_link) {
+			console.error('No action link in reset data');
+			throw new Error('No recovery link generated');
 		}
 
 		const recoveryLink = resetData.properties.action_link;
