@@ -60,6 +60,7 @@ serve(async (req) => {
     }
 
     // Generate recovery link for password setup
+    console.log('Generating password reset link for:', email);
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'recovery',
       email: email,
