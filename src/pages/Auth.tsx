@@ -4,18 +4,30 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 import type { AuthError } from '@supabase/supabase-js';
 
 const AuthPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [password, setPassword] = useState('');
+  const [isRecoveryFlow, setIsRecoveryFlow] = useState(false);
 
   useEffect(() => {
-    // Check for recovery token in URL
-    const hash = window.location.hash;
-    if (hash && hash.includes('type=recovery')) {
-      navigate('/profile?changePassword=true' + hash);
+    // Check URL parameters for recovery flow
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const type = params.get('type');
+
+    if (token && type === 'recovery') {
+      setIsRecoveryFlow(true);
       return;
     }
 
@@ -27,6 +39,42 @@ const AuthPage = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  const handlePasswordReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+
+      if (!token) {
+        throw new Error('No recovery token found');
+      }
+
+      const { error } = await supabase.auth.verifyOtp({
+        token_hash: token,
+        type: 'recovery',
+      });
+
+      if (error) throw error;
+
+      const { error: updateError } = await supabase.auth.updateUser({
+        password: password
+      });
+
+      if (updateError) throw updateError;
+
+      toast.success('Password set successfully! You can now log in.');
+      navigate('/auth');
+    } catch (error: any) {
+      console.error('Password reset error:', error);
+      setErrorMessage(error.message || 'Failed to set password');
+      toast.error(error.message || 'Failed to set password');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const getErrorMessage = (error: AuthError) => {
     switch (error.message) {
@@ -40,6 +88,51 @@ const AuthPage = () => {
         return error.message;
     }
   };
+
+  if (isRecoveryFlow) {
+    return (
+      <div className="min-h-screen bg-navy flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <Card className="bg-white/10 backdrop-blur-lg border border-white/20">
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold text-white text-center">Set Your Password</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handlePasswordReset} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-white">New Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your new password"
+                    required
+                    minLength={6}
+                    className="bg-white/5 border-white/10 text-white"
+                  />
+                </div>
+                <Button 
+                  type="submit" 
+                  className="w-full"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Setting Password...
+                    </>
+                  ) : (
+                    'Set Password'
+                  )}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-navy flex items-center justify-center p-4">
