@@ -13,10 +13,18 @@ const Rules = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/90 to-[#001F3F]/85" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00ff94] via-[#00c8ff] to-[#ff4d4d]">
-            Trading Challenge Rules
-          </h2>
+        <div className="text-center mb-16 animate-fade-in">
+          <div className="relative inline-block">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
+            <h2 className="relative text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">
+              Trading Challenge Rules
+            </h2>
+          </div>
+          <div className="flex items-center justify-center space-x-2">
+            <div className="w-12 h-1 bg-bright-blue rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-bright-blue to-purple-500 rounded-full"></div>
+            <div className="w-12 h-1 bg-purple-500 rounded-full"></div>
+          </div>
         </div>
 
         <div className="max-w-4xl mx-auto">
