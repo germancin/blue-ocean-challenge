@@ -24,14 +24,24 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
   };
 
   useEffect(() => {
-    // Check if there's a hash in the URL and scroll to that section
-    if (location.hash) {
+    // Check if there's a hash in the URL that contains access_token
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token')) {
+      // If it's a recovery flow (password reset), redirect to profile
+      if (hash.includes('type=recovery')) {
+        navigate('/profile?changePassword=true');
+        return;
+      }
+    }
+    
+    // Handle regular hash navigation for sections
+    if (location.hash && !location.hash.includes('access_token')) {
       const element = document.querySelector(location.hash);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
-  }, [location]);
+  }, [location, navigate]);
 
   const handleNavigation = (href: string) => {
     if (location.pathname !== '/') {
