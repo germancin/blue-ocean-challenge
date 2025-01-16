@@ -34,23 +34,17 @@ export function PasswordUpdateForm() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // Extract token from URL hash if present
-  const getTokenFromHash = () => {
-    const hash = window.location.hash.substring(1); // Remove the # character
-    const params = new URLSearchParams(hash);
-    return params.get('access_token');
-  };
-
-  // Get URL parameters
+  // Get URL parameters - token is directly in the URL, not in hash
   const params = new URLSearchParams(location.search);
   const changePassword = params.get('changePassword');
-  const hashToken = getTokenFromHash();
+  const token = params.get('token');
+  const type = params.get('type');
 
   console.log('URL Parameters:', { 
     changePassword,
-    hashToken,
+    token,
+    type,
     fullUrl: window.location.href,
-    hash: window.location.hash 
   });
 
   useEffect(() => {
@@ -58,13 +52,12 @@ export function PasswordUpdateForm() {
       try {
         console.log('Starting form initialization');
         
-        // Check for token in hash
-        if (hashToken) {
-          console.log('Found token in hash:', hashToken);
+        if (token && type === 'recovery') {
+          console.log('Found token:', token);
           
           // Verify the recovery token
           const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
-            token_hash: hashToken,
+            token_hash: token,
             type: 'recovery',
           });
 
@@ -83,7 +76,7 @@ export function PasswordUpdateForm() {
           console.log('Successfully verified token for email:', verifyData.user.email);
           setUserEmail(verifyData.user.email);
         } else {
-          console.error('No token found in URL hash');
+          console.error('No valid token found in URL');
           throw new Error('Invalid password reset request');
         }
       } catch (error: any) {
@@ -96,7 +89,7 @@ export function PasswordUpdateForm() {
     };
 
     initializeForm();
-  }, [hashToken, navigate]);
+  }, [token, type, navigate]);
 
   const form = useForm({
     resolver: zodResolver(passwordSchema),
