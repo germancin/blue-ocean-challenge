@@ -76,7 +76,6 @@ const DiversificationStrategy = () => {
           className="absolute inset-0 bg-gradient-to-b from-navy/90 to-navy"
           style={{
             backgroundImage: 'url("/lovable-uploads/2eca4db5-1876-4e6d-986b-871fcd2f75f2.png")',
-            backgroundAttachment: 'fixed',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             filter: 'blur(4px)',
