@@ -22,7 +22,13 @@ const DiversificationStrategy = () => {
 
   return (
     <div id="strategy" className="relative bg-navy py-20 overflow-hidden">
-      <div className="container mx-auto px-4">
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-50"
+        style={{ 
+          backgroundImage: 'url("/lovable-uploads/490f6ed8-97cc-4c95-962d-26d5cac2fda8.png")'
+        }}
+      />
+      <div className="container mx-auto px-4 relative z-10">
         <h2 className="text-6xl font-bold text-white text-center mb-16 animate-fade-in">
           <span className="relative">
             Diversified Trading Strategies
