@@ -17,16 +17,16 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const isPasswordReset = searchParams.get('changePassword') === 'true';
-  const hash = window.location.hash;
-  const hasAccessToken = hash && hash.includes('access_token') && hash.includes('type=recovery');
+  const token = searchParams.get('token');
+  const type = searchParams.get('type');
+  const isPasswordReset = type === 'recovery' && token;
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   // Allow access if it's a password reset flow with valid token
-  if (isPasswordReset && hasAccessToken) {
+  if (isPasswordReset) {
     return <>{children}</>;
   }
 

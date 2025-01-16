@@ -18,6 +18,7 @@ const AuthPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [isRecoveryFlow, setIsRecoveryFlow] = useState(false);
 
   useEffect(() => {
@@ -28,6 +29,12 @@ const AuthPage = () => {
 
     if (token && type === 'recovery') {
       setIsRecoveryFlow(true);
+      // Get email from token
+      supabase.auth.getUser(token).then(({ data: { user } }) => {
+        if (user?.email) {
+          setEmail(user.email);
+        }
+      });
       return;
     }
 
@@ -99,6 +106,16 @@ const AuthPage = () => {
             </CardHeader>
             <CardContent>
               <form onSubmit={handlePasswordReset} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-white">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    readOnly
+                    className="bg-white/5 border-white/10 text-white opacity-50"
+                  />
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="password" className="text-white">New Password</Label>
                   <Input
