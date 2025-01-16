@@ -35,20 +35,21 @@ export function PasswordUpdateForm() {
   const { user } = useAuth();
 
   // Get URL parameters
-  const searchParams = new URLSearchParams(location.search);
-  const token = searchParams.get('token');
-  const type = searchParams.get('type');
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
+  const type = params.get('type');
+  const changePassword = params.get('changePassword');
 
-  console.log('URL Parameters:', { token, type });
+  console.log('URL Parameters:', { token, type, changePassword });
 
   useEffect(() => {
     const initializeForm = async () => {
       try {
-        console.log('Starting form initialization with token:', token);
+        console.log('Starting form initialization');
         
         // Recovery flow with token
-        if (token && type === 'recovery') {
-          console.log('Starting token verification process');
+        if (token && (type === 'recovery' || changePassword === 'true')) {
+          console.log('Starting token verification process with token:', token);
           
           // Verify the recovery token
           const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
@@ -71,7 +72,7 @@ export function PasswordUpdateForm() {
           console.log('Successfully verified token for email:', verifyData.user.email);
           setUserEmail(verifyData.user.email);
         } else {
-          console.error('No valid recovery token found. Token:', token, 'Type:', type);
+          console.error('Invalid request parameters:', { token, type, changePassword });
           throw new Error('Invalid password reset request');
         }
       } catch (error: any) {
@@ -84,7 +85,7 @@ export function PasswordUpdateForm() {
     };
 
     initializeForm();
-  }, [token, type, navigate]);
+  }, [token, type, changePassword, navigate]);
 
   const form = useForm({
     resolver: zodResolver(passwordSchema),
@@ -97,16 +98,23 @@ export function PasswordUpdateForm() {
   const onSubmit = async (values: z.infer<typeof passwordSchema>) => {
     setIsLoading(true);
     try {
+      console.log('Attempting to update password for email:', userEmail);
+      
       const { error } = await supabase.auth.updateUser({ 
         password: values.newPassword 
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error updating password:', error);
+        throw error;
+      }
 
+      console.log('Password updated successfully');
       toast.success('Password set successfully! You can now log in.');
       form.reset();
       navigate('/auth');
     } catch (error: any) {
+      console.error('Failed to set password:', error);
       toast.error(error.message || 'Failed to set password');
     } finally {
       setIsLoading(false);
