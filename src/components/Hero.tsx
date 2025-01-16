@@ -53,7 +53,7 @@ const Hero = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-bright-blue via-bright-blue/80 to-bright-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </button>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px] bg-gradient-to-b from-bright-blue/30 to-navy/95 backdrop-blur-lg p-8 rounded-xl shadow-xl border border-bright-blue/20">
+                <DialogContent className="sm:max-w-[425px] bg-[#1A1F2C] backdrop-blur-sm p-8 rounded-xl shadow-xl border border-white/10">
                   <DialogHeader>
                     <DialogTitle className="text-3xl font-bold text-center text-white mb-2">
                       Unlock Your Trading Potential Today! 🚀
