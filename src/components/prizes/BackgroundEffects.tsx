@@ -7,7 +7,7 @@ const BackgroundEffects = () => {
           backgroundImage: 'url("/lovable-uploads/5afc0bf4-60fc-4269-bbb3-bdafb47a4a7c.png")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'brightness(0.7) contrast(0.9)',
+          filter: 'brightness(0.4) contrast(0.9)',
           transform: 'scale(1.1)',
           opacity: '0.9',
         }}
