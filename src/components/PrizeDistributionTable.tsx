@@ -43,10 +43,10 @@ const PrizeDistributionTable = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white font-display mb-4">
+          <h2 className="text-5xl font-bold text-white font-display mb-4">
             Prize Distribution
           </h2>
-          <p className="text-white text-xl mb-8">
+          <p className="text-2xl text-white mb-8 font-medium">
             Total Prize Pool: $6,250
           </p>
           <div className="w-24 h-1 bg-bright-blue mx-auto rounded-full" />
@@ -70,28 +70,28 @@ const PrizeDistributionTable = () => {
                 )}
                 
                 <div className="relative z-10 space-y-4">
-                  <h3 className="text-2xl font-bold text-white mb-2 text-center">
+                  <h3 className="text-3xl font-bold text-white mb-2 text-center">
                     {tier.title}
                   </h3>
                   
                   <div className="grid sm:grid-cols-4 gap-4 items-center text-center sm:text-left">
                     <div className="text-white">
-                      <p className="text-sm opacity-70">Position</p>
-                      <p className="font-semibold">{tier.position}</p>
+                      <p className="text-base opacity-80 font-medium mb-1">Position</p>
+                      <p className="text-xl font-semibold">{tier.position}</p>
                     </div>
                     <div className="text-white">
-                      <p className="text-sm opacity-70">Winners</p>
-                      <p className="font-semibold">{tier.winners}</p>
+                      <p className="text-base opacity-80 font-medium mb-1">Winners</p>
+                      <p className="text-xl font-semibold">{tier.winners}</p>
                     </div>
                     <div className="text-white">
-                      <p className="text-sm opacity-70">Prize</p>
-                      <p className={`font-semibold ${index === 0 ? 'text-yellow-400' : ''}`}>
+                      <p className="text-base opacity-80 font-medium mb-1">Prize</p>
+                      <p className={`text-xl font-semibold ${index === 0 ? 'text-yellow-400' : ''}`}>
                         {tier.prize}
                       </p>
                     </div>
                     <div className="text-white">
-                      <p className="text-sm opacity-70">Total</p>
-                      <p className="font-semibold">{tier.total}</p>
+                      <p className="text-base opacity-80 font-medium mb-1">Total</p>
+                      <p className="text-xl font-semibold">{tier.total}</p>
                     </div>
                   </div>
                 </div>
