@@ -4,13 +4,13 @@ const Rules = () => {
   return (
     <section className="relative py-16 overflow-hidden bg-navy">
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50"
         style={{ 
-          backgroundImage: 'url("/lovable-uploads/e9c136b6-a734-4836-a50b-e8984f715f89.png")',
-          filter: 'brightness(0.7) contrast(1.2)'
+          backgroundImage: 'url("/lovable-uploads/7cec8cef-9c5b-423c-9299-4f44b4430fb1.png")',
+          filter: 'brightness(1.2) contrast(1.1)'
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-br from-navy/95 via-navy/90 to-[#001F3F]/85" />
+      <div className="absolute inset-0 bg-gradient-to-br from-navy/90 via-navy/85 to-[#001F3F]/80" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
