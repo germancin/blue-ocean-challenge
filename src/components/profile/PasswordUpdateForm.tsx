@@ -28,6 +28,7 @@ const passwordSchema = z.object({
 export function PasswordUpdateForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [verifying, setVerifying] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
@@ -37,40 +38,65 @@ export function PasswordUpdateForm() {
   useEffect(() => {
     const getEmailFromToken = async () => {
       try {
-        // If we have a recovery token, verify it to get the email
+        console.log('Token:', token);
+        console.log('Type:', type);
+        
         if (token && type === 'recovery') {
-          const { data, error } = await supabase.auth.verifyOtp({
-            token_hash: token,
-            type: 'recovery',
-          });
-
+          // First, try to get the user from the recovery token
+          const { data: { user }, error } = await supabase.auth.getUser();
+          console.log('Initial user data:', user);
+          
           if (error) {
-            console.error('Error verifying token:', error);
-            toast.error('Invalid or expired recovery link. Please request a new one.');
-            navigate('/auth');
-            return;
+            console.error('Error getting user:', error);
           }
 
-          if (data?.user?.email) {
-            setUserEmail(data.user.email);
+          if (!user) {
+            // If no user is found, verify the token
+            const { data, error: verifyError } = await supabase.auth.verifyOtp({
+              token_hash: token,
+              type: 'recovery',
+            });
+            
+            console.log('Verify OTP response:', data);
+            
+            if (verifyError) {
+              console.error('Error verifying token:', verifyError);
+              toast.error('Invalid or expired recovery link. Please request a new one.');
+              navigate('/auth');
+              return;
+            }
+
+            if (data?.user?.email) {
+              console.log('Setting email from token verification:', data.user.email);
+              setUserEmail(data.user.email);
+            } else {
+              console.error('No email found in token verification response');
+              toast.error('Could not retrieve email from recovery token');
+              navigate('/auth');
+            }
           } else {
-            toast.error('Could not retrieve email from recovery token');
-            navigate('/auth');
+            // If user exists in session, use that email
+            console.log('Setting email from session:', user.email);
+            setUserEmail(user.email);
           }
         } else {
           // Fallback to getting email from session
           const { data: { user } } = await supabase.auth.getUser();
           if (user?.email) {
+            console.log('Setting email from session fallback:', user.email);
             setUserEmail(user.email);
           } else {
+            console.error('No user found in session');
             toast.error('Could not retrieve user email');
             navigate('/auth');
           }
         }
       } catch (error) {
-        console.error('Error getting email:', error);
+        console.error('Error in getEmailFromToken:', error);
         toast.error('An error occurred while retrieving your information');
         navigate('/auth');
+      } finally {
+        setVerifying(false);
       }
     };
 
@@ -106,11 +132,20 @@ export function PasswordUpdateForm() {
     }
   };
 
-  if (!userEmail) {
+  if (verifying) {
     return (
       <div className="flex flex-col items-center justify-center space-y-4">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
         <p className="text-sm text-muted-foreground">Verifying your recovery link...</p>
+      </div>
+    );
+  }
+
+  if (!userEmail) {
+    return (
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <p className="text-sm text-red-600">Unable to verify your recovery link. Please request a new one.</p>
+        <Button onClick={() => navigate('/auth')}>Return to Login</Button>
       </div>
     );
   }
