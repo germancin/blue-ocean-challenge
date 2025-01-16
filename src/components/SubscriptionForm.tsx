@@ -32,9 +32,9 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
       const paymentStatus = await checkPaymentStatus(data.email);
       
       if (paymentStatus === 'success') {
-        toast.info("You've already completed payment. Redirecting to dashboard...");
+        toast.info("You've already completed payment. Redirecting to payment verification...");
         onSuccess();
-        navigate('/dashboard');
+        navigate('/payment', { state: { email: data.email } });
         return;
       }
 
@@ -51,9 +51,9 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
         const paymentStatus = await checkPaymentStatus(data.email);
         
         if (paymentStatus === 'success') {
-          toast.info("You've already completed payment. Redirecting to dashboard...");
+          toast.info("You've already completed payment. Redirecting to payment verification...");
           onSuccess();
-          navigate('/dashboard');
+          navigate('/payment', { state: { email: data.email } });
         } else {
           toast.info("You're already registered. Redirecting to payment...");
           onSuccess();
