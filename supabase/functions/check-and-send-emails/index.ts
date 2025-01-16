@@ -1,73 +1,92 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
 
-const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
-const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
-const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-
 const corsHeaders = {
-	'Access-Control-Allow-Origin': '*',
-	'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+  'Access-Control-Max-Age': '86400',
 };
 
 serve(async (req) => {
-	console.log('Got into the check and send email', req);
-	if (req.method === 'OPTIONS') {
-		return new Response(null, { headers: corsHeaders });
-	}
+  console.log('Got into the check and send email', req);
 
-	try {
-		if (!RESEND_API_KEY) {
-			throw new Error('Email service not configured');
-		}
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    console.log('Handling OPTIONS request');
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders
+    });
+  }
 
-		const { email, paymentId, amount } = await req.json();
-		console.log('Processing request for:', { email, paymentId, amount });
+  try {
+    if (!Deno.env.get('RESEND_API_KEY')) {
+      throw new Error('Email service not configured');
+    }
 
-		if (!email || !paymentId) {
-			throw new Error('Email and paymentId are required');
-		}
+    const { email, paymentId, amount } = await req.json();
+    console.log('Processing request for:', { email, paymentId, amount });
 
-		const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    if (!email || !paymentId) {
+      throw new Error('Email and paymentId are required');
+    }
 
-		// First check if email was already sent
-		const { data: payment, error: fetchError } = await supabase.from('payments').select('email_sent').eq('id', paymentId).single();
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    );
 
-		if (fetchError) {
-			console.error('Error fetching payment:', fetchError);
-			throw new Error('Payment not found');
-		}
+    // First check if email was already sent
+    const { data: payment, error: fetchError } = await supabase
+      .from('payments')
+      .select('email_sent')
+      .eq('id', paymentId)
+      .single();
 
-		if (payment.email_sent) {
-			return new Response(JSON.stringify({ message: 'Email already sent', success: true }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
-		}
+    if (fetchError) {
+      console.error('Error fetching payment:', fetchError);
+      throw new Error('Payment not found');
+    }
 
-		// Generate recovery link for password setup
-		const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
-			type: 'recovery',
-			email: email,
-			options: {
-				redirectTo: `${SUPABASE_URL}/profile?changePassword=true`,
-			},
-		});
+    console.log('Payment data:', payment);
 
-		if (linkError || !linkData?.properties?.action_link) {
-			console.error('Error generating recovery link:', linkError);
-			throw new Error('Failed to generate password reset link');
-		}
+    if (payment.email_sent) {
+      console.log('Email was already sent for payment:', paymentId);
+      return new Response(
+        JSON.stringify({ message: 'Email already sent', success: true }), 
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
-		// Send email with Resend
-		const emailRes = await fetch('https://api.resend.com/emails', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${RESEND_API_KEY}`,
-			},
-			body: JSON.stringify({
-				from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
-				to: [email],
-				subject: 'Payment Confirmation - Elite Trading Tournament',
-				html: `
+    // Generate recovery link for password setup
+    const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
+      type: 'recovery',
+      email: email,
+      options: {
+        redirectTo: `${Deno.env.get('SUPABASE_URL')}/profile?changePassword=true`,
+      },
+    });
+
+    if (linkError || !linkData?.properties?.action_link) {
+      console.error('Error generating recovery link:', linkError);
+      throw new Error('Failed to generate password reset link');
+    }
+
+    console.log('Generated password reset link successfully');
+
+    // Send email with Resend
+    const emailRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Deno.env.get('RESEND_API_KEY')}`,
+      },
+      body: JSON.stringify({
+        from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
+        to: [email],
+        subject: 'Payment Confirmation - Elite Trading Tournament',
+        html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
 
@@ -106,38 +125,44 @@ serve(async (req) => {
             </p>
           </div>
         `,
-			}),
-		});
+      }),
+    });
 
-		if (!emailRes.ok) {
-			const error = await emailRes.text();
-			console.error('Resend API error:', error);
-			throw new Error(`Failed to send email: ${error}`);
-		}
+    if (!emailRes.ok) {
+      const error = await emailRes.text();
+      console.error('Resend API error:', error);
+      throw new Error(`Failed to send email: ${error}`);
+    }
 
-		// Update payment record to mark email as sent
-		const { error: updateError } = await supabase.from('payments').update({ email_sent: true }).eq('id', paymentId);
+    console.log('Email sent successfully, updating payment record');
 
-		if (updateError) {
-			console.error('Error updating email_sent status:', updateError);
-			throw new Error('Failed to update email status');
-		}
+    // Update payment record to mark email as sent
+    const { error: updateError } = await supabase
+      .from('payments')
+      .update({ email_sent: true })
+      .eq('id', paymentId);
 
-		console.log('Email sent and status updated successfully for payment:', paymentId);
+    if (updateError) {
+      console.error('Error updating email_sent status:', updateError);
+      throw new Error('Failed to update email status');
+    }
 
-		return new Response(JSON.stringify({ success: true }), {
-			headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-		});
-	} catch (error) {
-		console.error('Error in check-and-send-emails:', error);
-		return new Response(
-			JSON.stringify({
-				error: error instanceof Error ? error.message : 'Unknown error occurred',
-			}),
-			{
-				status: 500,
-				headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-			},
-		);
-	}
+    console.log('Payment record updated successfully');
+
+    return new Response(
+      JSON.stringify({ success: true, message: 'Email sent successfully' }),
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+  } catch (error) {
+    console.error('Error in check-and-send-emails:', error);
+    return new Response(
+      JSON.stringify({
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
+      }),
+      {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      }
+    );
+  }
 });
