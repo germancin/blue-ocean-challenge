@@ -9,7 +9,7 @@ const BackgroundEffects = () => {
           backgroundPosition: 'center',
           filter: 'brightness(1.1) contrast(1.1)',
           transform: 'scale(1.1)',
-          opacity: '0.8',
+          opacity: '0.9',
         }}
       />
 
