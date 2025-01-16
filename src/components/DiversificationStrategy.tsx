@@ -23,7 +23,7 @@ const DiversificationStrategy = () => {
   return (
     <div id="strategy" className="relative bg-navy py-20 overflow-hidden">
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-50 brightness-[0.4]"
+        className="absolute inset-0 bg-cover bg-center opacity-50 brightness-[0.2]"
         style={{ 
           backgroundImage: 'url("/lovable-uploads/490f6ed8-97cc-4c95-962d-26d5cac2fda8.png")'
         }}
