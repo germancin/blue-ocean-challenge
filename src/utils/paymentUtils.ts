@@ -127,14 +127,14 @@ export const createOrUpdatePendingPayment = async (email: string, amount: number
   return newPayment;
 };
 
-export const sendPaymentConfirmationEmail = async (email: string, amount: number) => {
+export const sendPaymentConfirmationEmail = async (email: string, paymentId: string) => {
   try {
-    console.log('Sending confirmation email for:', email, 'amount:', amount);
+    console.log('Sending confirmation email for:', email, 'paymentId:', paymentId);
     
     const { data, error } = await supabase.functions.invoke('check-and-send-emails', {
       body: { 
         email,
-        amount 
+        paymentId
       }
     });
 
