@@ -58,10 +58,6 @@ serve(async (req) => {
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'recovery',
       email: email,
-      options: {
-        // Let Supabase handle appending the token and type parameters
-        redirectTo: `${Deno.env.get('SUPABASE_URL')}/profile`,
-      },
     });
 
     if (linkError || !linkData?.properties?.action_link) {
@@ -69,7 +65,7 @@ serve(async (req) => {
       throw new Error('Failed to generate password recovery link');
     }
 
-    console.log('Generated recovery link successfully');
+    console.log('Generated recovery link:', linkData.properties.action_link);
 
     // Send welcome email with password setup link via Resend
     const emailRes = await fetch('https://api.resend.com/emails', {
