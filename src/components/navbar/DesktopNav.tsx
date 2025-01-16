@@ -73,6 +73,13 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
           </Button>
           <Button 
             variant="ghost"
+            onClick={() => navigate('/chart')}
+            className="text-bright-blue hover:bg-bright-blue/10"
+          >
+            Charts
+          </Button>
+          <Button 
+            variant="ghost"
             onClick={() => navigate('/profile')}
             className="text-bright-blue hover:bg-bright-blue/10"
           >

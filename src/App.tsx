@@ -9,6 +9,7 @@ import Payment from "./pages/Payment";
 import AuthPage from "./pages/Auth";
 import ProfilePage from "./pages/Profile";
 import Terms from "./pages/Terms";
+import ChartPage from "./pages/Chart";
 import { useAuth } from "./components/AuthProvider";
 
 const queryClient = new QueryClient();
@@ -57,6 +58,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <ProfilePage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/chart" 
+              element={
+                <ProtectedRoute>
+                  <ChartPage />
                 </ProtectedRoute>
               } 
             />
