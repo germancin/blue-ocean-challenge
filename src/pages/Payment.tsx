@@ -61,7 +61,8 @@ const PaymentPage = () => {
                 const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
                   body: { 
                     email,
-                    paymentId: existingPayment.id
+                    paymentId: existingPayment.id,
+                    amount: existingPayment.amount
                   }
                 });
                 
@@ -126,10 +127,25 @@ const PaymentPage = () => {
       const sendEmail = async () => {
         try {
           console.log('Attempting to send confirmation email for payment:', currentPaymentId);
+          
+          // First fetch the payment details to get the amount
+          const { data: payment, error: fetchError } = await supabase
+            .from('payments')
+            .select('amount')
+            .eq('id', currentPaymentId)
+            .single();
+
+          if (fetchError || !payment) {
+            console.error('Error fetching payment details:', fetchError);
+            toast.error('Failed to fetch payment details');
+            return;
+          }
+
           const { error: emailError } = await supabase.functions.invoke('check-and-send-emails', {
             body: { 
               email,
-              paymentId: currentPaymentId
+              paymentId: currentPaymentId,
+              amount: payment.amount
             }
           });
 
@@ -162,7 +178,7 @@ const PaymentPage = () => {
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1">
-          <PaymentInformationCard onAcceptTerms={handleTermsAcceptance} />
+          <PaymentInformationCard onAcceptTerms={handleTermsAccepted} />
         </div>
 
         <div className="lg:col-span-1">
