@@ -46,7 +46,7 @@ const PrizeDistributionTable = () => {
           <div className="relative inline-block">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
             <h2 className="relative text-4xl md:text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">
-              Prize Pool Distribution
+              Prize Distribution
             </h2>
           </div>
           <p className="text-2xl md:text-3xl text-white mb-8 font-medium tracking-wide">
