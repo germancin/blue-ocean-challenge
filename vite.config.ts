@@ -10,7 +10,15 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   build: {
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 2000, // Increased from 1000 to 2000
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-tooltip', '@radix-ui/react-accordion'],
+        },
+      },
+    },
   },
   plugins: [
     react(),
