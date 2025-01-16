@@ -38,62 +38,38 @@ export function PasswordUpdateForm() {
   useEffect(() => {
     const getEmailFromToken = async () => {
       try {
+        console.log('Starting token verification process');
         console.log('Token:', token);
         console.log('Type:', type);
-        
-        if (token && type === 'recovery') {
-          // First, try to get the user from the recovery token
-          const { data: { user }, error } = await supabase.auth.getUser();
-          console.log('Initial user data:', user);
-          
-          if (error) {
-            console.error('Error getting user:', error);
-          }
 
-          if (!user) {
-            // If no user is found, verify the token
-            const { data, error: verifyError } = await supabase.auth.verifyOtp({
-              token_hash: token,
-              type: 'recovery',
-            });
-            
-            console.log('Verify OTP response:', data);
-            
-            if (verifyError) {
-              console.error('Error verifying token:', verifyError);
-              toast.error('Invalid or expired recovery link. Please request a new one.');
-              navigate('/auth');
-              return;
-            }
-
-            if (data?.user?.email) {
-              console.log('Setting email from token verification:', data.user.email);
-              setUserEmail(data.user.email);
-            } else {
-              console.error('No email found in token verification response');
-              toast.error('Could not retrieve email from recovery token');
-              navigate('/auth');
-            }
-          } else {
-            // If user exists in session, use that email
-            console.log('Setting email from session:', user.email);
-            setUserEmail(user.email);
-          }
-        } else {
-          // Fallback to getting email from session
-          const { data: { user } } = await supabase.auth.getUser();
-          if (user?.email) {
-            console.log('Setting email from session fallback:', user.email);
-            setUserEmail(user.email);
-          } else {
-            console.error('No user found in session');
-            toast.error('Could not retrieve user email');
-            navigate('/auth');
-          }
+        if (!token || type !== 'recovery') {
+          throw new Error('Invalid recovery link parameters');
         }
-      } catch (error) {
+
+        // First verify the OTP token
+        const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
+          token_hash: token,
+          type: 'recovery',
+        });
+
+        console.log('Verify OTP response:', verifyData);
+        
+        if (verifyError) {
+          console.error('Error verifying token:', verifyError);
+          throw new Error('Invalid or expired recovery link');
+        }
+
+        if (!verifyData?.user?.email) {
+          console.error('No email found in verification response');
+          throw new Error('Could not retrieve email from recovery token');
+        }
+
+        console.log('Successfully retrieved email:', verifyData.user.email);
+        setUserEmail(verifyData.user.email);
+
+      } catch (error: any) {
         console.error('Error in getEmailFromToken:', error);
-        toast.error('An error occurred while retrieving your information');
+        toast.error(error.message || 'An error occurred while verifying your recovery link');
         navigate('/auth');
       } finally {
         setVerifying(false);
@@ -122,8 +98,6 @@ export function PasswordUpdateForm() {
 
       toast.success('Password set successfully! You can now log in.');
       form.reset();
-      
-      // Redirect to login page after successful password update
       navigate('/auth');
     } catch (error: any) {
       toast.error(error.message || 'Failed to set password');
