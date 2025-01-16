@@ -39,7 +39,9 @@ const DiversificationStrategy = () => {
               </div>
               <div className="-mx-8 -mb-[1px]">
                 <img 
-                  src={index === 1 ? "/lovable-uploads/c936bd0d-019f-48d0-923d-64fa1671eaf1.png" : "/lovable-uploads/e1a1adda-f688-4160-9548-0535dbf1afd2.png"}
+                  src={index === 2 ? "/lovable-uploads/3406221e-b8b1-4f5a-8950-831c6354f0e9.png" : 
+                      index === 1 ? "/lovable-uploads/c936bd0d-019f-48d0-923d-64fa1671eaf1.png" : 
+                      "/lovable-uploads/e1a1adda-f688-4160-9548-0535dbf1afd2.png"}
                   alt="Trading Interface" 
                   className="w-full rounded-b-lg hover:opacity-90 transition-opacity duration-300"
                 />
