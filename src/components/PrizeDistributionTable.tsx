@@ -30,8 +30,16 @@ const PrizeDistributionTable = () => {
 
   return (
     <div className="bg-navy py-20 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,123,255,0.1),transparent_50%)]" />
+      {/* Background image with blur and opacity */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 blur-sm"
+        style={{
+          backgroundImage: "url('/lovable-uploads/f72cf336-f7f5-4f48-b178-7503ef515628.png')",
+        }}
+      />
+      
+      {/* Overlay gradient */}
+      <div className="absolute inset-0 bg-navy/70" />
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
