@@ -38,7 +38,7 @@ const Hero = () => {
           <div className="text-white space-y-8 animate-fade-in order-1 md:order-1 text-center md:text-left">
             <div className="space-y-4">
               <div className="inline-block bg-bright-blue/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                <span className="text-bright-blue font-semibold">🏆 Trading Tournament 2024</span>
+                <span className="text-bright-blue font-semibold">🏆 Trading Tournament 2025</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-bright-blue to-white bg-clip-text text-transparent animate-pulse">
                 150 traders, 33% chance of success, and the rest is up to you!
