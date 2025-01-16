@@ -20,8 +20,8 @@ serve(async (req) => {
       throw new Error('Email service not configured');
     }
 
-    const { email, paymentId } = await req.json();
-    console.log('Processing request for:', { email, paymentId });
+    const { email, paymentId, amount } = await req.json();
+    console.log('Processing request for:', { email, paymentId, amount });
 
     if (!email || !paymentId) {
       throw new Error('Email and paymentId are required');
@@ -29,19 +29,15 @@ serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
-    // Get payment details
+    // First check if email was already sent
     const { data: payment, error: fetchError } = await supabase
       .from('payments')
-      .select('*')
+      .select('email_sent')
       .eq('id', paymentId)
       .single();
 
     if (fetchError) {
       console.error('Error fetching payment:', fetchError);
-      throw new Error('Payment not found');
-    }
-
-    if (!payment) {
       throw new Error('Payment not found');
     }
 
@@ -52,7 +48,7 @@ serve(async (req) => {
       );
     }
 
-    // Generate recovery link
+    // Generate recovery link for password setup
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: 'recovery',
       email: email,
@@ -82,7 +78,7 @@ serve(async (req) => {
             <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
             
             <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-              Thank you for your payment of ${payment.amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
+              Thank you for your payment of ${amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
             </p>
 
             <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
@@ -120,9 +116,9 @@ serve(async (req) => {
     });
 
     if (!emailRes.ok) {
-      const emailError = await emailRes.text();
-      console.error('Resend API error:', emailError);
-      throw new Error(`Failed to send email: ${emailError}`);
+      const error = await emailRes.text();
+      console.error('Resend API error:', error);
+      throw new Error(`Failed to send email: ${error}`);
     }
 
     // Update payment record to mark email as sent
@@ -135,6 +131,8 @@ serve(async (req) => {
       console.error('Error updating email_sent status:', updateError);
       throw new Error('Failed to update email status');
     }
+
+    console.log('Email sent and status updated successfully for payment:', paymentId);
 
     return new Response(
       JSON.stringify({ success: true }),
