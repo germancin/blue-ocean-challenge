@@ -54,38 +54,10 @@ serve(async (req) => {
 		}
 
 		// Generate recovery link for first-time password setup
-		console.log('Generating password recovery link for:', email);
-
-		// First check if user exists
-		const { data: existingUser, error: userError } = await supabase.auth.admin.listUsers();
-		const userExists = existingUser?.users.some(user => user.email === email);
-
-		if (userError) {
-			console.error('Error checking user existence:', userError);
-			throw new Error('Failed to check user existence');
-		}
-
-		let recoveryLink;
-
-		if (!userExists) {
-			// Create user if they don't exist
-			console.log('User does not exist, creating new user');
-			const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
-				email: email,
-				email_confirm: true,
-				password: crypto.randomUUID(),
-			});
-
-			if (createError) {
-				console.error('Error creating user:', createError);
-				throw new Error('Failed to create user account');
-			}
-
-			console.log('New user created:', newUser);
-		}
+		console.log('Starting password recovery process for:', email);
 
 		// Generate password reset link
-		console.log('Generating recovery link');
+		console.log('Generating recovery link with admin.generateLink');
 		const { data: resetData, error: resetError } = await supabase.auth.admin.generateLink({
 			type: 'recovery',
 			email: email,
@@ -99,13 +71,16 @@ serve(async (req) => {
 			throw new Error('Failed to generate password reset link');
 		}
 
+		console.log('Reset data received:', resetData);
+
 		if (!resetData?.properties?.action_link) {
-			console.error('No action link in reset data');
+			console.error('No action link in reset data:', resetData);
 			throw new Error('No recovery link generated');
 		}
 
-		recoveryLink = resetData.properties.action_link;
-		console.log('Generated recovery link:', recoveryLink);
+		const recoveryLink = resetData.properties.action_link;
+		console.log('Successfully generated recovery link:', recoveryLink);
+		console.log('Token from link:', new URL(recoveryLink).searchParams.get('token'));
 
 		// Send welcome email with password setup link via Resend
 		const emailRes = await fetch('https://api.resend.com/emails', {

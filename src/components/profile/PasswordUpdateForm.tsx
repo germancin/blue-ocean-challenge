@@ -44,7 +44,7 @@ export function PasswordUpdateForm() {
   useEffect(() => {
     const initializeForm = async () => {
       try {
-        console.log('Initializing password form with token:', token);
+        console.log('Starting form initialization with token:', token);
         
         // Recovery flow with token
         if (token && type === 'recovery') {
@@ -56,20 +56,22 @@ export function PasswordUpdateForm() {
             type: 'recovery',
           });
 
+          console.log('Verify OTP response:', { verifyData, verifyError });
+
           if (verifyError) {
             console.error('Error verifying token:', verifyError);
             throw new Error('Invalid or expired recovery link');
           }
 
           if (!verifyData?.user?.email) {
-            console.error('No email found in verification response');
+            console.error('No email found in verification response:', verifyData);
             throw new Error('Could not retrieve email from recovery token');
           }
 
           console.log('Successfully verified token for email:', verifyData.user.email);
           setUserEmail(verifyData.user.email);
         } else {
-          console.error('No valid recovery token found');
+          console.error('No valid recovery token found. Token:', token, 'Type:', type);
           throw new Error('Invalid password reset request');
         }
       } catch (error: any) {
