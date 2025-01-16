@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Payment from "./pages/Payment";
 import AuthPage from "./pages/Auth";
 import ProfilePage from "./pages/Profile";
+import Terms from "./pages/Terms";
 import { useAuth } from "./components/AuthProvider";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/terms" element={<Terms />} />
             <Route 
               path="/profile" 
               element={

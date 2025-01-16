@@ -1,6 +1,7 @@
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
+import { Link } from "react-router-dom";
 import { FieldErrors, UseFormRegister } from "react-hook-form";
 
 interface SubscriptionFormData {
@@ -73,7 +74,15 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
           htmlFor="acceptTerms"
           className="text-sm font-medium leading-none text-white cursor-pointer"
         >
-          I accept the terms and conditions
+          I accept the{" "}
+          <Link
+            to="/terms"
+            className="text-purple-400 hover:text-purple-300 underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            terms and conditions
+          </Link>
         </Label>
       </div>
       {errors.acceptTerms && (
