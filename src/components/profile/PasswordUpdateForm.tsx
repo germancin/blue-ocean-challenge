@@ -29,31 +29,42 @@ export function PasswordUpdateForm() {
 	const navigate = useNavigate();
 	const { user } = useAuth();
 
-	// Get URL parameters - token is directly in the URL, not in hash
-	const params = new URLSearchParams(location.search);
-	console.log('params::', params);
-	const changePassword = params.get('changePassword');
-	const token = params.get('token');
-	const type = params.get('type');
-
-	console.log('URL Parameters:', {
-		changePassword,
-		token,
-		type,
-		fullUrl: window.location.href,
-	});
-
 	useEffect(() => {
 		const initializeForm = async () => {
 			try {
 				console.log('Starting form initialization');
+				console.log('Current URL:', window.location.href);
 
-				if (token && type === 'recovery') {
-					console.log('Found token:', token);
+				// If we're coming directly from Supabase's email link
+				if (window.location.href.includes('supabase.co/auth/v1/verify')) {
+					const currentUrl = new URL(window.location.href);
+					const token = currentUrl.searchParams.get('token');
+					const type = currentUrl.searchParams.get('type');
+					
+					console.log('Detected Supabase verification URL', { token, type });
 
-					// Verify the recovery token
+					if (token && type === 'recovery') {
+						// Store token in session storage before redirect
+						sessionStorage.setItem('recovery_token', token);
+						
+						// Redirect to our app's password reset page
+						const redirectUrl = currentUrl.searchParams.get('redirect_to');
+						if (redirectUrl) {
+							window.location.href = redirectUrl;
+							return;
+						}
+					}
+				}
+
+				// Check for stored token in session storage
+				const storedToken = sessionStorage.getItem('recovery_token');
+				console.log('Checking stored token:', storedToken);
+
+				if (storedToken) {
+					console.log('Found stored token, verifying...');
+
 					const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
-						token_hash: token,
+						token_hash: storedToken,
 						type: 'recovery',
 					});
 
@@ -71,8 +82,11 @@ export function PasswordUpdateForm() {
 
 					console.log('Successfully verified token for email:', verifyData.user.email);
 					setUserEmail(verifyData.user.email);
+					
+					// Clear the token from session storage
+					sessionStorage.removeItem('recovery_token');
 				} else {
-					console.error('No valid token found in URL');
+					console.error('No recovery token found');
 					throw new Error('Invalid password reset request');
 				}
 			} catch (error: any) {
@@ -85,7 +99,7 @@ export function PasswordUpdateForm() {
 		};
 
 		initializeForm();
-	}, [token, type, navigate]);
+	}, [navigate]);
 
 	const form = useForm({
 		resolver: zodResolver(passwordSchema),
