@@ -31,22 +31,31 @@ export function PasswordUpdateForm() {
   const [verifying, setVerifying] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
-  const searchParams = new URLSearchParams(location.search);
-  const token = searchParams.get('token');
-  const type = searchParams.get('type');
+
+  // Get the full URL to parse parameters
+  const fullUrl = window.location.href;
+  console.log('Full URL:', fullUrl);
+  
+  // Parse URL parameters
+  const urlParams = new URL(fullUrl).searchParams;
+  const token = urlParams.get('token');
+  const type = urlParams.get('type');
+
+  console.log('URL Parameters:', { token, type });
 
   useEffect(() => {
     const getEmailFromToken = async () => {
       try {
         console.log('Starting token verification process');
-        console.log('Token:', token);
-        console.log('Type:', type);
+        console.log('Token from URL:', token);
+        console.log('Type from URL:', type);
 
         if (!token || type !== 'recovery') {
+          console.error('Missing or invalid parameters:', { token, type });
           throw new Error('Invalid recovery link parameters');
         }
 
-        // First verify the OTP token
+        // Verify the OTP token
         const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
           token_hash: token,
           type: 'recovery',
