@@ -35,18 +35,47 @@ export function PasswordUpdateForm() {
   const type = searchParams.get('type');
 
   useEffect(() => {
-    const getEmailFromSession = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user?.email) {
-        setUserEmail(user.email);
+    const getEmailFromToken = async () => {
+      try {
+        // If we have a recovery token, verify it to get the email
+        if (token && type === 'recovery') {
+          const { data, error } = await supabase.auth.verifyOtp({
+            token_hash: token,
+            type: 'recovery',
+          });
+
+          if (error) {
+            console.error('Error verifying token:', error);
+            toast.error('Invalid or expired recovery link. Please request a new one.');
+            navigate('/auth');
+            return;
+          }
+
+          if (data?.user?.email) {
+            setUserEmail(data.user.email);
+          } else {
+            toast.error('Could not retrieve email from recovery token');
+            navigate('/auth');
+          }
+        } else {
+          // Fallback to getting email from session
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user?.email) {
+            setUserEmail(user.email);
+          } else {
+            toast.error('Could not retrieve user email');
+            navigate('/auth');
+          }
+        }
+      } catch (error) {
+        console.error('Error getting email:', error);
+        toast.error('An error occurred while retrieving your information');
+        navigate('/auth');
       }
     };
 
-    // If we have a recovery token, get the email from it
-    if (token && type === 'recovery') {
-      getEmailFromSession();
-    }
-  }, [token, type]);
+    getEmailFromToken();
+  }, [token, type, navigate]);
 
   const form = useForm({
     resolver: zodResolver(passwordSchema),
@@ -79,8 +108,9 @@ export function PasswordUpdateForm() {
 
   if (!userEmail) {
     return (
-      <div className="flex items-center justify-center">
-        <Loader2 className="h-6 w-6 animate-spin" />
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <p className="text-sm text-muted-foreground">Verifying your recovery link...</p>
       </div>
     );
   }
@@ -90,7 +120,7 @@ export function PasswordUpdateForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
           <FormLabel>Email</FormLabel>
-          <Input type="email" value={userEmail} disabled />
+          <Input type="email" value={userEmail} disabled className="bg-muted" />
         </div>
 
         <FormField
