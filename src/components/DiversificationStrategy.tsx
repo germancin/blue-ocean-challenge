@@ -29,13 +29,14 @@ const DiversificationStrategy = () => {
         }}
       />
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-5xl md:text-6xl font-display font-bold text-white text-center mb-16 animate-fade-in">
-          <span className="relative">
-            Diversified Trading Strategies
-            <span className="absolute -bottom-2 left-0 right-0 h-1 bg-bright-blue blur-sm"></span>
-            <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-bright-blue"></span>
-          </span>
-        </h2>
+        <div className="text-center mb-16 animate-fade-in">
+          <div className="relative inline-block">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
+            <h2 className="relative text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">
+              Diversified Trading Strategies
+            </h2>
+          </div>
+        </div>
         <div className="grid md:grid-cols-3 gap-8">
           {strategies.map((strategy, index) => (
             <div key={index} className="bg-navy/50 p-8 pt-8 pb-0 rounded-lg border border-white/10 backdrop-blur-sm hover:border-bright-blue/50 transition-all duration-300 flex flex-col">
