@@ -48,16 +48,20 @@ serve(async (req) => {
 		const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
 			type: 'recovery',
 			email: email,
+			options: {
+				redirectTo: 'https://elitetraderhub.co/profile'
+			}
 		});
 
-		console.log('linkData::', linkData);
+		console.log('Generated link data:', linkData);
 
 		if (linkError || !linkData?.properties?.action_link) {
 			console.error('Error generating recovery link:', linkError);
 			throw new Error('Failed to generate password recovery link');
 		}
 
-		console.log('Generated recovery link:', linkData.properties.action_link);
+		const recoveryLink = linkData.properties.action_link;
+		console.log('Generated recovery link:', recoveryLink);
 
 		// Send welcome email with password setup link via Resend
 		const emailRes = await fetch('https://api.resend.com/emails', {
@@ -83,7 +87,7 @@ serve(async (req) => {
             </p>
 
             <div style="text-align: center; margin: 32px 0;">
-              <a href="${linkData.properties.action_link}"
+              <a href="${recoveryLink}"
                  style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                 Set Up Your Password
               </a>
