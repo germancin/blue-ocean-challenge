@@ -33,61 +33,21 @@ export function PasswordUpdateForm() {
 		const initializeForm = async () => {
 			try {
 				console.log('Starting form initialization');
-				console.log('Current URL:', window.location.href);
-
-				// If we're coming directly from Supabase's email link
-				if (window.location.href.includes('supabase.co/auth/v1/verify')) {
-					const currentUrl = new URL(window.location.href);
-					const token = currentUrl.searchParams.get('token');
-					const type = currentUrl.searchParams.get('type');
-					
-					console.log('Detected Supabase verification URL', { token, type });
-
-					if (token && type === 'recovery') {
-						// Store token in session storage before redirect
-						sessionStorage.setItem('recovery_token', token);
-						
-						// Redirect to our app's password reset page
-						const redirectUrl = currentUrl.searchParams.get('redirect_to');
-						if (redirectUrl) {
-							window.location.href = redirectUrl;
-							return;
-						}
-					}
+				const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+				
+				if (sessionError) {
+					console.error('Session error:', sessionError);
+					throw new Error('Failed to get session');
 				}
 
-				// Check for stored token in session storage
-				const storedToken = sessionStorage.getItem('recovery_token');
-				console.log('Checking stored token:', storedToken);
+				console.log('Session data:', session);
 
-				if (storedToken) {
-					console.log('Found stored token, verifying...');
-
-					const { data: verifyData, error: verifyError } = await supabase.auth.verifyOtp({
-						token_hash: storedToken,
-						type: 'recovery',
-					});
-
-					console.log('Verify OTP response:', { verifyData, verifyError });
-
-					if (verifyError) {
-						console.error('Error verifying token:', verifyError);
-						throw new Error('Invalid or expired recovery link');
-					}
-
-					if (!verifyData?.user?.email) {
-						console.error('No email found in verification response:', verifyData);
-						throw new Error('Could not retrieve email from recovery token');
-					}
-
-					console.log('Successfully verified token for email:', verifyData.user.email);
-					setUserEmail(verifyData.user.email);
-					
-					// Clear the token from session storage
-					sessionStorage.removeItem('recovery_token');
+				if (session?.user?.email) {
+					console.log('User email from session:', session.user.email);
+					setUserEmail(session.user.email);
 				} else {
-					console.error('No recovery token found');
-					throw new Error('Invalid password reset request');
+					console.error('No user email in session');
+					throw new Error('No user email found');
 				}
 			} catch (error: any) {
 				console.error('Error in initializeForm:', error);
