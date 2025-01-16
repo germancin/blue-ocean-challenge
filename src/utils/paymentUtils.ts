@@ -131,10 +131,27 @@ export const sendPaymentConfirmationEmail = async (email: string, paymentId: str
   try {
     console.log('Sending confirmation email for:', email, 'paymentId:', paymentId);
     
+    // First fetch the payment details to get the amount
+    const { data: payment, error: fetchError } = await supabase
+      .from('payments')
+      .select('amount')
+      .eq('id', paymentId)
+      .single();
+
+    if (fetchError) {
+      console.error('Error fetching payment details:', fetchError);
+      throw fetchError;
+    }
+
+    if (!payment) {
+      throw new Error('Payment not found');
+    }
+
     const { data, error } = await supabase.functions.invoke('check-and-send-emails', {
       body: { 
         email,
-        paymentId
+        paymentId,
+        amount: payment.amount // Include the amount from the database
       }
     });
 

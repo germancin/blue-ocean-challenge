@@ -38,9 +38,9 @@ export function usePaymentVerification({ email, amount, enabled }: UsePaymentVer
 
         console.log('Payment verification response:', data);
 
-        if (data.status === 'success') {
+        if (data.status === 'success' && data.paymentId) {
           setTransactionStatus('success');
-          await sendPaymentConfirmationEmail(email, amount);
+          await sendPaymentConfirmationEmail(email, data.paymentId);
           return true;
         } else if (data.status === 'no_payment_found') {
           setTransactionStatus('failed');
