@@ -50,10 +50,10 @@ const PrizeDistributionTable = () => {
               <div
                 key={index}
                 className={`
-                  relative group rounded-xl p-8 border backdrop-blur-sm
+                  relative group rounded-xl p-6 sm:p-8 border backdrop-blur-sm
                   transform transition-all duration-300 hover:-translate-y-1
                   ${tier.className}
-                  ${index === 0 ? 'w-3/4 mx-auto' : index === 1 ? 'w-5/6 mx-auto' : 'w-full'}
+                  ${index === 0 ? 'w-full sm:w-3/4 mx-auto' : index === 1 ? 'w-full sm:w-5/6 mx-auto' : 'w-full'}
                 `}
               >
                 {/* Glow effect for top tier */}
@@ -62,11 +62,11 @@ const PrizeDistributionTable = () => {
                 )}
                 
                 <div className="relative z-10 space-y-4">
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h3 className="text-2xl font-bold text-white mb-2 text-center">
                     {tier.title}
                   </h3>
                   
-                  <div className="grid md:grid-cols-4 gap-4 items-center">
+                  <div className="grid sm:grid-cols-4 gap-4 items-center text-center sm:text-left">
                     <div className="text-white">
                       <p className="text-sm opacity-70">Position</p>
                       <p className="font-semibold">{tier.position}</p>
