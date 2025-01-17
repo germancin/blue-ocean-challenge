@@ -11,8 +11,9 @@ const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
 const MERCHANT_ADDRESS = Deno.env.get('MERCHANT_ADDRESS');
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
@@ -21,7 +22,10 @@ serve(async (req) => {
     if (!email || !amount || !paymentId) {
       console.error('Missing required parameters:', { email, amount, paymentId });
       return new Response(
-        JSON.stringify({ error: 'Missing required parameters' }),
+        JSON.stringify({ 
+          status: 'error',
+          message: 'Missing required parameters' 
+        }),
         { 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
           status: 400,
@@ -51,16 +55,28 @@ serve(async (req) => {
 
     if (fetchError) {
       console.error('Error fetching payment:', fetchError);
-      throw fetchError;
+      return new Response(
+        JSON.stringify({ 
+          status: 'error',
+          message: 'Error fetching payment details' 
+        }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 500,
+        }
+      );
     }
 
     if (!payment) {
       console.log('No payment found with ID:', paymentId);
       return new Response(
-        JSON.stringify({ status: 'no_payment_found' }),
+        JSON.stringify({ 
+          status: 'error',
+          message: 'No payment found' 
+        }),
         { 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 200,
+          status: 404,
         }
       );
     }
@@ -90,7 +106,16 @@ serve(async (req) => {
 
     if (!response.ok) {
       console.error('Error fetching transactions:', await response.text());
-      throw new Error('Failed to fetch transactions');
+      return new Response(
+        JSON.stringify({ 
+          status: 'error',
+          message: 'Failed to fetch transactions' 
+        }),
+        { 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 500,
+        }
+      );
     }
 
     const data = await response.json();
@@ -134,7 +159,16 @@ serve(async (req) => {
 
       if (updateError) {
         console.error('Error updating payment:', updateError);
-        throw updateError;
+        return new Response(
+          JSON.stringify({ 
+            status: 'error',
+            message: 'Error updating payment status' 
+          }),
+          { 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            status: 500,
+          }
+        );
       }
 
       return new Response(
@@ -159,12 +193,15 @@ serve(async (req) => {
     );
 
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error in verify-payment function:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ 
+        status: 'error',
+        message: error instanceof Error ? error.message : 'Unknown error occurred'
+      }),
       { 
-        status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 500,
       }
     );
   }
