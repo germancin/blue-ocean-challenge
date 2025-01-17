@@ -53,17 +53,33 @@ serve(async (req) => {
 			);
 		}
 
-		// First, create the user if they don't exist
-		console.log('Creating user if not exists:', email);
-		const { data: userData, error: createUserError } = await supabase.auth.admin.createUser({
-			email: email,
-			email_confirm: true,
-			password: crypto.randomUUID(), // Generate a random temporary password
+		// Check if user exists first
+		const { data: existingUser, error: userCheckError } = await supabase.auth.admin.listUsers({
+			filters: {
+				email: email
+			}
 		});
 
-		if (createUserError && createUserError.message !== 'User already registered') {
-			console.error('Error creating user:', createUserError);
-			throw createUserError;
+		console.log('Existing user check:', existingUser);
+
+		let userId;
+		if (existingUser && existingUser.users.length > 0) {
+			console.log('User already exists, generating recovery link');
+			userId = existingUser.users[0].id;
+		} else {
+			console.log('Creating new user');
+			// Create new user if they don't exist
+			const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
+				email: email,
+				email_confirm: true,
+				password: crypto.randomUUID(), // Generate a random temporary password
+			});
+
+			if (createError) {
+				console.error('Error creating user:', createError);
+				throw createError;
+			}
+			userId = newUser.user.id;
 		}
 
 		// Generate password reset link
@@ -90,7 +106,6 @@ serve(async (req) => {
 
 		const recoveryLink = resetData.properties.action_link;
 		console.log('Successfully generated recovery link:', recoveryLink);
-		console.log('Token from link:', new URL(recoveryLink).searchParams.get('token'));
 
 		// Send welcome email with password setup link via Resend
 		const emailRes = await fetch('https://api.resend.com/emails', {
