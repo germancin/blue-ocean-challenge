@@ -31,20 +31,14 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
     try {
       setIsLoading(true);
 
-      // First check if email already exists
+      // First check if email already exists in subscribers
       const { data: existingSubscriber } = await supabase
         .from('subscribers')
-        .select('email')
+        .select('*')
         .eq('email', data.email)
-        .single();
+        .maybeSingle();
 
-      if (existingSubscriber) {
-        // If subscriber exists, show success message and proceed
-        toast({
-          title: "Welcome back!",
-          description: "You're already registered. Proceeding to payment.",
-        });
-      } else {
+      if (!existingSubscriber) {
         // If subscriber doesn't exist, insert new record
         const { error: insertError } = await supabase
           .from('subscribers')
@@ -58,14 +52,26 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
         if (insertError) {
           throw insertError;
         }
-
-        toast({
-          title: "Successfully registered!",
-          description: "Proceeding to payment page.",
-        });
       }
 
-      // In both cases, proceed to payment
+      // Check for existing payments
+      const { data: existingPayment } = await supabase
+        .from('payments')
+        .select('*')
+        .eq('email', data.email)
+        .eq('status', 'success')
+        .maybeSingle();
+
+      if (existingPayment) {
+        toast({
+          title: "Payment already completed",
+          description: "You have already completed the payment process.",
+        });
+        navigate("/chart");
+        return;
+      }
+
+      // Proceed to payment page
       onSuccess?.();
       navigate("/payment", { 
         state: { 
@@ -93,7 +99,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
         className="w-full bg-purple-600 hover:bg-purple-700"
         disabled={isLoading}
       >
-        {isLoading ? "Registering..." : "Register"}
+        {isLoading ? "Processing..." : "Register"}
       </Button>
     </form>
   );
