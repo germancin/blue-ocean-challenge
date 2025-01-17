@@ -53,8 +53,18 @@ serve(async (req) => {
 			);
 		}
 
-		// Generate recovery link for first-time password setup
-		console.log('Starting password recovery process for:', email);
+		// First, create the user if they don't exist
+		console.log('Creating user if not exists:', email);
+		const { data: userData, error: createUserError } = await supabase.auth.admin.createUser({
+			email: email,
+			email_confirm: true,
+			password: crypto.randomUUID(), // Generate a random temporary password
+		});
+
+		if (createUserError && createUserError.message !== 'User already registered') {
+			console.error('Error creating user:', createUserError);
+			throw createUserError;
+		}
 
 		// Generate password reset link
 		console.log('Generating recovery link with admin.generateLink');
