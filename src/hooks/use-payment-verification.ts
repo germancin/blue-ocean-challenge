@@ -93,7 +93,7 @@ export const usePaymentVerification = (email: string) => {
           if (successfulPayment) {
             setPaymentStatus('success');
             if (!successfulPayment.email_sent) {
-              // Use Supabase Functions client to call the edge function
+              // Send confirmation email using the edge function
               const { error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
                 body: {
                   email,
