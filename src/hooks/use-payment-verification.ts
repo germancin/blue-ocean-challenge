@@ -1,84 +1,54 @@
 import { useState, useEffect } from 'react';
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { 
-  checkExistingSuccessfulPayment, 
-  createOrUpdatePendingPayment,
-  sendPaymentConfirmationEmail
-} from '@/utils/paymentUtils';
 
-export type PaymentStatus = 'pending' | 'success' | 'failed';
-
-interface UsePaymentVerificationProps {
-  email: string;
-  amount: number;
-  enabled: boolean;
-}
-
-export function usePaymentVerification({ email, amount, enabled }: UsePaymentVerificationProps) {
-  const [transactionStatus, setTransactionStatus] = useState<PaymentStatus>('pending');
+export const usePaymentVerification = (email: string) => {
+  const [isVerifying, setIsVerifying] = useState(true);
+  const [paymentStatus, setPaymentStatus] = useState<'pending' | 'success' | null>(null);
 
   useEffect(() => {
-    if (!enabled) return;
-
-    const verifyPayment = async () => {
+    const checkPayment = async () => {
       try {
-        console.log('Verifying payment status for email:', email);
-        const { data, error } = await supabase.functions.invoke('verify-payment', {
-          body: { 
+        const response = await fetch(`${import.meta.env.VITE_SUPABASE_FUNCTIONS_URL}/verify-payment`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
             email,
-            amount: Number(amount.toFixed(3))
-          }
+            amount: 99.99,
+            paymentId: localStorage.getItem('paymentId'),
+          }),
         });
 
-        if (error) {
-          console.error('Error verifying payment:', error);
-          return false;
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+          setPaymentStatus('success');
+          setIsVerifying(false);
+          toast.success('Payment verified successfully!');
+          
+          // Update payment status in Supabase
+          const { error } = await supabase
+            .from('payments')
+            .update({ status: 'success' })
+            .eq('email', email);
+            
+          if (error) {
+            console.error('Error updating payment status:', error);
+          }
         }
-
-        console.log('Payment verification response:', data);
-
-        if (data.status === 'success' && data.paymentId) {
-          setTransactionStatus('success');
-          await sendPaymentConfirmationEmail(email, data.paymentId);
-          return true;
-        } else if (data.status === 'no_payment_found') {
-          setTransactionStatus('failed');
-          return true;
-        }
-
       } catch (error) {
-        console.error('Error checking payment:', error);
+        console.error('Error verifying payment:', error);
       }
-      return false;
     };
 
-    const initializePaymentCheck = async () => {
-      // First check for existing successful payment
-      const successfulPayment = await checkExistingSuccessfulPayment(email);
-      if (successfulPayment) {
-        setTransactionStatus('success');
-        return;
-      }
+    const interval = setInterval(checkPayment, 30000); // Check every 30 seconds
+    checkPayment(); // Initial check
 
-      // If no successful payment, create or update pending payment
-      await createOrUpdatePendingPayment(email, amount);
-      
-      // Initial verification
-      await verifyPayment();
-      
-      // Set up polling every 30 seconds
-      const intervalId = window.setInterval(verifyPayment, 30000);
-      
-      return () => {
-        clearInterval(intervalId);
-      };
-    };
+    return () => clearInterval(interval);
+  }, [email]);
 
-    initializePaymentCheck();
-  }, [email, amount, enabled]);
-
-  return {
-    transactionStatus
-  };
-}
+  return { isVerifying, paymentStatus };
+};
