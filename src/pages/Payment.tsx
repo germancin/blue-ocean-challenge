@@ -4,6 +4,8 @@ import { PaymentInformationCard } from '@/components/payment/PaymentInformationC
 import { PaymentDetailsCard } from '@/components/payment/PaymentDetailsCard';
 import { PaymentInstructionsCard } from '@/components/payment/PaymentInstructionsCard';
 
+const MERCHANT_ADDRESS = 'TQVxjVxvjBtZHxofxqwJKNEuZgJw7AXLbY';
+
 const Payment = () => {
   const location = useLocation();
   const email = location.state?.email;
@@ -37,7 +39,7 @@ const Payment = () => {
           <PaymentDetailsCard amount={paymentAmount} email={email} />
           <PaymentInstructionsCard 
             amount={paymentAmount}
-            merchantAddress={import.meta.env.VITE_MERCHANT_ADDRESS || ''}
+            merchantAddress={MERCHANT_ADDRESS}
             transactionStatus={paymentStatus || 'pending'}
           />
         </div>

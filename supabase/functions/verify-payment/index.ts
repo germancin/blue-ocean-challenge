@@ -8,7 +8,7 @@ const corsHeaders = {
 
 const TRON_API_URL = 'https://api.trongrid.io';
 const USDT_CONTRACT = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t';
-const MERCHANT_ADDRESS = Deno.env.get('MERCHANT_ADDRESS');
+const MERCHANT_ADDRESS = 'TQVxjVxvjBtZHxofxqwJKNEuZgJw7AXLbY';
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -138,11 +138,11 @@ serve(async (req) => {
         txAmount,
         expectedAmount,
         matches: txAmount === expectedAmount,
-        addressMatch: tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase()
+        addressMatch: tx.to.toLowerCase() === MERCHANT_ADDRESS.toLowerCase()
       });
       
       return txAmount === expectedAmount && 
-             tx.to.toLowerCase() === MERCHANT_ADDRESS?.toLowerCase();
+             tx.to.toLowerCase() === MERCHANT_ADDRESS.toLowerCase();
     });
 
     if (matchingTx) {
