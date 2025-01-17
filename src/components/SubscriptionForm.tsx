@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import { PostgrestError } from "@supabase/supabase-js";
+import { Button } from "@/components/ui/button";
 import { SubscriptionFields } from "./subscription/SubscriptionFields";
-import { SubscriptionButton } from "./subscription/SubscriptionButton";
-import { checkPaymentStatus, saveSubscriber } from "@/utils/paymentUtils";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface SubscriptionFormData {
   name: string;
@@ -13,55 +12,74 @@ interface SubscriptionFormData {
   acceptTerms: boolean;
 }
 
-export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
+interface SubscriptionFormProps {
+  onSuccess?: () => void;
+}
+
+export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, formState: { errors }, setError } = useForm<SubscriptionFormData>();
+  const { toast } = useToast();
   const navigate = useNavigate();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SubscriptionFormData>();
+
   const onSubmit = async (data: SubscriptionFormData) => {
-    if (!data.acceptTerms) {
-      setError('acceptTerms', {
-        type: 'manual',
-        message: 'You must accept the terms and conditions'
-      });
-      return;
-    }
-
-    setIsLoading(true);
     try {
-      const paymentStatus = await checkPaymentStatus(data.email);
-      
-      if (paymentStatus === 'success') {
-        toast.info("You've already completed payment. Redirecting to payment verification...");
-        onSuccess();
-        navigate('/payment', { state: { email: data.email } });
-        return;
+      setIsLoading(true);
+
+      // First check if email already exists
+      const { data: existingSubscriber } = await supabase
+        .from('subscribers')
+        .select('email')
+        .eq('email', data.email)
+        .single();
+
+      if (existingSubscriber) {
+        // If subscriber exists, show success message and proceed
+        toast({
+          title: "Welcome back!",
+          description: "You're already registered. Proceeding to payment.",
+        });
+      } else {
+        // If subscriber doesn't exist, insert new record
+        const { error: insertError } = await supabase
+          .from('subscribers')
+          .insert([
+            {
+              name: data.name,
+              email: data.email,
+            },
+          ]);
+
+        if (insertError) {
+          throw insertError;
+        }
+
+        toast({
+          title: "Successfully registered!",
+          description: "Proceeding to payment page.",
+        });
       }
 
-      await saveSubscriber(data.name, data.email);
-      toast.success("Successfully saved your information!");
-      onSuccess();
-      navigate('/payment', { state: { email: data.email } });
+      // In both cases, proceed to payment
+      onSuccess?.();
+      navigate("/payment", { 
+        state: { 
+          email: data.email,
+          name: data.name
+        } 
+      });
     } catch (error) {
-      console.error('Submission error:', error);
-      const postgrestError = error as PostgrestError;
-      
-      if (postgrestError.code === '23505') {
-        // This email is already registered
-        const paymentStatus = await checkPaymentStatus(data.email);
-        
-        if (paymentStatus === 'success') {
-          toast.info("You've already completed payment. Redirecting to payment verification...");
-          onSuccess();
-          navigate('/payment', { state: { email: data.email } });
-        } else {
-          toast.info("You're already registered. Redirecting to payment...");
-          onSuccess();
-          navigate('/payment', { state: { email: data.email } });
-        }
-      } else {
-        toast.error("Something went wrong. Please try again.");
-      }
+      console.error("Submission error:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -70,7 +88,13 @@ export function SubscriptionForm({ onSuccess }: { onSuccess: () => void }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <SubscriptionFields register={register} errors={errors} />
-      <SubscriptionButton isLoading={isLoading} />
+      <Button
+        type="submit"
+        className="w-full bg-purple-600 hover:bg-purple-700"
+        disabled={isLoading}
+      >
+        {isLoading ? "Registering..." : "Register"}
+      </Button>
     </form>
   );
 }
