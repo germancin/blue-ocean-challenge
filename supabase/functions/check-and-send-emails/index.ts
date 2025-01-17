@@ -64,49 +64,66 @@ serve(async (req) => {
 
 		let userId;
 		if (existingUser && existingUser.users.length > 0) {
-			console.log('User already exists, generating recovery link');
+			console.log('User already exists');
 			userId = existingUser.users[0].id;
 		} else {
 			console.log('User does not exist, creating new user');
-			// Create new user with a random password since we'll reset it anyway
+			const tempPassword = crypto.randomUUID();
 			const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
 				email: email,
-				email_confirm: true,
-				password: crypto.randomUUID(),
+				password: tempPassword,
+				email_confirm: true
 			});
 
 			if (createError) {
 				console.error('Error creating user:', createError);
 				throw createError;
 			}
+
 			console.log('New user created:', newUser);
 			userId = newUser.user.id;
+
+			// Add a small delay to ensure user is properly created
+			await new Promise(resolve => setTimeout(resolve, 1000));
 		}
 
-		// Generate password reset link
-		console.log('Generating recovery link with admin.generateLink');
-		const { data: resetData, error: resetError } = await supabase.auth.admin.generateLink({
-			type: 'recovery',
-			email: email,
-			options: {
-				redirectTo: 'https://elitetraderhub.co/profile?changePassword=true'
+		// Try to generate recovery link multiple times if needed
+		let attempts = 0;
+		let recoveryLink;
+		while (attempts < 3) {
+			try {
+				console.log('Attempting to generate recovery link, attempt:', attempts + 1);
+				const { data: resetData, error: resetError } = await supabase.auth.admin.generateLink({
+					type: 'recovery',
+					email: email,
+					options: {
+						redirectTo: 'https://elitetraderhub.co/profile?changePassword=true'
+					}
+				});
+
+				if (!resetError && resetData?.properties?.action_link) {
+					recoveryLink = resetData.properties.action_link;
+					console.log('Successfully generated recovery link');
+					break;
+				}
+
+				console.error('Error generating reset link:', resetError);
+				attempts++;
+				if (attempts < 3) {
+					await new Promise(resolve => setTimeout(resolve, 1000));
+				}
+			} catch (error) {
+				console.error('Error in recovery link generation:', error);
+				attempts++;
+				if (attempts < 3) {
+					await new Promise(resolve => setTimeout(resolve, 1000));
+				}
 			}
-		});
-
-		if (resetError) {
-			console.error('Error generating reset link:', resetError);
-			throw resetError;
 		}
 
-		console.log('Reset data received:', resetData);
-
-		if (!resetData?.properties?.action_link) {
-			console.error('No action link in reset data:', resetData);
-			throw new Error('No recovery link generated');
+		if (!recoveryLink) {
+			throw new Error('Failed to generate recovery link after multiple attempts');
 		}
-
-		const recoveryLink = resetData.properties.action_link;
-		console.log('Successfully generated recovery link:', recoveryLink);
 
 		// Send welcome email with password setup link via Resend
 		const emailRes = await fetch('https://api.resend.com/emails', {
@@ -120,44 +137,44 @@ serve(async (req) => {
 				to: [email],
 				subject: 'Welcome to Elite Trading Tournament - Set Up Your Password',
 				html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
+					<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+						<h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
 
-            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-              Thank you for your payment of ${amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
-            </p>
+						<p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+							Thank you for your payment of ${amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
+						</p>
 
-            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-              To access your account, please click the secure link below to set up your password:
-            </p>
+						<p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
+							To access your account, please click the secure link below to set up your password:
+						</p>
 
-            <div style="text-align: center; margin: 32px 0;">
-              <a href="${recoveryLink}"
-                 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                Set Up Your Password
-              </a>
-            </div>
+						<div style="text-align: center; margin: 32px 0;">
+							<a href="${recoveryLink}"
+								 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+								Set Up Your Password
+							</a>
+						</div>
 
-            <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
-              <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
-              <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Click the link above to set up your password</li>
-                <li style="margin-bottom: 8px;">Access your tournament dashboard</li>
-                <li style="margin-bottom: 8px;">Join our trading community</li>
-                <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
-              </ul>
-            </div>
+						<div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
+							<h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
+							<ul style="color: #4b5563; margin: 0; padding-left: 20px;">
+								<li style="margin-bottom: 8px;">Click the link above to set up your password</li>
+								<li style="margin-bottom: 8px;">Access your tournament dashboard</li>
+								<li style="margin-bottom: 8px;">Join our trading community</li>
+								<li style="margin-bottom: 8px;">Prepare your trading strategy</li>
+							</ul>
+						</div>
 
-            <p style="font-size: 16px; line-height: 1.5; color: #374151;">
-              If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
-            </p>
+						<p style="font-size: 16px; line-height: 1.5; color: #374151;">
+							If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
+						</p>
 
-            <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
-              Best regards,<br>
-              The Elite Trading Tournament Team
-            </p>
-          </div>
-        `,
+						<p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
+							Best regards,<br>
+							The Elite Trading Tournament Team
+						</p>
+					</div>
+				`,
 			}),
 		});
 
