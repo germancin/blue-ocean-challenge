@@ -3,14 +3,28 @@ import { usePaymentVerification } from '@/hooks/use-payment-verification';
 import { PaymentInformationCard } from '@/components/payment/PaymentInformationCard';
 import { PaymentDetailsCard } from '@/components/payment/PaymentDetailsCard';
 import { PaymentInstructionsCard } from '@/components/payment/PaymentInstructionsCard';
-
-const MERCHANT_ADDRESS = 'TQVxjVxvjBtZHxofxqwJKNEuZgJw7AXLbY';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 
 const Payment = () => {
   const location = useLocation();
   const email = location.state?.email;
+  const [merchantAddress, setMerchantAddress] = useState('');
 
   const { isVerifying, paymentStatus, paymentAmount } = usePaymentVerification(email);
+
+  useEffect(() => {
+    const fetchMerchantAddress = async () => {
+      const { data: { MERCHANT_ADDRESS }, error } = await supabase.functions.invoke('get-merchant-address');
+      if (error) {
+        console.error('Error fetching merchant address:', error);
+        return;
+      }
+      setMerchantAddress(MERCHANT_ADDRESS);
+    };
+
+    fetchMerchantAddress();
+  }, []);
 
   if (!email) {
     return <Navigate to="/" />;
@@ -39,7 +53,7 @@ const Payment = () => {
           <PaymentDetailsCard amount={paymentAmount} email={email} />
           <PaymentInstructionsCard 
             amount={paymentAmount}
-            merchantAddress={MERCHANT_ADDRESS}
+            merchantAddress={merchantAddress}
             transactionStatus={paymentStatus || 'pending'}
           />
         </div>
