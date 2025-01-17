@@ -93,22 +93,17 @@ export const usePaymentVerification = (email: string) => {
           if (successfulPayment) {
             setPaymentStatus('success');
             if (!successfulPayment.email_sent) {
-              // Trigger email sending via edge function
-              const response = await fetch(`${import.meta.env.VITE_SUPABASE_FUNCTIONS_URL}/check-and-send-emails`, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-                },
-                body: JSON.stringify({
+              // Use Supabase Functions client to call the edge function
+              const { error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
+                body: {
                   email,
                   paymentId: successfulPayment.id,
                   amount: successfulPayment.amount
-                }),
+                }
               });
 
-              if (!response.ok) {
-                console.error('Failed to send email:', await response.text());
+              if (functionError) {
+                console.error('Failed to send email:', functionError);
               }
             }
           }
@@ -117,26 +112,25 @@ export const usePaymentVerification = (email: string) => {
 
         setPaymentAmount(payment.amount);
 
-        const response = await fetch(`${import.meta.env.VITE_SUPABASE_FUNCTIONS_URL}/verify-payment`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({
+        // Use Supabase Functions client to call the verify-payment function
+        const { data, error: functionError } = await supabase.functions.invoke('verify-payment', {
+          body: {
             email,
             amount: payment.amount,
             paymentId: payment.id,
-          }),
+          }
         });
 
-        const data = await response.json();
+        if (functionError) {
+          console.error('Error verifying payment:', functionError);
+          return;
+        }
         
-        if (data.status === 'success') {
+        if (data?.status === 'success') {
           setPaymentStatus('success');
           toast.success('Payment verified successfully!');
         } else {
-          setPaymentStatus(data.status);
+          setPaymentStatus(data?.status || 'pending');
         }
       } catch (error) {
         console.error('Error verifying payment:', error);
