@@ -17,7 +17,7 @@ export const usePaymentVerification = (email: string) => {
           .select('amount')
           .eq('email', email)
           .eq('status', 'pending')
-          .single();
+          .maybeSingle(); // Changed from .single() to .maybeSingle()
 
         if (fetchError) {
           console.error('Error fetching payment:', fetchError);
@@ -26,6 +26,8 @@ export const usePaymentVerification = (email: string) => {
 
         if (!payment) {
           console.log('No pending payment found for:', email);
+          setPaymentStatus('failed');
+          setIsVerifying(false);
           return;
         }
 
@@ -61,6 +63,8 @@ export const usePaymentVerification = (email: string) => {
         }
       } catch (error) {
         console.error('Error verifying payment:', error);
+        setPaymentStatus('failed');
+        setIsVerifying(false);
       }
     };
 
