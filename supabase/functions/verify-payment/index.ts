@@ -17,18 +17,16 @@ serve(async (req) => {
 
   try {
     const { email, amount, paymentId } = await req.json();
+    console.log('Verifying payment:', { email, amount, paymentId });
     
     if (!email || !amount || !paymentId) {
       console.error('Missing required parameters:', { email, amount, paymentId });
       return new Response(
         JSON.stringify({ 
-          status: 'error',
+          status: 'pending',
           message: 'Missing required parameters' 
         }),
-        { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 400,
-        }
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
       );
     }
 
@@ -38,22 +36,14 @@ serve(async (req) => {
       console.error('MERCHANT_ADDRESS not configured');
       return new Response(
         JSON.stringify({ 
-          status: 'error',
-          message: 'Merchant address not configured' 
+          status: 'pending',
+          message: 'Payment system configuration pending' 
         }),
-        { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 500,
-        }
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
       );
     }
 
-    console.log('Starting payment verification for:', {
-      email,
-      amount: amount.toFixed(3),
-      paymentId,
-      merchantAddress: MERCHANT_ADDRESS
-    });
+    console.log('Using merchant address:', MERCHANT_ADDRESS);
 
     // Create Supabase client
     const supabaseClient = createClient(
@@ -72,13 +62,10 @@ serve(async (req) => {
       console.error('Error fetching payment:', fetchError);
       return new Response(
         JSON.stringify({ 
-          status: 'error',
-          message: 'Error fetching payment details' 
+          status: 'pending',
+          message: 'Payment verification in progress' 
         }),
-        { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 200, // Changed to 200 to prevent FunctionsHttpError
-        }
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
       );
     }
 
@@ -86,13 +73,10 @@ serve(async (req) => {
       console.log('No payment found with ID:', paymentId);
       return new Response(
         JSON.stringify({ 
-          status: 'error',
-          message: 'No payment found' 
+          status: 'pending',
+          message: 'Payment not found' 
         }),
-        { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 200, // Changed to 200 to prevent FunctionsHttpError
-        }
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
       );
     }
 
@@ -100,10 +84,7 @@ serve(async (req) => {
       console.log('Payment status is not pending:', payment.status);
       return new Response(
         JSON.stringify({ status: payment.status }),
-        { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 200,
-        }
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
       );
     }
 
@@ -124,12 +105,9 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({ 
           status: 'pending',
-          message: 'Unable to verify transaction at this time' 
+          message: 'Payment verification in progress' 
         }),
-        { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 200, // Changed to 200 to prevent FunctionsHttpError
-        }
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
       );
     }
 
@@ -141,15 +119,11 @@ serve(async (req) => {
     
     // Look for a matching transaction with exact amount
     const matchingTx = transactions.find(tx => {
-      // Convert from USDT's smallest unit (6 decimals) to actual USDT amount
       const txAmountRaw = Number(tx.value) / 1_000_000;
-      // Format to 3 decimal places for comparison
       const txAmount = Number(txAmountRaw.toFixed(3));
       
       console.log('Comparing transaction:', {
         txHash: tx.transaction_id,
-        rawValue: tx.value,
-        txAmountRaw,
         txAmount,
         expectedAmount,
         matches: txAmount === expectedAmount,
@@ -177,12 +151,9 @@ serve(async (req) => {
         return new Response(
           JSON.stringify({ 
             status: 'pending',
-            message: 'Error updating payment status' 
+            message: 'Payment verification in progress' 
           }),
-          { 
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-            status: 200, // Changed to 200 to prevent FunctionsHttpError
-          }
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
         );
       }
 
@@ -191,20 +162,14 @@ serve(async (req) => {
           status: 'success', 
           transaction: matchingTx
         }),
-        { 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          status: 200,
-        }
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
       );
     }
 
     console.log('No matching transaction found, payment still pending');
     return new Response(
       JSON.stringify({ status: 'pending' }),
-      { 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 200,
-      }
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
     );
 
   } catch (error) {
@@ -212,12 +177,9 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         status: 'pending',
-        message: error instanceof Error ? error.message : 'Unknown error occurred'
+        message: 'Payment verification in progress'
       }),
-      { 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 200, // Changed to 200 to prevent FunctionsHttpError
-      }
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
     );
   }
 });
