@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
+export type PaymentStatus = 'pending' | 'success' | 'failed' | null;
+
 export const usePaymentVerification = (email: string) => {
   const [isVerifying, setIsVerifying] = useState(true);
-  const [paymentStatus, setPaymentStatus] = useState<'pending' | 'success' | null>(null);
+  const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>(null);
 
   useEffect(() => {
     const checkPayment = async () => {
