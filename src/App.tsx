@@ -33,9 +33,26 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (!user) {
-    // Store the current URL to redirect back after auth
-    const currentPath = `${location.pathname}${location.search}`;
-    return <Navigate to={`/auth?redirect=${encodeURIComponent(currentPath)}`} />;
+    return <Navigate to="/auth" />;
+  }
+
+  return <>{children}</>;
+};
+
+const RedirectIfAuthenticated = ({ children }: { children: React.ReactNode }) => {
+  const { user, loading } = useAuth();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token');
+  const type = searchParams.get('type');
+  const isPasswordReset = type === 'recovery' && token;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (user && !isPasswordReset) {
+    return <Navigate to="/chart" />;
   }
 
   return <>{children}</>;
@@ -49,8 +66,22 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<AuthPage />} />
+            <Route 
+              path="/" 
+              element={
+                <RedirectIfAuthenticated>
+                  <Index />
+                </RedirectIfAuthenticated>
+              } 
+            />
+            <Route 
+              path="/auth" 
+              element={
+                <RedirectIfAuthenticated>
+                  <AuthPage />
+                </RedirectIfAuthenticated>
+              } 
+            />
             <Route path="/payment" element={<Payment />} />
             <Route path="/terms" element={<Terms />} />
             <Route 
