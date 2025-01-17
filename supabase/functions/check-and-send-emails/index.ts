@@ -53,7 +53,7 @@ serve(async (req) => {
 			);
 		}
 
-		// Check if user exists first
+		// Check if user exists
 		const { data: existingUser, error: userCheckError } = await supabase.auth.admin.listUsers({
 			filters: {
 				email: email
@@ -67,18 +67,19 @@ serve(async (req) => {
 			console.log('User already exists, generating recovery link');
 			userId = existingUser.users[0].id;
 		} else {
-			console.log('Creating new user');
-			// Create new user if they don't exist
+			console.log('User does not exist, creating new user');
+			// Create new user with a random password since we'll reset it anyway
 			const { data: newUser, error: createError } = await supabase.auth.admin.createUser({
 				email: email,
 				email_confirm: true,
-				password: crypto.randomUUID(), // Generate a random temporary password
+				password: crypto.randomUUID(),
 			});
 
 			if (createError) {
 				console.error('Error creating user:', createError);
 				throw createError;
 			}
+			console.log('New user created:', newUser);
 			userId = newUser.user.id;
 		}
 
@@ -94,7 +95,7 @@ serve(async (req) => {
 
 		if (resetError) {
 			console.error('Error generating reset link:', resetError);
-			throw new Error('Failed to generate password reset link');
+			throw resetError;
 		}
 
 		console.log('Reset data received:', resetData);
