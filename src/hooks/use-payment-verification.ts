@@ -11,6 +11,24 @@ export const usePaymentVerification = (email: string) => {
   useEffect(() => {
     const checkPayment = async () => {
       try {
+        // First get the pending payment amount from the database
+        const { data: payment, error: fetchError } = await supabase
+          .from('payments')
+          .select('amount')
+          .eq('email', email)
+          .eq('status', 'pending')
+          .single();
+
+        if (fetchError) {
+          console.error('Error fetching payment:', fetchError);
+          return;
+        }
+
+        if (!payment) {
+          console.log('No pending payment found for:', email);
+          return;
+        }
+
         const response = await fetch(`${import.meta.env.VITE_SUPABASE_FUNCTIONS_URL}/verify-payment`, {
           method: 'POST',
           headers: {
@@ -19,7 +37,7 @@ export const usePaymentVerification = (email: string) => {
           },
           body: JSON.stringify({
             email,
-            amount: 99.99,
+            amount: payment.amount,
             paymentId: localStorage.getItem('paymentId'),
           }),
         });
