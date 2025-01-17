@@ -21,23 +21,19 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const token = searchParams.get('token');
   const type = searchParams.get('type');
   const changePassword = searchParams.get('changePassword');
-  
-  // Only allow password reset if there's both a token and it's a recovery flow
-  const isValidPasswordReset = type === 'recovery' && token;
-  const isChangePasswordPage = location.pathname === '/profile' && changePassword === 'true';
+  const isPasswordReset = (type === 'recovery' && token) || changePassword === 'true';
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  // If user is trying to access the change password page without being logged in
-  // and without a valid recovery token, redirect to auth
-  if (!user && !isValidPasswordReset && isChangePasswordPage) {
-    return <Navigate to="/auth" />;
+  // Allow access if it's a password reset flow with valid token or changePassword=true
+  if (isPasswordReset) {
+    return <>{children}</>;
   }
 
-  // For all other protected routes, require authentication
-  if (!user && !isValidPasswordReset) {
+  if (!user) {
+    // Store the current URL to redirect back after auth
     const currentPath = `${location.pathname}${location.search}`;
     return <Navigate to={`/auth?redirect=${encodeURIComponent(currentPath)}`} />;
   }
