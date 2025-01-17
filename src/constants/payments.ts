@@ -1,0 +1,1 @@
+export const BASE_PAYMENT_AMOUNT = 2;
