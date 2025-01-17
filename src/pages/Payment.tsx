@@ -23,9 +23,9 @@ const Payment = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <PaymentInformationCard onAcceptTerms={() => {}} />
-          <PaymentDetailsCard amount={99.99} email={email} />
+          <PaymentDetailsCard amount={2} email={email} />
           <PaymentInstructionsCard 
-            amount={99.99}
+            amount={2}
             merchantAddress={import.meta.env.VITE_MERCHANT_ADDRESS || ''}
             transactionStatus={paymentStatus || 'pending'}
           />
