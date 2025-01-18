@@ -55,8 +55,7 @@ serve(async (req) => {
 		});
 
 		if (createUserError && createUserError.message !== 'User already registered') {
-			console.log('Error creating user:', createUserError);
-			throw createUserError;
+			console.log('This user was alredy registered:');
 		}
 
 		// Generate password reset link
@@ -149,14 +148,14 @@ serve(async (req) => {
 		console.log('Payment record updated successfully');
 
 		return new Response(
-			JSON.stringify({ 
-				success: true, 
+			JSON.stringify({
+				success: true,
 				message: 'Welcome email sent successfully',
-				temporaryPassword // Return the temporary password so we can use it to sign in the user
-			}), 
-			{ 
-				headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-			}
+				temporaryPassword, // Return the temporary password so we can use it to sign in the user
+			}),
+			{
+				headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+			},
 		);
 	} catch (error) {
 		console.error('Error in check-and-send-emails:', error);
