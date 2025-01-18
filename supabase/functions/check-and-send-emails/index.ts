@@ -43,16 +43,20 @@ serve(async (req) => {
 			return new Response(JSON.stringify({ message: 'Email already sent', success: true }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
 		}
 
-		// First, create the user if they don't exist
+		// Generate a temporary password
+		const temporaryPassword = crypto.randomUUID();
 		console.log('Creating user if not exists:', email);
+
+		// Create the user with the temporary password
 		const { data: userData, error: createUserError } = await supabase.auth.admin.createUser({
 			email: email,
 			email_confirm: true,
-			password: crypto.randomUUID(), // Generate a random temporary password
+			password: temporaryPassword,
 		});
 
 		if (createUserError && createUserError.message !== 'User already registered') {
-			console.log('This user was alredy registered:');
+			console.log('Error creating user:', createUserError);
+			throw createUserError;
 		}
 
 		// Generate password reset link
@@ -134,8 +138,6 @@ serve(async (req) => {
 			}),
 		});
 
-		console.log('Welcome email sent successfully');
-
 		// Update payment record to mark email as sent
 		const { error: updateError } = await supabase.from('payments').update({ email_sent: true }).eq('id', paymentId);
 
@@ -146,7 +148,16 @@ serve(async (req) => {
 
 		console.log('Payment record updated successfully');
 
-		return new Response(JSON.stringify({ success: true, message: 'Welcome email sent successfully' }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+		return new Response(
+			JSON.stringify({ 
+				success: true, 
+				message: 'Welcome email sent successfully',
+				temporaryPassword // Return the temporary password so we can use it to sign in the user
+			}), 
+			{ 
+				headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+			}
+		);
 	} catch (error) {
 		console.error('Error in check-and-send-emails:', error);
 		return new Response(
