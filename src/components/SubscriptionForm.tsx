@@ -69,8 +69,8 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 			if (existingPayment?.email_sent && existingPayment?.status === 'success') {
 				console.log('Found existing successful payment:', existingPayment);
 				toast({
-					title: 'Payment already completed',
-					description: 'You have already completed the payment process. Login',
+					title: 'You are already Registered!',
+					description: 'Log in now to join the action!',
 				});
 				navigate('/chart');
 				return;
