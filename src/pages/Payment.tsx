@@ -4,6 +4,7 @@ import { PaymentDetailsCard } from '@/components/payment/PaymentDetailsCard';
 import { PaymentInstructionsCard } from '@/components/payment/PaymentInstructionsCard';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useNavigate } from 'react-router-dom';
 
 const Payment = () => {
 	const location = useLocation();
@@ -11,11 +12,13 @@ const Payment = () => {
 	const email = location.state?.email;
 	const initialPaymentStatus = location.state?.paymentStatus;
 	const paymentAmount = location.state?.paymentAmount;
+	const navigate = useNavigate();
 
 	// Track the merchant address in state
 	const [merchantAddress, setMerchantAddress] = useState('');
 	// Track the payment status in state (default to 'pending' if not provided)
 	const [currentPaymentStatus, setCurrentPaymentStatus] = useState(initialPaymentStatus || 'pending');
+	const [isFirstTime, setIsFirstTime] = useState(false);
 
 	useEffect(() => {
 		const fetchMerchantAddress = async () => {
@@ -91,6 +94,7 @@ const Payment = () => {
 							}
 							// Update local state to 'success'
 							setCurrentPaymentStatus('success');
+							setIsFirstTime(true);
 						}
 					}
 				} catch (error) {
@@ -107,6 +111,14 @@ const Payment = () => {
 	// If email is missing, redirect to home
 	if (!email) {
 		return <Navigate to="/" />;
+	}
+
+	if (currentPaymentStatus === 'sucsess') {
+		navigate('/chart', {
+			state: {
+				isFirstTime: isFirstTime,
+			},
+		});
 	}
 
 	return (
