@@ -4,7 +4,8 @@ import { useAuth } from '@/components/AuthProvider';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Navbar from '@/components/Navbar';
-import { toast } from 'sonner';
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { X } from "lucide-react";
 
 const data = [
 	{ name: 'Jan', value: 400 },
@@ -18,31 +19,61 @@ const data = [
 const ChartPage = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const [showPaymentAlert, setShowPaymentAlert] = useState(false);
+	const [showPasswordAlert, setShowPasswordAlert] = useState(false);
+	
 	// Extract the initial payment data from the route state
 	const isFirstTime = location.state?.isFirstTime || false;
 
 	useEffect(() => {
 		if (isFirstTime) {
-			// Show success payment toast
-			toast.success("Thank you! Your payment has been successfully processed.", {
-				duration: 5000
-			});
-
-			// Show password change reminder toast with action
-			toast("Please set up your password to secure your account", {
-				duration: 8000,
-				action: {
-					label: "Set Password",
-					onClick: () => navigate('/profile?changePassword=true')
-				}
-			});
+			setShowPaymentAlert(true);
+			setShowPasswordAlert(true);
 		}
-	}, [isFirstTime, navigate]);
+	}, [isFirstTime]);
 
 	return (
 		<div className="min-h-screen bg-black">
 			<Navbar />
 			<div className="container mx-auto px-4 pt-24">
+				{showPaymentAlert && (
+					<Alert className="mb-4 bg-green-500/10 border-green-500/50 text-green-500">
+						<div className="flex justify-between items-center">
+							<AlertDescription className="text-lg">
+								Thank you! Your payment has been successfully processed.
+							</AlertDescription>
+							<button 
+								onClick={() => setShowPaymentAlert(false)}
+								className="text-green-500 hover:text-green-400"
+							>
+								<X size={20} />
+							</button>
+						</div>
+					</Alert>
+				)}
+				
+				{showPasswordAlert && (
+					<Alert className="mb-4 bg-blue-500/10 border-blue-500/50 text-blue-500">
+						<div className="flex justify-between items-center">
+							<AlertDescription className="text-lg flex-1">
+								Please set up your password to secure your account.{' '}
+								<button 
+									onClick={() => navigate('/profile?changePassword=true')}
+									className="underline hover:text-blue-400"
+								>
+									Click here to set password
+								</button>
+							</AlertDescription>
+							<button 
+								onClick={() => setShowPasswordAlert(false)}
+								className="text-blue-500 hover:text-blue-400 ml-4"
+							>
+								<X size={20} />
+							</button>
+						</div>
+					</Alert>
+				)}
+
 				<Card className="bg-navy/50 backdrop-blur-sm border-bright-blue/20">
 					<CardHeader>
 						<CardTitle className="text-white">Trading Performance</CardTitle>
