@@ -147,11 +147,17 @@ serve(async (req) => {
 
 		console.log('Payment record updated successfully');
 
+		const { data: linkData, error } = await supabase.auth.admin.generateLink({
+			type: 'magiclink',
+			email,
+			options: { redirectTo: 'https://elitetraderhub.co/chart' },
+		});
+
 		return new Response(
 			JSON.stringify({
 				success: true,
 				message: 'Welcome email sent successfully',
-				temporaryPassword, // Return the temporary password so we can use it to sign in the user
+				link: linkData.properties.action_link, // Return the temporary password so we can use it to sign in the user
 			}),
 			{
 				headers: { ...corsHeaders, 'Content-Type': 'application/json' },
