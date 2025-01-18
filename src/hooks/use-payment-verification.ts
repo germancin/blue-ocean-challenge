@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { generateUniqueAmount } from '@/utils/paymentUtils';
+import { generateUniqueAmount, createOrUpdatePendingPayment } from '@/utils/paymentUtils';
 import { BASE_PAYMENT_AMOUNT } from '@/constants/payments';
 
 export type PaymentStatus = 'pending' | 'success' | 'failed' | null;
@@ -34,22 +34,14 @@ export const usePaymentVerification = (email: string) => {
 				const uniqueAmount = await generateUniqueAmount(BASE_PAYMENT_AMOUNT);
 				console.log('Generated new unique amount:', uniqueAmount);
 
-				// Create new payment record
-				const { error: insertError } = await supabase.from('payments').insert([
-					{
-						email,
-						amount: uniqueAmount,
-						status: 'pending',
-						email_sent: false,
-					},
-				]);
-
-				if (insertError) {
-					console.error('Error creating payment:', insertError);
-					throw insertError;
+				// Create new payment record using centralized method
+				const payment = await createOrUpdatePendingPayment(email, uniqueAmount);
+				
+				if (!payment) {
+					throw new Error('Failed to create payment record');
 				}
 
-				setPaymentAmount(uniqueAmount);
+				setPaymentAmount(payment.amount);
 				setPaymentStatus('pending');
 			} catch (error) {
 				console.error('Error in initializePayment:', error);

@@ -5,7 +5,7 @@ import { SubscriptionFields } from "./subscription/SubscriptionFields";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import { generateUniqueAmount } from "@/utils/paymentUtils";
+import { generateUniqueAmount, createOrUpdatePendingPayment } from "@/utils/paymentUtils";
 import { BASE_PAYMENT_AMOUNT } from "@/constants/payments";
 
 interface SubscriptionFormData {
@@ -89,19 +89,11 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
       const uniqueAmount = await generateUniqueAmount(BASE_PAYMENT_AMOUNT);
       console.log('Generated unique amount:', uniqueAmount);
 
-      // Create new pending payment
-      const { error: paymentInsertError } = await supabase
-        .from('payments')
-        .insert([{
-          email: data.email,
-          amount: uniqueAmount,
-          status: 'pending',
-          email_sent: false
-        }]);
-
-      if (paymentInsertError) {
-        console.error('Error creating payment:', paymentInsertError);
-        throw paymentInsertError;
+      // Create new pending payment using centralized method
+      const payment = await createOrUpdatePendingPayment(data.email, uniqueAmount);
+      
+      if (!payment) {
+        throw new Error('Failed to create payment record');
       }
 
       // Proceed to payment page
