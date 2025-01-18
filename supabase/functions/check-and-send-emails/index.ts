@@ -52,8 +52,7 @@ serve(async (req) => {
 		});
 
 		if (createUserError && createUserError.message !== 'User already registered') {
-			console.error('Error creating user:', createUserError);
-			throw createUserError;
+			console.log('This user was alredy registered:', email);
 		}
 
 		// Generate password reset link

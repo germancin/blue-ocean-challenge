@@ -66,8 +66,23 @@ const Payment = () => {
 						}
 
 						if (data.status === 'success') {
-							// Update the payment record to 'success' in Supabase
-							setCurrentPaymentStatus('success');
+							if (!existingPayment.email_sent) {
+								const { error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
+									body: {
+										email: existingPayment.email,
+										paymentId: existingPayment.id,
+										amount: existingPayment.amount,
+									},
+								});
+
+								if (functionError) {
+									console.error('Failed to sending e-mail:', functionError);
+								}
+
+								// Update local state to 'success'
+								setCurrentPaymentStatus('success');
+								setIsFirstTime(true);
+							}
 						}
 					} else {
 						// If there's no pending payment, check if there's one with status 'success'
@@ -82,7 +97,7 @@ const Payment = () => {
 							if (!successfulPayment.email_sent) {
 								const { error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
 									body: {
-										email,
+										email: successfulPayment.email_sent,
 										paymentId: successfulPayment.id,
 										amount: successfulPayment.amount,
 									},
@@ -91,10 +106,14 @@ const Payment = () => {
 								if (functionError) {
 									console.error('Failed to send email:', functionError);
 								}
+
+								// Update local state to 'success'
+								setCurrentPaymentStatus('success');
+								setIsFirstTime(true);
+							} else if (successfulPayment.email_sent) {
+								setCurrentPaymentStatus('success');
+								setIsFirstTime(false);
 							}
-							// Update local state to 'success'
-							setCurrentPaymentStatus('success');
-							setIsFirstTime(true);
 						}
 					}
 				} catch (error) {

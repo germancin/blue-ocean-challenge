@@ -86,7 +86,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 				// Send confirmation email using the edge function
 				const { data, error } = await supabase.functions.invoke('check-and-send-emails', {
 					body: {
-						email: existingPayment.email_sent,
+						email: existingPayment.email,
 						paymentId: existingPayment.id,
 						amount: existingPayment.amount,
 					},
@@ -98,8 +98,8 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 						title: 'Welcome email was sent.',
 						description: 'Go to your email to complete your registration.',
 					});
-				} else if (data?.message) {
-					console.log('Email status:', data.message);
+				} else {
+					console.error('Error sending E-mail: ', error?.message);
 				}
 				navigate('/payment', {
 					state: {
