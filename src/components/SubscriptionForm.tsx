@@ -70,7 +70,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 				console.log('Found existing successful payment:', existingPayment);
 				toast({
 					title: 'Payment already completed',
-					description: 'You have already completed the payment process.',
+					description: 'You have already completed the payment process. Login',
 				});
 				navigate('/chart');
 				return;
