@@ -134,14 +134,6 @@ serve(async (req) => {
 			}),
 		});
 
-		if (!emailRes.ok) {
-			const error = await emailRes.text();
-			return new Response(JSON.stringify({ error }), {
-				status: 400,
-				headers: { ...corsHeaders, "Content-Type": "application/json" },
-			});
-		}
-
 		console.log('Welcome email sent successfully');
 
 		// Update payment record to mark email as sent
