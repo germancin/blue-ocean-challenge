@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useLocation, Navigate } from 'react-router-dom';
+import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/components/AuthProvider';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Navbar from '@/components/Navbar';
+import { toast } from 'sonner';
 
 const data = [
 	{ name: 'Jan', value: 400 },
@@ -16,8 +17,27 @@ const data = [
 
 const ChartPage = () => {
 	const location = useLocation();
+	const navigate = useNavigate();
 	// Extract the initial payment data from the route state
 	const isFirstTime = location.state?.isFirstTime || false;
+
+	useEffect(() => {
+		if (isFirstTime) {
+			// Show success payment toast
+			toast.success("Thank you! Your payment has been successfully processed.", {
+				duration: 5000
+			});
+
+			// Show password change reminder toast with action
+			toast("Please set up your password to secure your account", {
+				duration: 8000,
+				action: {
+					label: "Set Password",
+					onClick: () => navigate('/profile?changePassword=true')
+				}
+			});
+		}
+	}, [isFirstTime, navigate]);
 
 	return (
 		<div className="min-h-screen bg-black">
