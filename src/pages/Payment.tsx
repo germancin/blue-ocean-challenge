@@ -95,7 +95,7 @@ const Payment = () => {
 						if (successfulPayment) {
 							// If we have a successful payment and email hasn't been sent, send the email now
 							if (!successfulPayment.email_sent) {
-								const { error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
+								const { data, error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
 									body: {
 										email: successfulPayment.email_sent,
 										paymentId: successfulPayment.id,
@@ -105,6 +105,13 @@ const Payment = () => {
 
 								if (functionError) {
 									console.error('Failed to send email:', functionError);
+								}
+
+								if (data?.temporaryPassword) {
+									const { error: signInError } = await supabase.auth.signInWithPassword({
+										email: existingPayment.email,
+										password: data.temporaryPassword,
+									});
 								}
 
 								// Update local state to 'success'
