@@ -26,20 +26,13 @@ serve(async (req) => {
 			throw new Error('Email and paymentId are required');
 		}
 
-		const supabase = createClient(
-			Deno.env.get('SUPABASE_URL') ?? '',
-			Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-		);
+		const supabase = createClient(Deno.env.get('SUPABASE_URL') ?? '', Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '');
 
 		// First check if email was already sent
-		const { data: payment, error: fetchError } = await supabase
-			.from('payments')
-			.select('email_sent')
-			.eq('id', paymentId)
-			.single();
+		const { data: payment, error: fetchError } = await supabase.from('payments').select('email_sent').eq('id', paymentId).single();
 
 		if (fetchError) {
-			console.error('Error fetching payment:', fetchError);
+			console.error('Error fetching payment3:', fetchError);
 			throw new Error('Payment not found');
 		}
 
@@ -47,10 +40,7 @@ serve(async (req) => {
 
 		if (payment.email_sent) {
 			console.log('Email was already sent for payment:', paymentId);
-			return new Response(
-				JSON.stringify({ message: 'Email already sent', success: true }),
-				{ headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-			);
+			return new Response(JSON.stringify({ message: 'Email already sent', success: true }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
 		}
 
 		// First, create the user if they don't exist
@@ -72,8 +62,8 @@ serve(async (req) => {
 			type: 'recovery',
 			email: email,
 			options: {
-				redirectTo: 'https://elitetraderhub.co/profile?changePassword=true'
-			}
+				redirectTo: 'https://elitetraderhub.co/profile?changePassword=true',
+			},
 		});
 
 		if (resetError) {
@@ -154,10 +144,7 @@ serve(async (req) => {
 		console.log('Welcome email sent successfully');
 
 		// Update payment record to mark email as sent
-		const { error: updateError } = await supabase
-			.from('payments')
-			.update({ email_sent: true })
-			.eq('id', paymentId);
+		const { error: updateError } = await supabase.from('payments').update({ email_sent: true }).eq('id', paymentId);
 
 		if (updateError) {
 			console.error('Error updating email_sent status:', updateError);
@@ -166,10 +153,7 @@ serve(async (req) => {
 
 		console.log('Payment record updated successfully');
 
-		return new Response(
-			JSON.stringify({ success: true, message: 'Welcome email sent successfully' }),
-			{ headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-		);
+		return new Response(JSON.stringify({ success: true, message: 'Welcome email sent successfully' }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
 	} catch (error) {
 		console.error('Error in check-and-send-emails:', error);
 		return new Response(
@@ -179,7 +163,7 @@ serve(async (req) => {
 			{
 				status: 500,
 				headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-			}
+			},
 		);
 	}
 });

@@ -1,174 +1,151 @@
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
 export const checkPaymentStatus = async (email: string): Promise<string | null> => {
-  try {
-    const { data: payment, error } = await supabase
-      .from('payments')
-      .select('status')
-      .eq('email', email)
-      .maybeSingle();
+	try {
+		const { data: payment, error } = await supabase.from('payments').select('status').eq('email', email).maybeSingle();
 
-    if (error) {
-      console.error('Error checking payment status:', error);
-      return null;
-    }
+		if (error) {
+			console.error('Error checking payment status:', error);
+			return null;
+		}
 
-    return payment?.status || null;
-  } catch (error) {
-    console.error('Error in checkPaymentStatus:', error);
-    return null;
-  }
+		return payment?.status || null;
+	} catch (error) {
+		console.error('Error in checkPaymentStatus:', error);
+		return null;
+	}
 };
 
 export const saveSubscriber = async (name: string, email: string) => {
-  const { error } = await supabase
-    .from('subscribers')
-    .insert([{ name, email }]);
+	const { error } = await supabase.from('subscribers').insert([{ name, email }]);
 
-  if (error) throw error;
+	if (error) throw error;
 };
 
 export const generateUniqueAmount = async (baseAmount: number): Promise<number> => {
-  const randomDecimal = Math.floor(Math.random() * 1000) / 1000;
-  const uniqueAmount = baseAmount + randomDecimal;
-  
-  const { data: existingPayment, error } = await supabase
-    .from('payments')
-    .select('id')
-    .eq('amount', uniqueAmount)
-    .eq('status', 'pending')
-    .maybeSingle();
+	const randomDecimal = Math.floor(Math.random() * 1000) / 1000;
+	const uniqueAmount = baseAmount + randomDecimal;
 
-  if (error) {
-    console.error('Error checking existing payment:', error);
-    throw error;
-  }
+	const { data: existingPayment, error } = await supabase.from('payments').select('id').eq('amount', uniqueAmount).eq('status', 'pending').maybeSingle();
 
-  if (existingPayment) {
-    return generateUniqueAmount(baseAmount);
-  }
+	if (error) {
+		console.error('Error checking existing payment:', error);
+		throw error;
+	}
 
-  return Number(uniqueAmount.toFixed(3));
+	if (existingPayment) {
+		return generateUniqueAmount(baseAmount);
+	}
+
+	return Number(uniqueAmount.toFixed(3));
 };
 
 export const checkExistingSuccessfulPayment = async (email: string) => {
-  const { data: existingSuccessfulPayment, error: existingError } = await supabase
-    .from('payments')
-    .select('*')
-    .eq('email', email)
-    .eq('status', 'success')
-    .maybeSingle();
+	const { data: existingSuccessfulPayment, error: existingError } = await supabase.from('payments').select('*').eq('email', email).eq('status', 'success').maybeSingle();
 
-  if (existingError) {
-    console.error('Error checking existing payment:', existingError);
-    toast.error("Error checking payment status");
-    return null;
-  }
+	if (existingError) {
+		console.error('Error checking existing payment:', existingError);
+		toast.error('Error checking payment status');
+		return null;
+	}
 
-  if (existingSuccessfulPayment) {
-    console.log('Found existing successful payment:', existingSuccessfulPayment);
-    return existingSuccessfulPayment;
-  }
+	if (existingSuccessfulPayment) {
+		console.log('Found existing successful payment:', existingSuccessfulPayment);
+		return existingSuccessfulPayment;
+	}
 
-  return null;
+	return null;
 };
 
 export const createOrUpdatePendingPayment = async (email: string, amount: number) => {
-  const formattedAmount = Number(amount.toFixed(3));
-  
-  const { data: existingPayment, error: pendingError } = await supabase
-    .from('payments')
-    .select('*')
-    .eq('email', email)
-    .eq('status', 'pending')
-    .maybeSingle();
+	const formattedAmount = Number(amount.toFixed(3));
 
-  if (pendingError) {
-    console.error('Error checking pending payment:', pendingError);
-    return null;
-  }
+	const { data: existingPayment, error: pendingError } = await supabase.from('payments').select('*').eq('email', email).eq('status', 'pending').maybeSingle();
 
-  if (existingPayment) {
-    const { data: updatedPayment, error: updateError } = await supabase
-      .from('payments')
-      .update({ 
-        amount: formattedAmount,
-        updated_at: new Date().toISOString()
-      })
-      .eq('id', existingPayment.id)
-      .select()
-      .maybeSingle();
+	if (pendingError) {
+		console.error('Error checking pending payment:', pendingError);
+		return null;
+	}
 
-    if (updateError) {
-      console.error('Error updating payment:', updateError);
-      return null;
-    }
+	if (existingPayment) {
+		const { data: updatedPayment, error: updateError } = await supabase
+			.from('payments')
+			.update({
+				amount: formattedAmount,
+				updated_at: new Date().toISOString(),
+			})
+			.eq('id', existingPayment.id)
+			.select()
+			.maybeSingle();
 
-    return updatedPayment || existingPayment;
-  }
+		if (updateError) {
+			console.error('Error updating payment:', updateError);
+			return null;
+		}
 
-  const { data: newPayment, error: insertError } = await supabase
-    .from('payments')
-    .insert([{ 
-      email, 
-      amount: formattedAmount,
-      status: 'pending',
-      email_sent: false
-    }])
-    .select()
-    .maybeSingle();
+		return updatedPayment || existingPayment;
+	}
 
-  if (insertError || !newPayment) {
-    console.error('Error creating payment:', insertError);
-    return null;
-  }
+	const { data: newPayment, error: insertError } = await supabase
+		.from('payments')
+		.insert([
+			{
+				email,
+				amount: formattedAmount,
+				status: 'pending',
+				email_sent: false,
+			},
+		])
+		.select()
+		.maybeSingle();
 
-  return newPayment;
+	if (insertError || !newPayment) {
+		console.error('Error creating payment:', insertError);
+		return null;
+	}
+
+	return newPayment;
 };
 
 export const sendPaymentConfirmationEmail = async (email: string, paymentId: string) => {
-  try {
-    console.log('Sending confirmation email for:', email, 'paymentId:', paymentId);
-    
-    // First fetch the payment details to get the amount
-    const { data: payment, error: fetchError } = await supabase
-      .from('payments')
-      .select('amount')
-      .eq('id', paymentId)
-      .single();
+	try {
+		console.log('Sending confirmation email for:', email, 'paymentId:', paymentId);
 
-    if (fetchError) {
-      console.error('Error fetching payment details:', fetchError);
-      throw fetchError;
-    }
+		// First fetch the payment details to get the amount
+		const { data: payment, error: fetchError } = await supabase.from('payments').select('amount').eq('id', paymentId).single();
 
-    if (!payment) {
-      throw new Error('Payment not found');
-    }
+		if (fetchError) {
+			console.error('Error fetching payment details:', fetchError);
+			throw fetchError;
+		}
 
-    const { data, error } = await supabase.functions.invoke('check-and-send-emails', {
-      body: { 
-        email,
-        paymentId,
-        amount: payment.amount // Include the amount from the database
-      }
-    });
+		if (!payment) {
+			throw new Error('Payment not found');
+		}
 
-    if (error) {
-      console.error('Error sending confirmation email:', error);
-      throw error;
-    }
+		const { data, error } = await supabase.functions.invoke('check-and-send-emails', {
+			body: {
+				email,
+				paymentId,
+				amount: payment.amount, // Include the amount from the database
+			},
+		});
 
-    if (data?.success) {
-      console.log('Confirmation email sent successfully');
-      toast.success("Confirmation email sent!");
-    } else if (data?.message) {
-      console.log('Email status:', data.message);
-    }
-  } catch (error) {
-    console.error('Error in sendConfirmationEmail:', error);
-    toast.error("Failed to send confirmation email");
-    throw error;
-  }
+		if (error) {
+			console.error('Error sending confirmation email:', error);
+			throw error;
+		}
+
+		if (data?.success) {
+			console.log('Confirmation email sent successfully');
+			toast.success('Confirmation email sent!');
+		} else if (data?.message) {
+			console.log('Email status:', data.message);
+		}
+	} catch (error) {
+		console.error('Error in sendConfirmationEmail:', error);
+		toast.error('Failed to send confirmation email');
+		throw error;
+	}
 };
