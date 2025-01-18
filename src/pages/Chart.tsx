@@ -6,6 +6,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import Navbar from '@/components/Navbar';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { X } from 'lucide-react';
+import ReactConfetti from 'react-confetti';
 
 const data = [
 	{ name: 'Jan', value: 400 },
@@ -21,6 +22,7 @@ const ChartPage = () => {
 	const navigate = useNavigate();
 	const [showPaymentAlert, setShowPaymentAlert] = useState(false);
 	const [showPasswordAlert, setShowPasswordAlert] = useState(false);
+	const [showConfetti, setShowConfetti] = useState(false);
 
 	// Extract the initial payment data from the route state
 	const isFirstTime = location.state?.isFirstTime || false;
@@ -29,11 +31,24 @@ const ChartPage = () => {
 		if (isFirstTime) {
 			setShowPaymentAlert(true);
 			setShowPasswordAlert(true);
+			setShowConfetti(true);
+			// Hide confetti after 5 seconds
+			const timer = setTimeout(() => setShowConfetti(false), 5000);
+			return () => clearTimeout(timer);
 		}
 	}, [isFirstTime]);
 
 	return (
 		<div className="min-h-screen bg-black">
+			{showConfetti && (
+				<ReactConfetti
+					width={window.innerWidth}
+					height={window.innerHeight}
+					numberOfPieces={200}
+					recycle={false}
+					colors={['#007BFF', '#00FF00', '#FFD700', '#FF69B4', '#9b87f5']}
+				/>
+			)}
 			<Navbar />
 			<div className="container mx-auto px-4 pt-24">
 				{showPaymentAlert && (
