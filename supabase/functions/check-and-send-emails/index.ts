@@ -52,7 +52,7 @@ serve(async (req) => {
 		});
 
 		if (createUserError && createUserError.message !== 'User already registered') {
-			console.log('This user was alredy registered:', email);
+			console.log('This user was alredy registered:');
 		}
 
 		// Generate password reset link
@@ -136,8 +136,10 @@ serve(async (req) => {
 
 		if (!emailRes.ok) {
 			const error = await emailRes.text();
-			console.error('Resend API error:', error);
-			throw new Error(`Failed to send email: ${error}`);
+			return new Response(JSON.stringify({ error }), {
+				status: 400,
+				headers: { ...corsHeaders, "Content-Type": "application/json" },
+			});
 		}
 
 		console.log('Welcome email sent successfully');
