@@ -40,15 +40,7 @@ const ChartPage = () => {
 
 	return (
 		<div className="min-h-screen bg-black">
-			{showConfetti && (
-				<ReactConfetti
-					width={window.innerWidth}
-					height={window.innerHeight}
-					numberOfPieces={200}
-					recycle={false}
-					colors={['#007BFF', '#00FF00', '#FFD700', '#FF69B4', '#9b87f5']}
-				/>
-			)}
+			{showConfetti && <ReactConfetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} colors={['#007BFF', '#00FF00', '#FFD700', '#FF69B4', '#9b87f5']} />}
 			<Navbar />
 			<div className="container mx-auto px-4 pt-24">
 				{showPaymentAlert && (

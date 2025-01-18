@@ -113,21 +113,13 @@ const Payment = () => {
 		return <Navigate to="/" />;
 	}
 
-	if (currentPaymentStatus === 'sucsess') {
-		navigate('/chart', {
-			state: {
-				isFirstTime: isFirstTime,
-			},
-		});
-	}
-
 	return (
 		<div className="min-h-screen bg-gray-100 py-12">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 					<PaymentInformationCard onAcceptTerms={() => {}} />
 					<PaymentDetailsCard amount={paymentAmount} email={email} />
-					<PaymentInstructionsCard amount={paymentAmount} merchantAddress={merchantAddress} transactionStatus={currentPaymentStatus} />
+					<PaymentInstructionsCard isFirstTime={isFirstTime} amount={paymentAmount} merchantAddress={merchantAddress} transactionStatus={currentPaymentStatus} />
 				</div>
 			</div>
 		</div>
