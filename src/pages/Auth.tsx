@@ -35,7 +35,7 @@ const AuthPage = () => {
 			}
 		};
 
-		// Initial check
+		// Initial check.
 		updateAuthLinks();
 
 		// Set up a MutationObserver to watch for DOM changes
