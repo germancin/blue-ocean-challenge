@@ -100,8 +100,8 @@ export function PasswordUpdateForm() {
 	if (verifying) {
 		return (
 			<div className="flex flex-col items-center justify-center space-y-4">
-				<Loader2 className="h-8 w-8 animate-spin text-primary" />
-				<p className="text-sm text-muted-foreground">Verifying your request...</p>
+				<Loader2 className="h-8 w-8 animate-spin text-bright-blue" />
+				<p className="text-sm text-white/70">Verifying your request...</p>
 			</div>
 		);
 	}
@@ -109,8 +109,8 @@ export function PasswordUpdateForm() {
 	if (!userEmail) {
 		return (
 			<div className="flex flex-col items-center justify-center space-y-4">
-				<p className="text-sm text-red-600">Unable to verify your request. Please try again.</p>
-				<Button onClick={() => navigate('/auth')}>Return to Login</Button>
+				<p className="text-sm text-red-400">Unable to verify your request. Please try again.</p>
+				<Button onClick={() => navigate('/auth')} className="bg-bright-blue hover:bg-bright-blue/90">Return to Login</Button>
 			</div>
 		);
 	}
@@ -119,12 +119,12 @@ export function PasswordUpdateForm() {
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 				<div className="space-y-2" style={{ display: 'none' }}>
-					<FormLabel>Email</FormLabel>
+					<FormLabel className="text-white">Email</FormLabel>
 					<Input 
 						type="email" 
 						value={userEmail} 
 						disabled 
-						className="bg-background text-muted-foreground" 
+						className="bg-white/5 text-white/50" 
 					/>
 				</div>
 
@@ -138,7 +138,8 @@ export function PasswordUpdateForm() {
 								<FormControl>
 									<Input 
 										type={showNewPassword ? "text" : "password"} 
-										{...field} 
+										{...field}
+										className="bg-white/5 border-white/10 text-white placeholder:text-white/50 focus:border-bright-blue focus:ring-bright-blue"
 									/>
 								</FormControl>
 								<Button
@@ -149,13 +150,13 @@ export function PasswordUpdateForm() {
 									onClick={() => setShowNewPassword(!showNewPassword)}
 								>
 									{showNewPassword ? (
-										<EyeOff className="h-4 w-4 text-muted-foreground" />
+										<EyeOff className="h-4 w-4 text-white/70" />
 									) : (
-										<Eye className="h-4 w-4 text-muted-foreground" />
+										<Eye className="h-4 w-4 text-white/70" />
 									)}
 								</Button>
 							</div>
-							<FormMessage />
+							<FormMessage className="text-red-400" />
 						</FormItem>
 					)}
 				/>
@@ -170,7 +171,8 @@ export function PasswordUpdateForm() {
 								<FormControl>
 									<Input 
 										type={showConfirmPassword ? "text" : "password"} 
-										{...field} 
+										{...field}
+										className="bg-white/5 border-white/10 text-white placeholder:text-white/50 focus:border-bright-blue focus:ring-bright-blue"
 									/>
 								</FormControl>
 								<Button
@@ -181,18 +183,22 @@ export function PasswordUpdateForm() {
 									onClick={() => setShowConfirmPassword(!showConfirmPassword)}
 								>
 									{showConfirmPassword ? (
-										<EyeOff className="h-4 w-4 text-muted-foreground" />
+										<EyeOff className="h-4 w-4 text-white/70" />
 									) : (
-										<Eye className="h-4 w-4 text-muted-foreground" />
+										<Eye className="h-4 w-4 text-white/70" />
 									)}
 								</Button>
 							</div>
-							<FormMessage />
+							<FormMessage className="text-red-400" />
 						</FormItem>
 					)}
 				/>
 
-				<Button type="submit" disabled={isLoading} className="w-full">
+				<Button 
+					type="submit" 
+					disabled={isLoading} 
+					className="w-full bg-bright-blue hover:bg-bright-blue/90 text-white"
+				>
 					{isLoading ? (
 						<>
 							<Loader2 className="mr-2 h-4 w-4 animate-spin" />
