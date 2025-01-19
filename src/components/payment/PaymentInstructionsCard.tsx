@@ -1,14 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle2, AlertCircle, Shield, LockKeyhole, ShieldCheck, Copy, Check } from 'lucide-react';
-import type { PaymentStatus } from '@/hooks/use-payment-verification';
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
 
 interface PaymentInstructionsCardProps {
 	amount: number;
 	merchantAddress: string;
-	transactionStatus: PaymentStatus;
+	transactionStatus: string;
 }
 
 export function PaymentInstructionsCard({ amount, merchantAddress, transactionStatus }: PaymentInstructionsCardProps) {
