@@ -78,3 +78,20 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom styles for the forgot password link */
+.supabase-auth-ui_ui-anchor.c-dumjqv {
+  /* Hides the text but maintains the element's clickable area */
+  color: transparent; 
+  position: relative;
+}
+
+.supabase-auth-ui_ui-anchor.c-dumjqv::after {
+  content: "Reset / Forgot Password?";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #2563eb;
+  text-decoration: underline;
+  cursor: pointer;
+}
