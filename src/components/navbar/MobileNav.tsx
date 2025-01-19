@@ -69,7 +69,18 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 				<div className="absolute top-full right-0 bg-black/95 backdrop-blur-sm w-64 border-t border-gray-800 rounded-b-lg shadow-xl">
 					<nav className="py-4">
 						<div className="px-4 space-y-2">
-							{/* Authentication-related buttons */}
+							{/* Join Tournament always at top */}
+							{!user && (
+								<Button 
+									variant="default" 
+									className="w-full justify-start bg-bright-blue hover:bg-bright-blue/90" 
+									onClick={onSubscribe}
+								>
+									Join Tournament
+								</Button>
+							)}
+
+							{/* Auth-specific navigation */}
 							<div className="space-y-2 border-b border-gray-800 pb-4 mb-4">
 								{user ? (
 									<>
@@ -96,42 +107,38 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 										</Button>
 									</>
 								) : (
-									<>
-										<Button 
-											variant="default" 
-											className="w-full justify-start bg-bright-blue hover:bg-bright-blue/90" 
-											onClick={onSubscribe}
-										>
-											Join Tournament
-										</Button>
-										<Button 
-											variant="default" 
-											className="w-full justify-start bg-bright-blue hover:bg-bright-blue/90" 
-											onClick={handleLogin}
-										>
-											Login
-										</Button>
-										<Button 
-											variant="ghost" 
-											onClick={() => navigate('/chart')} 
-											className="w-full justify-start text-bright-blue hover:bg-bright-blue/10"
-										>
-											Charts
-										</Button>
-									</>
+									<Button 
+										variant="ghost" 
+										onClick={() => navigate('/chart')} 
+										className="w-full justify-start text-bright-blue hover:bg-bright-blue/10"
+									>
+										Charts
+									</Button>
 								)}
 							</div>
 
 							{/* Menu items */}
-							{menuItems.map((item) => (
+							<div className="space-y-2 border-b border-gray-800 pb-4">
+								{menuItems.map((item) => (
+									<button
+										key={item.label}
+										onClick={() => handleNavigation(item.href)}
+										className="block w-full text-left px-4 py-2 text-light-gray hover:text-bright-blue hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg"
+									>
+										{item.label}
+									</button>
+								))}
+							</div>
+
+							{/* Login link at the bottom */}
+							{!user && (
 								<button
-									key={item.label}
-									onClick={() => handleNavigation(item.href)}
-									className="block w-full text-left px-4 py-2 text-light-gray hover:text-bright-blue hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg"
+									onClick={handleLogin}
+									className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg"
 								>
-									{item.label}
+									Login
 								</button>
-							))}
+							)}
 						</div>
 					</nav>
 				</div>
