@@ -53,7 +53,6 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 
 	return (
 		<div className="md:hidden relative">
-			{/* Only show the burger menu button in the top bar */}
 			<div className="flex justify-end">
 				<button
 					onClick={() => setIsOpen(!isOpen)}
@@ -64,7 +63,6 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 				</button>
 			</div>
 
-			{/* All navigation items moved inside the dropdown */}
 			{isOpen && (
 				<div className="absolute top-full right-0 bg-black/95 backdrop-blur-sm w-64 border-t border-gray-800 rounded-b-lg shadow-xl">
 					<nav className="py-4">
@@ -81,32 +79,8 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 							)}
 
 							{/* Auth-specific navigation */}
-							<div className="space-y-2 border-b border-gray-800 pb-4 mb-4">
-								{user ? (
-									<>
-										<Button 
-											variant="ghost" 
-											onClick={() => navigate('/chart')} 
-											className="w-full justify-start text-bright-blue hover:bg-bright-blue/10"
-										>
-											Charts
-										</Button>
-										<Button 
-											variant="ghost" 
-											onClick={() => navigate('/profile')} 
-											className="w-full justify-start text-bright-blue hover:bg-bright-blue/10"
-										>
-											Profile
-										</Button>
-										<Button 
-											variant="outline" 
-											onClick={handleLogout} 
-											className="w-full justify-start border-bright-blue text-bright-blue hover:bg-bright-blue/10"
-										>
-											Logout
-										</Button>
-									</>
-								) : (
+							{user && (
+								<div className="space-y-2 border-b border-gray-800 pb-4 mb-4">
 									<Button 
 										variant="ghost" 
 										onClick={() => navigate('/chart')} 
@@ -114,8 +88,22 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 									>
 										Charts
 									</Button>
-								)}
-							</div>
+									<Button 
+										variant="ghost" 
+										onClick={() => navigate('/profile')} 
+										className="w-full justify-start text-bright-blue hover:bg-bright-blue/10"
+									>
+										Profile
+									</Button>
+									<Button 
+										variant="outline" 
+										onClick={handleLogout} 
+										className="w-full justify-start border-bright-blue text-bright-blue hover:bg-bright-blue/10"
+									>
+										Logout
+									</Button>
+								</div>
+							)}
 
 							{/* Menu items */}
 							<div className="space-y-2 border-b border-gray-800 pb-4">
