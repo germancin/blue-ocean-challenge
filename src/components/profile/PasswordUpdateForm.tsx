@@ -120,7 +120,12 @@ export function PasswordUpdateForm() {
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 				<div className="space-y-2">
 					<FormLabel>Email</FormLabel>
-					<Input type="email" value={userEmail} disabled className="bg-muted" />
+					<Input 
+						type="email" 
+						value={userEmail} 
+						disabled 
+						className="bg-background text-muted-foreground" 
+					/>
 				</div>
 
 				<FormField
