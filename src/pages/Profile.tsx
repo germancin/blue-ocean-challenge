@@ -50,7 +50,7 @@ const ProfilePage = () => {
 	const totalPaid = payments?.reduce((sum, payment) => (payment.status === 'success' ? sum + Number(payment.amount) : sum), 0) || 0;
 
 	return (
-		<div className="min-h-screen bg-black">
+		<div className="min-h-screen bg-navy">
 			<Navbar />
 			<div className="container mx-auto px-4 pt-24">
 				{shouldShowPasswordForm ? (
