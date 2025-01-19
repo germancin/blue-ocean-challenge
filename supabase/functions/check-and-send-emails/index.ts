@@ -7,6 +7,8 @@ const corsHeaders = {
 	'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
 };
 
+const HOST = 'http:localhost:8080';
+
 serve(async (req) => {
 	console.log('Got into check-and-send-emails function');
 
@@ -64,7 +66,7 @@ serve(async (req) => {
 			type: 'recovery',
 			email: email,
 			options: {
-				redirectTo: 'https://elitetraderhub.co/profile?changePassword=true',
+				redirectTo: `${HOST}/profile?changePassword=true`,
 			},
 		});
 
@@ -150,7 +152,7 @@ serve(async (req) => {
 		const { data: linkData, error } = await supabase.auth.admin.generateLink({
 			type: 'magiclink',
 			email,
-			options: { redirectTo: 'https://elitetraderhub.co/chart?isFirstTime=true' },
+			options: { redirectTo: `${HOST}/chart?isFirstTime=true` },
 		});
 
 		return new Response(
