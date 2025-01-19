@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Eye, EyeOff } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/components/AuthProvider';
 
@@ -25,6 +25,8 @@ export function PasswordUpdateForm() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [userEmail, setUserEmail] = useState<string | null>(null);
 	const [verifying, setVerifying] = useState(true);
+	const [showNewPassword, setShowNewPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { user } = useAuth();
@@ -127,9 +129,27 @@ export function PasswordUpdateForm() {
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Password</FormLabel>
-							<FormControl>
-								<Input type="password" {...field} />
-							</FormControl>
+							<div className="relative">
+								<FormControl>
+									<Input 
+										type={showNewPassword ? "text" : "password"} 
+										{...field} 
+									/>
+								</FormControl>
+								<Button
+									type="button"
+									variant="ghost"
+									size="icon"
+									className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+									onClick={() => setShowNewPassword(!showNewPassword)}
+								>
+									{showNewPassword ? (
+										<EyeOff className="h-4 w-4 text-muted-foreground" />
+									) : (
+										<Eye className="h-4 w-4 text-muted-foreground" />
+									)}
+								</Button>
+							</div>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -141,9 +161,27 @@ export function PasswordUpdateForm() {
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Confirm Password</FormLabel>
-							<FormControl>
-								<Input type="password" {...field} />
-							</FormControl>
+							<div className="relative">
+								<FormControl>
+									<Input 
+										type={showConfirmPassword ? "text" : "password"} 
+										{...field} 
+									/>
+								</FormControl>
+								<Button
+									type="button"
+									variant="ghost"
+									size="icon"
+									className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+									onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+								>
+									{showConfirmPassword ? (
+										<EyeOff className="h-4 w-4 text-muted-foreground" />
+									) : (
+										<Eye className="h-4 w-4 text-muted-foreground" />
+									)}
+								</Button>
+							</div>
 							<FormMessage />
 						</FormItem>
 					)}
