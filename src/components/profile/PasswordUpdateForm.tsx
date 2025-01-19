@@ -118,7 +118,7 @@ export function PasswordUpdateForm() {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-				<div className="space-y-2">
+				<div className="space-y-2" style={{ display: 'none' }}>
 					<FormLabel>Email</FormLabel>
 					<Input 
 						type="email" 
@@ -165,7 +165,7 @@ export function PasswordUpdateForm() {
 					name="confirmPassword"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Confirm Password</FormLabel>
+							<FormLabel>Repeat Password</FormLabel>
 							<div className="relative">
 								<FormControl>
 									<Input 
