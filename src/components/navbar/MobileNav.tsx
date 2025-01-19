@@ -67,7 +67,7 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 				<div className="absolute top-full right-0 bg-black/95 backdrop-blur-sm w-64 border-t border-gray-800 rounded-b-lg shadow-xl">
 					<nav className="py-4">
 						<div className="px-4 space-y-2">
-							{/* Join Tournament always at top */}
+							{/* Join Tournament always at top for non-logged in users */}
 							{!user && (
 								<Button 
 									variant="default" 
@@ -95,13 +95,6 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 									>
 										Profile
 									</Button>
-									<Button 
-										variant="outline" 
-										onClick={handleLogout} 
-										className="w-full justify-start border-bright-blue text-bright-blue hover:bg-bright-blue/10"
-									>
-										Logout
-									</Button>
 								</div>
 							)}
 
@@ -118,8 +111,15 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 								))}
 							</div>
 
-							{/* Login link at the bottom */}
-							{!user && (
+							{/* Login/Logout at the bottom */}
+							{user ? (
+								<button
+									onClick={handleLogout}
+									className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg"
+								>
+									Logout
+								</button>
+							) : (
 								<button
 									onClick={handleLogin}
 									className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg"
