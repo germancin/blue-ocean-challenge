@@ -12,7 +12,7 @@ const Payment = () => {
 
 	// Extract the payment ID from the URL query parameters
 	const searchParams = new URLSearchParams(location.search);
-	const subscriberId = searchParams.get('pid');
+	const subscriberId = searchParams.get('sid');
 
 	const [email, setEmail] = useState('');
 	const [paymentAmount, setPaymentAmount] = useState(null);
