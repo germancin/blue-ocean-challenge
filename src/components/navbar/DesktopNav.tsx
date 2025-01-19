@@ -59,12 +59,19 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
 				</button>
 			))}
 			{user ? (
-				// If user is logged in, show these buttons
 				<div className="flex items-center space-x-4">
-					<Button variant="ghost" onClick={() => navigate('/chart')} className="text-bright-blue hover:bg-bright-blue/10">
+					<Button 
+						variant="ghost" 
+						onClick={() => navigate('/chart')} 
+						className="text-bright-blue hover:bg-[#D3E4FD] hover:text-[#0FA0CE] transition-colors duration-200"
+					>
 						Charts
 					</Button>
-					<Button variant="ghost" onClick={() => navigate('/profile')} className="text-bright-blue hover:bg-bright-blue/10">
+					<Button 
+						variant="ghost" 
+						onClick={() => navigate('/profile')} 
+						className="text-bright-blue hover:bg-[#E5DEFF] hover:text-[#7E69AB] transition-colors duration-200"
+					>
 						Profile
 					</Button>
 					<Button 
@@ -76,7 +83,6 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
 					</Button>
 				</div>
 			) : (
-				// If user is NOT logged in, show Join Tournament + Login
 				<div className="flex items-center space-x-4">
 					<Button variant="default" className="bg-bright-blue hover:bg-bright-blue/90" onClick={onSubscribe}>
 						Join Tournament
