@@ -192,14 +192,6 @@ const AuthPage = () => {
 								},
 							},
 						}}
-						localization={{
-							variables: {
-								sign_in: {
-									password_label: 'Password',
-									link_text: 'Reset/Forgot Password',
-								},
-							},
-						}}
 						providers={[]}
 						redirectTo={window.location.origin}
 					/>
