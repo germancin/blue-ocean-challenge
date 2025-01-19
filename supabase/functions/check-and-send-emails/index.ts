@@ -61,30 +61,30 @@ serve(async (req) => {
 		}
 
 		// Generate password reset link
-		console.log('Generating recovery link with admin.generateLink');
-		const { data: resetData, error: resetError } = await supabase.auth.admin.generateLink({
-			type: 'recovery',
-			email: email,
-			options: {
-				redirectTo: `${HOST}/profile?changePassword=true`,
-			},
-		});
+		// console.log('Generating recovery link with admin.generateLink');
+		// const { data: resetData, error: resetError } = await supabase.auth.admin.generateLink({
+		// 	type: 'recovery',
+		// 	email: email,
+		// 	options: {
+		// 		redirectTo: `${HOST}/profile?changePassword=true`,
+		// 	},
+		// });
 
-		if (resetError) {
-			console.error('Error generating reset link:', resetError);
-			throw new Error('Failed to generate password reset link');
-		}
+		// if (resetError) {
+		// 	console.error('Error generating reset link:', resetError);
+		// 	throw new Error('Failed to generate password reset link');
+		// }
 
-		console.log('Reset data received:', resetData);
+		// console.log('Reset data received:', resetData);
 
-		if (!resetData?.properties?.action_link) {
-			console.error('No action link in reset data:', resetData);
-			throw new Error('No recovery link generated');
-		}
+		// if (!resetData?.properties?.action_link) {
+		// 	console.error('No action link in reset data:', resetData);
+		// 	throw new Error('No recovery link generated');
+		// }
 
-		const recoveryLink = resetData.properties.action_link;
-		console.log('Successfully generated recovery link:', recoveryLink);
-		console.log('Token from link:', new URL(recoveryLink).searchParams.get('token'));
+		// const recoveryLink = resetData.properties.action_link;
+		// console.log('Successfully generated recovery link:', recoveryLink);
+		// console.log('Token from link:', new URL(recoveryLink).searchParams.get('token'));
 
 		// Send welcome email with password setup link via Resend
 		const emailRes = await fetch('https://api.resend.com/emails', {
@@ -109,12 +109,12 @@ serve(async (req) => {
               To access your account, please click the secure link below to set up your password:
             </p>
 
-            <div style="text-align: center; margin: 32px 0;">
-              <a href="${recoveryLink}"
+            <!-- <div style="text-align: center; margin: 32px 0;">
+              <a href="#"
                  style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
                 Set Up Your Password
               </a>
-            </div>
+            </div> -->
 
             <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
               <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
