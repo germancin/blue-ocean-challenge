@@ -67,7 +67,11 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
 					<Button variant="ghost" onClick={() => navigate('/profile')} className="text-bright-blue hover:bg-bright-blue/10">
 						Profile
 					</Button>
-					<Button variant="outline" onClick={handleLogout} className="border-bright-blue text-bright-blue hover:bg-bright-blue/10">
+					<Button 
+						variant="outline" 
+						onClick={handleLogout} 
+						className="border-bright-blue text-bright-blue hover:bg-bright-blue hover:text-white transition-colors duration-200"
+					>
 						Logout
 					</Button>
 				</div>
