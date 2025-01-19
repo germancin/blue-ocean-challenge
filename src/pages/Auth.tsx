@@ -31,7 +31,7 @@ const AuthPage = () => {
 
 			const forgotPasswordLink = document.querySelector('a[href="#auth-forgot-password"]');
 			if (forgotPasswordLink) {
-				forgotPasswordLink.textContent = 'Reset/Forgot Password';
+				forgotPasswordLink.textContent = 'Reset Your Password';
 			}
 		};
 
@@ -196,9 +196,9 @@ const AuthPage = () => {
 							variables: {
 								sign_in: {
 									password_label: 'Password',
-									link_text: 'Reset/Forgot Password'
-								}
-							}
+									link_text: 'Reset/Forgot Password',
+								},
+							},
 						}}
 						providers={[]}
 						redirectTo={window.location.origin}
