@@ -31,11 +31,15 @@ const ProfilePage = () => {
 	}, [shouldShowPasswordForm]);
 
 	const { data: payments, isLoading } = useQuery({
-		queryKey: ['payments', user?.id],
+		queryKey: ['payments', user?.email],
 		queryFn: async () => {
-			if (!user?.id) return [];
+			if (!user?.email) return [];
 
-			const { data, error } = await supabase.from('payments').select('amount, created_at, status, transaction_hash').eq('user_id', user.id).order('created_at', { ascending: false });
+			const { data, error } = await supabase
+				.from('payments')
+				.select('amount, created_at, status, transaction_hash')
+				.eq('email', user.email)
+				.order('created_at', { ascending: false });
 
 			if (error) throw error;
 			return data as Payment[];
