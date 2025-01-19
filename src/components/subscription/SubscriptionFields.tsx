@@ -26,11 +26,11 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
           id="name"
           type="text"
           placeholder="Enter your name"
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-4 py-3 rounded-lg bg-white text-dark-gray border-0 focus:ring-2 focus:ring-bright-blue focus:border-transparent transition-all duration-200"
           {...register("name", { required: "Name is required" })}
         />
         {errors.name && (
-          <p className="text-red-500 text-sm">{errors.name.message}</p>
+          <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
         )}
       </div>
 
@@ -42,7 +42,7 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
           id="email"
           type="email"
           placeholder="Enter your email"
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+          className="w-full px-4 py-3 rounded-lg bg-white text-dark-gray border-0 focus:ring-2 focus:ring-bright-blue focus:border-transparent transition-all duration-200"
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -52,14 +52,14 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
           })}
         />
         {errors.email && (
-          <p className="text-red-500 text-sm">{errors.email.message}</p>
+          <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
         )}
       </div>
 
       <div className="flex items-center space-x-2">
         <Checkbox
           id="acceptTerms"
-          className="h-5 w-5 border-2 border-white data-[state=checked]:bg-white data-[state=checked]:text-navy"
+          className="h-5 w-5 border-2 border-white data-[state=checked]:bg-bright-blue data-[state=checked]:border-bright-blue"
           onCheckedChange={(checked) => {
             const event = {
               target: {
@@ -72,12 +72,12 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
         />
         <Label
           htmlFor="acceptTerms"
-          className="text-sm font-medium leading-none text-white cursor-pointer"
+          className="text-sm font-medium leading-none text-white/80 cursor-pointer"
         >
           I accept the{" "}
           <Link
             to="/terms"
-            className="text-purple-400 hover:text-purple-300 underline"
+            className="text-bright-blue hover:text-bright-blue/80 underline"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -86,7 +86,7 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
         </Label>
       </div>
       {errors.acceptTerms && (
-        <p className="text-red-500 text-sm">{errors.acceptTerms.message}</p>
+        <p className="text-red-400 text-sm mt-1">{errors.acceptTerms.message}</p>
       )}
     </>
   );
