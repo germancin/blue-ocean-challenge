@@ -83,19 +83,17 @@ serve(async (req) => {
               To access your account, please click the secure link below to set up your password:
             </p>
 
-            <!-- <div style="text-align: center; margin: 32px 0;">
-              <a href="#"
-                 style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                Set Up Your Password
+            <div style="text-align: center; margin: 32px 0;">
+              <a href="https://elitetraderhub.co" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                Reset Your Password
               </a>
-            </div> -->
+            </div>
 
             <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
               <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
               <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Click the link above to set up your password</li>
-                <li style="margin-bottom: 8px;">Access your tournament dashboard</li>
-                <li style="margin-bottom: 8px;">Join our trading community</li>
+                <li style="margin-bottom: 8px;">Click the link above and reset your password</li>
+                <li style="margin-bottom: 8px;">Access the tournament</li>
                 <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
               </ul>
             </div>
