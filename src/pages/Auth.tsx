@@ -171,7 +171,8 @@ const AuthPage = () => {
 						localization={{
 							variables: {
 								sign_in: {
-									forgotten_password_text: 'Reset/Forgot Password'
+									password_label: 'Password',
+									link_text: 'Reset/Forgot Password'
 								}
 							}
 						}}
