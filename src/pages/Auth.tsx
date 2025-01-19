@@ -22,6 +22,21 @@ const AuthPage = () => {
 	const [isRecoveryFlow, setIsRecoveryFlow] = useState(false);
 
 	useEffect(() => {
+		// Remove sign up link when component mounts
+		const removeSignUpLink = () => {
+			const signUpLink = document.querySelector('a[href="#auth-sign-up"]');
+			if (signUpLink) {
+				signUpLink.remove();
+			}
+		};
+
+		// Initial check
+		removeSignUpLink();
+
+		// Set up a MutationObserver to watch for DOM changes
+		const observer = new MutationObserver(removeSignUpLink);
+		observer.observe(document.body, { childList: true, subtree: true });
+
 		// Check URL parameters for recovery flow
 		const params = new URLSearchParams(window.location.search);
 		const token = params.get('token');
@@ -53,7 +68,11 @@ const AuthPage = () => {
 			}
 		});
 
-		return () => subscription.unsubscribe();
+		// Cleanup observer on component unmount
+		return () => {
+			subscription.unsubscribe();
+			observer.disconnect();
+		};
 	}, [navigate]);
 
 	const handlePasswordReset = async (e: React.FormEvent) => {
