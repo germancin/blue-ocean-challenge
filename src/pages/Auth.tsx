@@ -22,19 +22,24 @@ const AuthPage = () => {
 	const [isRecoveryFlow, setIsRecoveryFlow] = useState(false);
 
 	useEffect(() => {
-		// Remove sign up link when component mounts
-		const removeSignUpLink = () => {
+		// Remove sign up link and update forgot password link text
+		const updateAuthLinks = () => {
 			const signUpLink = document.querySelector('a[href="#auth-sign-up"]');
 			if (signUpLink) {
 				signUpLink.remove();
 			}
+
+			const forgotPasswordLink = document.querySelector('a[href="#auth-forgot-password"]');
+			if (forgotPasswordLink) {
+				forgotPasswordLink.textContent = 'Reset/Forgot Password';
+			}
 		};
 
 		// Initial check
-		removeSignUpLink();
+		updateAuthLinks();
 
 		// Set up a MutationObserver to watch for DOM changes
-		const observer = new MutationObserver(removeSignUpLink);
+		const observer = new MutationObserver(updateAuthLinks);
 		observer.observe(document.body, { childList: true, subtree: true });
 
 		// Check URL parameters for recovery flow
