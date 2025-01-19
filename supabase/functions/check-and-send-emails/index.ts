@@ -7,7 +7,7 @@ const corsHeaders = {
 	'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
 };
 
-const HOST = 'http:localhost:8080';
+const HOST = 'https://elitetraderhub.co';
 
 serve(async (req) => {
 	console.log('Got into check-and-send-emails function');
@@ -59,32 +59,6 @@ serve(async (req) => {
 		if (createUserError && createUserError.message !== 'User already registered') {
 			console.log('This user was alredy registered:');
 		}
-
-		// Generate password reset link
-		// console.log('Generating recovery link with admin.generateLink');
-		// const { data: resetData, error: resetError } = await supabase.auth.admin.generateLink({
-		// 	type: 'recovery',
-		// 	email: email,
-		// 	options: {
-		// 		redirectTo: `${HOST}/profile?changePassword=true`,
-		// 	},
-		// });
-
-		// if (resetError) {
-		// 	console.error('Error generating reset link:', resetError);
-		// 	throw new Error('Failed to generate password reset link');
-		// }
-
-		// console.log('Reset data received:', resetData);
-
-		// if (!resetData?.properties?.action_link) {
-		// 	console.error('No action link in reset data:', resetData);
-		// 	throw new Error('No recovery link generated');
-		// }
-
-		// const recoveryLink = resetData.properties.action_link;
-		// console.log('Successfully generated recovery link:', recoveryLink);
-		// console.log('Token from link:', new URL(recoveryLink).searchParams.get('token'));
 
 		// Send welcome email with password setup link via Resend
 		const emailRes = await fetch('https://api.resend.com/emails', {
