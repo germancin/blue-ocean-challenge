@@ -9,28 +9,11 @@ interface PaymentInstructionsCardProps {
 	amount: number;
 	merchantAddress: string;
 	transactionStatus: PaymentStatus;
-	isFirstTime: boolean;
 }
 
-export function PaymentInstructionsCard({ amount, merchantAddress, transactionStatus, isFirstTime }: PaymentInstructionsCardProps) {
+export function PaymentInstructionsCard({ amount, merchantAddress, transactionStatus }: PaymentInstructionsCardProps) {
 	const [hasCopiedAddress, setHasCopiedAddress] = useState(false);
 	const [hasCopiedAmount, setHasCopiedAmount] = useState(false);
-
-	const navigate = useNavigate();
-
-	// Efecto para redirigir luego de 2 segundos si el pago es exitoso
-	useEffect(() => {
-		if (transactionStatus === 'success') {
-			const timer = setTimeout(() => {
-				navigate('/chart', {
-					state: { isFirstTime },
-				});
-			}, 2000);
-
-			// Limpieza para evitar problemas si se desmonta antes de los 2s
-			return () => clearTimeout(timer);
-		}
-	}, [transactionStatus, isFirstTime, navigate]);
 
 	const copyToClipboard = async (text: string, type: 'address' | 'amount') => {
 		try {

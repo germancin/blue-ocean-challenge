@@ -150,7 +150,7 @@ serve(async (req) => {
 		const { data: linkData, error } = await supabase.auth.admin.generateLink({
 			type: 'magiclink',
 			email,
-			options: { redirectTo: 'https://elitetraderhub.co/chart' },
+			options: { redirectTo: 'https://elitetraderhub.co/chart?isFirstTime=true' },
 		});
 
 		return new Response(

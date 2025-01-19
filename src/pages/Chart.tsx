@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useLocation, Navigate, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/components/AuthProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import Navbar from '@/components/Navbar';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { X } from 'lucide-react';
 import ReactConfetti from 'react-confetti';
+import { useSearchParams } from 'react-router-dom';
 
 const data = [
 	{ name: 'Jan', value: 400 },
@@ -25,7 +25,8 @@ const ChartPage = () => {
 	const [showConfetti, setShowConfetti] = useState(false);
 
 	// Extract the initial payment data from the route state
-	const isFirstTime = location.state?.isFirstTime || false;
+	const [searchParams] = useSearchParams();
+	const isFirstTime = searchParams.get('isFirstTime') === 'true';
 
 	useEffect(() => {
 		if (isFirstTime) {

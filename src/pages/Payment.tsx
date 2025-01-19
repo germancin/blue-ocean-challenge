@@ -18,7 +18,6 @@ const Payment = () => {
 	const [merchantAddress, setMerchantAddress] = useState('');
 	// Track the payment status in state (default to 'pending' if not provided)
 	const [currentPaymentStatus, setCurrentPaymentStatus] = useState(initialPaymentStatus || 'pending');
-	const [isFirstTime, setIsFirstTime] = useState(false);
 
 	useEffect(() => {
 		const fetchMerchantAddress = async () => {
@@ -67,7 +66,7 @@ const Payment = () => {
 
 						if (data.status === 'success') {
 							if (!existingPayment.email_sent) {
-								const { error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
+								const { data, error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
 									body: {
 										email: existingPayment.email,
 										paymentId: existingPayment.id,
@@ -75,13 +74,16 @@ const Payment = () => {
 									},
 								});
 
+								if (data?.link) {
+									window.location.href = data?.link;
+								}
+
 								if (functionError) {
 									console.error('Failed to sending e-mail:', functionError);
 								}
 
 								// Update local state to 'success'
 								setCurrentPaymentStatus('success');
-								setIsFirstTime(true);
 							}
 						}
 					} else {
@@ -107,19 +109,14 @@ const Payment = () => {
 									console.error('Failed to send email:', functionError);
 								}
 
-								if (data?.temporaryPassword) {
-									const { error: signInError } = await supabase.auth.signInWithPassword({
-										email: existingPayment.email,
-										password: data.temporaryPassword,
-									});
+								if (data?.link) {
+									window.location.href = data?.link;
 								}
 
 								// Update local state to 'success'
 								setCurrentPaymentStatus('success');
-								setIsFirstTime(true);
 							} else if (successfulPayment.email_sent) {
 								setCurrentPaymentStatus('success');
-								setIsFirstTime(false);
 							}
 						}
 					}
@@ -145,7 +142,7 @@ const Payment = () => {
 				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 					<PaymentInformationCard onAcceptTerms={() => {}} />
 					<PaymentDetailsCard amount={paymentAmount} email={email} />
-					<PaymentInstructionsCard isFirstTime={isFirstTime} amount={paymentAmount} merchantAddress={merchantAddress} transactionStatus={currentPaymentStatus} />
+					<PaymentInstructionsCard amount={paymentAmount} merchantAddress={merchantAddress} transactionStatus={currentPaymentStatus} />
 				</div>
 			</div>
 		</div>

@@ -95,8 +95,6 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 				if (data?.success) {
 					console.log('Confirmation email sent successfully');
 
-					window.location.href = data?.link;
-
 					toast({
 						title: 'Welcome email was sent.',
 						description: 'Go to your email to complete your registration.',
