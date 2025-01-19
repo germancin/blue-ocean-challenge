@@ -133,7 +133,7 @@ export function PasswordUpdateForm() {
 					name="newPassword"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Password</FormLabel>
+							<FormLabel className="text-white">Password</FormLabel>
 							<div className="relative">
 								<FormControl>
 									<Input 
@@ -165,7 +165,7 @@ export function PasswordUpdateForm() {
 					name="confirmPassword"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Repeat Password</FormLabel>
+							<FormLabel className="text-white">Repeat Password</FormLabel>
 							<div className="relative">
 								<FormControl>
 									<Input 
