@@ -2,15 +2,156 @@ import { useLocation, Navigate } from 'react-router-dom';
 import { PaymentInformationCard } from '@/components/payment/PaymentInformationCard';
 import { PaymentDetailsCard } from '@/components/payment/PaymentDetailsCard';
 import { PaymentInstructionsCard } from '@/components/payment/PaymentInstructionsCard';
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
+
+// ---- Helper Functions ---- //
+
+/**
+ * Fetch subscriber and payment info given a subscriberId.
+ */
+async function fetchSubscriberAndPayment(subscriberId) {
+	if (!subscriberId) return { subscriber: null, payment: null };
+
+	// 1) Fetch subscriber info
+	const { data: subscriber, error: subscriberError } = await supabase.from('subscribers').select('email').eq('id', subscriberId).maybeSingle();
+
+	if (subscriberError) {
+		console.error('Error fetching subscriber details:', subscriberError);
+		return { subscriber: null, payment: null };
+	}
+
+	// 2) Fetch payment info for subscriber
+	if (subscriber) {
+		const { data: payment, error: paymentError } = await supabase.from('payments').select('*').eq('email', subscriber.email).maybeSingle();
+
+		if (paymentError) {
+			console.error('Error fetching payment details:', paymentError);
+			return { subscriber, payment: null };
+		}
+		return { subscriber, payment };
+	}
+
+	return { subscriber: null, payment: null };
+}
+
+/**
+ * Fetch the merchant address.
+ */
+async function fetchMerchantAddress() {
+	try {
+		const {
+			data: { MERCHANT_ADDRESS },
+			error,
+		} = await supabase.functions.invoke('get-merchant-address');
+		if (error) {
+			console.error('Error fetching merchant address:', error);
+			return '';
+		}
+		return MERCHANT_ADDRESS;
+	} catch (err) {
+		console.error('Error in fetchMerchantAddress:', err);
+		return '';
+	}
+}
+
+/**
+ * Send emails if not already sent, and redirect if a link is provided.
+ */
+async function handlePaymentEmailSending(payment) {
+	if (!payment || payment.email_sent) return; // Nothing to do if already sent
+
+	try {
+		const { data, error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
+			body: {
+				email: payment.email,
+				paymentId: payment.id,
+				amount: payment.amount,
+			},
+		});
+
+		if (functionError) {
+			console.error('Failed to send email:', functionError);
+		}
+
+		if (data?.link) {
+			window.location.href = data.link;
+		}
+	} catch (err) {
+		console.error('Error in handlePaymentEmailSending:', err);
+	}
+}
+
+/**
+ * Verify a payment if it's pending, or finalize if it's already successful.
+ */
+async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPaymentStatus) {
+	if (!email) return;
+
+	try {
+		// 1) If status is 'pending', check for existing pending payment
+		if (currentPaymentStatus === 'pending') {
+			const { data: existingPayment, error: fetchError } = await supabase.from('payments').select('*').eq('email', email).eq('status', 'pending').maybeSingle();
+
+			if (fetchError) throw new Error(fetchError.message);
+
+			if (existingPayment) {
+				// Verify the payment via Supabase Function
+				const { data: verification, error: functionError } = await supabase.functions.invoke('verify-payment', {
+					body: {
+						email,
+						amount: existingPayment.amount,
+						paymentId: existingPayment.id,
+					},
+				});
+
+				console.log('payment verify:', verification);
+
+				if (functionError) {
+					throw new Error(functionError.message);
+				}
+
+				if (verification?.status === 'success') {
+					await handlePaymentEmailSending(existingPayment);
+					setCurrentPaymentStatus('success');
+					return;
+				}
+			}
+
+			// 2) If there's no pending payment, check if there's one with status 'success'
+			const { data: successfulPayment, error: successFetchError } = await supabase.from('payments').select('*').eq('email', email).eq('status', 'success').maybeSingle();
+
+			if (successFetchError) throw new Error(successFetchError.message);
+
+			if (successfulPayment) {
+				await handlePaymentEmailSending(successfulPayment);
+				setCurrentPaymentStatus('success');
+			}
+		}
+		// 3) If currentPaymentStatus is 'success', check to ensure email is sent
+		else if (currentPaymentStatus === 'success') {
+			const { data: successfulPayment, error: successFetchError } = await supabase.from('payments').select('*').eq('email', email).eq('status', 'success').maybeSingle();
+
+			if (successFetchError) throw new Error(successFetchError.message);
+
+			if (successfulPayment) {
+				await handlePaymentEmailSending(successfulPayment);
+				setCurrentPaymentStatus('success');
+			}
+		}
+	} catch (error) {
+		console.error('Error handling payment check:', error);
+	}
+}
+
+// ---- Main Component ---- //
 
 const Payment = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
-	// Extract the subscriber ID from the URL query parameters
 	const searchParams = new URLSearchParams(location.search);
 	const subscriberId = searchParams.get('sid');
 
@@ -20,161 +161,55 @@ const Payment = () => {
 	const [currentPaymentStatus, setCurrentPaymentStatus] = useState(location.state?.paymentStatus || 'pending');
 	const [loading, setLoading] = useState(true);
 
+	// 1) On mount or when subscriberId changes, fetch subscriber & payment
 	useEffect(() => {
-		console.log('Fetching payment details for subscriberId:', subscriberId);
-		const fetchPaymentDetails = async () => {
-			if (subscriberId) {
-				const { data: subscriber, error: subscriberError } = await supabase.from('subscribers').select('email').eq('id', subscriberId).maybeSingle();
+		async function initPaymentData() {
+			console.log('Fetching payment details for subscriberId:', subscriberId);
 
-				if (subscriberError) {
-					console.error('Error fetching subscriber details:', subscriberError);
-					return;
-				}
+			const { subscriber, payment } = await fetchSubscriberAndPayment(subscriberId);
 
-				if (subscriber) {
-					const { data: payment, error: paymentError } = await supabase.from('payments').select('*').eq('email', subscriber.email).maybeSingle();
-
-					if (paymentError) {
-						console.error('Error fetching payment details:', paymentError);
-						return;
-					}
-
-					if (payment) {
-						setEmail(payment.email);
-						setPaymentAmount(payment.amount);
-						setCurrentPaymentStatus(payment.status || 'pending');
-					}
-
-					if (payment.email && payment.amount && payment.status) {
-						setLoading(false);
-					}
-				}
+			// Update local state
+			if (payment) {
+				setEmail(payment.email);
+				setPaymentAmount(payment.amount);
+				setCurrentPaymentStatus(payment.status || 'pending');
 			}
-		};
 
-		fetchPaymentDetails();
-	}, [location.search, subscriberId]);
+			// If we have the data from the DB, we're not loading anymore.
+			if (payment?.email && payment?.amount && payment?.status) {
+				setLoading(false);
+			}
+		}
 
+		initPaymentData();
+	}, [subscriberId]);
+
+	// 2) Fetch merchant address and check if we already have the needed data
 	useEffect(() => {
-		console.log('Fetching merchant address...');
-		const fetchMerchantAddress = async () => {
-			const {
-				data: { MERCHANT_ADDRESS },
-				error,
-			} = await supabase.functions.invoke('get-merchant-address');
+		async function initMerchantData() {
+			console.log('Fetching merchant address...');
+			const address = await fetchMerchantAddress();
+			setMerchantAddress(address);
 
-			if (error) {
-				console.error('Error fetching merchant address:', error);
-				return;
-			}
-			setMerchantAddress(MERCHANT_ADDRESS);
-		};
-
-		const checkDataPresence = () => {
 			if (email && paymentAmount && currentPaymentStatus) {
 				setLoading(false);
 			}
-		};
+		}
 
-		fetchMerchantAddress();
-		checkDataPresence();
+		initMerchantData();
 	}, [currentPaymentStatus, email, paymentAmount]);
 
+	// 3) Continuously check payment status every 30 seconds
 	useEffect(() => {
-		const handlePendingPayment = async () => {
-			// Only run if we have an email and we're still in a 'pending' state
-			if (currentPaymentStatus === 'pending' && email) {
-				try {
-					// Check if there's an existing payment with status 'pending'
-					const { data: existingPayment, error: fetchError } = await supabase.from('payments').select('*').eq('email', email).eq('status', 'pending').maybeSingle();
+		const intervalId = setInterval(() => {
+			handlePaymentCheck(email, currentPaymentStatus, setCurrentPaymentStatus);
+		}, 30000);
 
-					if (fetchError) {
-						throw new Error(fetchError.message);
-					}
-
-					if (existingPayment) {
-						// Verify the payment via the Supabase Function
-						const { data, error: functionError } = await supabase.functions.invoke('verify-payment', {
-							body: {
-								email,
-								amount: existingPayment.amount,
-								paymentId: existingPayment.id,
-							},
-						});
-
-						console.log('verify payment:', data);
-
-						if (functionError) {
-							throw new Error(functionError.message);
-						}
-
-						if (data.status === 'success') {
-							if (!existingPayment.email_sent) {
-								const { data, error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
-									body: {
-										email: existingPayment.email,
-										paymentId: existingPayment.id,
-										amount: existingPayment.amount,
-									},
-								});
-
-								if (data?.link) {
-									window.location.href = data?.link;
-								}
-
-								if (functionError) {
-									console.error('Failed to sending e-mail:', functionError);
-								}
-
-								// Update local state to 'success'
-								setCurrentPaymentStatus('success');
-							}
-						}
-					} else {
-						// If there's no pending payment, check if there's one with status 'success'
-						const { data: successfulPayment, error: successFetchError } = await supabase.from('payments').select('*').eq('email', email).eq('status', 'success').maybeSingle();
-
-						if (successFetchError) {
-							throw new Error(successFetchError.message);
-						}
-
-						if (successfulPayment) {
-							// If we have a successful payment and email hasn't been sent, send the email now
-							if (!successfulPayment.email_sent) {
-								const { data, error: functionError } = await supabase.functions.invoke('check-and-send-emails', {
-									body: {
-										email: successfulPayment.email_sent,
-										paymentId: successfulPayment.id,
-										amount: successfulPayment.amount,
-									},
-								});
-
-								if (functionError) {
-									console.error('Failed to send email:', functionError);
-								}
-
-								if (data?.link) {
-									window.location.href = data?.link;
-								}
-
-								// Update local state to 'success'
-								setCurrentPaymentStatus('success');
-							} else if (successfulPayment.email_sent) {
-								setCurrentPaymentStatus('success');
-							}
-						}
-					}
-				} catch (error) {
-					console.error('Error handling pending payment:', error);
-				}
-			}
-		};
-
-		// Check for payment status every 30 seconds
-		const intervalId = setInterval(handlePendingPayment, 30000);
+		// Cleanup on unmount
 		return () => clearInterval(intervalId);
 	}, [currentPaymentStatus, email]);
 
+	// 4) If still loading, show a spinner
 	if (loading) {
 		return (
 			<div className="min-h-screen flex items-center justify-center">
@@ -183,6 +218,7 @@ const Payment = () => {
 		);
 	}
 
+	// 5) Render the UI
 	return (
 		<div className="min-h-screen bg-gray-100 py-12">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
