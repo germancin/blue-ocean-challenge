@@ -93,7 +93,7 @@ async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPayment
 	try {
 		// 1) If status is 'pending', check for existing pending payment
 		if (currentPaymentStatus === 'pending') {
-			const { data: existingPayment, error: fetchError } = 1await supabase.from('payments').select('*').eq('email', email).eq('status', 'pending').maybeSingle();
+			const { data: existingPayment, error: fetchError } = await supabase.from('payments').select('*').eq('email', email).eq('status', 'pending').maybeSingle();
 
 			if (fetchError) throw new Error(fetchError.message);
 
