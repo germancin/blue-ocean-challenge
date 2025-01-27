@@ -60,12 +60,12 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
 			))}
 			{user ? (
 				<div className="flex items-center space-x-4">
-					<Button variant="ghost" onClick={() => navigate('/chart')} className="text-bright-blue hover:bg-[#D3E4FD] hover:text-[#0FA0CE] transition-colors duration-200">
+					{/* <Button variant="ghost" onClick={() => navigate('/chart')} className="text-bright-blue hover:bg-[#D3E4FD] hover:text-[#0FA0CE] transition-colors duration-200">
 						Charts
 					</Button>
 					<Button variant="ghost" onClick={() => navigate('/profile')} className="text-bright-blue hover:bg-[#E5DEFF] hover:text-[#7E69AB] transition-colors duration-200">
 						Profile
-					</Button>
+					</Button> */}
 					{/* <Button variant="outline" onClick={handleLogout} className="border-bright-blue text-bright-blue hover:bg-bright-blue hover:text-white transition-colors duration-200">
 						Logout
 					</Button> */}

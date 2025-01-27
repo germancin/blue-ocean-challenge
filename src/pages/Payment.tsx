@@ -87,7 +87,7 @@ async function handlePaymentEmailSending(payment) {
 /**
  * Verify a payment if it's pending, or finalize if it's already successful.
  */
-async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPaymentStatus) {
+async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPaymentStatus, navigate) {
 	if (!email) return;
 
 	try {
@@ -139,6 +139,7 @@ async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPayment
 			if (successfulPayment) {
 				await handlePaymentEmailSending(successfulPayment);
 				setCurrentPaymentStatus('success');
+				navigate('/nextStep');
 			}
 		}
 	} catch (error) {
@@ -202,7 +203,7 @@ const Payment = () => {
 	// 3) Continuously check payment status every 30 seconds
 	useEffect(() => {
 		const intervalId = setInterval(() => {
-			handlePaymentCheck(email, currentPaymentStatus, setCurrentPaymentStatus);
+			handlePaymentCheck(email, currentPaymentStatus, setCurrentPaymentStatus, navigate);
 		}, 30000);
 
 		// Cleanup on unmount
