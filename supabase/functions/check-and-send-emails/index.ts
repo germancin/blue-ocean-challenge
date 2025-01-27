@@ -46,7 +46,7 @@ serve(async (req) => {
 		}
 
 		// Generate a temporary password...
-		const temporaryPassword = crypto.randomUUID();
+		// const temporaryPassword = crypto.randomUUID();
 		// console.log('Creating user if not exists:', email);
 
 		// Create the user with the temporary password
