@@ -7,6 +7,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { generateUniqueAmount, createOrUpdatePendingPayment } from '@/utils/paymentUtils';
 import { BASE_PAYMENT_AMOUNT } from '@/constants/payments';
+import { triggerWebhook } from '@/lib/utils';
+const subscriptionWebhook = 'https://n8n.elitetraderhub.co/webhook/subscription-email';
 
 interface SubscriptionFormData {
 	name: string;
@@ -138,14 +140,16 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 
 			// Proceed to payment page
 			console.log('Redirecting to payment page');
+			const stateObj = {
+				email: data.email,
+				name: data.name,
+				paymentStatus: 'pending',
+				paymentAmount: payment.amount,
+			};
+			triggerWebhook(subscriptionWebhook, stateObj);
 			onSuccess?.();
 			navigate('/payment', {
-				state: {
-					email: data.email,
-					name: data.name,
-					paymentStatus: 'pending',
-					paymentAmount: payment.amount,
-				},
+				state: stateObj,
 			});
 		} catch (error) {
 			console.error('Submission error:', error);
