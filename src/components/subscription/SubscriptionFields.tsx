@@ -33,7 +33,7 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
 				<Input
 					id="email"
 					type="email"
-					placeholder="Introduce tu Correo electrónico"
+					placeholder="Introduce tu correo electrónico"
 					className="w-full px-4 py-3 rounded-lg bg-white text-dark-gray border-0 focus:ring-2 focus:ring-bright-blue focus:border-transparent transition-all duration-200"
 					{...register('email', {
 						required: 'Correo electrónico es obligatorio',
