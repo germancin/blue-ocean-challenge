@@ -45,7 +45,7 @@ serve(async (req) => {
 			return new Response(JSON.stringify({ message: 'Email already sent', success: true }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
 		}
 
-		// Generate a temporary password
+		// Generate a temporary password...
 		const temporaryPassword = crypto.randomUUID();
 		console.log('Creating user if not exists:', email);
 
