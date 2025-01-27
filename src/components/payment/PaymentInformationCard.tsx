@@ -9,54 +9,54 @@ export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCard
 	const sections = [
 		{
 			id: 'payment-works',
-			title: 'How Payment Works',
+			title: 'Cómo Funciona el Pago',
 			items: [
 				{
 					icon: Clock,
-					title: 'Confirmation Time',
-					description: 'Transactions on the TRON network (TRC20) are fast and usually confirm in less than 1 minute. However, in rare cases, it may take up to 5 minutes depending on network traffic.',
+					title: 'Tiempo de Confirmación',
+					description: 'Las transacciones en la red TRON (TRC20) son rápidas y, por lo general, se confirman en menos de 1 minuto. Sin embargo, en casos poco frecuentes, pueden tardar hasta 5 minutos dependiendo del tráfico de la red.',
 					color: 'text-blue-600',
 				},
 				{
 					icon: Bell,
-					title: 'Automatic Notification',
-					description: 'Once the payment is confirmed on the blockchain, you will receive an email notification with your tournament registration details.',
+					title: 'Notificación Automática',
+					description: 'Una vez que el pago se confirme en la blockchain, recibirás una notificación por correo electrónico con los detalles de tu registro en el torneo.',
 					color: 'text-yellow-600',
 				},
 			],
 		},
 		{
 			id: 'why-usdt',
-			title: 'Why Use USDT',
+			title: 'Por Qué Usar USDT',
 			items: [
 				{
 					icon: Shield,
-					title: 'Secure Transactions',
-					description: 'USDT transactions are secure and traceable on the blockchain',
+					title: 'Transacciones Seguras',
+					description: 'Las transacciones en USDT son seguras y se pueden rastrear en la blockchain.',
 					color: 'text-green-600',
 				},
 			],
 		},
 		{
 			id: 'support',
-			title: 'Support Policy',
+			title: 'Política de Soporte',
 			items: [
 				{
 					icon: HelpCircle,
-					title: 'Have Questions?',
-					description: 'If you have any issues with your transaction, our team is here to help. Write to us at support@elitetraderhub.com.',
+					title: '¿Tienes Preguntas?',
+					description: 'Si tienes algún problema con tu transacción, nuestro equipo está aquí para ayudarte. Escríbenos a support@elitetraderhub.com.',
 					color: 'text-purple-600',
 				},
 			],
 		},
 		{
 			id: 'benefits',
-			title: 'Benefits of Participating',
+			title: 'Beneficios de Participar',
 			items: [
 				{
 					icon: Trophy,
-					title: 'Tournament Benefits',
-					description: ['Exclusive access to the Elite Trading Tournament, where you can win amazing prizes.', 'Connect with a community of passionate traders.', 'A unique opportunity to test your skills in a competitive environment.'],
+					title: 'Beneficios del Torneo',
+					description: ['Acceso exclusivo al Elite Trading Tournament, donde podrás ganar premios increíbles.', 'Conéctate con una comunidad de traders apasionados.', 'Una oportunidad única para poner a prueba tus habilidades en un entorno competitivo.'],
 					color: 'text-indigo-600',
 				},
 			],

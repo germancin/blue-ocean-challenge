@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EliteTraderHub</title>
-    <link rel="icon" type="image/png" href="/lovable-uploads/d11caddd-8007-4df4-a318-84d02ffe2e34.png" />
-    <meta name="description" content="Elite Trading Tournament Platform" />
-    <meta name="author" content="EliteTraderHub" />
-    <meta property="og:image" content="/lovable-uploads/d11caddd-8007-4df4-a318-84d02ffe2e34.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>EliteTraderHub</title>
+	<link rel="icon" type="image/png" href="/lovable-uploads/d11caddd-8007-4df4-a318-84d02ffe2e34.png" />
+	<meta name="description" content="Elite Trading Tournament Platform" />
+	<meta name="author" content="EliteTraderHub" />
+	<meta property="og:image" content="/lovable-uploads/d11caddd-8007-4df4-a318-84d02ffe2e34.png" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div id="root"></div>
+	<script type="module" src="/src/main.tsx"></script>
+	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+	<script type="module">
+		import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+		createChat({
+			webhookUrl: 'https://n8n.8gents.dev/webhook/2af80ca8-518a-409f-b81f-d53e63df12d6/chat'
+		});
+	</script>
+</body>
+
 </html>

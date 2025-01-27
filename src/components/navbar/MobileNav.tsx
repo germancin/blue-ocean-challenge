@@ -54,11 +54,7 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 	return (
 		<div className="md:hidden relative">
 			<div className="flex justify-end">
-				<button
-					onClick={() => setIsOpen(!isOpen)}
-					className="text-white hover:text-bright-blue p-2"
-					aria-label="Toggle menu"
-				>
+				<button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-bright-blue p-2" aria-label="Toggle menu">
 					{isOpen ? <X size={24} /> : <Menu size={24} />}
 				</button>
 			</div>
@@ -69,30 +65,18 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 						<div className="px-4 space-y-2">
 							{/* Join Tournament always at top for non-logged in users */}
 							{!user && (
-								<Button 
-									variant="default" 
-									className="w-full justify-start bg-bright-blue hover:bg-bright-blue/90" 
-									onClick={onSubscribe}
-								>
-									Join Tournament
+								<Button variant="default" className="w-full justify-start bg-bright-blue hover:bg-bright-blue/90" onClick={onSubscribe}>
+									Únete al Evento
 								</Button>
 							)}
 
 							{/* Auth-specific navigation */}
 							{user && (
 								<div className="space-y-2 border-b border-gray-800 pb-4 mb-4">
-									<Button 
-										variant="ghost" 
-										onClick={() => navigate('/chart')} 
-										className="w-full justify-start text-bright-blue hover:bg-bright-blue/10"
-									>
+									<Button variant="ghost" onClick={() => navigate('/chart')} className="w-full justify-start text-bright-blue hover:bg-bright-blue/10">
 										Charts
 									</Button>
-									<Button 
-										variant="ghost" 
-										onClick={() => navigate('/profile')} 
-										className="w-full justify-start text-bright-blue hover:bg-bright-blue/10"
-									>
+									<Button variant="ghost" onClick={() => navigate('/profile')} className="w-full justify-start text-bright-blue hover:bg-bright-blue/10">
 										Profile
 									</Button>
 								</div>
@@ -101,11 +85,7 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 							{/* Menu items */}
 							<div className="space-y-2 border-b border-gray-800 pb-4">
 								{menuItems.map((item) => (
-									<button
-										key={item.label}
-										onClick={() => handleNavigation(item.href)}
-										className="block w-full text-left px-4 py-2 text-light-gray hover:text-bright-blue hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg"
-									>
+									<button key={item.label} onClick={() => handleNavigation(item.href)} className="block w-full text-left px-4 py-2 text-light-gray hover:text-bright-blue hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg">
 										{item.label}
 									</button>
 								))}
@@ -113,17 +93,11 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 
 							{/* Login/Logout at the bottom */}
 							{user ? (
-								<button
-									onClick={handleLogout}
-									className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg"
-								>
+								<button onClick={handleLogout} className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg">
 									Logout
 								</button>
 							) : (
-								<button
-									onClick={handleLogin}
-									className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg"
-								>
+								<button onClick={handleLogin} className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg">
 									Login
 								</button>
 							)}

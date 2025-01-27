@@ -8,18 +8,17 @@ import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
 
 const Index = () => {
-  return (
-    <main className="min-h-screen bg-light-gray">
-      <Navbar />
-      <Hero />
-      <Rules />
-      <PrizeCards />
-      <PrizeDistributionTable />
-      <DiversificationStrategy />
-      <FAQ />
-      <Footer />
-    </main>
-  );
+	return (
+		<main className="min-h-screen bg-light-gray">
+			<Navbar />
+			<Hero />
+			<Rules />
+			<PrizeDistributionTable />
+			<DiversificationStrategy />
+			<FAQ />
+			<Footer />
+		</main>
+	);
 };
 
 export default Index;

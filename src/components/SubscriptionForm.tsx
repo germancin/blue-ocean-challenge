@@ -67,9 +67,9 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 			}
 
 			if (existingPayment?.email_sent && existingPayment?.status === 'success') {
-				console.log('Found existing successful payment:', existingPayment);
+				console.log('Pago exitoso existente encontrado:', existingPayment);
 				toast({
-					title: 'You are already Registered!',
+					title: '¡Ya estás registrado!',
 					description: 'Log in now to join the action!',
 				});
 				navigate('/chart');
@@ -77,9 +77,9 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 			}
 
 			if (!existingPayment?.email_sent && existingPayment?.status === 'success') {
-				console.log('You need to receive the welcome email:', existingPayment);
+				console.log('Necesitas recibir el correo de bienvenida:', existingPayment);
 				toast({
-					title: 'Sending welcome email.',
+					title: 'Enviando correo de bienvenida.',
 					description: "You have already paid but didn't received the welcome email. We are sending it right now.",
 				});
 
@@ -97,10 +97,10 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 
 					toast({
 						title: 'Welcome email was sent.',
-						description: 'Go to your email to complete your registration.',
+						description: 'Ve a tu correo electrónico para completar tu registro.',
 					});
 				} else {
-					console.error('Error sending E-mail: ', error?.message);
+					console.error('Error al enviar el correo electrónico.: ', error?.message);
 				}
 				navigate('/payment', {
 					state: {
@@ -133,7 +133,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 			const payment = await createOrUpdatePendingPayment(data.email, uniqueAmount);
 
 			if (!payment) {
-				throw new Error('Failed to create payment record');
+				throw new Error('No se pudo crear el registro de pago.');
 			}
 
 			// Proceed to payment page
@@ -152,7 +152,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 			toast({
 				variant: 'destructive',
 				title: 'Error',
-				description: 'Something went wrong. Please try again.',
+				description: 'Algo salió mal. Por favor, inténtalo de nuevo.',
 			});
 		} finally {
 			setIsLoading(false);
@@ -163,7 +163,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 		<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 			<SubscriptionFields register={register} errors={errors} />
 			<Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700" disabled={isLoading}>
-				{isLoading ? 'Processing...' : 'Register'}
+				{isLoading ? 'Procesando...' : 'Registrar'}
 			</Button>
 		</form>
 	);
