@@ -50,15 +50,15 @@ serve(async (req) => {
 		console.log('Creating user if not exists:', email);
 
 		// Create the user with the temporary password
-		const { data: userData, error: createUserError } = await supabase.auth.admin.createUser({
-			email: email,
-			email_confirm: true,
-			password: temporaryPassword,
-		});
+		// const { data: userData, error: createUserError } = await supabase.auth.admin.createUser({
+		// 	email: email,
+		// 	email_confirm: true,
+		// 	password: temporaryPassword,
+		// });
 
-		if (createUserError && createUserError.message !== 'User already registered') {
-			console.log('This user was alredy registered:');
-		}
+		// if (createUserError && createUserError.message !== 'User already registered') {
+		// 	console.log('This user was alredy registered:');
+		// }
 
 		// Send welcome email with password setup link via Resend
 		const emailRes = await fetch('https://api.resend.com/emails', {
