@@ -17,7 +17,6 @@ export type Database = {
           email_subject: string
           email_type: string
           id: string
-          subscriber_id: string | null
         }
         Insert: {
           created_at?: string
@@ -26,7 +25,6 @@ export type Database = {
           email_subject: string
           email_type: string
           id?: string
-          subscriber_id?: string | null
         }
         Update: {
           created_at?: string
@@ -35,17 +33,35 @@ export type Database = {
           email_subject?: string
           email_type?: string
           id?: string
-          subscriber_id?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "email_interactions_subscriber_id_fkey"
-            columns: ["subscriber_id"]
-            isOneToOne: false
-            referencedRelation: "subscribers"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
+      }
+      email_sequences: {
+        Row: {
+          created_at: string
+          current_step: number
+          email: string
+          email_id: string | null
+          id: string
+          next_step: number
+        }
+        Insert: {
+          created_at?: string
+          current_step: number
+          email: string
+          email_id?: string | null
+          id?: string
+          next_step: number
+        }
+        Update: {
+          created_at?: string
+          current_step?: number
+          email?: string
+          email_id?: string | null
+          id?: string
+          next_step?: number
+        }
+        Relationships: []
       }
       payments: {
         Row: {
