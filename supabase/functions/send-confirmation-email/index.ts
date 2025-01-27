@@ -106,7 +106,7 @@ serve(async (req) => {
 
 		if (!emailRes.ok) {
 			const errorText = await emailRes.text();
-			console.error('Failed to send email:', errorText);
+			console.error('Failed to send email:::', errorText);
 			throw new Error(`Failed to send email: ${errorText}`);
 		}
 
