@@ -46,8 +46,8 @@ serve(async (req) => {
 		}
 
 		// Generate a temporary password...
-		const temporaryPassword = crypto.randomUUID();
-		console.log('Creating user if not exists:', email);
+		// const temporaryPassword = crypto.randomUUID();
+		// console.log('Creating user if not exists:', email);
 
 		// Create the user with the temporary password
 		// const { data: userData, error: createUserError } = await supabase.auth.admin.createUser({
@@ -61,55 +61,27 @@ serve(async (req) => {
 		// }
 
 		// Send welcome email with password setup link via Resend
-		const emailRes = await fetch('https://api.resend.com/emails', {
+		const payload = {
+			emailTo: email,
+			amount: amount,
+			payment: payment,
+		};
+
+		fetch('https://n8n.elitetraderhub.co/webhook/payment-email', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${Deno.env.get('RESEND_API_KEY')}`,
 			},
-			body: JSON.stringify({
-				from: 'Elite Trading Tournament <tournament@elitetraderhub.co>',
-				to: [email],
-				subject: 'Welcome to Elite Trading Tournament - Set Up Your Password',
-				html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h1 style="color: #2563eb; margin-bottom: 24px;">🎉 Welcome to Elite Trading Tournament!</h1>
-
-            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-              Thank you for your payment of ${amount} USDT. Your registration for the Elite Trading Tournament has been confirmed!
-            </p>
-
-            <p style="font-size: 16px; line-height: 1.5; color: #374151; margin-bottom: 16px;">
-              To access your account, please click the secure link below to set up your password:
-            </p>
-
-            <div style="text-align: center; margin: 32px 0;">
-              <a href="https://elitetraderhub.co" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
-                Reset Your Password
-              </a>
-            </div>
-
-            <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; margin: 24px 0;">
-              <h2 style="color: #1f2937; margin-bottom: 12px;">Next Steps:</h2>
-              <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
-                <li style="margin-bottom: 8px;">Click the link above and reset your password</li>
-                <li style="margin-bottom: 8px;">Access the tournament</li>
-                <li style="margin-bottom: 8px;">Prepare your trading strategy</li>
-              </ul>
-            </div>
-
-            <p style="font-size: 16px; line-height: 1.5; color: #374151;">
-              If you have any questions, feel free to reach out to our support team at support@elitetraderhub.co
-            </p>
-
-            <p style="font-size: 14px; color: #6b7280; margin-top: 32px;">
-              Best regards,<br>
-              The Elite Trading Tournament Team
-            </p>
-          </div>
-        `,
-			}),
-		});
+			body: JSON.stringify(payload),
+		})
+			.then((response) => {
+				// Optional: Handle any successful response if required
+				console.log('Webhook triggered successfully APyment Email:', response.status);
+			})
+			.catch((error) => {
+				// Handle any errors encountered while sending the request
+				console.error('Error triggering webhook Payment Email:', error);
+			});
 
 		// Update payment record to mark email as sent
 		const { error: updateError } = await supabase.from('payments').update({ email_sent: true }).eq('id', paymentId);
