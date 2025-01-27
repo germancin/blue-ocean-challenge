@@ -116,6 +116,7 @@ async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPayment
 				if (verification?.status === 'success') {
 					await handlePaymentEmailSending(existingPayment);
 					setCurrentPaymentStatus('success');
+					navigate('/next-step');
 					return;
 				}
 			}
@@ -128,6 +129,7 @@ async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPayment
 			if (successfulPayment) {
 				await handlePaymentEmailSending(successfulPayment);
 				setCurrentPaymentStatus('success');
+				navigate('/next-step');
 			}
 		}
 		// 3) If currentPaymentStatus is 'success', check to ensure email is sent
@@ -139,7 +141,7 @@ async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPayment
 			if (successfulPayment) {
 				await handlePaymentEmailSending(successfulPayment);
 				setCurrentPaymentStatus('success');
-				navigate('/nextStep');
+				navigate('/next-step');
 			}
 		}
 	} catch (error) {
@@ -208,7 +210,7 @@ const Payment = () => {
 
 		// Cleanup on unmount
 		return () => clearInterval(intervalId);
-	}, [currentPaymentStatus, email]);
+	}, [currentPaymentStatus, email, navigate]);
 
 	// 4) If still loading, show a spinner
 	if (loading) {
