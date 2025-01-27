@@ -10,6 +10,7 @@ import AuthPage from './pages/Auth';
 import ProfilePage from './pages/Profile';
 import Terms from './pages/Terms';
 import ChartPage from './pages/Chart';
+import NextStep from './pages/NextStep';
 import { useAuth } from './components/AuthProvider';
 
 const queryClient = new QueryClient();
@@ -80,6 +81,7 @@ const App = () => (
 						/>
 						<Route path="/payment" element={<Payment />} />
 						<Route path="/terms" element={<Terms />} />
+						<Route path="/next-step" element={<NextStep />} />
 						<Route
 							path="/profile"
 							element={
