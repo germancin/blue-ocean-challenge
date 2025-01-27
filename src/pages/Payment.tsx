@@ -76,9 +76,9 @@ async function handlePaymentEmailSending(payment) {
 			console.error('Failed to send email:', functionError);
 		}
 
-		if (data?.link) {
-			window.location.href = data.link;
-		}
+		// if (data?.link) {
+		// 	window.location.href = data.link;
+		// }
 	} catch (err) {
 		console.error('Error in handlePaymentEmailSending:', err);
 	}
