@@ -46,7 +46,6 @@ serve(async (req) => {
 		}
 
 		// Generate a temporary password...
-		// const temporaryPassword = crypto.randomUUID();
 		// console.log('Creating user if not exists:', email);
 
 		// Create the user with the temporary password
@@ -60,7 +59,7 @@ serve(async (req) => {
 		// 	console.log('This user was alredy registered:');
 		// }
 
-		// Send welcome email with password setup link via Resend
+		// Send welcome email with password setup link via Resend...
 		const payload = {
 			emailTo: email,
 			amount: amount,
