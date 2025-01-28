@@ -9,6 +9,71 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      availability: {
+        Row: {
+          available_times: string[]
+          created_at: string
+          date: string
+          id: string
+          is_open: boolean
+        }
+        Insert: {
+          available_times: string[]
+          created_at?: string
+          date: string
+          id?: string
+          is_open?: boolean
+        }
+        Update: {
+          available_times?: string[]
+          created_at?: string
+          date?: string
+          id?: string
+          is_open?: boolean
+        }
+        Relationships: []
+      }
+      bookings: {
+        Row: {
+          created_at: string
+          date: string
+          duration: number
+          google_calendar_event_id: string | null
+          id: string
+          status: Database["public"]["Enums"]["booking_status"]
+          time: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          duration: number
+          google_calendar_event_id?: string | null
+          id?: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          time: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          duration?: number
+          google_calendar_event_id?: string | null
+          id?: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          time?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "paid_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       email_interactions: {
         Row: {
           created_at: string
@@ -60,6 +125,30 @@ export type Database = {
           email_id?: string | null
           id?: string
           next_step?: number
+        }
+        Relationships: []
+      }
+      paid_users: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_paid: boolean
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_paid?: boolean
+          name: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_paid?: boolean
+          name?: string
         }
         Relationships: []
       }
@@ -160,7 +249,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      booking_status: "confirmed" | "pending" | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
