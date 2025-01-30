@@ -37,34 +37,34 @@ export type Database = {
         Row: {
           attendee: string | null
           created_at: string
-          date: string | null
           duration: number | null
+          end_date: string | null
           google_calendar_event_id: string | null
           id: string
+          start_date: string | null
           status: Database["public"]["Enums"]["booking_status"] | null
-          time: string | null
           user_id: string | null
         }
         Insert: {
           attendee?: string | null
           created_at?: string
-          date?: string | null
           duration?: number | null
+          end_date?: string | null
           google_calendar_event_id?: string | null
           id?: string
+          start_date?: string | null
           status?: Database["public"]["Enums"]["booking_status"] | null
-          time?: string | null
           user_id?: string | null
         }
         Update: {
           attendee?: string | null
           created_at?: string
-          date?: string | null
           duration?: number | null
+          end_date?: string | null
           google_calendar_event_id?: string | null
           id?: string
+          start_date?: string | null
           status?: Database["public"]["Enums"]["booking_status"] | null
-          time?: string | null
           user_id?: string | null
         }
         Relationships: [
