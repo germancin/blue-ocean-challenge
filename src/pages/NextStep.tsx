@@ -32,6 +32,10 @@ const NextStep = () => {
 					getStarted: 'Crear mi cita virtual',
 					inputPlaceholder: 'Escribir...',
 					error: 'An error occurred. Please try again.',
+					closeButtonTooltip: 'Close',
+					minimizeButtonTooltip: 'Minimize',
+					maximizeButtonTooltip: 'Maximize',
+					sendButtonTooltip: 'Send',
 				},
 			},
 			initialMessages: [`Bienvenido saluda a Sofia,`],
@@ -66,7 +70,7 @@ const NextStep = () => {
 	const sendInitialMessage = (sessionId) => {
 		if (sessionId) {
 			const initialMessage = {
-				chatInput: 'Durante nuestra interaccion te referiras a mi como Germancin y mi correo electronico es germancin@gmail.com guardalo en tu memoria.',
+				chatInput: 'Durante nuestra interaccion te referiras a mi como German G. y mi correo electronico es elmaildegerman@gmail.com guardalo en tu memoria.',
 				sessionId: sessionId, // Pass the captured sessionId
 			};
 
@@ -90,8 +94,8 @@ const NextStep = () => {
 		const [resource, config] = args;
 
 		// If this is the webhook request, inspect the payload
-		if (resource.includes('https://n8n.elitetraderhub.co/webhook')) {
-			if (config && config.body) {
+		if (typeof resource === 'string' && resource.includes('https://n8n.elitetraderhub.co/webhook')) {
+			if (config && typeof config.body === 'string' && config.body) {
 				const payload = JSON.parse(config.body);
 
 				// Check if sessionId is present and capture it
