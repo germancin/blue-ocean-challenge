@@ -7,8 +7,45 @@ import enTranslations from './locales/en.json';
 import esTranslations from './locales/es.json';
 import ptTranslations from './locales/pt.json';
 
+// Function to get user's location and determine language
+const getGeoLanguage = async () => {
+  try {
+    const response = await fetch('https://ipapi.co/json/');
+    const data = await response.json();
+    const countryCode = data.country_code.toLowerCase();
+    
+    // Map country codes to our supported languages
+    const countryToLanguage: { [key: string]: string } = {
+      'es': 'es', // Spain
+      'mx': 'es', // Mexico
+      'ar': 'es', // Argentina
+      'br': 'pt', // Brazil
+      'pt': 'pt', // Portugal
+      'us': 'en', // United States
+      'gb': 'en', // United Kingdom
+      // Add more country mappings as needed
+    };
+
+    return countryToLanguage[countryCode] || 'en';
+  } catch (error) {
+    console.log('Error detecting location:', error);
+    return 'en';
+  }
+};
+
+const languageDetector = new LanguageDetector();
+languageDetector.addDetector({
+  name: 'geoLocation',
+  lookup: async () => {
+    return await getGeoLanguage();
+  },
+  cacheUserLanguage: (lng) => {
+    localStorage.setItem('i18nextLng', lng);
+  }
+});
+
 i18n
-  .use(LanguageDetector)
+  .use(languageDetector)
   .use(initReactI18next)
   .init({
     resources: {
@@ -22,7 +59,11 @@ i18n
         translation: ptTranslations,
       },
     },
-    fallbackLng: 'es',
+    fallbackLng: 'en',
+    detection: {
+      order: ['navigator', 'geoLocation', 'localStorage', 'htmlTag'],
+      caches: ['localStorage'],
+    },
     interpolation: {
       escapeValue: false,
     },
