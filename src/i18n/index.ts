@@ -8,25 +8,43 @@ import esTranslations from './locales/es.json';
 import ptTranslations from './locales/pt.json';
 
 // Function to get user's location and determine language
-const getGeoLanguage = async () => {
+const getGeoLanguage = () => {
   try {
-    const response = await fetch('https://ipapi.co/json/');
-    const data = await response.json();
-    const countryCode = data.country_code.toLowerCase();
-    
-    // Map country codes to our supported languages
-    const countryToLanguage: { [key: string]: string } = {
-      'es': 'es', // Spain
-      'mx': 'es', // Mexico
-      'ar': 'es', // Argentina
-      'br': 'pt', // Brazil
-      'pt': 'pt', // Portugal
-      'us': 'en', // United States
-      'gb': 'en', // United Kingdom
-      // Add more country mappings as needed
-    };
+    // Get from localStorage first if exists
+    const cachedLanguage = localStorage.getItem('geoLanguage');
+    if (cachedLanguage) {
+      return cachedLanguage;
+    }
 
-    return countryToLanguage[countryCode] || 'en';
+    // If no cached language, fetch it
+    fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        const countryCode = data.country_code.toLowerCase();
+        
+        // Map country codes to our supported languages
+        const countryToLanguage: { [key: string]: string } = {
+          'es': 'es', // Spain
+          'mx': 'es', // Mexico
+          'ar': 'es', // Argentina
+          'br': 'pt', // Brazil
+          'pt': 'pt', // Portugal
+          'us': 'en', // United States
+          'gb': 'en', // United Kingdom
+          // Add more country mappings as needed
+        };
+
+        const detectedLanguage = countryToLanguage[countryCode] || 'en';
+        localStorage.setItem('geoLanguage', detectedLanguage);
+        i18n.changeLanguage(detectedLanguage);
+        return detectedLanguage;
+      })
+      .catch(error => {
+        console.log('Error detecting location:', error);
+        return 'en';
+      });
+
+    return 'en'; // Default while fetching
   } catch (error) {
     console.log('Error detecting location:', error);
     return 'en';
@@ -36,8 +54,8 @@ const getGeoLanguage = async () => {
 const languageDetector = new LanguageDetector();
 languageDetector.addDetector({
   name: 'geoLocation',
-  lookup: async () => {
-    return await getGeoLanguage();
+  lookup: () => {
+    return getGeoLanguage();
   },
   cacheUserLanguage: (lng) => {
     localStorage.setItem('i18nextLng', lng);
