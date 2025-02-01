@@ -78,7 +78,7 @@ i18n.use(languageDetector)
 		},
 		fallbackLng: 'en',
 		detection: {
-			order: ['localStorage', 'navigator', 'geoLocation', 'htmlTag'],
+			order: ['localStorage', 'navigator', 'geoLocation', 'htmlTag'], // order
 			caches: ['localStorage'],
 		},
 		interpolation: {
