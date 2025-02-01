@@ -4,6 +4,8 @@ import { useAuth } from '../AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from './LanguageSelector';
 
 interface MobileNavProps {
 	isOpen: boolean;
@@ -16,6 +18,7 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 	const { user } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { t } = useTranslation();
 
 	const handleLogout = async () => {
 		await supabase.auth.signOut();
@@ -55,7 +58,8 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 
 	return (
 		<div className="md:hidden relative">
-			<div className="flex justify-end">
+			<div className="flex justify-end items-center gap-4">
+				<LanguageSelector />
 				<button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-bright-blue p-2" aria-label="Toggle menu">
 					{isOpen ? <X size={24} /> : <Menu size={24} />}
 				</button>
@@ -65,42 +69,38 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 				<div className="absolute top-full right-0 bg-black/95 backdrop-blur-sm w-64 border-t border-gray-800 rounded-b-lg shadow-xl">
 					<nav className="py-4">
 						<div className="px-4 space-y-2">
-							{/* Join Tournament always at top for non-logged in users */}
 							{!user && !isNextStepPage && (
 								<Button variant="default" className="w-full justify-start bg-bright-blue hover:bg-bright-blue/90" onClick={onSubscribe}>
-									Únete al Evento
+									{t('nav.joinEvent')}
 								</Button>
 							)}
 
-							{/* Auth-specific navigation */}
 							{user && (
 								<div className="space-y-2 border-b border-gray-800 pb-4 mb-4">
 									<Button variant="ghost" onClick={() => navigate('/chart')} className="w-full justify-start text-bright-blue hover:bg-bright-blue/10">
-										Charts
+										{t('nav.charts')}
 									</Button>
 									<Button variant="ghost" onClick={() => navigate('/profile')} className="w-full justify-start text-bright-blue hover:bg-bright-blue/10">
-										Profile
+										{t('nav.profile')}
 									</Button>
 								</div>
 							)}
 
-							{/* Menu items */}
 							<div className="space-y-2 border-b border-gray-800 pb-4">
 								{menuItems.map((item) => (
 									<button key={item.label} onClick={() => handleNavigation(item.href)} className="block w-full text-left px-4 py-2 text-light-gray hover:text-bright-blue hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg">
-										{item.label}
+										{t(item.label)}
 									</button>
 								))}
 							</div>
 
-							{/* Login/Logout at the bottom */}
 							{user ? (
 								<button onClick={handleLogout} className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg">
-									Logout
+									{t('nav.logout')}
 								</button>
 							) : (
 								<button onClick={handleLogin} className="w-full text-left px-4 py-2 text-bright-blue hover:text-bright-blue/80 hover:bg-bright-blue/5 transition-colors duration-200 rounded-lg">
-									Login
+									{t('nav.login')}
 								</button>
 							)}
 						</div>

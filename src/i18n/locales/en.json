@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "rules": "Rules",
+    "prizes": "Prizes",
+    "strategy": "Strategy",
+    "faq": "FAQ",
+    "joinEvent": "Join Event",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "charts": "Charts"
+  }
+}

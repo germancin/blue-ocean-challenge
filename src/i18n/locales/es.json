@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "rules": "Reglas",
+    "prizes": "Premios",
+    "strategy": "Estrategia",
+    "faq": "Preguntas Frecuentes",
+    "joinEvent": "Únete al Evento",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "profile": "Perfil",
+    "charts": "Gráficos"
+  }
+}
