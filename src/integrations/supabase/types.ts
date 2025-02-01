@@ -131,6 +131,30 @@ export type Database = {
         }
         Relationships: []
       }
+      email_templates: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          template_key: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          template_key: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          template_key?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       paid_users: {
         Row: {
           created_at: string
@@ -219,6 +243,47 @@ export type Database = {
           name?: string
         }
         Relationships: []
+      }
+      template_translations: {
+        Row: {
+          body: string
+          created_at: string | null
+          id: string
+          language: string
+          subject: string
+          template_id: string
+          updated_at: string | null
+          variables_hint: Json | null
+        }
+        Insert: {
+          body: string
+          created_at?: string | null
+          id?: string
+          language: string
+          subject: string
+          template_id: string
+          updated_at?: string | null
+          variables_hint?: Json | null
+        }
+        Update: {
+          body?: string
+          created_at?: string | null
+          id?: string
+          language?: string
+          subject?: string
+          template_id?: string
+          updated_at?: string | null
+          variables_hint?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_template_id"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "email_templates"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       users: {
         Row: {
