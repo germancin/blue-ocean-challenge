@@ -51,6 +51,8 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 		setIsOpen(false);
 	};
 
+	const isNextStepPage = location.pathname === '/next-step';
+
 	return (
 		<div className="md:hidden relative">
 			<div className="flex justify-end">
@@ -64,7 +66,7 @@ const MobileNav = ({ isOpen, setIsOpen, menuItems, onSubscribe }: MobileNavProps
 					<nav className="py-4">
 						<div className="px-4 space-y-2">
 							{/* Join Tournament always at top for non-logged in users */}
-							{!user && (
+							{!user && !isNextStepPage && (
 								<Button variant="default" className="w-full justify-start bg-bright-blue hover:bg-bright-blue/90" onClick={onSubscribe}>
 									Únete al Evento
 								</Button>

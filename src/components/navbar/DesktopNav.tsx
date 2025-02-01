@@ -24,17 +24,13 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
 	};
 
 	useEffect(() => {
-		// Check if there's a hash in the URL that contains access_token
-		const hash = window.location.hash;
-		if (hash && hash.includes('access_token')) {
-			// If it's a recovery flow (password reset), redirect to profile
+		if (location.hash && location.hash.includes('access_token')) {
 			if (hash.includes('type=recovery')) {
 				navigate('/profile?changePassword=true');
 				return;
 			}
 		}
 
-		// Handle regular hash navigation for sections
 		if (location.hash && !location.hash.includes('access_token')) {
 			const element = document.querySelector(location.hash);
 			if (element) {
@@ -50,6 +46,8 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
 			document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
 		}
 	};
+
+	const isNextStepPage = location.pathname === '/next-step';
 
 	return (
 		<div className="hidden md:flex items-center space-x-8">
@@ -72,9 +70,11 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
 				</div>
 			) : (
 				<div className="flex items-center space-x-4">
-					<Button variant="default" className="bg-bright-blue hover:bg-bright-blue/90" onClick={onSubscribe}>
-						Únete al Evento
-					</Button>
+					{!isNextStepPage && (
+						<Button variant="default" className="bg-bright-blue hover:bg-bright-blue/90" onClick={onSubscribe}>
+							Únete al Evento
+						</Button>
+					)}
 					{/* <Button variant="default" className="bg-bright-blue hover:bg-bright-blue/90" onClick={handleLogin}>
 						Login
 					</Button> */}
