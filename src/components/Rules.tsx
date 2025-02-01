@@ -1,6 +1,8 @@
 import { Trophy, Target, BarChart3 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Rules = () => {
+	const { t } = useTranslation();
 	return (
 		<section id="rules" className="relative py-16 overflow-hidden bg-navy">
 			<div
@@ -15,7 +17,7 @@ const Rules = () => {
 				<div className="text-center mb-16 animate-fade-in">
 					<div className="relative inline-block">
 						<div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
-						<h2 className="relative text-4xl md:text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">Reglas del Desafío de Trading</h2>
+						<h2 className="relative text-4xl md:text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">{t('rules.sectionTitle')}</h2>
 					</div>
 					<div className="flex items-center justify-center space-x-2">
 						<div className="w-12 h-1 bg-bright-blue rounded-full"></div>
@@ -31,15 +33,15 @@ const Rules = () => {
 
 						<div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#00ff94]/20 group-hover:border-[#00ff94]/40 transition-all duration-300">
 							<Trophy className="w-12 h-12 text-[#00ff94] mb-4" />
-							<h3 className="text-2xl font-bold text-white mb-4">CONDICIONES GENERALES</h3>
+							<h3 className="text-2xl font-bold text-white mb-4">{t('rules.conditionsTitle')}</h3>
 							<div className="grid md:grid-cols-2 gap-6">
 								<div className="space-y-2">
-									<h4 className="text-[#00ff94] font-semibold">Configuración de la cuenta demo</h4>
-									<p className="text-gray-300">Comienza con una cuenta demo para practicar y demostrar tus habilidades de trading sin arriesgar capital real.</p>
+									<h4 className="text-[#00ff94] font-semibold">{t('rules.demoSetup')}</h4>
+									<p className="text-gray-300">{t('rules.demoDescription')}</p>
 								</div>
 								<div className="space-y-2">
-									<h4 className="text-[#00ff94] font-semibold">Duración del desafío</h4>
-									<p className="text-gray-300">Completa el desafío en un plazo de 30 días para demostrar un desempeño constante y la correcta ejecución de tu estrategia.</p>
+									<h4 className="text-[#00ff94] font-semibold">{t('rules.durationTitle')}</h4>
+									<p className="text-gray-300">{t('rules.durationDescription')}</p>
 								</div>
 							</div>
 						</div>
@@ -51,10 +53,10 @@ const Rules = () => {
 
 						<div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#00c8ff]/20 group-hover:border-[#00c8ff]/40 transition-all duration-300">
 							<Target className="w-12 h-12 text-[#00c8ff] mb-4" />
-							<h3 className="text-2xl font-bold text-white mb-4">REGLAS DE GESTIÓN DE RIESGOS</h3>
+							<h3 className="text-2xl font-bold text-white mb-4">{t('rules.riskManagementTitle')}</h3>
 							<div className="space-y-2">
-								<h4 className="text-[#00c8ff] font-semibold">REGLAS DE GESTIÓN DE RIESGOS</h4>
-								<p className="text-gray-300">Mantén una estricta adherencia a los límites de drawdown máximo del 10% para asegurar una gestión de riesgos responsable y preservar tu capital.</p>
+								<h4 className="text-[#00c8ff] font-semibold">{t('rules.riskManagementTitle')}</h4>
+								<p className="text-gray-300">{t('rules.riskManagementDescription')}</p>
 							</div>
 						</div>
 					</div>
@@ -65,26 +67,26 @@ const Rules = () => {
 
 						<div className="bg-black/20 backdrop-blur-xl p-8 rounded-lg border border-[#ff4d4d]/20 group-hover:border-[#ff4d4d]/40 transition-all duration-300">
 							<BarChart3 className="w-12 h-12 text-[#ff4d4d] mb-4" />
-							<h3 className="text-2xl font-bold text-white mb-4">CRITERIOS DE EVALUACIÓN</h3>
+							<h3 className="text-2xl font-bold text-white mb-4">{t('rules.evaluationCriteriaTitle')}</h3>
 							<div className="grid md:grid-cols-2 gap-6">
 								<div className="space-y-4">
 									<div>
-										<h4 className="text-[#ff4d4d] font-semibold">Requisitos de balance final</h4>
-										<p className="text-gray-300">Alcanza un objetivo mínimo de ganancias mientras mantienes un desempeño de trading constante durante el periodo del desafío.</p>
+										<h4 className="text-[#ff4d4d] font-semibold">{t('rules.finalBalanceTitle')}</h4>
+										<p className="text-gray-300">{t('rules.finalBalanceDescription')}</p>
 									</div>
 									<div>
-										<h4 className="text-[#ff4d4d] font-semibold">Cumplimiento de las reglas de trading</h4>
-										<p className="text-gray-300">Sigue todas las reglas y directrices de trading de manera constante a lo largo de la duración del desafío.</p>
+										<h4 className="text-[#ff4d4d] font-semibold">{t('rules.tradingRulesComplianceTitle')}</h4>
+										<p className="text-gray-300">{t('rules.tradingRulesComplianceDescription')}</p>
 									</div>
 								</div>
 								<div className="space-y-4">
 									<div>
-										<h4 className="text-[#ff4d4d] font-semibold">Métricas de rendimiento</h4>
-										<p className="text-gray-300">Cumple con indicadores de rendimiento clave, como tasa de aciertos, relación riesgo-recompensa y generación constante de beneficios.</p>
+										<h4 className="text-[#ff4d4d] font-semibold">{t('rules.performanceMetricsTitle')}</h4>
+										<p className="text-gray-300">{t('rules.performanceMetricsDescription')}</p>
 									</div>
 									<div>
-										<h4 className="text-[#ff4d4d] font-semibold">Estándares de calificación</h4>
-										<p className="text-gray-300">Completa con éxito todos los requisitos del desafío para calificar como un trader financiado.</p>
+										<h4 className="text-[#ff4d4d] font-semibold">{t('rules.qualificationStandardsTitle')}</h4>
+										<p className="text-gray-300">{t('rules.qualificationStandardsDescription')}</p>
 									</div>
 								</div>
 							</div>

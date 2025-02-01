@@ -17,5 +17,81 @@
 		"dialogTitle": "Desbloqueie seu potencial de trading hoje! 🚀",
 		"dialogDescription": "Junte-se à nossa comunidade confiável de traders. Seus dados estão seguros e só enviaremos atualizações sobre torneios e notícias essenciais. ✨",
 		"imageAlt": "Interface da Plataforma de Trading"
+	},
+	"rules": {
+		"sectionTitle": "Regras do Desafio de Negociação",
+		"conditionsTitle": "CONDIÇÕES GERAIS",
+		"demoSetup": "Configuração da Conta Demo",
+		"demoDescription": "Comece com uma conta demo para praticar e mostrar suas habilidades de negociação sem arriscar capital real.",
+		"durationTitle": "Duração do Desafio",
+		"durationDescription": "Complete o desafio dentro de um período de 30 dias para demonstrar desempenho consistente e execução correta da estratégia.",
+		"riskManagementTitle": "REGRAS DE GESTÃO DE RISCOS",
+		"riskManagementDescription": "Adira estritamente aos limites máximos de drawdown de 10% para garantir uma gestão de riscos responsável e preservar seu capital.",
+		"evaluationCriteriaTitle": "CRITÉRIOS DE AVALIAÇÃO",
+		"finalBalanceTitle": "Requisitos de Saldo Final",
+		"finalBalanceDescription": "Alcance uma meta mínima de lucro mantendo um desempenho de negociação consistente durante o período do desafio.",
+		"tradingRulesComplianceTitle": "Conformidade com as Regras de Negociação",
+		"tradingRulesComplianceDescription": "Siga todas as regras e diretrizes de negociação de forma consistente durante a duração do desafio.",
+		"performanceMetricsTitle": "Métricas de Desempenho",
+		"performanceMetricsDescription": "Atenda aos principais indicadores de desempenho, como taxa de acertos, razão risco-recompensa e geração de lucros constantes.",
+		"qualificationStandardsTitle": "Padrões de Qualificação",
+		"qualificationStandardsDescription": "Complete com sucesso todos os requisitos do desafio para se qualificar como um trader financiado."
+	},
+	"distributionSectionTitle": "Distribuição de Prêmios",
+	"tiers": [
+		{
+			"title": "Principais Vencedores",
+			"position": "1º - 3º Lugar",
+			"winners": "Vencedores",
+			"prize": "Prêmio",
+			"total": "Total"
+		},
+		{
+			"title": "Desempenho Notável",
+			"position": "4º - 10º Lugar",
+			"winners": "Vencedores",
+			"prize": "Prêmio",
+			"total": "Total"
+		},
+		{
+			"title": "Menções Honrosas",
+			"position": "11º - 20º Lugar",
+			"winners": "Vencedores",
+			"prize": "Prêmio",
+			"total": "Total"
+		}
+	],
+	"labels": {
+		"position": "Posição",
+		"winners": "Vencedores",
+		"prize": "Prêmio",
+		"total": "Total"
+	},
+	"strategy": {
+		"sectionTitle": "Estratégias de Trading Diversificadas",
+		"cryptoTitle": "Criptomoeda",
+		"cryptoDescription": "Negocie ativos digitais utilizando tecnologia de ponta em blockchain e insights de mercado."
+	},
+	"faq": {
+		"title": "Perguntas Frequentes",
+		"subtitle": "Tem perguntas?",
+		"questions": [
+			{
+				"question": "Quais instrumentos de negociação estão disponíveis?",
+				"answer": "Você terá acesso aos principais pares de forex, criptomoedas populares e índices de ações líderes. Todas as operações são realizadas com fundos virtuais em uma conta demo."
+			},
+			{
+				"question": "Existem taxas de participação?",
+				"answer": "Sim, há uma pequena taxa de inscrição para garantir a participação séria. Essa taxa contribui para o prêmio e ajuda a manter a qualidade da competição."
+			},
+			{
+				"question": "Como os vencedores são determinados?",
+				"answer": "Os vencedores são classificados com base no saldo final da conta, enquanto aderem a todas as regras de negociação e diretrizes de gestão de riscos. Métricas adicionais, como retornos ajustados ao risco, podem ser consideradas para desempates."
+			},
+			{
+				"question": "Como posso participar do torneio?",
+				"answer": "Basta clicar no botão 'Participar do Torneio', completar o processo de registro e pagar a taxa de inscrição. Você receberá suas credenciais de conta demo imediatamente após a confirmação."
+			}
+		]
 	}
 }

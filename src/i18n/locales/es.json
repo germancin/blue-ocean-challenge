@@ -17,5 +17,81 @@
 		"dialogTitle": "¡Desbloquea tu potencial de trading hoy! 🚀",
 		"dialogDescription": "Únete a nuestra confiable comunidad de traders. Tus datos están seguros y solo te enviaremos actualizaciones de torneos y noticias esenciales. ✨",
 		"imageAlt": "Interfaz de Plataforma de Trading"
+	},
+	"rules": {
+		"sectionTitle": "Reglas del Desafío de Trading",
+		"conditionsTitle": "CONDICIONES GENERALES",
+		"demoSetup": "Configuración de la cuenta demo",
+		"demoDescription": "Comienza con una cuenta demo para practicar y demostrar tus habilidades de trading sin arriesgar capital real.",
+		"durationTitle": "Duración del desafío",
+		"durationDescription": "Completa el desafío en un plazo de 30 días para demostrar un desempeño constante y la correcta ejecución de tu estrategia.",
+		"riskManagementTitle": "REGLAS DE GESTIÓN DE RIESGOS",
+		"riskManagementDescription": "Mantén una estricta adherencia a los límites de drawdown máximo del 10% para asegurar una gestión de riesgos responsable y preservar tu capital.",
+		"evaluationCriteriaTitle": "CRITERIOS DE EVALUACIÓN",
+		"finalBalanceTitle": "Requisitos de balance final",
+		"finalBalanceDescription": "Alcanza un objetivo mínimo de ganancias mientras mantienes un desempeño de trading constante durante el periodo del desafío.",
+		"tradingRulesComplianceTitle": "Cumplimiento de las reglas de trading",
+		"tradingRulesComplianceDescription": "Sigue todas las reglas y directrices de trading de manera constante a lo largo de la duración del desafío.",
+		"performanceMetricsTitle": "Métricas de rendimiento",
+		"performanceMetricsDescription": "Cumple con indicadores de rendimiento clave, como tasa de aciertos, relación riesgo-recompensa y generación constante de beneficios.",
+		"qualificationStandardsTitle": "Estándares de calificación",
+		"qualificationStandardsDescription": "Completa con éxito todos los requisitos del desafío para calificar como un trader financiado."
+	},
+	"distributionSectionTitle": "Distribución de Premios",
+	"tiers": [
+		{
+			"title": "Principales Ganadores",
+			"position": "1st - 3rd Lugar",
+			"winners": "Ganadores",
+			"prize": "Premio",
+			"total": "Total"
+		},
+		{
+			"title": "Desempeño Destacado",
+			"position": "4th - 10th Lugar",
+			"winners": "Ganadores",
+			"prize": "Premio",
+			"total": "Total"
+		},
+		{
+			"title": "Menciones Honoríficas",
+			"position": "11th - 20th Lugar",
+			"winners": "Ganadores",
+			"prize": "Premio",
+			"total": "Total"
+		}
+	],
+	"labels": {
+		"position": "Posición",
+		"winners": "Ganadores",
+		"prize": "Premio",
+		"total": "Total"
+	},
+	"strategy": {
+		"sectionTitle": "Estrategias de Trading Diversificadas",
+		"cryptoTitle": "Criptomoneda",
+		"cryptoDescription": "Opera con activos digitales utilizando la tecnología blockchain de vanguardia y conocimientos del mercado."
+	},
+	"faq": {
+		"title": "Preguntas Frecuentes",
+		"subtitle": "¿Tienes preguntas?",
+		"questions": [
+			{
+				"question": "¿Qué instrumentos de trading están disponibles?",
+				"answer": "Tendrás acceso a los principales pares de forex, criptomonedas populares e índices de acciones líderes. Todas las operaciones se realizan con fondos virtuales en una cuenta demo."
+			},
+			{
+				"question": "¿Hay tarifas de participación?",
+				"answer": "Sí, hay una pequeña tarifa de entrada para asegurar la participación seria. Esta tarifa contribuye al pozo de premios y ayuda a mantener la calidad de la competencia."
+			},
+			{
+				"question": "¿Cómo se determinan los ganadores?",
+				"answer": "Los ganadores se clasifican en función de su saldo final de cuenta, mientras se adhieren a todas las reglas de trading y directrices de gestión de riesgos. Se pueden considerar métricas adicionales como rendimientos ajustados por riesgo para desempates."
+			},
+			{
+				"question": "¿Cómo puedo unirme al torneo?",
+				"answer": "Simplemente haz clic en el botón 'Unirse al Torneo', completa el proceso de registro y paga la tarifa de entrada. Recibirás tus credenciales de cuenta demo inmediatamente después de la confirmación."
+			}
+		]
 	}
 }

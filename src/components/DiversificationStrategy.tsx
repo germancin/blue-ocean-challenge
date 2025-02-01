@@ -1,12 +1,15 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { LineChart, Wallet, BarChart3 } from 'lucide-react';
 
 const DiversificationStrategy = () => {
+	const { t } = useTranslation();
+
 	const strategies = [
 		{
 			icon: <Wallet className="w-16 h-16 text-white mb-4" />,
-			title: 'Criptomoneda',
-			description: 'Opera con activos digitales utilizando la tecnología blockchain de vanguardia y conocimientos del mercado.',
+			title: t('strategy.cryptoTitle'),
+			description: t('strategy.cryptoDescription'),
 		},
 	];
 
@@ -22,7 +25,7 @@ const DiversificationStrategy = () => {
 				<div className="text-center mb-16 animate-fade-in">
 					<div className="relative inline-block">
 						<div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
-						<h2 className="relative text-3xl md:text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">Estrategias de Trading Diversificadas</h2>
+						<h2 className="relative text-3xl md:text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">{t('strategy.sectionTitle')}</h2>
 					</div>
 				</div>
 				<div className="flex justify-center">

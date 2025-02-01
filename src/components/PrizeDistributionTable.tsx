@@ -1,26 +1,29 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const PrizeDistributionTable = () => {
+	const { t } = useTranslation();
+
 	const tiers = [
 		{
-			title: 'Principales Ganadores',
-			position: '1st - 3rd Lugar',
+			title: t('tiers.0.title'),
+			position: t('tiers.0.position'),
 			winners: '3',
 			prize: '$2,000 - $500',
 			total: '$3,500',
 			className: 'bg-gradient-to-br from-yellow-300/20 to-amber-500/20 border-yellow-500/30',
 		},
 		{
-			title: 'Desempeño Destacado',
-			position: '4th - 10th Lugar',
+			title: t('tiers.1.title'),
+			position: t('tiers.1.position'),
 			winners: '7',
 			prize: '$250',
 			total: '$1,750',
 			className: 'bg-gradient-to-br from-blue-400/20 to-blue-600/20 border-blue-500/30',
 		},
 		{
-			title: 'Menciones Honoríficas',
-			position: '11th - 20th Lugar',
+			title: t('tiers.2.title'),
+			position: t('tiers.2.position'),
 			winners: '10',
 			prize: '$100',
 			total: '$1,000',
@@ -45,7 +48,7 @@ const PrizeDistributionTable = () => {
 				<div className="text-center mb-16 animate-fade-in">
 					<div className="relative inline-block">
 						<div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
-						<h2 className="relative text-4xl md:text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">Distribución de Premios</h2>
+						<h2 className="relative text-4xl md:text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">{t('distributionSectionTitle')}</h2>
 					</div>
 					<div className="flex items-center justify-center space-x-2">
 						<div className="w-12 h-1 bg-bright-blue rounded-full"></div>
@@ -74,19 +77,19 @@ const PrizeDistributionTable = () => {
 
 									<div className="grid sm:grid-cols-4 gap-4 items-center text-center sm:text-left">
 										<div className="text-white">
-											<p className="text-base opacity-80 font-medium mb-1">Posición</p>
+											<p className="text-base opacity-80 font-medium mb-1">{t('labels.position')}</p>
 											<p className="text-xl font-semibold">{tier.position}</p>
 										</div>
 										<div className="text-white">
-											<p className="text-base opacity-80 font-medium mb-1">Ganadores</p>
+											<p className="text-base opacity-80 font-medium mb-1">{t('labels.winners')}</p>
 											<p className="text-xl font-semibold">{tier.winners}</p>
 										</div>
 										<div className="text-white">
-											<p className="text-base opacity-80 font-medium mb-1">Premio</p>
+											<p className="text-base opacity-80 font-medium mb-1">{t('labels.prize')}</p>
 											<p className={`text-xl font-semibold ${index === 0 ? 'text-yellow-400' : ''}`}>{tier.prize}</p>
 										</div>
 										<div className="text-white">
-											<p className="text-base opacity-80 font-medium mb-1">Total</p>
+											<p className="text-base opacity-80 font-medium mb-1">{t('labels.total')}</p>
 											<p className="text-xl font-semibold">{tier.total}</p>
 										</div>
 									</div>
