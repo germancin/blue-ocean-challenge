@@ -27,11 +27,18 @@ const getGeoLanguage = () => {
 					es: 'es', // Spain
 					mx: 'es', // Mexico
 					ar: 'es', // Argentina
-					br: 'pt', // Brazil
-					pt: 'pt', // Portugal
+					co: 'es', // Colombia
+					ve: 'es', // Venezuela
+					cl: 'es', // Chile
+					pe: 'es', // Peru
+					ec: 'es', // Ecuador
+					uy: 'es', // Uruguay
+					py: 'es', // Paraguay
+					bo: 'es', // Bolivia
 					us: 'en', // United States
 					gb: 'en', // United Kingdom
-					// Add more country mappings as needed
+					br: 'pt', // Brazil
+					pt: 'pt', // Portugal
 				};
 
 				const detectedLanguage = countryToLanguage[countryCode] || 'en';
@@ -78,7 +85,7 @@ i18n.use(languageDetector)
 		},
 		fallbackLng: 'en',
 		detection: {
-			order: ['localStorage', 'navigator', 'geoLocation', 'htmlTag'], // order
+			order: ['localStorage', 'geoLocation', 'navigator', 'htmlTag'], // order
 			caches: ['localStorage'],
 		},
 		interpolation: {
