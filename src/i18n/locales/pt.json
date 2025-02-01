@@ -1,13 +1,21 @@
 {
-  "nav": {
-    "rules": "Regras",
-    "prizes": "Prêmios",
-    "strategy": "Estratégia",
-    "faq": "Perguntas Frequentes",
-    "joinEvent": "Participe do Evento",
-    "login": "Entrar",
-    "logout": "Sair",
-    "profile": "Perfil",
-    "charts": "Gráficos"
-  }
+	"nav": {
+		"rules": "Regras",
+		"prizes": "Prêmios",
+		"strategy": "Estratégia",
+		"faq": "Perguntas Frequentes",
+		"joinEvent": "Participe do Evento",
+		"login": "Entrar",
+		"logout": "Sair",
+		"profile": "Perfil",
+		"charts": "Gráficos"
+	},
+	"hero": {
+		"tournament": "🏆 Torneio de Trading 2025",
+		"tagline": "150 traders, 33% de chance de sucesso, e o resto depende de você!",
+		"joinEvent": "Participe do Evento",
+		"dialogTitle": "Desbloqueie seu potencial de trading hoje! 🚀",
+		"dialogDescription": "Junte-se à nossa comunidade confiável de traders. Seus dados estão seguros e só enviaremos atualizações sobre torneios e notícias essenciais. ✨",
+		"imageAlt": "Interface da Plataforma de Trading"
+	}
 }

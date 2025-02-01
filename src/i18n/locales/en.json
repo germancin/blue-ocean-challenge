@@ -1,13 +1,21 @@
 {
-  "nav": {
-    "rules": "Rules",
-    "prizes": "Prizes",
-    "strategy": "Strategy",
-    "faq": "FAQ",
-    "joinEvent": "Join Event",
-    "login": "Login",
-    "logout": "Logout",
-    "profile": "Profile",
-    "charts": "Charts"
-  }
+	"nav": {
+		"rules": "Rules",
+		"prizes": "Prizes",
+		"strategy": "Strategy",
+		"faq": "FAQ",
+		"joinEvent": "Join Event",
+		"login": "Login",
+		"logout": "Logout",
+		"profile": "Profile",
+		"charts": "Charts"
+	},
+	"hero": {
+		"tournament": "🏆 Trading Tournament 2025",
+		"tagline": "150 traders, 33% chance of success, and the rest depends on you!",
+		"joinEvent": "Join the Event",
+		"dialogTitle": "Unlock your trading potential today! 🚀",
+		"dialogDescription": "Join our trustworthy community of traders. Your data is secure, and we will only send you tournament updates and essential news. ✨",
+		"imageAlt": "Trading Platform Interface"
+	}
 }
