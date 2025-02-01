@@ -12,7 +12,7 @@ const LanguageSelector = () => {
 
 	return (
 		<Select value={i18n.language} onValueChange={(value) => i18n.changeLanguage(value)}>
-			<SelectTrigger className="w-[140px] bg-transparent text-white border-white/20">
+			<SelectTrigger className="w-[60px] bg-transparent text-white border-white/20">
 				<SelectValue />
 			</SelectTrigger>
 			<SelectContent>
