@@ -74,7 +74,6 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 					title: '¡Ya estás registrado!',
 					description: 'Log in now to join the action!',
 				});
-				navigate('/next-step');
 				return;
 			}
 

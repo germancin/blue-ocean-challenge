@@ -7,14 +7,21 @@ import Confetti from 'react-confetti';
 import '@n8n/chat/style.css';
 import { createChat } from '@n8n/chat';
 import './../global.css';
+import { set } from 'date-fns';
 
 const NextStep = () => {
 	const location = useLocation();
 	const [showConfetti, setShowConfetti] = useState(true);
-	const paymentId = location.state?.paymentId ?? 'uniqueid_345w';
-	const name = location.state?.name ?? 'Luis Fernando';
-	const email = location.state?.email ?? 'elmaildegerman@gmail.com';
+	const [name, setName] = useState(location.state?.name ?? null);
+	const [email, setEmail] = useState(location.state?.email ?? null);
 	const [sessionId, setSessionid] = useState('');
+
+	useEffect(() => {
+		if (name && email) {
+			setName(name);
+			setEmail(email);
+		}
+	}, [name, email]);
 
 	useEffect(() => {
 		// Hide confetti after 5 seconds
@@ -112,6 +119,10 @@ const NextStep = () => {
 		return originalFetch(...args);
 	};
 
+	if (!name && !email) {
+		window.location.href = '/';
+	}
+
 	return (
 		<main className="min-h-screen bg-navy relative">
 			{showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={true} numberOfPieces={200} gravity={0.3} />}
@@ -126,14 +137,20 @@ const NextStep = () => {
 					</Card> */}
 
 					{/* Step 2: AI Chat */}
-					<Card className="p-8 bg-white/10 backdrop-blur animate-fade-in delay-300">
-						<h2 className="text-2xl font-bold mb-6 text-white flex items-center justify-center  gap-2">¡Felicidades! 🎉</h2>
-						<h2 className="text-2xl font-bold mb-1 text-white">Siguiente Paso</h2>
-						<p className=" text-light-gray mb-">Chatea con nuestra Agente IA que te ayudará a crear una cita virtual para abrir tu cuenta en XM.</p>
-						<div id="chat-widget" className="mt-6 min-h-[570px] rounded-lg bg-white/5 p-4">
-							{/* Chat widget will be injected here */}
+					{name && email ? (
+						<Card className="p-8 bg-white/10 backdrop-blur animate-fade-in delay-300">
+							<h2 className="text-2xl font-bold mb-6 text-white flex items-center justify-center gap-2">¡Felicidades! 🎉</h2>
+							<h2 className="text-2xl font-bold mb-1 text-white">Siguiente Paso</h2>
+							<p className="text-light-gray mb-">Chatea con nuestra Agente IA que te ayudará a crear una cita virtual para abrir tu cuenta en XM.</p>
+							<div id="chat-widget" className="mt-6 min-h-[570px] rounded-lg bg-white/5 p-4">
+								{/* Chat widget will be injected here */}
+							</div>
+						</Card>
+					) : (
+						<div className="min-h-screen flex items-center justify-center">
+							<div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
 						</div>
-					</Card>
+					)}
 				</div>
 			</div>
 			<Footer />

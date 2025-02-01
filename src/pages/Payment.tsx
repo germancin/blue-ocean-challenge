@@ -84,6 +84,26 @@ async function handlePaymentEmailSending(payment) {
 	}
 }
 
+interface ISubscriber {
+	email: string;
+	name?: string;
+}
+
+async function fetchSubscriberByEmail(email: string): Promise<ISubscriber | null> {
+	try {
+		const { data: subscriber, error } = await supabase.from('subscribers').select('*').eq('email', email).maybeSingle();
+
+		if (error) {
+			throw new Error(error.message);
+		}
+
+		return subscriber;
+	} catch (error) {
+		console.error('Error fetching subscriber:', error);
+		return null; // Handle the error as required
+	}
+}
+
 /**
  * Verify a payment if it's pending, or finalize if it's already successful.
  */
@@ -116,7 +136,12 @@ async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPayment
 				if (verification?.status === 'success') {
 					await handlePaymentEmailSending(existingPayment);
 					setCurrentPaymentStatus('success');
-					navigate('/next-step');
+					const subscriber = await fetchSubscriberByEmail(email);
+
+					navigate('/next-step', {
+						email,
+						name: subscriber?.name,
+					});
 					return;
 				}
 			}
@@ -129,7 +154,12 @@ async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPayment
 			if (successfulPayment) {
 				await handlePaymentEmailSending(successfulPayment);
 				setCurrentPaymentStatus('success');
-				navigate('/next-step');
+				const subscriber = await fetchSubscriberByEmail(email);
+
+				navigate('/next-step', {
+					email,
+					name: subscriber?.name,
+				});
 			}
 		}
 		// 3) If currentPaymentStatus is 'success', check to ensure email is sent
@@ -141,7 +171,12 @@ async function handlePaymentCheck(email, currentPaymentStatus, setCurrentPayment
 			if (successfulPayment) {
 				await handlePaymentEmailSending(successfulPayment);
 				setCurrentPaymentStatus('success');
-				navigate('/next-step');
+				const subscriber = await fetchSubscriberByEmail(email);
+
+				navigate('/next-step', {
+					email,
+					name: subscriber?.name,
+				});
 			}
 		}
 	} catch (error) {
