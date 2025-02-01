@@ -25,7 +25,7 @@ const DesktopNav = ({ menuItems, onSubscribe }: DesktopNavProps) => {
 
 	useEffect(() => {
 		if (location.hash && location.hash.includes('access_token')) {
-			if (hash.includes('type=recovery')) {
+			if (location.hash.includes('type=recovery')) {
 				navigate('/profile?changePassword=true');
 				return;
 			}
