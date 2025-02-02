@@ -115,6 +115,21 @@
 		"termsLink": "Terms and Conditions",
 		"termsRequired": "You must accept the terms and conditions"
 	},
+	"subscriptionForm": {
+		"successToastTitle": "Already Registered!",
+		"successToastDescription": "Log in now to join the action!",
+		"welcomeEmailToastTitle": "Sending Welcome Email",
+		"welcomeEmailToastDescription": "We are sending your welcome email. Please check your inbox.",
+		"confirmationEmailSuccessTitle": "Welcome email was sent.",
+		"confirmationEmailSuccessDescription": "Check your email to complete registration.",
+		"confirmationEmailErrorTitle": "Error sending email.",
+		"confirmationEmailErrorDescription": "We could not send the confirmation email.",
+		"paymentCreationError": "Failed to create payment record.",
+		"errorToastTitle": "Error",
+		"errorToastDescription": "Something went wrong. Please try again.",
+		"processing": "Processing...",
+		"register": "Register"
+	},
 	"terms": {
 		"title": "Terms and Conditions",
 		"sections": {

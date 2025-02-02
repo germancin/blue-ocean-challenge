@@ -115,6 +115,21 @@
 		"termsLink": "Términos y Condiciones",
 		"termsRequired": "Debe aceptar los términos y condiciones"
 	},
+	"subscriptionForm": {
+		"successToastTitle": "¡Ya estás registrado!",
+		"successToastDescription": "¡Inicia sesión para unirte a la acción!",
+		"welcomeEmailToastTitle": "Enviando correo de bienvenida",
+		"welcomeEmailToastDescription": "Estamos enviando tu correo de bienvenida. Revisa tu bandeja de entrada.",
+		"confirmationEmailSuccessTitle": "Correo de bienvenida enviado.",
+		"confirmationEmailSuccessDescription": "Revisa tu correo electrónico para completar el registro.",
+		"confirmationEmailErrorTitle": "Error al enviar el correo.",
+		"confirmationEmailErrorDescription": "No se pudo enviar el correo de confirmación.",
+		"paymentCreationError": "No se pudo crear el registro de pago.",
+		"errorToastTitle": "Error",
+		"errorToastDescription": "Algo salió mal. Por favor, inténtalo de nuevo.",
+		"processing": "Procesando...",
+		"register": "Registrar"
+	},
 	"terms": {
 		"title": "Términos y Condiciones",
 		"sections": {

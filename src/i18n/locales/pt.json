@@ -115,6 +115,21 @@
 		"termsLink": "Termos e Condições",
 		"termsRequired": "Você deve aceitar os termos e condições"
 	},
+	"subscriptionForm": {
+		"successToastTitle": "Já registrado!",
+		"successToastDescription": "Faça login agora para participar da ação!",
+		"welcomeEmailToastTitle": "Enviando e-mail de boas-vindas",
+		"welcomeEmailToastDescription": "Estamos enviando seu e-mail de boas-vindas. Verifique sua caixa de entrada.",
+		"confirmationEmailSuccessTitle": "E-mail de boas-vindas enviado.",
+		"confirmationEmailSuccessDescription": "Verifique seu e-mail para concluir o registro.",
+		"confirmationEmailErrorTitle": "Erro ao enviar e-mail.",
+		"confirmationEmailErrorDescription": "Não conseguimos enviar o e-mail de confirmação.",
+		"paymentCreationError": "Falha ao criar o registro de pagamento.",
+		"errorToastTitle": "Erro",
+		"errorToastDescription": "Algo deu errado. Por favor, tente novamente.",
+		"processing": "Processando...",
+		"register": "Registrar"
+	},
 	"terms": {
 		"title": "Termos e Condições",
 		"sections": {
