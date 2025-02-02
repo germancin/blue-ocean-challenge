@@ -29,7 +29,6 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 	const navigate = useNavigate();
 	const { t, i18n } = useTranslation();
 	const selectedLocation = i18n.language;
-	console.log(selectedLocation);
 
 	const {
 		register,
