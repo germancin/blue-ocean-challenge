@@ -11,6 +11,7 @@ import { triggerWebhook } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 
 const subscriptionWebhook = 'https://n8n.elitetraderhub.co/webhook/subscription-email';
+// const subscriptionWebhook = 'https://n8n.elitetraderhub.co/webhook-test/subscription-email';
 
 interface SubscriptionFormData {
 	name: string;
@@ -26,7 +27,9 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 	const [isLoading, setIsLoading] = useState(false);
 	const { toast } = useToast();
 	const navigate = useNavigate();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
+	const selectedLocation = i18n.language;
+	console.log(selectedLocation);
 
 	const {
 		register,
@@ -49,6 +52,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 					{
 						name: data.name,
 						email: data.email,
+						i18n: selectedLocation,
 					},
 				]);
 				if (insertError) throw insertError;
@@ -130,6 +134,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 				name: data.name,
 				paymentStatus: 'pending',
 				paymentAmount: payment.amount,
+				i18n: selectedLocation,
 			};
 
 			triggerWebhook(subscriptionWebhook, stateObj);
