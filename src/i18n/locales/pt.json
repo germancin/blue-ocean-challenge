@@ -231,5 +231,23 @@
 		"securePayment": "Pagamento Seguro",
 		"encrypted": "Criptografado",
 		"verified": "Verificado"
+	},
+	"nextStep": {
+		"chatTitle": "Parabéns! 🎉",
+		"nextStepTitle": "Próximo Passo",
+		"chatDescription": "Converse com nossa Agente IA, que o ajudará a criar uma consulta virtual para abrir sua conta na XM.",
+		"paymentSuccessTitle": "Parabéns! 🎉",
+		"paymentSuccessMessage": "Você concluiu com sucesso seu pagamento e agora faz parte do torneio de trading conosco.",
+		"paymentIdLabel": "ID de Pagamento:"
+	},
+	"chatWidget": {
+		"getStarted": "Criar meu compromisso virtual",
+		"inputPlaceholder": "Escreva...",
+		"error": "Ocorreu um erro. Por favor, tente novamente.",
+		"closeButtonTooltip": "Fechar",
+		"minimizeButtonTooltip": "Minimizar",
+		"maximizeButtonTooltip": "Maximizar",
+		"sendButtonTooltip": "Enviar",
+		"initialMessage": "Bem-vindo! Conheça Sofia, sua assistente virtual."
 	}
 }
