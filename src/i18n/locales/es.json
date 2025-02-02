@@ -12,14 +12,14 @@
 	},
 	"hero": {
 		"tournament": "🏆 Torneo de Trading 2025",
-		"tagline": "150 traders, 33% de posibilidades de éxito, ¡y el resto depende de ti!",
+		"tagline": "150 traders, más de 35% de ganadores, usa tu estrategia y gana con inteligencia",
 		"joinEvent": "Únete al Evento",
 		"dialogTitle": "¡Desbloquea tu potencial de trading hoy! 🚀",
 		"dialogDescription": "Únete a nuestra confiable comunidad de traders. Tus datos están seguros y solo te enviaremos actualizaciones de torneos y noticias esenciales. ✨",
 		"imageAlt": "Interfaz de Plataforma de Trading"
 	},
 	"rules": {
-		"sectionTitle": "Reglas del Desafío de Trading",
+		"sectionTitle": "Reglas del Torneo",
 		"conditionsTitle": "CONDICIONES GENERALES",
 		"demoSetup": "Configuración de la cuenta demo",
 		"demoDescription": "Comienza con una cuenta demo para practicar y demostrar tus habilidades de trading sin arriesgar capital real.",
@@ -73,24 +73,48 @@
 		"cryptoDescription": "Opera con activos digitales utilizando la tecnología blockchain de vanguardia y conocimientos del mercado."
 	},
 	"faq": {
-		"title": "Preguntas Frecuentes",
+		"title": "Preguntas Frecuentes (FAQ)",
 		"subtitle": "¿Tienes preguntas?",
 		"questions": [
 			{
-				"question": "¿Qué instrumentos de trading están disponibles?",
-				"answer": "Tendrás acceso a los principales pares de forex, criptomonedas populares e índices de acciones líderes. Todas las operaciones se realizan con fondos virtuales en una cuenta demo."
+				"question": "¿Cómo puedo participar en el torneo?",
+				"answer": "Es fácil y rápido. Solo **regístrate en nuestro sitio, realiza TU INSCRIPCION de 99 usd y agenda tu cita cita con nuestro equipo para realizar tu depósito mínimo de $50 USD** y empieza a operar con tu estrategia. ¡No hay límites, solo oportunidades! ¡Haz clic en Únete al evento ahora y sé parte de los 150 traders que lucharán por premios increíbles!."
 			},
 			{
-				"question": "¿Hay tarifas de participación?",
-				"answer": "Sí, hay una pequeña tarifa de entrada para asegurar la participación seria. Esta tarifa contribuye al pozo de premios y ayuda a mantener la calidad de la competencia."
+				"question": "¿Qué tipo de estrategias puedo usar?",
+				"answer": "¡Tienes total libertad! Puedes operar en **todos los mercados** disponibles, 24/7. Ya sea que utilices estrategias de scalping, swing trading o de largo plazo, **tú decides cómo OPERAR**. ¡Lo importante es que aproveches cada oportunidad para llegar a la cima!"
 			},
 			{
-				"question": "¿Cómo se determinan los ganadores?",
-				"answer": "Los ganadores se clasifican en función de su saldo final de cuenta, mientras se adhieren a todas las reglas de trading y directrices de gestión de riesgos. Se pueden considerar métricas adicionales como rendimientos ajustados por riesgo para desempates."
+				"question": "¿Cuántos ganadores habrá y qué premios recibirán?",
+				"answer": "Habrá ¡57 ganadores serán premiados! Con **más de un 38% de posibilidades de ganar**, tu esfuerzo puede llevarte a un gran premio. ¡Sé parte de ese porcentaje ganador!"
 			},
 			{
-				"question": "¿Cómo puedo unirme al torneo?",
-				"answer": "Simplemente haz clic en el botón 'Unirse al Torneo', completa el proceso de registro y paga la tarifa de entrada. Recibirás tus credenciales de cuenta demo inmediatamente después de la confirmación."
+				"question": "¿Puedo competir con otros traders?",
+				"answer": "¡Sí! Estarás compitiendo SOLO con **150 traders**. Es la oportunidad perfecta para demostrar tus habilidades y hacer crecer tu cuenta. Imagina ser uno de los **57 afortunados ganadores**. ¡Este es tu momento!"
+			},
+			{
+				"question": "¿Cuál es el depósito mínimo para participar?",
+				"answer": "El depósito mínimo es solo **$50 USD**. ¡Así de accesible es unirte a este emocionante torneo! Puedes realizar depósitos **sin límites**, lo que te da flexibilidad para mejorar tus oportunidades."
+			},
+			{
+				"question": "¿Qué pasa si mi Drawdown (DD) alcanza el 45%?",
+				"answer": "Si tu DD llega al **45%**, tu cuenta quedará automáticamente fuera del torneo. Pero no te preocupes, ¡puedes realizar depósitos para seguir en e concurso mientras no superes el 45%, REDCUERDA! Mantén tu **gestión de riesgo** bajo control, y continúa luchando por esos premios. ¡Es tu momento de brillar"
+			},
+			{
+				"question": "¿Puedo hacer depósitos durante el torneo?",
+				"answer": "¡Absolutamente! Tienes **total libertad para realizar depósitos** en cualquier momento, asegurando que tu Drawdown (DD) permanezca dentro de los límites del 45%. ¡Recuerda, tú decides cómo llegar a la cima! "
+			},
+			{
+				"question": "¿Por qué este torneo es mejor que otros?",
+				"answer": "¡Porque no es una prueba de fondeo, tu dinero está en juego directamente en la **bolsa de premios**! Además, con un **38% de probabilidades de ganar**, y un sistema que premia a **57 traders**, este torneo está diseñado para recompensar a los más dedicados y estratégicos. ¡Deja atrás las pruebas de fondeo, este torneo está hecho para ganar!"
+			},
+			{
+				"question": "¿Qué mercados puedo operar durante el torneo?",
+				"answer": "¡Todos los mercados están a tu disposición! No hay restricciones, puedes operar en **Forex, criptos, acciones, índices, materias primas, ect.**... ¡Lo que quieras! Tú decides cómo gestionar tu riesgo y maximizar tus ganancias."
+			},
+			{
+				"question": "¿Qué sucede si no encuentro la respuesta que busco?",
+				"answer": "¡No te preocupes! Haz clic en el botón de la **IA** para hablar con nuestra **Trader Virtual** sobre el torneo. O si prefieres, **envíanos un correo** y te responderemos personalmente para resolver cualquier duda. ¡Estamos aquí para ayudarte en todo momento!"
 			}
 		]
 	},
