@@ -93,5 +93,62 @@
 				"answer": "Simply click the 'Join Tournament' button, complete the registration process, and pay the entry fee. You will receive your demo account credentials immediately upon confirmation."
 			}
 		]
+	},
+	"footer": {
+		"rightsReserved": "All rights reserved.",
+		"terms": "Terms and Conditions",
+		"privacy": "Privacy Policy",
+		"companyNotice": "For Traders is an educational and evaluation company that does not accept client deposits or provide financial services to them. All accounts provided to clients operate in a virtual environment with virtual funds.",
+		"investmentDisclaimer": "All information provided on this website is solely for educational purposes in the area of financial market trading and does not constitute specific investment recommendations, trading advice, or general investment guidance. The Company does not offer investment services under MiFID I or act as a licensed investment services provider (broker) under MiFID II. All trades on the platform are simulated with virtual accounts, and terms like 'trading' or 'trader' should be understood in this context.",
+		"technicalSolution": "The technical solution offered in the form of platforms, as part of the Company's services, relies on third-party services. The website is managed and owned by the Company, and all content is protected by the Company’s copyrights.",
+		"restrictedCountries": "Restricted countries: Pakistan, Iran, Syria, Myanmar, Bangladesh, Vietnam, North Korea, Russia, Belarus, Cuba, Lebanon, Libya, Sudan, Crimea, Donetsk, Luhansk, UAE."
+	},
+	"subscription": {
+		"nameLabel": "Nombre",
+		"namePlaceholder": "Introduce tu nombre",
+		"nameRequired": "Nombre requerido",
+		"emailLabel": "Correo electrónico",
+		"emailPlaceholder": "Introduce tu correo electrónico",
+		"emailRequired": "Correo electrónico es obligatorio",
+		"emailInvalid": "Dirección de correo electrónico no válida",
+		"termsLabel": "Acepto los ",
+		"termsLink": "Términos y Condiciones",
+		"termsRequired": "Debe aceptar los términos y condiciones"
+	},
+	"terms": {
+		"title": "Terms and Conditions",
+		"sections": {
+			"generalDescriptionTitle": "1. General Contest Description",
+			"generalDescriptionContent": "This trading contest is organized to test and showcase trading skills in a competitive environment. Participants must be of legal age in their jurisdiction to participate.",
+			"eligibilityTitle": "2. Eligibility",
+			"eligibilityList": [
+				"Participants must be at least 18 years old.",
+				"They must have a valid email address.",
+				"They must complete the registration process and pay the entry fee.",
+				"They must comply with all local laws and regulations."
+			],
+			"contestRulesTitle": "3. Contest Rules",
+			"contestRulesList": [
+				"Trading must be conducted within the specified contest period.",
+				"Only designated trading pairs are allowed.",
+				"The use of automated trading systems or bots is prohibited.",
+				"Market manipulation tactics are strictly prohibited.",
+				"Participants must use their own trading account."
+			],
+			"prizeDistributionTitle": "4. Prize Distribution",
+			"prizeDistributionContent": "Prizes will be distributed based on final rankings. The organizer reserves the right to verify all trading activities before distributing the prizes.",
+			"disqualificationTitle": "5. Disqualification",
+			"disqualificationIntro": "The organizer reserves the right to disqualify any participant who:",
+			"disqualificationList": [
+				"Violates the contest rules.",
+				"Provides false information.",
+				"Engages in unfair trading practices.",
+				"Attempts to manipulate the contest results."
+			],
+			"liabilityTitle": "6. Liability",
+			"liabilityContent": "Participants acknowledge that trading involves risk, and the organizer is not responsible for any losses incurred during the contest.",
+			"termsChangesTitle": "7. Changes to Terms",
+			"termsChangesContent": "The organizer reserves the right to modify these terms and conditions at any time. Participants will be notified of any changes."
+		}
 	}
 }

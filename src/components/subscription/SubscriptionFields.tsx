@@ -3,6 +3,7 @@ import { Label } from '../ui/label';
 import { Checkbox } from '../ui/checkbox';
 import { Link } from 'react-router-dom';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 interface SubscriptionFormData {
 	name: string;
@@ -16,30 +17,32 @@ interface SubscriptionFieldsProps {
 }
 
 export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps) {
+	const { t } = useTranslation();
+
 	return (
 		<>
 			<div className="space-y-2">
 				<Label htmlFor="name" className="text-lg font-medium text-white">
-					Nombre
+					{t('subscription.nameLabel')}
 				</Label>
-				<Input id="name" type="text" placeholder="Introduce tu nombre" className="w-full px-4 py-3 rounded-lg bg-white text-dark-gray border-0 focus:ring-2 focus:ring-bright-blue focus:border-transparent transition-all duration-200" {...register('name', { required: 'Nombre requerido' })} />
+				<Input id="name" type="text" placeholder={t('subscription.namePlaceholder')} className="w-full px-4 py-3 rounded-lg bg-white text-dark-gray border-0 focus:ring-2 focus:ring-bright-blue focus:border-transparent transition-all duration-200" {...register('name', { required: t('subscription.nameRequired') })} />
 				{errors.name && <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>}
 			</div>
 
 			<div className="space-y-2">
 				<Label htmlFor="email" className="text-lg font-medium text-white">
-					Correo electrónico
+					{t('subscription.emailLabel')}
 				</Label>
 				<Input
 					id="email"
 					type="email"
-					placeholder="Introduce tu correo electrónico"
+					placeholder={t('subscription.emailPlaceholder')}
 					className="w-full px-4 py-3 rounded-lg bg-white text-dark-gray border-0 focus:ring-2 focus:ring-bright-blue focus:border-transparent transition-all duration-200"
 					{...register('email', {
-						required: 'Correo electrónico es obligatorio',
+						required: t('subscription.emailRequired'),
 						pattern: {
 							value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-							message: 'Dirección de correo electrónico no válida',
+							message: t('subscription.emailInvalid'),
 						},
 					})}
 				/>
@@ -61,13 +64,13 @@ export function SubscriptionFields({ register, errors }: SubscriptionFieldsProps
 					}}
 				/>
 				<Label htmlFor="acceptTerms" className="text-sm font-medium leading-none text-white/80 cursor-pointer">
-					Acepto los{' '}
+					{t('subscription.termsLabel')}
 					<Link to="/terms" className="text-bright-blue hover:text-bright-blue/80 underline" target="_blank" rel="noopener noreferrer">
-						Términos y Condiciones
+						{t('subscription.termsLink')}
 					</Link>
 				</Label>
 			</div>
-			{errors.acceptTerms && <p className="text-red-400 text-sm mt-1">{errors.acceptTerms.message}</p>}
+			{errors.acceptTerms && <p className="text-red-400 text-sm mt-1">{t('subscription.termsRequired')}</p>}
 		</>
 	);
 }

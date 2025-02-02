@@ -93,5 +93,62 @@
 				"answer": "Basta clicar no botão 'Participar do Torneio', completar o processo de registro e pagar a taxa de inscrição. Você receberá suas credenciais de conta demo imediatamente após a confirmação."
 			}
 		]
+	},
+	"footer": {
+		"rightsReserved": "Todos os direitos reservados.",
+		"terms": "Termos e Condições",
+		"privacy": "Política de Privacidade",
+		"companyNotice": "For Traders é uma empresa de educação e avaliação que não aceita depósitos de clientes nem oferece serviços financeiros aos mesmos. Todas as contas fornecidas aos clientes operam em um ambiente virtual com fundos virtuais.",
+		"investmentDisclaimer": "Todas as informações fornecidas neste site são exclusivamente para fins educativos na área de negociação de mercados financeiros e não constituem recomendações específicas de investimento, conselhos de negociação ou orientação geral de investimentos. A Empresa não oferece serviços de investimento nos termos da MiFID I nem atua como um provedor licenciado de serviços de investimento (corretor) nos termos da MiFID II. Todas as operações na plataforma são simuladas com contas virtuais, e termos como 'trading' ou 'trader' devem ser entendidos neste contexto.",
+		"technicalSolution": "A solução técnica oferecida na forma de plataformas, como parte dos serviços da Empresa, utiliza serviços de terceiros. O site é gerido e de propriedade da Empresa, e todo o conteúdo está protegido pelos direitos autorais da Empresa.",
+		"restrictedCountries": "Países restritos: Paquistão, Irã, Síria, Mianmar, Bangladesh, Vietnã, Coreia do Norte, Rússia, Bielorrússia, Cuba, Líbano, Líbia, Sudão, Crimeia, Donetsk, Luhansk, EAU."
+	},
+	"subscription": {
+		"nameLabel": "Nome",
+		"namePlaceholder": "Digite seu nome",
+		"nameRequired": "O nome é obrigatório",
+		"emailLabel": "Endereço de e-mail",
+		"emailPlaceholder": "Digite seu endereço de e-mail",
+		"emailRequired": "O e-mail é obrigatório",
+		"emailInvalid": "Endereço de e-mail inválido",
+		"termsLabel": "Aceito os ",
+		"termsLink": "Termos e Condições",
+		"termsRequired": "Você deve aceitar os termos e condições"
+	},
+	"terms": {
+		"title": "Termos e Condições",
+		"sections": {
+			"generalDescriptionTitle": "1. Descrição Geral do Concurso",
+			"generalDescriptionContent": "Este concurso de trading é organizado para testar e demonstrar habilidades de negociação em um ambiente competitivo. Os participantes devem ter a idade legal em sua jurisdição para participar.",
+			"eligibilityTitle": "2. Elegibilidade",
+			"eligibilityList": [
+				"Os participantes devem ter pelo menos 18 anos.",
+				"Devem ter um endereço de e-mail válido.",
+				"Devem concluir o processo de registro e pagar a taxa de inscrição.",
+				"Devem cumprir todas as leis e regulamentos locais."
+			],
+			"contestRulesTitle": "3. Regras do Concurso",
+			"contestRulesList": [
+				"A negociação deve ser realizada dentro do período especificado do concurso.",
+				"Apenas os pares de negociação designados são permitidos.",
+				"O uso de sistemas automatizados de negociação ou bots é proibido.",
+				"Táticas de manipulação de mercado são estritamente proibidas.",
+				"Os participantes devem usar sua própria conta de negociação."
+			],
+			"prizeDistributionTitle": "4. Distribuição de Prêmios",
+			"prizeDistributionContent": "Os prêmios serão distribuídos com base nas classificações finais. O organizador reserva-se o direito de verificar todas as atividades de negociação antes de distribuir os prêmios.",
+			"disqualificationTitle": "5. Desqualificação",
+			"disqualificationIntro": "O organizador reserva-se o direito de desqualificar qualquer participante que:",
+			"disqualificationList": [
+				"Viole as regras do concurso.",
+				"Forneça informações falsas.",
+				"Participe de práticas de negociação desleais.",
+				"Tente manipular os resultados do concurso."
+			],
+			"liabilityTitle": "6. Responsabilidade",
+			"liabilityContent": "Os participantes reconhecem que a negociação envolve riscos e o organizador não é responsável por quaisquer perdas incorridas durante o concurso.",
+			"termsChangesTitle": "7. Alterações nos Termos",
+			"termsChangesContent": "O organizador reserva-se o direito de modificar estes termos e condições a qualquer momento. Os participantes serão notificados de quaisquer alterações."
+		}
 	}
 }

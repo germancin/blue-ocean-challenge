@@ -1,8 +1,16 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useTranslation } from 'react-i18next';
 
+interface FAQItem {
+	question: string;
+	answer: string;
+}
+
 const FAQ = () => {
 	const { t } = useTranslation();
+
+	// Dynamic FAQ list with correct typing
+	const faqItems = t('faq.questions', { returnObjects: true }) as FAQItem[];
 
 	return (
 		<section id="faq" className="bg-[#1A1F2C] py-20 relative overflow-hidden">
@@ -14,7 +22,7 @@ const FAQ = () => {
 					</div>
 
 					<Accordion type="single" collapsible className="space-y-4">
-						{t('faq.questions', { returnObjects: true }).map((faq, index) => (
+						{faqItems.map((faq, index) => (
 							<AccordionItem key={index} value={`item-${index}`} className="border-b border-white/10 transition-all duration-300 ease-in-out">
 								<AccordionTrigger className="text-[#0EA5E9] hover:text-[#0EA5E9]/80 text-xl py-6 transition-all duration-300 ease-in-out group">
 									<span className="group-data-[state=open]:scale-105 transition-transform duration-300">{faq.question}</span>
