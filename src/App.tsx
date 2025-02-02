@@ -98,14 +98,7 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/i18n-editor"
-              element={
-                <ProtectedRoute>
-                  <I18nEditor />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/i18n-editor" element={<I18nEditor />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
