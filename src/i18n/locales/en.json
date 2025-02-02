@@ -104,16 +104,16 @@
 		"restrictedCountries": "Restricted countries: Pakistan, Iran, Syria, Myanmar, Bangladesh, Vietnam, North Korea, Russia, Belarus, Cuba, Lebanon, Libya, Sudan, Crimea, Donetsk, Luhansk, UAE."
 	},
 	"subscription": {
-		"nameLabel": "Nombre",
-		"namePlaceholder": "Introduce tu nombre",
-		"nameRequired": "Nombre requerido",
-		"emailLabel": "Correo electrónico",
-		"emailPlaceholder": "Introduce tu correo electrónico",
-		"emailRequired": "Correo electrónico es obligatorio",
-		"emailInvalid": "Dirección de correo electrónico no válida",
-		"termsLabel": "Acepto los ",
-		"termsLink": "Términos y Condiciones",
-		"termsRequired": "Debe aceptar los términos y condiciones"
+		"nameLabel": "Name",
+		"namePlaceholder": "Enter your name",
+		"nameRequired": "Name required",
+		"emailLabel": "Email",
+		"emailPlaceholder": "Enter your email",
+		"emailRequired": "Email is required",
+		"emailInvalid": "Invalid email address",
+		"termsLabel": "I accept the ",
+		"termsLink": "Terms and Conditions",
+		"termsRequired": "You must accept the terms and conditions"
 	},
 	"terms": {
 		"title": "Terms and Conditions",
