@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { generateUniqueAmount, createOrUpdatePendingPayment } from '@/utils/paymentUtils';
 import { BASE_PAYMENT_AMOUNT } from '@/constants/payments';
+import { useTranslation } from 'react-i18next';
 
 export type PaymentStatus = 'pending' | 'success' | 'failed' | null;
 
@@ -10,6 +11,8 @@ export const usePaymentVerification = (email: string) => {
 	const [isVerifying, setIsVerifying] = useState(true);
 	const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>(null);
 	const [paymentAmount, setPaymentAmount] = useState<number | null>(null);
+	const { i18n } = useTranslation();
+	const selectedLocation = i18n.language;
 
 	useEffect(() => {
 		const initializePayment = async () => {
@@ -36,7 +39,7 @@ export const usePaymentVerification = (email: string) => {
 
 				// Create new payment record using centralized method
 				const payment = await createOrUpdatePendingPayment(email, uniqueAmount);
-				
+
 				if (!payment) {
 					throw new Error('Failed to create payment record');
 				}
@@ -74,6 +77,7 @@ export const usePaymentVerification = (email: string) => {
 									email,
 									paymentId: successfulPayment.id,
 									amount: successfulPayment.amount,
+									i18n: selectedLocation,
 								},
 							});
 

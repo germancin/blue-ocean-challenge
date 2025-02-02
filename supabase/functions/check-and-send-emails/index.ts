@@ -21,8 +21,8 @@ serve(async (req) => {
 			throw new Error('Email service not configured');
 		}
 
-		const { email, paymentId, amount } = await req.json();
-		console.log('Processing request for:', { email, paymentId, amount });
+		const { email, paymentId, amount, i18n } = await req.json();
+		console.log('Processing request for:', { email, paymentId, amount, i18n });
 
 		if (!email || !paymentId) {
 			throw new Error('Email and paymentId are required');
@@ -65,6 +65,7 @@ serve(async (req) => {
 			emailTo: email,
 			amount: amount,
 			payment: payment,
+			i18n,
 		};
 
 		fetch('https://n8n.elitetraderhub.co/webhook/payment-email', {

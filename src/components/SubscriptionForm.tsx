@@ -81,6 +81,7 @@ export function SubscriptionForm({ onSuccess }: SubscriptionFormProps) {
 						email: existingPayment.email,
 						paymentId: existingPayment.id,
 						amount: existingPayment.amount,
+						i18n: selectedLocation,
 					},
 				});
 
