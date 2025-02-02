@@ -5,7 +5,6 @@ import { PaymentInstructionsCard } from '@/components/payment/PaymentInstruction
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
-// ---- Types ---- //
 interface ISubscriber {
   email: string;
   name?: string;
@@ -186,8 +185,6 @@ async function handlePaymentCheck(
   }
 }
 
-// ---- Main Component ---- //
-
 const Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -257,18 +254,18 @@ const Payment = () => {
 		);
 	}
 
-	// 5) Render the UI
-	return (
-		<div className="min-h-screen bg-gray-100 py-12">
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-					<PaymentInformationCard onAcceptTerms={() => {}} />
-					<PaymentDetailsCard amount={paymentAmount} email={email} />
-					<PaymentInstructionsCard amount={paymentAmount} merchantAddress={merchantAddress} transactionStatus={currentPaymentStatus} />
-				</div>
-			</div>
-		</div>
-	);
+    // 5) Render the UI
+    return (
+        <div className="min-h-screen bg-gray-100 py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <PaymentInformationCard />
+                    <PaymentDetailsCard amount={paymentAmount} email={email} />
+                    <PaymentInstructionsCard amount={paymentAmount} merchantAddress={merchantAddress} transactionStatus={currentPaymentStatus} />
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Payment;
