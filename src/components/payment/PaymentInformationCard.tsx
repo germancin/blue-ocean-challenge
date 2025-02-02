@@ -1,67 +1,41 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Clock, Bell, Shield, HelpCircle, Trophy } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { LucideIcon } from 'lucide-react';
 
-interface PaymentInformationCardProps {
-	onAcceptTerms: (accepted: boolean) => void;
+const icons: Record<string, LucideIcon> = { Clock, Bell, Shield, HelpCircle, Trophy };
+
+interface SectionItem {
+	icon: LucideIcon;
+	title: string;
+	description: string | string[];
+	color: string;
 }
 
-export function PaymentInformationCard({ onAcceptTerms }: PaymentInformationCardProps) {
-	const sections = [
-		{
-			id: 'payment-works',
-			title: 'Cómo Funciona el Pago',
-			items: [
-				{
-					icon: Clock,
-					title: 'Tiempo de Confirmación',
-					description: 'Las transacciones en la red TRON (TRC20) son rápidas y, por lo general, se confirman en menos de 1 minuto. Sin embargo, en casos poco frecuentes, pueden tardar hasta 5 minutos dependiendo del tráfico de la red.',
-					color: 'text-blue-600',
-				},
-				{
-					icon: Bell,
-					title: 'Notificación Automática',
-					description: 'Una vez que el pago se confirme en la blockchain, recibirás una notificación por correo electrónico con los detalles de tu registro en el torneo.',
-					color: 'text-yellow-600',
-				},
-			],
-		},
-		{
-			id: 'why-usdt',
-			title: 'Por Qué Usar USDT',
-			items: [
-				{
-					icon: Shield,
-					title: 'Transacciones Seguras',
-					description: 'Las transacciones en USDT son seguras y se pueden rastrear en la blockchain.',
-					color: 'text-green-600',
-				},
-			],
-		},
-		{
-			id: 'support',
-			title: 'Política de Soporte',
-			items: [
-				{
-					icon: HelpCircle,
-					title: '¿Tienes Preguntas?',
-					description: 'Si tienes algún problema con tu transacción, nuestro equipo está aquí para ayudarte. Escríbenos a support@elitetraderhub.com.',
-					color: 'text-purple-600',
-				},
-			],
-		},
-		{
-			id: 'benefits',
-			title: 'Beneficios de Participar',
-			items: [
-				{
-					icon: Trophy,
-					title: 'Beneficios del Torneo',
-					description: ['Acceso exclusivo al Elite Trading Tournament, donde podrás ganar premios increíbles.', 'Conéctate con una comunidad de traders apasionados.', 'Una oportunidad única para poner a prueba tus habilidades en un entorno competitivo.'],
-					color: 'text-indigo-600',
-				},
-			],
-		},
-	];
+interface SectionTranslationItem {
+	icon: string; // The icon as a string from the JSON translation
+	title: string;
+	description: string | string[];
+	color: string;
+}
+
+interface Section {
+	id: string;
+	title: string;
+	items: SectionItem[];
+}
+
+export function PaymentInformationCard() {
+	const { t } = useTranslation();
+
+	const sections: Section[] = ['paymentWorks', 'whyUsdt', 'support', 'benefits'].map((key) => ({
+		id: key,
+		title: t(`paymentCard.sections.${key}.title`),
+		items: (t(`paymentCard.sections.${key}.items`, { returnObjects: true }) as SectionTranslationItem[]).map((item) => ({
+			...item,
+			icon: icons[item.icon], // Map the string icon to the corresponding LucideIcon
+		})),
+	}));
 
 	return (
 		<Card>

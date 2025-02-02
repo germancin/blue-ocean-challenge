@@ -150,5 +150,86 @@
 			"termsChangesTitle": "7. Alterações nos Termos",
 			"termsChangesContent": "O organizador reserva-se o direito de modificar estes termos e condições a qualquer momento. Os participantes serão notificados de quaisquer alterações."
 		}
+	},
+	"paymentCard": {
+		"sections": {
+			"paymentWorks": {
+				"title": "Como Funciona o Pagamento",
+				"items": [
+					{
+						"icon": "Clock",
+						"title": "Tempo de Confirmação",
+						"description": "As transações na rede TRON (TRC20) são rápidas e geralmente confirmadas em menos de 1 minuto. No entanto, em casos raros, podem levar até 5 minutos, dependendo do tráfego da rede.",
+						"color": "text-blue-600"
+					},
+					{
+						"icon": "Bell",
+						"title": "Notificação Automática",
+						"description": "Assim que o pagamento for confirmado na blockchain, você receberá uma notificação por e-mail com os detalhes do seu registro no torneio.",
+						"color": "text-yellow-600"
+					}
+				]
+			},
+			"whyUsdt": {
+				"title": "Por Que Usar USDT",
+				"items": [
+					{
+						"icon": "Shield",
+						"title": "Transações Seguras",
+						"description": "As transações em USDT são seguras e rastreáveis na blockchain.",
+						"color": "text-green-600"
+					}
+				]
+			},
+			"support": {
+				"title": "Política de Suporte",
+				"items": [
+					{
+						"icon": "HelpCircle",
+						"title": "Tem Perguntas?",
+						"description": "Se você tiver algum problema com sua transação, nossa equipe está aqui para ajudar. Entre em contato pelo e-mail support@elitetraderhub.com.",
+						"color": "text-purple-600"
+					}
+				]
+			},
+			"benefits": {
+				"title": "Benefícios de Participar",
+				"items": [
+					{
+						"icon": "Trophy",
+						"title": "Benefícios do Torneio",
+						"description": [
+							"Acesso exclusivo ao Elite Trading Tournament, onde você pode ganhar prêmios incríveis.",
+							"Conecte-se com uma comunidade de traders apaixonados.",
+							"Uma oportunidade única para testar suas habilidades em um ambiente competitivo."
+						],
+						"color": "text-indigo-600"
+					}
+				]
+			}
+		}
+	},
+	"paymentDetailsCard": {
+		"title": "Detalhes do Pagamento",
+		"amountToPay": "Valor a Pagar",
+		"copySuccess": "Valor copiado para a área de transferência",
+		"copyError": "Erro ao copiar para a área de transferência",
+		"purchaseDetailTitle": "Detalhes da Compra",
+		"purchaseDetailDescription": "Seu pagamento será processado com segurança através do USDT na rede TRON.",
+		"emailTitle": "Endereço de E-mail"
+	},
+	"paymentInstructionsCard": {
+		"title": "Instruções de Pagamento",
+		"copySuccessAddress": "Endereço copiado para a área de transferência",
+		"copySuccessAmount": "Valor copiado para a área de transferência",
+		"copyError": "Falha ao copiar para a área de transferência",
+		"sendAmount": "Envie exatamente este valor:",
+		"toAddress": "Para este endereço:",
+		"pendingPayment": "Pagamento Pendente",
+		"successfulPayment": "Pagamento Bem-Sucedido",
+		"failedPayment": "Pagamento Falhou",
+		"securePayment": "Pagamento Seguro",
+		"encrypted": "Criptografado",
+		"verified": "Verificado"
 	}
 }

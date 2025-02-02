@@ -150,5 +150,86 @@
 			"termsChangesTitle": "7. Changes to Terms",
 			"termsChangesContent": "The organizer reserves the right to modify these terms and conditions at any time. Participants will be notified of any changes."
 		}
+	},
+	"paymentCard": {
+		"sections": {
+			"paymentWorks": {
+				"title": "How Payment Works",
+				"items": [
+					{
+						"icon": "Clock",
+						"title": "Confirmation Time",
+						"description": "Transactions on the TRON (TRC20) network are fast and typically confirmed within 1 minute. However, in rare cases, it may take up to 5 minutes depending on network traffic.",
+						"color": "text-blue-600"
+					},
+					{
+						"icon": "Bell",
+						"title": "Automatic Notification",
+						"description": "Once the payment is confirmed on the blockchain, you will receive an email notification with your tournament registration details.",
+						"color": "text-yellow-600"
+					}
+				]
+			},
+			"whyUsdt": {
+				"title": "Why Use USDT",
+				"items": [
+					{
+						"icon": "Shield",
+						"title": "Secure Transactions",
+						"description": "Transactions in USDT are secure and traceable on the blockchain.",
+						"color": "text-green-600"
+					}
+				]
+			},
+			"support": {
+				"title": "Support Policy",
+				"items": [
+					{
+						"icon": "HelpCircle",
+						"title": "Have Questions?",
+						"description": "If you encounter any issues with your transaction, our team is here to help. Contact us at support@elitetraderhub.com.",
+						"color": "text-purple-600"
+					}
+				]
+			},
+			"benefits": {
+				"title": "Participation Benefits",
+				"items": [
+					{
+						"icon": "Trophy",
+						"title": "Tournament Benefits",
+						"description": [
+							"Exclusive access to the Elite Trading Tournament, where you can win amazing prizes.",
+							"Connect with a community of passionate traders.",
+							"A unique opportunity to test your skills in a competitive environment."
+						],
+						"color": "text-indigo-600"
+					}
+				]
+			}
+		}
+	},
+	"paymentDetailsCard": {
+		"title": "Payment Details",
+		"amountToPay": "Amount to Pay",
+		"copySuccess": "Amount copied to clipboard",
+		"copyError": "Error copying to clipboard",
+		"purchaseDetailTitle": "Purchase Details",
+		"purchaseDetailDescription": "Your payment will be securely processed through USDT on the TRON network.",
+		"emailTitle": "Email Address"
+	},
+	"paymentInstructionsCard": {
+		"title": "Payment Instructions",
+		"copySuccessAddress": "Address copied to clipboard",
+		"copySuccessAmount": "Amount copied to clipboard",
+		"copyError": "Failed to copy to clipboard",
+		"sendAmount": "Send exactly this amount:",
+		"toAddress": "To this address:",
+		"pendingPayment": "Pending Payment",
+		"successfulPayment": "Successful Payment",
+		"failedPayment": "Payment Failed",
+		"securePayment": "Secure Payment",
+		"encrypted": "Encrypted",
+		"verified": "Verified"
 	}
 }
