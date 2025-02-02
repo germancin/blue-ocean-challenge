@@ -2,20 +2,51 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Card } from '@/components/ui/card';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Confetti from 'react-confetti';
 import '@n8n/chat/style.css';
 import { createChat } from '@n8n/chat';
 import './../global.css';
 import { useTranslation } from 'react-i18next';
+import { use } from 'i18next';
 
 const NextStep = () => {
 	const { t } = useTranslation();
 	const location = useLocation();
 	const [showConfetti, setShowConfetti] = useState(true);
-	const [name, setName] = useState(location.state?.name ?? null);
-	const [email, setEmail] = useState(location.state?.email ?? null);
-	const [sessionId, setSessionid] = useState('');
+	const [name, setName] = useState(location.state?.name ?? 'German');
+	const [email, setEmail] = useState(location.state?.email ?? 'elmaildegerman@gmail.com');
+	const [sessionId, setSessionid] = useState(null);
+	const [messageSent, setMessageSent] = useState(false);
+
+	if (document.querySelector('.chat-button')) {
+		document.querySelector('.chat-button').addEventListener('click', function () {
+			console.log('Chat button clicked!');
+			const targetDiv = document.querySelector('.chat-messages-list');
+
+			const observer = new MutationObserver((mutationsList) => {
+				mutationsList.forEach(({ type, addedNodes }) => {
+					if (type === 'childList' && addedNodes.length > 0) {
+						const lastElement = addedNodes[addedNodes.length - 1];
+						// Check if the added node is an element and meets the height condition
+						if (lastElement.nodeType === Node.ELEMENT_NODE && (lastElement as HTMLElement).offsetHeight >= 400) {
+							const chatBody = document.querySelector('.chat-body');
+							if (chatBody) {
+								setTimeout(() => {
+									chatBody.scrollTo({
+										top: 350,
+										behavior: 'smooth',
+									});
+								}, 100);
+							}
+						}
+					}
+				});
+			});
+
+			observer.observe(targetDiv, { childList: true, subtree: true });
+		});
+	}
 
 	useEffect(() => {
 		// Hide confetti after 5 seconds
@@ -50,14 +81,20 @@ const NextStep = () => {
 		return () => clearTimeout(timer);
 	}, [t]);
 
+	const initialMessage = useMemo(() => {
+		if (sessionId) {
+			return {
+				chatInput: `During our interaction, you will refer to me as ${name}, and my email is ${email}. Save it in your memory.`,
+				sessionId,
+			};
+		}
+
+		return null;
+	}, [sessionId, name, email]);
+
 	useEffect(() => {
 		const sendInitialMessage = (sessionId: string) => {
-			if (sessionId) {
-				const initialMessage = {
-					chatInput: `During our interaction, you will refer to me as ${name}, and my email is ${email} Save it in your memory.`,
-					sessionId,
-				};
-
+			if (sessionId && !messageSent) {
 				fetch('https://n8n.elitetraderhub.co/webhook/186e067f-c698-483e-88dc-347c59530e55/chat', {
 					method: 'POST',
 					headers: {
@@ -66,7 +103,10 @@ const NextStep = () => {
 					body: JSON.stringify(initialMessage),
 				})
 					.then((response) => response.json())
-					.then((data) => console.log('Initial message sent successfully:', data))
+					.then((data) => {
+						console.log('Initial message sent successfully:', data);
+						setMessageSent(true);
+					})
 					.catch((error) => console.error('Error sending initial message:', error));
 			}
 		};
@@ -74,37 +114,44 @@ const NextStep = () => {
 		if (sessionId) {
 			setTimeout(() => {
 				sendInitialMessage(sessionId);
-			}, 500);
+			}, 100);
 		}
 
 		const chatBody = document.querySelector('.chat-layout .chat-body');
 		if (chatBody) {
-			chatBody.setAttribute('style', 'max-height: 450px !important; overflow-y: scroll !important; ');
+			chatBody.setAttribute('style', 'max-height: 450px !important; ');
 		}
 
 		return () => {
 			sendInitialMessage('');
 		};
-	}, [sessionId]);
+	}, [sessionId, initialMessage, messageSent]);
 
-	const originalFetch = window.fetch;
-	window.fetch = async (...args) => {
-		const [resource, config] = args;
+	useEffect(() => {
+		const originalFetch = window.fetch;
+		window.fetch = async (...args) => {
+			const [resource, config] = args;
 
-		if (typeof resource === 'string' && resource.includes('https://n8n.elitetraderhub.co/webhook')) {
-			if (config && typeof config.body === 'string' && config.body) {
-				const payload = JSON.parse(config.body);
-				if (payload.sessionId) {
-					console.log('Session ID captured:', payload.sessionId);
-					if (!sessionId) {
-						setSessionid(payload.sessionId);
+			if (typeof resource === 'string' && resource.includes('https://n8n.elitetraderhub.co/webhook')) {
+				if (config && typeof config.body === 'string' && config.body) {
+					const payload = JSON.parse(config.body);
+					if (payload.sessionId) {
+						// console.log('Session ID captured:', payload.sessionId);
+						if (!sessionId) {
+							setSessionid((prev) => {
+								if (!prev && prev !== payload.sessionId) {
+									return payload.sessionId;
+								}
+								return null;
+							});
+						}
 					}
 				}
 			}
-		}
 
-		return originalFetch(...args);
-	};
+			return originalFetch(...args);
+		};
+	});
 
 	if (!name && !email) {
 		window.location.href = '/';
