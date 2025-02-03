@@ -15,7 +15,7 @@ const Terms = () => {
 					{/* Section 1 */}
 					<section>
 						<h2 className="text-2xl font-semibold mb-4 text-bright-blue">{t('terms.sections.generalDescriptionTitle')}</h2>
-						<p>{t('terms.sections.generalDescriptionContent')}</p>
+						<p dangerouslySetInnerHTML={{ __html: t("terms.sections.generalDescriptionContent").replace(/\n/g, "<br>") }} />
 					</section>
 
 					{/* Section 2 */}
@@ -58,10 +58,34 @@ const Terms = () => {
 					{/* Section 6 */}
 					<section>
 						<h2 className="text-2xl font-semibold mb-4 text-bright-blue">{t('terms.sections.liabilityTitle')}</h2>
-						<p>{t('terms.sections.liabilityContent')}</p>
+						<p dangerouslySetInnerHTML={{ __html: t("terms.sections.liabilityContent").replace(/\n/g, "<br>") }} />
+					</section>
+					
+					{/* Section 7 */}
+					<section>
+						<h2 className="text-2xl font-semibold mb-4 text-bright-blue">
+							{t('terms.sections.limitresponTitle')}
+						</h2>
+						<ul className="list-disc pl-6 space-y-2">
+							{(t('terms.sections.limitresponList', { returnObjects: true }) as string[]).map((item, index) => {
+							const parts = item.split(":"); 
+							return (
+								<li key={index}>
+									{parts.length > 1 ? (
+									<>
+									<strong>{parts[0]}:</strong> {parts.slice(1).join(":")}
+										</>
+										) : (
+											item 
+										)}
+								</li>
+								);
+							})}
+						</ul>
 					</section>
 
-					{/* Section 7 */}
+
+					{/* Section 8 */}
 					<section>
 						<h2 className="text-2xl font-semibold mb-4 text-bright-blue">{t('terms.sections.termsChangesTitle')}</h2>
 						<p>{t('terms.sections.termsChangesContent')}</p>

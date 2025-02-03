@@ -27,7 +27,7 @@ const Hero = () => {
 							<div className="inline-block bg-bright-blue/20 backdrop-blur-sm px-4 py-2 rounded-full">
 								<span className="text-bright-blue font-semibold">{t('hero.tournament')}</span>
 							</div>
-							<h1 className="text-4xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-bright-blue to-white bg-clip-text text-transparent animate-pulse">{t('hero.tagline')}</h1>
+							<h1 className="text-4xl md:text-6xl h1spa font-bold leading-tight bg-gradient-to-r from-white via-bright-blue to-white bg-clip-text text-transparent animate-pulse">{t('hero.tagline')}</h1>
 						</div>
 						<div className="flex justify-center md:justify-start space-x-4">
 							<Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
