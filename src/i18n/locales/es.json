@@ -11,7 +11,7 @@
 		"charts": "Gráficos"
 	},
 	"hero": {
-		"tournament": "🏆 Torneo de Trading 2025",
+		"tournament": "🏆 Torneo de Trading",
 		"tagline": "150 traders, más de 35% de ganadores, usa tu estrategia y gana con inteligencia",
 		"joinEvent": "Únete al Evento",
 		"dialogTitle": "¡Desbloquea tu potencial de trading hoy! 🚀",
@@ -158,36 +158,53 @@
 		"title": "Términos y Condiciones",
 		"sections": {
 			"generalDescriptionTitle": "1. Descripción General del Concurso",
-			"generalDescriptionContent": "Este concurso de trading se organiza para poner a prueba y exhibir habilidades de trading en un entorno competitivo. Los participantes deben tener la edad legal en su jurisdicción para participar.",
+			"generalDescriptionContent": "Este concurso de trading se organiza como propuesta diferente con una clara oportunidad porcentual de participar para ser ganador.\n\nLos participantes deben tener la edad legal en su jurisdicción para participar.",
 			"eligibilityTitle": "2. Elegibilidad",
 			"eligibilityList": [
 				"Los participantes deben tener al menos 18 años.",
 				"Deben contar con una dirección de correo electrónico válida.",
 				"Deben completar el proceso de registro y pagar la tarifa de inscripción.",
+				"Deben realizar un deposito mínimo de 50 usd con nuestro socio broker, corredor comercial oficial.",
 				"Deben cumplir con todas las leyes y regulaciones locales."
 			],
 			"contestRulesTitle": "3. Reglas del Concurso",
 			"contestRulesList": [
+				"Aceptar los Términos y condiciones.",
+				"Realizar el pago de la inscripción.", 
+				"Agendar la cita para la creación de la cuenta de trading.",
+				"Crea la Cuenta verifica tu identidad, realiza tu deposito mínimo.",
+				"NO infringir la condición de llevar tu Dropdown (DD) al limite del 45%, causa de descalificación automática.",
 				"El trading debe realizarse dentro del período de concurso especificado.",
-				"Solo se permiten los pares de trading designados.",
-				"Está prohibido el uso de sistemas de trading automatizados o bots.",
-				"Las tácticas de manipulación de mercado están estrictamente prohibidas.",
-				"Los participantes deben usar su propia cuenta de trading."
+				"Solo se permiten los instrumentos de trading designados.",
+				"Los participantes deben usar su propia y única cuenta de trading ASIGNADA con el link de Elite Trader Hub por nuestro socio broker, corredor comercial oficial."
 			],
 			"prizeDistributionTitle": "4. Distribución de Premios",
-			"prizeDistributionContent": "Los premios se distribuirán según las clasificaciones finales. El organizador se reserva el derecho de verificar todas las actividades de trading antes de distribuir los premios.",
+			"prizeDistributionContent": "Los premios se distribuirán según la tabla de clasificaciones finales al momento de terminar el ciclo CALENDARIO del concurso. El organizador se reserva el derecho de verificar todas las actividades de trading antes de distribuir los premios.",
 			"disqualificationTitle": "5. Descalificación",
 			"disqualificationIntro": "El organizador se reserva el derecho de descalificar a cualquier participante que:",
 			"disqualificationList": [
 				"Infrinja las reglas del concurso.",
 				"Proporcione información falsa.",
 				"Participe en prácticas de trading desleales.",
-				"Intente manipular los resultados del concurso."
+				"Intente manipular los resultados del concurso.",
+				"Infringir la condición de llevar tu Dropdown (DD) al limite del 45%."
 			],
-			"liabilityTitle": "6. Responsabilidad",
-			"liabilityContent": "Los participantes reconocen que el trading implica riesgo y el organizador no se hace responsable de ninguna pérdida incurrida durante el concurso.",
-			"termsChangesTitle": "7. Cambios en los Términos",
-			"termsChangesContent": "El organizador se reserva el derecho de modificar estos términos y condiciones en cualquier momento. Se notificará a los participantes sobre cualquier cambio."
+			"liabilityTitle": "6. Politica De Reembolso",
+			"liabilityContent": "Al participar en el Torneo de Trading y/o cualquier actividad relacionada con Elite Trader Hub.co, el participante reconoce y acepta que no se realizarán reembolsos bajo ninguna circunstancia. El pago de la inscripción es final e intransferible, y no se devolverá ni total ni parcialmente, independientemente de los resultados obtenidos en el torneo, la descalificación del participante o cualquier otra situación que pueda surgir durante el evento. \n\n Al completar su inscripción, el participante entiende y acepta que está comprometido con los términos establecidos y que cualquier pago realizado no es sujeto de reembolso.",
+			"limitresponTitle": "7. Limitación de Responsabilidades",
+			"limitresponList": [
+				"El trading en los mercados financieros conlleva un riesgo significativo de pérdida de capital. Los resultados pasados no garantizan resultados futuros. La participación en este torneo y cualquier actividad de trading asociada con él implica el reconocimiento de que las inversiones en instrumentos financieros son inherentemente riesgosas. Usted entiende y acepta que no existe garantía de ganancias y que es posible perder una parte o la totalidad del capital invertido.",
+				"Responsabilidad del Participante: Es responsabilidad exclusiva del participante asegurarse de que cumple con todos los requisitos y regulaciones legales para operar en los mercados financieros según las leyes y normativas de su país de residencia. La Empresa no será responsable de ninguna pérdida derivada de la incapacidad de un participante para cumplir con dichas regulaciones.", 
+				"Asociación con Brokers: El participante entiende que Elite Trader Hub.co tiene acuerdos de IB Partnership con diversos brokers. Al participar en este concurso o al abrir una cuenta de trading con dichos brokers, el participante acepta los términos y condiciones de cada broker, incluidos los costos asociados, los términos de negociación, y las comisiones establecidas por el broker. La Empresa no es responsable de ninguna operación, depósito, retiro o problema relacionado con la cuenta de trading del participante en los brokers asociados.",
+				"Cuentas de Trading: La apertura de una cuenta de trading con un depósito inicial mínimo de $50 USD es necesaria para participar en el torneo. El participante reconoce que el monto de la inscripción y los depósitos en la cuenta son su responsabilidad. La Empresa actúa únicamente como intermediario para facilitar el acceso al broker y no tiene control sobre las decisiones de trading ni sobre la ejecución de las operaciones realizadas en las cuentas de los participantes.",
+				"No Garantía de Resultados: Elite Trader Hub.co no garantiza ningún tipo de éxito financiero para los participantes, ni promete un porcentaje específico de ganancias o de probabilidades de éxito. Todos los resultados de trading dependen de factores fuera del control de la Empresa, incluyendo pero no limitándose a las condiciones del mercado, las estrategias utilizadas por el participante y las decisiones de trading.",
+				"Descalificación del Concurso: Los participantes aceptan que Elite Trader Hub.co se reserva el derecho de descalificar a cualquier trader que no cumpla con las reglas del concurso, incluidas las políticas sobre gestión de riesgo y el Drawdown. En particular, si el Drawdown (DD) alcanza el 45%, la cuenta del participante será descalificada del concurso automáticamente, sin derecho a reembolso o compensación.",
+				"Exoneración de Responsabilidad: El participante exime de responsabilidad a Elite Trader Hub.co, sus miembros, socios, afiliados, representantes y colaboradores, de cualquier pérdida financiera, daños, costos o perjuicios derivados de su participación en el torneo o el uso de servicios relacionados con el brokeraje. Esto incluye, pero no se limita a, pérdidas derivadas de decisiones de trading, errores en la ejecución de operaciones, o el incumplimiento de las normativas de trading establecidas por los brokers asociados.",
+				"Confidencialidad y Privacidad: Elite Trader Hub.co se compromete a tratar la información personal y financiera de los participantes con estricta confidencialidad y de acuerdo con nuestras políticas de privacidad. Sin embargo, el participante acepta que los detalles de su cuenta de trading, los resultados del torneo y cualquier otra información relevante podrán ser compartidos con brokers asociados según sea necesario para la ejecución de los servicios.",
+				"Modificaciones del Torneo: Elite Trader Hub.co se reserva el derecho de modificar los términos y condiciones del concurso en cualquier momento, incluyendo el valor de los premios, los requisitos de participación y las reglas de gestión de riesgo. Cualquier cambio será comunicado a los participantes con antelación. La participación continua en el torneo constituye la aceptación de los cambios realizados."
+			],
+			"termsChangesTitle": "8. Aceptación de los Términos",
+			"termsChangesContent": "Al inscribirse y participar en el torneo de trading, el participante acepta y se compromete a cumplir con todos los términos y condiciones descritos en este descargo de responsabilidad, así como con los términos y condiciones de los brokers asociados. Si en cualquier momento el participante no está de acuerdo con los términos, debe abstenerse de participar en el concurso y/o las actividades relacionadas."
 		}
 	},
 	"paymentCard": {

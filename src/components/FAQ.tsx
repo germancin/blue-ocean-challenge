@@ -27,7 +27,11 @@ const FAQ = () => {
 								<AccordionTrigger className="text-[#0EA5E9] hover:text-[#0EA5E9]/80 text-xl py-6 transition-all duration-300 ease-in-out group">
 									<span className="group-data-[state=open]:scale-105 transition-transform duration-300">{faq.question}</span>
 								</AccordionTrigger>
-								<AccordionContent className="text-white/80 text-lg leading-relaxed overflow-hidden transition-all duration-500 ease-in-out data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">{faq.answer}</AccordionContent>
+								<AccordionContent className="text-white/80 text-lg leading-relaxed overflow-hidden transition-all duration-500 ease-in-out data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+									{faq.answer.split(/\*\*(.*?)\*\*/g).map((part, index) =>
+										index % 2 === 1 ? <strong key={index}>{part}</strong> : part
+									)}
+								</AccordionContent>
 							</AccordionItem>
 						))}
 					</Accordion>

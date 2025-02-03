@@ -11,15 +11,15 @@
 		"charts": "Charts"
 	},
 	"hero": {
-		"tournament": "🏆 Trading Tournament 2025",
-		"tagline": "150 traders, 33% chance of success, and the rest depends on you!",
+		"tournament": "🏆 Trading Tournament",
+		"tagline": "150 traders, more than 35% winners, use your strategy and win with intelligence.",
 		"joinEvent": "Join the Event",
 		"dialogTitle": "Unlock your trading potential today! 🚀",
 		"dialogDescription": "Join our trustworthy community of traders. Your data is secure, and we will only send you tournament updates and essential news. ✨",
 		"imageAlt": "Trading Platform Interface"
 	},
 	"rules": {
-		"sectionTitle": "Trading Challenge Rules",
+		"sectionTitle": "Tornament Rules",
 		"conditionsTitle": "GENERAL CONDITIONS",
 		"demoSetup": "Demo Account Setup",
 		"demoDescription": "Start with a demo account to practice and showcase your trading skills without risking real capital.",
@@ -77,20 +77,44 @@
 		"subtitle": "Have questions?",
 		"questions": [
 			{
-				"question": "What trading instruments are available?",
-				"answer": "You will have access to major forex pairs, popular cryptocurrencies, and leading stock indices. All trades are executed with virtual funds in a demo account."
+				"question": "How can I participate in the tournament?",
+				"answer": "It's easy and fast. Just **register on our website, pay YOUR REGISTRATION fee of $99 USD, and schedule your appointment with our team to make your minimum deposit of $50 USD** and start trading with your strategy. There are no limits, only opportunities! Click on **Join the event now** and be one of the 150 traders competing for incredible prizes!"
 			},
 			{
-				"question": "Are there participation fees?",
-				"answer": "Yes, there is a small entry fee to ensure serious participation. This fee contributes to the prize pool and helps maintain the competition's quality."
+				"question": "What types of strategies can I use?",
+				"answer": "You have total freedom! You can trade in **all available markets**, 24/7. Whether you use scalping, swing trading, or long-term strategies, **you decide how to TRADE**. The important thing is to seize every opportunity to reach the top!"
 			},
 			{
-				"question": "How are winners determined?",
-				"answer": "Winners are ranked based on their final account balance while adhering to all trading rules and risk management guidelines. Additional metrics such as risk-adjusted returns may be considered for tie-breaks."
+				"question": "How many winners will there be, and what prizes will they receive?",
+				"answer": "There will be **57 winners!** With **over a 38% chance of winning**, your effort can earn you a great prize. Be part of that winning percentage!"
 			},
 			{
-				"question": "How can I join the tournament?",
-				"answer": "Simply click the 'Join Tournament' button, complete the registration process, and pay the entry fee. You will receive your demo account credentials immediately upon confirmation."
+				"question": "Can I compete with other traders?",
+				"answer": "Yes! You will be competing ONLY against **150 traders**. It’s the perfect opportunity to showcase your skills and grow your account. Imagine being one of the **57 lucky winners**. This is your moment!"
+			},
+			{
+				"question": "What is the minimum deposit to participate?",
+				"answer": "The minimum deposit is just **$50 USD**. That’s how accessible it is to join this exciting tournament! You can make **unlimited deposits**, giving you flexibility to improve your opportunities."
+			},
+			{
+				"question": "What happens if my Drawdown (DD) reaches 45%?",
+				"answer": "If your DD reaches **45%**, your account will be automatically disqualified from the tournament. But don’t worry, **you can make deposits to stay in the tournament**, as long as you don’t exceed the 45% limit. **REMEMBER!** Keep your **risk management** under control and keep fighting for those prizes. This is your time to shine!"
+			},
+			{
+				"question": "Can I make deposits during the tournament?",
+				"answer": "Absolutely! You have **total freedom to make deposits** at any time, ensuring that your Drawdown (DD) stays within the 45% limit. **Remember, you decide how to reach the top!**"
+			},
+			{
+				"question": "Why is this tournament better than others?",
+				"answer": "Because **it’s not a funding test, your money goes directly into the **prize pool**! Plus, with a **38% chance of winning** and a system that rewards **57 traders**, this tournament is designed to reward the most dedicated and strategic traders. **Forget about funding tests, this tournament is made for winning!**"
+			},
+			{
+				"question": "What markets can I trade during the tournament?",
+				"answer": "All markets are available to you! There are no restrictions—you can trade **Forex, cryptocurrencies, stocks, indices, commodities, etc.**... Whatever you want! You decide how to manage your risk and maximize your profits."
+			},
+			{
+				"question": "What happens if I can’t find the answer I’m looking for?",
+				"answer": "Don’t worry! Click the **AI** button to talk to our **Virtual Trader** about the tournament. Or, if you prefer, **send us an email**, and we will personally respond to clarify any doubts. We are here to help you at all times!"
 			}
 		]
 	},
@@ -134,36 +158,53 @@
 		"title": "Terms and Conditions",
 		"sections": {
 			"generalDescriptionTitle": "1. General Contest Description",
-			"generalDescriptionContent": "This trading contest is organized to test and showcase trading skills in a competitive environment. Participants must be of legal age in their jurisdiction to participate.",
+			"generalDescriptionContent": "This trading contest is organized as a unique proposal with a clear percentage opportunity to participate and be a winner.\n\nParticipants must be of legal age in their jurisdiction to participate.",
 			"eligibilityTitle": "2. Eligibility",
 			"eligibilityList": [
 				"Participants must be at least 18 years old.",
 				"They must have a valid email address.",
 				"They must complete the registration process and pay the entry fee.",
+				"They must make a minimum deposit of 50 USD with our partner broker, the official trading broker.",
 				"They must comply with all local laws and regulations."
 			],
 			"contestRulesTitle": "3. Contest Rules",
 			"contestRulesList": [
-				"Trading must be conducted within the specified contest period.",
-				"Only designated trading pairs are allowed.",
-				"The use of automated trading systems or bots is prohibited.",
-				"Market manipulation tactics are strictly prohibited.",
-				"Participants must use their own trading account."
+				"Accept the Terms and Conditions.",
+				"Make the registration payment.", 
+				"Schedule an appointment to create the trading account.",
+				"Create the account, verify your identity, and make your minimum deposit.",
+				"DO NOT violate the condition of taking your Drawdown (DD) to the 45% limit, as it will result in automatic disqualification.",
+				"Trading must take place within the specified contest period.",
+				"Only designated trading instruments are allowed.",
+				"Participants must use their own unique trading account ASSIGNED via the Elite Trader Hub link by our partner broker, the official trading broker."
 			],
 			"prizeDistributionTitle": "4. Prize Distribution",
-			"prizeDistributionContent": "Prizes will be distributed based on final rankings. The organizer reserves the right to verify all trading activities before distributing the prizes.",
+			"prizeDistributionContent": "Prizes will be distributed according to the final leaderboard at the end of the contest's CALENDAR cycle. The organizer reserves the right to verify all trading activities before distributing the prizes.",
 			"disqualificationTitle": "5. Disqualification",
 			"disqualificationIntro": "The organizer reserves the right to disqualify any participant who:",
 			"disqualificationList": [
 				"Violates the contest rules.",
 				"Provides false information.",
 				"Engages in unfair trading practices.",
-				"Attempts to manipulate the contest results."
+				"Attempts to manipulate contest results.",
+				"Violates the condition of taking their Drawdown (DD) to the 45% limit."
 			],
-			"liabilityTitle": "6. Liability",
-			"liabilityContent": "Participants acknowledge that trading involves risk, and the organizer is not responsible for any losses incurred during the contest.",
-			"termsChangesTitle": "7. Changes to Terms",
-			"termsChangesContent": "The organizer reserves the right to modify these terms and conditions at any time. Participants will be notified of any changes."
+			"liabilityTitle": "6. Refund Policy",
+			"liabilityContent": "By participating in the Trading Tournament and/or any related activity with Elite Trader Hub.co, the participant acknowledges and agrees that no refunds will be issued under any circumstances. The registration payment is final and non-transferable and will not be refunded, either in whole or in part, regardless of the contest results, the participant’s disqualification, or any other situation that may arise during the event.\n\nBy completing their registration, the participant understands and agrees that they are bound by the established terms and that any payment made is non-refundable.",
+			"limitresponTitle": "7. Limitation of Liability",
+			"limitresponList": [
+				"Trading in financial markets carries a significant risk of capital loss. Past results do not guarantee future results. Participation in this contest and any trading-related activities associated with it implies acknowledgment that investments in financial instruments are inherently risky. You understand and accept that there is no guarantee of profits and that it is possible to lose a portion or all of the invested capital.",
+				"Participant Responsibility: It is the sole responsibility of the participant to ensure compliance with all legal requirements and financial market regulations according to the laws and regulations of their country of residence. The Company will not be liable for any loss resulting from a participant’s inability to comply with such regulations.", 
+				"Broker Partnerships: The participant understands that Elite Trader Hub.co has IB Partnership agreements with various brokers. By participating in this contest or opening a trading account with these brokers, the participant agrees to each broker’s terms and conditions, including associated costs, trading terms, and commissions set by the broker. The Company is not responsible for any trades, deposits, withdrawals, or issues related to the participant’s trading account with the associated brokers.",
+				"Trading Accounts: Opening a trading account with a minimum initial deposit of $50 USD is required to participate in the contest. The participant acknowledges that the registration fee and deposits into the account are their responsibility. The Company acts solely as an intermediary to facilitate broker access and has no control over trading decisions or the execution of trades within participants' accounts.",
+				"No Guarantee of Results: Elite Trader Hub.co does not guarantee any financial success for participants, nor does it promise a specific percentage of profits or probability of success. All trading results depend on factors beyond the Company's control, including but not limited to market conditions, the participant's strategies, and trading decisions.",
+				"Contest Disqualification: Participants agree that Elite Trader Hub.co reserves the right to disqualify any trader who does not comply with the contest rules, including risk management policies and Drawdown limits. In particular, if Drawdown (DD) reaches 45%, the participant’s account will be automatically disqualified from the contest without any right to a refund or compensation.",
+				"Liability Waiver: The participant releases Elite Trader Hub.co, its members, partners, affiliates, representatives, and collaborators from any financial loss, damages, costs, or harm arising from their participation in the contest or use of brokerage-related services. This includes, but is not limited to, losses resulting from trading decisions, trade execution errors, or failure to comply with the trading regulations set by the associated brokers.",
+				"Confidentiality and Privacy: Elite Trader Hub.co commits to handling participants’ personal and financial information with strict confidentiality and in accordance with our privacy policies. However, the participant agrees that details of their trading account, contest results, and any other relevant information may be shared with associated brokers as necessary for service execution.",
+				"Contest Modifications: Elite Trader Hub.co reserves the right to modify the contest terms and conditions at any time, including prize values, participation requirements, and risk management rules. Any changes will be communicated to participants in advance. Continued participation in the contest constitutes acceptance of the changes made."
+			],
+			"termsChangesTitle": "8. Acceptance of Terms",
+			"termsChangesContent": "By registering and participating in the trading contest, the participant agrees and commits to complying with all the terms and conditions described in this disclaimer, as well as the terms and conditions of the associated brokers. If at any time the participant disagrees with the terms, they must refrain from participating in the contest and/or related activities."
 		}
 	},
 	"paymentCard": {
