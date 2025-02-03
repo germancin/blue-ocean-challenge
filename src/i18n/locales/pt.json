@@ -77,52 +77,52 @@
 		"subtitle": "Tem perguntas?",
 		"questions": [
 			{
-					"question": "Como posso participar do torneio?",
-					"answer": "É fácil e rápido. Basta **se registrar em nosso site, fazer SUA INSCRIÇÃO de 99 USD e agendar sua reunião com nossa equipe para fazer seu depósito mínimo de $50 USD** e começar a operar com sua estratégia. Não há limites, apenas oportunidades! Clique em **Junte-se ao evento agora** e faça parte dos 150 traders que competirão por prêmios incríveis!"
-				},
-				{
-					"question": "Que tipo de estratégias posso usar?",
-					"answer": "Você tem total liberdade! Pode operar em **todos os mercados** disponíveis, 24/7. Seja utilizando estratégias de scalping, swing trading ou de longo prazo, **você decide como OPERAR**. O mais importante é aproveitar cada oportunidade para chegar ao topo!"
-				},
-				{
-					"question": "Quantos vencedores haverá e quais prêmios receberão?",
-					"answer": "Haverá **57 vencedores premiados!** Com **mais de 38% de chance de ganhar**, seu esforço pode levá-lo a um grande prêmio. Faça parte desse percentual vencedor!"
-				},
-				{
-					"question": "Posso competir com outros traders?",
-					"answer": "Sim! Você estará competindo SOMENTE com **150 traders**. É a oportunidade perfeita para demonstrar suas habilidades e fazer sua conta crescer. Imagine ser um dos **57 sortudos vencedores**. Este é o seu momento!"
-				},
-				{
-					"question": "Qual é o depósito mínimo para participar?",
-					"answer": "O depósito mínimo é apenas **$50 USD**. É assim tão acessível entrar neste torneio emocionante! Você pode fazer depósitos **sem limites**, o que lhe dá flexibilidade para aumentar suas oportunidades."
-				},
-				{
-					"question": "O que acontece se meu Drawdown (DD) atingir 45%?",
-					"answer": "Se seu DD atingir **45%**, sua conta será automaticamente eliminada do torneio. Mas não se preocupe, **você pode fazer depósitos para continuar no torneio**, desde que não ultrapasse o limite de 45%. **Lembre-se!** Mantenha sua **gestão de risco** sob controle e continue lutando por esses prêmios. Este é o seu momento de brilhar!"
-				},
-				{
-					"question": "Posso fazer depósitos durante o torneio?",
-					"answer": "Com certeza! Você tem **total liberdade para fazer depósitos** a qualquer momento, garantindo que seu Drawdown (DD) permaneça dentro do limite de 45%. **Lembre-se, você decide como chegar ao topo!**"
-				},
-				{
-					"question": "Por que este torneio é melhor que os outros?",
-					"answer": "Porque **não é um teste de funding, seu dinheiro vai diretamente para o **prêmio em dinheiro!** Além disso, com **38% de chance de ganhar** e um sistema que premia **57 traders**, este torneio foi feito para recompensar os mais dedicados e estratégicos. **Deixe os testes de funding para trás, este torneio foi feito para ganhar!**"
-				},
-				{
-					"question": "Quais mercados posso operar durante o torneio?",
-					"answer": "Todos os mercados estão à sua disposição! Não há restrições, você pode operar em **Forex, criptomoedas, ações, índices, commodities, etc.**... O que quiser! Você decide como gerenciar seu risco e maximizar seus lucros."
-				},
-				{
-					"question": "O que acontece se eu não encontrar a resposta que estou procurando?",
-					"answer": "Não se preocupe! Clique no botão da **IA** para falar com nossa **Trader Virtual** sobre o torneio. Ou, se preferir, **envie-nos um e-mail** e responderemos pessoalmente para esclarecer qualquer dúvida. Estamos aqui para ajudá-lo o tempo todo!"
-				}
-			]
+				"question": "Como posso participar do torneio?",
+				"answer": "É fácil e rápido. Basta **se registrar em nosso site, fazer SUA INSCRIÇÃO de 99 USD e agendar sua reunião com nossa equipe para fazer seu depósito mínimo de $50 USD** e começar a operar com sua estratégia. Não há limites, apenas oportunidades! Clique em **Junte-se ao evento agora** e faça parte dos 150 traders que competirão por prêmios incríveis!"
+			},
+			{
+				"question": "Que tipo de estratégias posso usar?",
+				"answer": "Você tem total liberdade! Pode operar em **todos os mercados** disponíveis, 24/7. Seja utilizando estratégias de scalping, swing trading ou de longo prazo, **você decide como OPERAR**. O mais importante é aproveitar cada oportunidade para chegar ao topo!"
+			},
+			{
+				"question": "Quantos vencedores haverá e quais prêmios receberão?",
+				"answer": "Haverá **57 vencedores premiados!** Com **mais de 38% de chance de ganhar**, seu esforço pode levá-lo a um grande prêmio. Faça parte desse percentual vencedor!"
+			},
+			{
+				"question": "Posso competir com outros traders?",
+				"answer": "Sim! Você estará competindo SOMENTE com **150 traders**. É a oportunidade perfeita para demonstrar suas habilidades e fazer sua conta crescer. Imagine ser um dos **57 sortudos vencedores**. Este é o seu momento!"
+			},
+			{
+				"question": "Qual é o depósito mínimo para participar?",
+				"answer": "O depósito mínimo é apenas **$50 USD**. É assim tão acessível entrar neste torneio emocionante! Você pode fazer depósitos **sem limites**, o que lhe dá flexibilidade para aumentar suas oportunidades."
+			},
+			{
+				"question": "O que acontece se meu Drawdown (DD) atingir 45%?",
+				"answer": "Se seu DD atingir **45%**, sua conta será automaticamente eliminada do torneio. Mas não se preocupe, **você pode fazer depósitos para continuar no torneio**, desde que não ultrapasse o limite de 45%. **Lembre-se!** Mantenha sua **gestão de risco** sob controle e continue lutando por esses prêmios. Este é o seu momento de brilhar!"
+			},
+			{
+				"question": "Posso fazer depósitos durante o torneio?",
+				"answer": "Com certeza! Você tem **total liberdade para fazer depósitos** a qualquer momento, garantindo que seu Drawdown (DD) permaneça dentro do limite de 45%. **Lembre-se, você decide como chegar ao topo!**"
+			},
+			{
+				"question": "Por que este torneio é melhor que os outros?",
+				"answer": "Porque **não é um teste de funding, seu dinheiro vai diretamente para o **prêmio em dinheiro!** Além disso, com **38% de chance de ganhar** e um sistema que premia **57 traders**, este torneio foi feito para recompensar os mais dedicados e estratégicos. **Deixe os testes de funding para trás, este torneio foi feito para ganhar!**"
+			},
+			{
+				"question": "Quais mercados posso operar durante o torneio?",
+				"answer": "Todos os mercados estão à sua disposição! Não há restrições, você pode operar em **Forex, criptomoedas, ações, índices, commodities, etc.**... O que quiser! Você decide como gerenciar seu risco e maximizar seus lucros."
+			},
+			{
+				"question": "O que acontece se eu não encontrar a resposta que estou procurando?",
+				"answer": "Não se preocupe! Clique no botão da **IA** para falar com nossa **Trader Virtual** sobre o torneio. Ou, se preferir, **envie-nos um e-mail** e responderemos pessoalmente para esclarecer qualquer dúvida. Estamos aqui para ajudá-lo o tempo todo!"
+			}
+		]
 	},
 	"footer": {
 		"rightsReserved": "Todos os direitos reservados.",
 		"terms": "Termos e Condições",
 		"privacy": "Política de Privacidade",
-		"companyNotice": "For Traders é uma empresa de educação e avaliação que não aceita depósitos de clientes nem oferece serviços financeiros aos mesmos. Todas as contas fornecidas aos clientes operam em um ambiente virtual com fundos virtuais.",
+		"companyNotice": "Elite Trader Hub é uma empresa de educação e avaliação que não aceita depósitos de clientes nem oferece serviços financeiros aos mesmos. Todas as contas fornecidas aos clientes operam em um ambiente virtual com fundos virtuais.",
 		"investmentDisclaimer": "Todas as informações fornecidas neste site são exclusivamente para fins educativos na área de negociação de mercados financeiros e não constituem recomendações específicas de investimento, conselhos de negociação ou orientação geral de investimentos. A Empresa não oferece serviços de investimento nos termos da MiFID I nem atua como um provedor licenciado de serviços de investimento (corretor) nos termos da MiFID II. Todas as operações na plataforma são simuladas com contas virtuais, e termos como 'trading' ou 'trader' devem ser entendidos neste contexto.",
 		"technicalSolution": "A solução técnica oferecida na forma de plataformas, como parte dos serviços da Empresa, utiliza serviços de terceiros. O site é gerido e de propriedade da Empresa, e todo o conteúdo está protegido pelos direitos autorais da Empresa.",
 		"restrictedCountries": "Países restritos: Paquistão, Irã, Síria, Mianmar, Bangladesh, Vietnã, Coreia do Norte, Rússia, Bielorrússia, Cuba, Líbano, Líbia, Sudão, Crimeia, Donetsk, Luhansk, EAU."
@@ -170,7 +170,7 @@
 			"contestRulesTitle": "3. Regras do Concurso",
 			"contestRulesList": [
 				"Aceitar os Termos e Condições.",
-				"Efetuar o pagamento da inscrição.", 
+				"Efetuar o pagamento da inscrição.",
 				"Agendar um horário para a criação da conta de trading.",
 				"Criar a conta, verificar sua identidade e fazer o depósito mínimo.",
 				"NÃO violar a condição de levar seu Drawdown (DD) ao limite de 45%, pois isso resultará em desclassificação automática.",
@@ -194,7 +194,7 @@
 			"limitresponTitle": "7. Limitação de Responsabilidade",
 			"limitresponList": [
 				"A negociação nos mercados financeiros envolve um risco significativo de perda de capital. Os resultados passados não garantem resultados futuros. A participação neste concurso e em quaisquer atividades de trading associadas implica o reconhecimento de que os investimentos em instrumentos financeiros são inerentemente arriscados. Você entende e aceita que não há garantia de lucros e que é possível perder parte ou todo o capital investido.",
-				"Responsabilidade do Participante: É responsabilidade exclusiva do participante garantir o cumprimento de todos os requisitos legais e regulamentos do mercado financeiro de acordo com as leis e regulamentos do seu país de residência. A Empresa não será responsável por quaisquer perdas resultantes da incapacidade do participante de cumprir tais regulamentos.", 
+				"Responsabilidade do Participante: É responsabilidade exclusiva do participante garantir o cumprimento de todos os requisitos legais e regulamentos do mercado financeiro de acordo com as leis e regulamentos do seu país de residência. A Empresa não será responsável por quaisquer perdas resultantes da incapacidade do participante de cumprir tais regulamentos.",
 				"Parcerias com Brokers: O participante entende que a Elite Trader Hub.co tem acordos de Parceria IB com vários brokers. Ao participar deste concurso ou abrir uma conta de trading com esses brokers, o participante aceita os termos e condições de cada broker, incluindo os custos associados, os termos de negociação e as comissões estabelecidas pelo broker. A Empresa não é responsável por nenhuma operação, depósito, saque ou problema relacionado à conta de trading do participante nos brokers associados.",
 				"Contas de Trading: A abertura de uma conta de trading com um depósito inicial mínimo de $50 USD é necessária para participar do concurso. O participante reconhece que o valor da inscrição e os depósitos na conta são de sua responsabilidade. A Empresa atua apenas como intermediária para facilitar o acesso ao broker e não tem controle sobre as decisões de trading nem sobre a execução das operações realizadas nas contas dos participantes.",
 				"Sem Garantia de Resultados: A Elite Trader Hub.co não garante nenhum sucesso financeiro para os participantes, nem promete uma porcentagem específica de lucros ou probabilidade de sucesso. Todos os resultados de trading dependem de fatores fora do controle da Empresa, incluindo, mas não se limitando a, condições de mercado, estratégias utilizadas pelo participante e decisões de trading.",
