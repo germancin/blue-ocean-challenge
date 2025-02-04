@@ -314,6 +314,6 @@
 		"minimizeButtonTooltip": "Minimizar",
 		"maximizeButtonTooltip": "Maximizar",
 		"sendButtonTooltip": "Enviar",
-		"initialMessage": "¡Bienvenido! ¡Hola!"
+		"initialMessage": "¡Bienvenido!"
 	}
 }
