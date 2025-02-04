@@ -264,5 +264,15 @@
 		"maximizeButtonTooltip": "Maximize",
 		"sendButtonTooltip": "Send",
 		"initialMessage": "Welcome! Meet Sofia, your virtual assistant."
+	},
+	"chatWidgetHome": {
+		"getStarted": "Let's chat!",
+		"inputPlaceholder": "Type...",
+		"error": "An error occurred. Please try again.",
+		"closeButtonTooltip": "Close",
+		"minimizeButtonTooltip": "Minimize",
+		"maximizeButtonTooltip": "Maximize",
+		"sendButtonTooltip": "Send",
+		"initialMessage": "Welcome!"
 	}
 }

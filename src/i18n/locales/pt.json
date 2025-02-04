@@ -305,5 +305,15 @@
 		"maximizeButtonTooltip": "Maximizar",
 		"sendButtonTooltip": "Enviar",
 		"initialMessage": "Bem-vindo! Conheça Sofia, sua assistente virtual."
+	},
+	"chatWidgetHome": {
+		"getStarted": "Vamos conversar!",
+		"inputPlaceholder": "Digite...",
+		"error": "Ocorreu um erro. Por favor, tente novamente.",
+		"closeButtonTooltip": "Fechar",
+		"minimizeButtonTooltip": "Minimizar",
+		"maximizeButtonTooltip": "Maximizar",
+		"sendButtonTooltip": "Enviar",
+		"initialMessage": "Bem-vindo!"
 	}
 }

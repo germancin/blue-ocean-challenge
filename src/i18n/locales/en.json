@@ -170,7 +170,7 @@
 			"contestRulesTitle": "3. Contest Rules",
 			"contestRulesList": [
 				"Accept the Terms and Conditions.",
-				"Make the registration payment.", 
+				"Make the registration payment.",
 				"Schedule an appointment to create the trading account.",
 				"Create the account, verify your identity, and make your minimum deposit.",
 				"DO NOT violate the condition of taking your Drawdown (DD) to the 45% limit, as it will result in automatic disqualification.",
@@ -194,7 +194,7 @@
 			"limitresponTitle": "7. Limitation of Liability",
 			"limitresponList": [
 				"Trading in financial markets carries a significant risk of capital loss. Past results do not guarantee future results. Participation in this contest and any trading-related activities associated with it implies acknowledgment that investments in financial instruments are inherently risky. You understand and accept that there is no guarantee of profits and that it is possible to lose a portion or all of the invested capital.",
-				"Participant Responsibility: It is the sole responsibility of the participant to ensure compliance with all legal requirements and financial market regulations according to the laws and regulations of their country of residence. The Company will not be liable for any loss resulting from a participant’s inability to comply with such regulations.", 
+				"Participant Responsibility: It is the sole responsibility of the participant to ensure compliance with all legal requirements and financial market regulations according to the laws and regulations of their country of residence. The Company will not be liable for any loss resulting from a participant’s inability to comply with such regulations.",
 				"Broker Partnerships: The participant understands that Elite Trader Hub.co has IB Partnership agreements with various brokers. By participating in this contest or opening a trading account with these brokers, the participant agrees to each broker’s terms and conditions, including associated costs, trading terms, and commissions set by the broker. The Company is not responsible for any trades, deposits, withdrawals, or issues related to the participant’s trading account with the associated brokers.",
 				"Trading Accounts: Opening a trading account with a minimum initial deposit of $50 USD is required to participate in the contest. The participant acknowledges that the registration fee and deposits into the account are their responsibility. The Company acts solely as an intermediary to facilitate broker access and has no control over trading decisions or the execution of trades within participants' accounts.",
 				"No Guarantee of Results: Elite Trader Hub.co does not guarantee any financial success for participants, nor does it promise a specific percentage of profits or probability of success. All trading results depend on factors beyond the Company's control, including but not limited to market conditions, the participant's strategies, and trading decisions.",
@@ -305,5 +305,15 @@
 		"maximizeButtonTooltip": "Maximize",
 		"sendButtonTooltip": "Send",
 		"initialMessage": "Welcome! Meet Sofia, your virtual assistant."
+	},
+	"chatWidgetHome": {
+		"getStarted": "Let's chat!",
+		"inputPlaceholder": "Type...",
+		"error": "An error occurred. Please try again.",
+		"closeButtonTooltip": "Close",
+		"minimizeButtonTooltip": "Minimize",
+		"maximizeButtonTooltip": "Maximize",
+		"sendButtonTooltip": "Send",
+		"initialMessage": "Welcome!"
 	}
 }

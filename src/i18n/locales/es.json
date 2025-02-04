@@ -170,7 +170,7 @@
 			"contestRulesTitle": "3. Reglas del Concurso",
 			"contestRulesList": [
 				"Aceptar los Términos y condiciones.",
-				"Realizar el pago de la inscripción.", 
+				"Realizar el pago de la inscripción.",
 				"Agendar la cita para la creación de la cuenta de trading.",
 				"Crea la Cuenta verifica tu identidad, realiza tu deposito mínimo.",
 				"NO infringir la condición de llevar tu Dropdown (DD) al limite del 45%, causa de descalificación automática.",
@@ -194,7 +194,7 @@
 			"limitresponTitle": "7. Limitación de Responsabilidades",
 			"limitresponList": [
 				"El trading en los mercados financieros conlleva un riesgo significativo de pérdida de capital. Los resultados pasados no garantizan resultados futuros. La participación en este torneo y cualquier actividad de trading asociada con él implica el reconocimiento de que las inversiones en instrumentos financieros son inherentemente riesgosas. Usted entiende y acepta que no existe garantía de ganancias y que es posible perder una parte o la totalidad del capital invertido.",
-				"Responsabilidad del Participante: Es responsabilidad exclusiva del participante asegurarse de que cumple con todos los requisitos y regulaciones legales para operar en los mercados financieros según las leyes y normativas de su país de residencia. La Empresa no será responsable de ninguna pérdida derivada de la incapacidad de un participante para cumplir con dichas regulaciones.", 
+				"Responsabilidad del Participante: Es responsabilidad exclusiva del participante asegurarse de que cumple con todos los requisitos y regulaciones legales para operar en los mercados financieros según las leyes y normativas de su país de residencia. La Empresa no será responsable de ninguna pérdida derivada de la incapacidad de un participante para cumplir con dichas regulaciones.",
 				"Asociación con Brokers: El participante entiende que Elite Trader Hub.co tiene acuerdos de IB Partnership con diversos brokers. Al participar en este concurso o al abrir una cuenta de trading con dichos brokers, el participante acepta los términos y condiciones de cada broker, incluidos los costos asociados, los términos de negociación, y las comisiones establecidas por el broker. La Empresa no es responsable de ninguna operación, depósito, retiro o problema relacionado con la cuenta de trading del participante en los brokers asociados.",
 				"Cuentas de Trading: La apertura de una cuenta de trading con un depósito inicial mínimo de $50 USD es necesaria para participar en el torneo. El participante reconoce que el monto de la inscripción y los depósitos en la cuenta son su responsabilidad. La Empresa actúa únicamente como intermediario para facilitar el acceso al broker y no tiene control sobre las decisiones de trading ni sobre la ejecución de las operaciones realizadas en las cuentas de los participantes.",
 				"No Garantía de Resultados: Elite Trader Hub.co no garantiza ningún tipo de éxito financiero para los participantes, ni promete un porcentaje específico de ganancias o de probabilidades de éxito. Todos los resultados de trading dependen de factores fuera del control de la Empresa, incluyendo pero no limitándose a las condiciones del mercado, las estrategias utilizadas por el participante y las decisiones de trading.",
@@ -305,5 +305,15 @@
 		"maximizeButtonTooltip": "Maximizar",
 		"sendButtonTooltip": "Enviar",
 		"initialMessage": "¡Bienvenido! Conoce a Sofía, tu asistente virtual."
+	},
+	"chatWidgetHome": {
+		"getStarted": "¡Vamos a chatear!",
+		"inputPlaceholder": "Escribe...",
+		"error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
+		"closeButtonTooltip": "Cerrar",
+		"minimizeButtonTooltip": "Minimizar",
+		"maximizeButtonTooltip": "Maximizar",
+		"sendButtonTooltip": "Enviar",
+		"initialMessage": "¡Bienvenido! ¡Hola!"
 	}
 }
