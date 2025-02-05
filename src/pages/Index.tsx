@@ -4,7 +4,9 @@ import PrizeCards from '../components/PrizeCards';
 import PrizeDistributionTable from '../components/PrizeDistributionTable';
 import DiversificationStrategy from '../components/DiversificationStrategy';
 import Rules from '../components/Rules';
+import InfoChallenge from '../components/InfoChallenge';
 import FAQ from '../components/FAQ';
+import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
 
 const Index = () => {
@@ -13,9 +15,11 @@ const Index = () => {
 			<Navbar />
 			<Hero />
 			<Rules />
+			<InfoChallenge />
 			<PrizeDistributionTable />
 			<DiversificationStrategy />
 			<FAQ />
+			<CallToAction />
 			<Footer />
 		</main>
 	);
