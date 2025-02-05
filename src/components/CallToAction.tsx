@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { SubscriptionForm } from './SubscriptionForm';
 
 const CallToAction = () => {
   const { t } = useTranslation();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
     <div id="calltoaction" className="relative bg-navy py-20 overflow-hidden">
@@ -26,9 +29,28 @@ const CallToAction = () => {
           {t('calltoaction.participate')} <br />
           {t('calltoaction.winners')}
         </p>
-        <button className="mt-6 px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-md hover:scale-105 transition-transform">
-          {t('calltoaction.button')}
-        </button>
+
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
+            <button className="mt-6 px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-md hover:scale-105 transition-transform">
+              {t('calltoaction.button')}
+            </button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px] bg-[#1A1F2C] backdrop-blur-sm p-8 rounded-xl shadow-xl border border-white/10">
+            <DialogHeader>
+              <DialogTitle className="text-3xl font-bold text-center text-white mb-2">
+                {t('hero.dialogTitle')}
+              </DialogTitle>
+            </DialogHeader>
+            <div className="mt-4">
+              <SubscriptionForm onSuccess={() => setIsDialogOpen(false)} />
+              <p className="text-center text-sm text-gray-400 mt-4">
+                {t('hero.dialogDescription')}
+              </p>
+            </div>
+          </DialogContent>
+        </Dialog>
+
         <p className="text-white text-lg mt-4">
           {t('calltoaction.success')}
         </p>

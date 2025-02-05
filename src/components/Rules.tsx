@@ -1,8 +1,13 @@
 import { DollarSign, Settings, TrendingUp, Clock, ShieldAlert } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { SubscriptionForm } from './SubscriptionForm';
 
 const Rules = () => {
     const { t } = useTranslation();
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
     return (
         <section id="rules" className="relative py-16 overflow-hidden bg-navy">
             <div
@@ -53,10 +58,28 @@ const Rules = () => {
                     <p className="text-lg font-semibold text-white">{t('rules.riskManagement')}</p>
                 </div>
                 
+                {/* Dialog para el botón CTA */}
                 <div className="text-center mt-12">
-                    <button className="px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-md hover:scale-105 transition-transform">
-                        {t('rules.ctaButton')}
-                    </button>
+                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                        <DialogTrigger asChild>
+                            <button className="px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-md hover:scale-105 transition-transform">
+                                {t('rules.ctaButton')}
+                            </button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px] bg-[#1A1F2C] backdrop-blur-sm p-8 rounded-xl shadow-xl border border-white/10">
+                            <DialogHeader>
+                                <DialogTitle className="text-3xl font-bold text-center text-white mb-2">
+                                    {t('hero.dialogTitle')}
+                                </DialogTitle>
+                            </DialogHeader>
+                            <div className="mt-4">
+                                <SubscriptionForm onSuccess={() => setIsDialogOpen(false)} />
+                                <p className="text-center text-sm text-gray-400 mt-4">
+                                    {t('hero.dialogDescription')}
+                                </p>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </div>
         </section>
