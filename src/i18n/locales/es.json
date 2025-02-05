@@ -18,25 +18,6 @@
 		"dialogDescription": "Únete a nuestra confiable comunidad de traders. Tus datos están seguros y solo te enviaremos actualizaciones de torneos y noticias esenciales. ✨",
 		"imageAlt": "Interfaz de Plataforma de Trading"
 	},
-	"rules": {
-		"sectionTitle": "Reglas del Torneo",
-		"conditionsTitle": "CONDICIONES GENERALES",
-		"demoSetup": "Configuración de la cuenta demo",
-		"demoDescription": "Comienza con una cuenta demo para practicar y demostrar tus habilidades de trading sin arriesgar capital real.",
-		"durationTitle": "Duración del desafío",
-		"durationDescription": "Completa el desafío en un plazo de 30 días para demostrar un desempeño constante y la correcta ejecución de tu estrategia.",
-		"riskManagementTitle": "REGLAS DE GESTIÓN DE RIESGOS",
-		"riskManagementDescription": "Mantén una estricta adherencia a los límites de drawdown máximo del 10% para asegurar una gestión de riesgos responsable y preservar tu capital.",
-		"evaluationCriteriaTitle": "CRITERIOS DE EVALUACIÓN",
-		"finalBalanceTitle": "Requisitos de balance final",
-		"finalBalanceDescription": "Alcanza un objetivo mínimo de ganancias mientras mantienes un desempeño de trading constante durante el periodo del desafío.",
-		"tradingRulesComplianceTitle": "Cumplimiento de las reglas de trading",
-		"tradingRulesComplianceDescription": "Sigue todas las reglas y directrices de trading de manera constante a lo largo de la duración del desafío.",
-		"performanceMetricsTitle": "Métricas de rendimiento",
-		"performanceMetricsDescription": "Cumple con indicadores de rendimiento clave, como tasa de aciertos, relación riesgo-recompensa y generación constante de beneficios.",
-		"qualificationStandardsTitle": "Estándares de calificación",
-		"qualificationStandardsDescription": "Completa con éxito todos los requisitos del desafío para calificar como un trader financiado."
-	},
 	"distributionSectionTitle": "Distribución de Premios",
 	"tiers": [
 		{
@@ -71,6 +52,58 @@
 		"sectionTitle": "Estrategias de Trading Diversificadas",
 		"cryptoTitle": "Criptomoneda",
 		"cryptoDescription": "Opera con activos digitales utilizando la tecnología blockchain de vanguardia y conocimientos del mercado."
+	},
+	"calltoaction": {
+		"title": "¿Listo para comenzar?",
+		"subtitle": "¡No pierdas esta oportunidad única!",
+		"participate": "Participa ahora",
+		"winners": "Conviértete en uno de los 57 ganadores",
+		"button": "Únete al evento",
+		"success": "¡El éxito es tuyo! 💥"
+	},
+	"rules": {
+		"sectionTitle": "Reglas del Torneo",
+		"depositMinimum": "Depósito mínimo: 50 USD",
+		"depositMaximum": "Depósito máximo: Sin límites",
+		"customConditions": "Tú pones las condiciones",
+		"anyTrades": "Pon las operaciones que desees",
+		"operateAnytime": "Opera 24/7",
+		"allMarkets": "Todos los mercados a tu disposición",
+		"ddLimitTitle": "Tu único camino al éxito depende de:",
+		"ddLimitDescription": "Si tu Drawdown (DD) alcanza el 45%, tu cuenta quedará fuera DEL CONCURSO automáticamente.",
+		"solutionTitle": "SOLUCIÓN PARA CONTINUAR:",
+		"solutionDescription": "Puedes realizar depósitos a tu cuenta las veces que sea necesario para mantener tu DD por debajo del límite!!!",
+		"riskManagement": "¡Sigue operando con gestión de riesgo y alcanza el éxito!",
+		"ctaButton": "PARTICIPA YA"
+	},
+	"infoChallenge": {
+		"sectionTitle": "Conviértete en un Trader Ganador",
+		"participants": "Solo compiten 150 traders, una locura!",
+		"chance": "Tienes más de un 38% de posibilidad, sé parte!",
+		"winners": "57 Traders Ganadores",
+		"best": "Somos el mejor en el mundo con estas características del mercado.",
+		"stat98": "Somos traders y sabemos que el 98% solo alcanza \"Pérdidas\"",
+		"twoPercentTitle": "Aquí puedes ser parte de ese",
+		"winnerStats": "de las estadísticas ganadoras",
+		"changeMindset": "Cambia el chip",
+		"noFunding": "Olvídate de tontas pruebas de fondeo",
+		"entryCost": "Costo de inscripción solo por 99 USD",
+		"prizePool": "Aquí tu dinero es para la bolsa de premios",
+		"ctaButton": "Habla con nuestra Trader Virtual"
+	},
+	"participation": {
+		"sectionTitle": "Cómo Participar",
+		"feeTitle": "Valor de Inscripción: $99 USD",
+		"description": "Únete al torneo de trading y comienza a competir por increíbles premios!",
+		"neverSeen": "NUNCA ANTES VISTO",
+		"winningChance": "Más del 38% de participantes van a ganar y ser premiados!",
+		"winnersTableTitle": "Tabla de Ganadores"
+	},
+	"table": {
+		"position": "Posición",
+		"winners": "Ganadores",
+		"prize": "Premio",
+		"total": "Total"
 	},
 	"faq": {
 		"title": "Preguntas Frecuentes (FAQ)",
@@ -115,6 +148,22 @@
 			{
 				"question": "¿Qué sucede si no encuentro la respuesta que busco?",
 				"answer": "¡No te preocupes! Haz clic en el botón de la **IA** para hablar con nuestra **Trader Virtual** sobre el torneo. O si prefieres, **envíanos un correo** y te responderemos personalmente para resolver cualquier duda. ¡Estamos aquí para ayudarte en todo momento!"
+			},
+			{
+				"question": "¿Cuál es el valor de la inscripción?",
+				"answer": "¡Un costo único, participar tiene un costo de 99 usd, costo destinado ara el Bote de premios, teniendo más de u 35% de posibilidades de ser parte de los ganadores, algo nunca antes visto en el mundo del trading!"
+			},
+			{
+				"question": "¿Cuál es el método para pagar la inscripción?",
+				"answer": "¡Súper sencillo! el pago se realiza con usdt Red TRC20 (TRON) una ves que accedes llenas tus datos y procedes al pago, y Listo!"
+			},
+			{
+				"question": "¿Cuánto tiempo durará la competición?",
+				"answer": "!Una gran pregunta!. La competición tendrá un periodo de 3 a 7 días. dependiendo las condiciones de la edición No. del concurso."
+			},
+			{
+				"question": "¿Cuánto demora que me den mi premio si consigo estar en el Ranking de ganadores?",
+				"answer": "!excelente, vamos a ver, si estás entre los mas de 50 ganadores, tomará hasta 48 horas en que seas notificado para la premiación On-Line, y serás contactado por nuestro equipo para recibir el pago - vía USDT"
 			}
 		]
 	},
