@@ -12,8 +12,8 @@
 	},
 	"hero": {
 		"tournament": "🏆 Torneio de Trading",
-		"tagline": "150 traders, mais de 35% de vencedores, use sua estratégia e vença com inteligência.",
-		"joinEvent": "Participe do Evento",
+		"tagline": "150 traders, mais de 38% de vencedores, use sua estratégia e vença com inteligência.",
+		"joinEvent": "Junte-se ao evento",
 		"dialogTitle": "Desbloqueie seu potencial de trading hoje! 🚀",
 		"dialogDescription": "Junte-se à nossa comunidade confiável de traders. Seus dados estão seguros e só enviaremos atualizações sobre torneios e notícias essenciais. ✨",
 		"imageAlt": "Interface da Plataforma de Trading"
@@ -22,38 +22,38 @@
 		"sectionTitle": "Regras do Torneio",
 		"depositMinimum": "Depósito mínimo: 50 USD",
 		"depositMaximum": "Depósito máximo: Sem limites",
-		"customConditions": "Você define as condições",
-		"anyTrades": "Faça as operações que desejar",
+		"customConditions": "Você define as regras!",
+		"anyTrades": "Realize quantas operações quiser",
 		"operateAnytime": "Negocie 24/7",
-		"allMarkets": "Todos os mercados à sua disposição",
+		"allMarkets": "Todos os mercados disponíveis",
 		"ddLimitTitle": "Seu único caminho para o sucesso depende de:",
-		"ddLimitDescription": "Se seu Drawdown (DD) atingir 45%, sua conta será automaticamente eliminada do TORNEIO.",
-		"solutionTitle": "SOLUÇÃO PARA CONTINUAR:",
-		"solutionDescription": "Você pode fazer depósitos em sua conta quantas vezes for necessário para manter seu DD abaixo do limite!!!",
+		"ddLimitDescription": "Se seu Drawdown (DD) atingir 45%, sua conta será automaticamente desqualificada  do torneio.",
+		"solutionTitle": "PARA CONTINUAR:",
+		"solutionDescription": "Você pode realizar depósitos na sua conta quantas vezes for necessário para manter seu Drawdown (DD) abaixo do limite!",
 		"riskManagement": "Continue negociando com gestão de risco e alcance o sucesso!",
 		"ctaButton": "PARTICIPE AGORA"
 	},
 	"infoChallenge": {
 		"sectionTitle": "Torne-se um Trader Vencedor",
-		"participants": "Apenas 150 traders competem, é uma loucura!",
-		"chance": "Você tem mais de 38% de chance, participe!",
-		"winners": "57 Traders Vencedores",
-		"best": "Somos os melhores do mundo com essas características de mercado.",
-		"stat98": "Somos traders e sabemos que 98% só têm \"perdas\"",
-		"twoPercentTitle": "Aqui você pode fazer parte desse",
+		"participants": "APENAS 150 TRADERS, UMA OPORTUNIDADE ÚNICA!",
+		"chance": "Mais de 38% de chances de ganhar!",
+		"winners": "57 TRADERS SERÃO PREMIADOS!",
+		"best": "Somos a melhor competição de trading do mundo, com as melhores condições de mercado!",
+		"stat98": "Sabemos que 98% dos traders só acumulam perdas.",
+		"twoPercentTitle": "Aqui você pode fazer parte dos 2% vencedores!",
 		"winnerStats": "das estatísticas vencedoras",
-		"changeMindset": "Mude sua mentalidade",
-		"noFunding": "Esqueça os testes de financiamento inúteis",
-		"entryCost": "Taxa de inscrição apenas $99 USD",
-		"prizePool": "Aqui, seu dinheiro vai para o prêmio",
+		"changeMindset": "Mude sua mentalidade!",
+		"noFunding": "Esqueça provas de financiamento impossíveis de alcançar.",
+		"entryCost": "Custo da inscrição: Apenas $99 USD",
+		"prizePool": "Seu dinheiro vai direto para o prêmio!",
 		"ctaButton": "Fale com nossa Trader Virtual"
 	},
 	"participation": {
 		"sectionTitle": "Como Participar",
-		"feeTitle": "Taxa de Inscrição: $99 USD",
-		"description": "Participe do torneio de trading e comece a competir por prêmios incríveis!",
-		"neverSeen": "NUNCA VISTO ANTES",
-		"winningChance": "Mais de 38% dos participantes vão ganhar e ser premiados!",
+		"feeTitle": "Valor da Inscrição $99 USD",
+		"description": "Junte-se ao torneio e dispute prêmios incríveis! A inscrição custa apenas $99 USD",
+		"neverSeen": "ALGO NUNCA VISTO ANTES!",
+		"winningChance": "Mais de 38% dos participantes ganharão prêmios!",
 		"winnersTableTitle": "Tabela de Vencedores"
 	},
 	"table": {
@@ -63,29 +63,6 @@
 		"total": "Total"
 	},
 	"distributionSectionTitle": "Distribuição de Prêmios",
-	"tiers": [
-		{
-			"title": "Principais Vencedores",
-			"position": "1º - 3º Lugar",
-			"winners": "Vencedores",
-			"prize": "Prêmio",
-			"total": "Total"
-		},
-		{
-			"title": "Desempenho Notável",
-			"position": "4º - 10º Lugar",
-			"winners": "Vencedores",
-			"prize": "Prêmio",
-			"total": "Total"
-		},
-		{
-			"title": "Menções Honrosas",
-			"position": "11º - 20º Lugar",
-			"winners": "Vencedores",
-			"prize": "Prêmio",
-			"total": "Total"
-		}
-	],
 	"labels": {
 		"position": "Posição",
 		"winners": "Vencedores",
@@ -93,9 +70,9 @@
 		"total": "Total"
 	},
 	"strategy": {
-		"sectionTitle": "Estratégias de Trading Diversificadas",
-		"cryptoTitle": "Criptomoeda",
-		"cryptoDescription": "Negocie ativos digitais utilizando tecnologia de ponta em blockchain e insights de mercado."
+		"sectionTitle": "O que acontece depois de se inscrever?",
+		"cryptoTitle": "Após o pagamento, nossa equipe entrará em contato com você para agendar o registro da sua conta de trading.",
+		"cryptoDescription": "Ajudamos você a configurar sua conta de trading com um depósito inicial de $50 USD. Iremos guiá-lo pelos detalhes do torneio para garantir que esteja totalmente preparado e maximize suas chances de ganhar."
 	},
 	"calltoaction": {
 		"title": "Pronto para começar?",
@@ -110,60 +87,64 @@
 		"subtitle": "Tem perguntas?",
 		"questions": [
 			{
-				"question": "Como posso participar do torneio?",
-				"answer": "É fácil e rápido. Basta **se registrar em nosso site, fazer SUA INSCRIÇÃO de 99 USD e agendar sua reunião com nossa equipe para fazer seu depósito mínimo de $50 USD** e começar a operar com sua estratégia. Não há limites, apenas oportunidades! Clique em **Junte-se ao evento agora** e faça parte dos 150 traders que competirão por prêmios incríveis!"
+				"question": "1. Como posso participar do torneio?",
+				"answer": "É fácil e rápido. Basta **se registrar em nosso site, fazer SUA INSCRIÇÃO de $99 USD e agendar sua reunião com nossa equipe para fazer seu depósito mínimo de $50 USD** e começar a operar com sua estratégia. Não há limites, apenas oportunidades! Clique em **Junte-se ao evento agora** e faça parte dos 150 traders que competirão por prêmios incríveis!"
 			},
 			{
-				"question": "Que tipo de estratégias posso usar?",
+				"question": "2. Que tipo de estratégias posso usar?",
 				"answer": "Você tem total liberdade! Pode operar em **todos os mercados** disponíveis, 24/7. Seja utilizando estratégias de scalping, swing trading ou de longo prazo, **você decide como OPERAR**. O mais importante é aproveitar cada oportunidade para chegar ao topo!"
 			},
 			{
-				"question": "Quantos vencedores haverá e quais prêmios receberão?",
+				"question": "3. Quantos vencedores haverá e quais prêmios receberão?",
 				"answer": "Haverá **57 vencedores premiados!** Com **mais de 38% de chance de ganhar**, seu esforço pode levá-lo a um grande prêmio. Faça parte desse percentual vencedor!"
 			},
 			{
-				"question": "Posso competir com outros traders?",
+				"question": "4. Posso competir com outros traders?",
 				"answer": "Sim! Você estará competindo SOMENTE com **150 traders**. É a oportunidade perfeita para demonstrar suas habilidades e fazer sua conta crescer. Imagine ser um dos **57 sortudos vencedores**. Este é o seu momento!"
 			},
 			{
-				"question": "Qual é o depósito mínimo para participar?",
+				"question": "5. Qual é o depósito mínimo para participar?",
 				"answer": "O depósito mínimo é apenas **$50 USD**. É assim tão acessível entrar neste torneio emocionante! Você pode fazer depósitos **sem limites**, o que lhe dá flexibilidade para aumentar suas oportunidades."
 			},
 			{
-				"question": "O que acontece se meu Drawdown (DD) atingir 45%?",
+				"question": "6. O que acontece se meu Drawdown (DD) atingir 45%?",
 				"answer": "Se seu DD atingir **45%**, sua conta será automaticamente eliminada do torneio. Mas não se preocupe, **você pode fazer depósitos para continuar no torneio**, desde que não ultrapasse o limite de 45%. **Lembre-se!** Mantenha sua **gestão de risco** sob controle e continue lutando por esses prêmios. Este é o seu momento de brilhar!"
 			},
 			{
-				"question": "Posso fazer depósitos durante o torneio?",
+				"question": "7. Posso fazer depósitos durante o torneio?",
 				"answer": "Com certeza! Você tem **total liberdade para fazer depósitos** a qualquer momento, garantindo que seu Drawdown (DD) permaneça dentro do limite de 45%. **Lembre-se, você decide como chegar ao topo!**"
 			},
 			{
-				"question": "Por que este torneio é melhor que os outros?",
+				"question": "8. Por que este torneio é melhor que os outros?",
 				"answer": "Porque **não é um teste de funding, seu dinheiro vai diretamente para o **prêmio em dinheiro!** Além disso, com **38% de chance de ganhar** e um sistema que premia **57 traders**, este torneio foi feito para recompensar os mais dedicados e estratégicos. **Deixe os testes de funding para trás, este torneio foi feito para ganhar!**"
 			},
 			{
-				"question": "Quais mercados posso operar durante o torneio?",
+				"question": "9. Quais mercados posso operar durante o torneio?",
 				"answer": "Todos os mercados estão à sua disposição! Não há restrições, você pode operar em **Forex, criptomoedas, ações, índices, commodities, etc.**... O que quiser! Você decide como gerenciar seu risco e maximizar seus lucros."
 			},
 			{
-				"question": "O que acontece se eu não encontrar a resposta que estou procurando?",
+				"question": "10. O que acontece se eu não encontrar a resposta que estou procurando?",
 				"answer": "Não se preocupe! Clique no botão da **IA** para falar com nossa **Trader Virtual** sobre o torneio. Ou, se preferir, **envie-nos um e-mail** e responderemos pessoalmente para esclarecer qualquer dúvida. Estamos aqui para ajudá-lo o tempo todo!"
 			},
 			{
-				"question": "Qual é o valor da inscrição?",
+				"question": "11. Qual é o valor da inscrição?",
 				"answer": "Uma **taxa única**—participar custa **$99 USD**, valor destinado **ao prêmio total**. Você tem **mais de 35% de chance de estar entre os vencedores**, algo nunca visto antes no mundo do trading!"
 			},
 			{
-				"question": "Como posso pagar a inscrição?",
+				"question": "12. Como posso pagar a inscrição?",
 				"answer": "Super fácil! O pagamento é feito com **USDT (TRC20 - Rede TRON)**. Basta acessar o registro, preencher seus dados, concluir o pagamento e pronto!"
 			},
 			{
-				"question": "Quanto tempo dura a competição?",
+				"question": "13. Quanto tempo dura a competição?",
 				"answer": "Ótima pergunta! A competição terá um período de **3 a 7 dias**, dependendo da edição específica do torneio."
 			},
 			{
-				"question": "Quanto tempo demora para receber meu prêmio se eu estiver no ranking dos vencedores?",
+				"question": "14. Quanto tempo demora para receber meu prêmio se eu estiver no ranking dos vencedores?",
 				"answer": "Excelente! Se você estiver entre os **50+ vencedores**, será notificado **em até 48 horas** para a **Cerimônia de Premiação Online**, e nossa equipe entrará em contato para processar seu **pagamento via USDT**."
+			},
+			{
+				"question": "15. O que acontece se meu Drawdown (DD) atingir 45%?",
+				"answer": "🚨 Não manter seu saldo resultará em desclassificação automática, mas você pode fazer depósitos adicionais para continuar na competição!"
 			}
 		]
 	},
@@ -210,21 +191,21 @@
 			"generalDescriptionContent": "Este concurso de trading é organizado como uma proposta única com uma clara oportunidade percentual de participação para se tornar um vencedor.\n\nOs participantes devem ter idade legal em sua jurisdição para participar.",
 			"eligibilityTitle": "2. Elegibilidade",
 			"eligibilityList": [
-				"Os participantes devem ter pelo menos 18 anos de idade.",
+				"Os participantes devem ter pelo menos 18 anos",
 				"Devem possuir um endereço de e-mail válido.",
-				"Devem completar o processo de inscrição e pagar a taxa de participação.",
+				"Devem concluir o processo de registro e pagar a taxa de inscrição.",
 				"Devem fazer um depósito mínimo de 50 USD com nosso broker parceiro, o broker oficial de negociação.",
 				"Devem cumprir todas as leis e regulamentos locais."
 			],
 			"contestRulesTitle": "3. Regras do Concurso",
 			"contestRulesList": [
 				"Aceitar os Termos e Condições.",
-				"Efetuar o pagamento da inscrição.",
-				"Agendar um horário para a criação da conta de trading.",
+				"Efetuar o pagamento da taxa de inscrição.",
+				"Agendar uma reunião para a criação da conta de trading.",
 				"Criar a conta, verificar sua identidade e fazer o depósito mínimo.",
-				"NÃO violar a condição de levar seu Drawdown (DD) ao limite de 45%, pois isso resultará em desclassificação automática.",
-				"As negociações devem ocorrer dentro do período especificado do concurso.",
-				"Apenas os instrumentos de negociação designados são permitidos.",
+				"Não ultrapassar o limite de Drawdown (DD) de 45%, pois isso resultará em desclassificação automática.",
+				"As operações de trading devem ser realizadas dentro do período especificado do concurso.",
+				"Apenas os instrumentos de trading designados serão permitidos.",
 				"Os participantes devem usar sua própria conta de trading ÚNICA, ATRIBUÍDA através do link da Elite Trader Hub por nosso broker parceiro, o broker oficial de negociação."
 			],
 			"prizeDistributionTitle": "4. Distribuição de Prêmios",
@@ -234,12 +215,12 @@
 			"disqualificationList": [
 				"Viole as regras do concurso.",
 				"Forneça informações falsas.",
-				"Participe de práticas de negociação desleais.",
+				"Participe de práticas desleais de trading.",
 				"Tente manipular os resultados do concurso.",
-				"Viole a condição de levar seu Drawdown (DD) ao limite de 45%."
+				"Ultrapasse o limite de Drawdown (DD) de 45%."
 			],
 			"liabilityTitle": "6. Política de Reembolso",
-			"liabilityContent": "Ao participar do Torneio de Trading e/ou qualquer atividade relacionada à Elite Trader Hub.co, o participante reconhece e aceita que não serão feitos reembolsos sob nenhuma circunstância. O pagamento da inscrição é final e intransferível e não será reembolsado, total ou parcialmente, independentemente dos resultados do concurso, da desclassificação do participante ou de qualquer outra situação que possa surgir durante o evento.\n\nAo completar sua inscrição, o participante entende e aceita que está vinculado aos termos estabelecidos e que qualquer pagamento realizado não está sujeito a reembolso.",
+			"liabilityContent": "Ao participar do Torneio de Trading e/ou qualquer atividade relacionada à Elite Trader Hub.co, o participante reconhece e aceita que não serão feitos reembolsos sob nenhuma circunstância. O pagamento da inscrição é final e intransferível e não será reembolsado, total ou parcialmente, independentemente dos resultados do concurso, da desclassificação do participante ou de qualquer outra situação que possa surgir durante o evento.\n\nAo completar sua inscrição, o participante entende e aceita que está vinculado aos termos estabelecidos e que qualquer pagamento feito não será reembolsado.",
 			"limitresponTitle": "7. Limitação de Responsabilidade",
 			"limitresponList": [
 				"A negociação nos mercados financeiros envolve um risco significativo de perda de capital. Os resultados passados não garantem resultados futuros. A participação neste concurso e em quaisquer atividades de trading associadas implica o reconhecimento de que os investimentos em instrumentos financeiros são inerentemente arriscados. Você entende e aceita que não há garantia de lucros e que é possível perder parte ou todo o capital investido.",
