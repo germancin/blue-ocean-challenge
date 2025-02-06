@@ -6,9 +6,9 @@ const PrizeDistributionTable = () => {
     const { t } = useTranslation();
 
     const winnersTable = [
-        { position: '1°', winners: '1', prize: '$1,500', total: '$1,500' },
-        { position: '2°', winners: '1', prize: '$1,000', total: '$1,000' },
-        { position: '3°', winners: '1', prize: '$750', total: '$750' },
+        { position: '🥇 1°', winners: '1', prize: '$1,500', total: '$1,500' },
+        { position: '🥈 2°', winners: '1', prize: '$1,000', total: '$1,000' },
+        { position: '🥉 3°', winners: '1', prize: '$750', total: '$750' },
         { position: '4°-5°', winners: '2', prize: '$500', total: '$1,000' },
         { position: '6°-10°', winners: '5', prize: '$300', total: '$1,500' },
         { position: '11°-20°', winners: '10', prize: '$200', total: '$2,000' },
