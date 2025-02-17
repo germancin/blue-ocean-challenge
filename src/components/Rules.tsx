@@ -29,10 +29,35 @@ const Rules = () => {
                 <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                     {[
                         { icon: <DollarSign className="w-12 h-12 text-bright-blue mb-4 mx-auto" />, text: t('rules.depositMinimum') },
+                        { icon: <DollarSign className="w-12 h-12 text-green-400 mb-4 mx-auto" />, text: t('rules.dropdownMinimum') }
+                    ].map((rule, index) => (
+                        <div key={index} className="relative pl-8 group hover:bg-gray-800 transition duration-300 p-6 rounded-lg border border-gray-700 text-center cursor-pointer">
+                            <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00ff94] to-[#00c8ff] rounded-full" />
+                            <div className="absolute left-[-12px] top-0 w-6 h-6 bg-[#00ff94] rounded-full" />
+                            {rule.icon}
+                            <p className="text-lg font-semibold text-white">{rule.text}</p>
+                        </div>
+                    ))}
+                </div>
+
+                
+               
+            </div>
+		
+
+            <div className="container mx-auto px-4 relative z-10 mt-10">
+                <div className="text-center mb-16 animate-fade-in">
+                    <div className="relative inline-block">
+						<div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
+						<h2 className="relative text-4xl md:text-6xl font-bold text-white font-display mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-100">{t('rules.beneficiostitle')}</h2>
+					</div>
+                </div>
+
+                <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {[
                         { icon: <DollarSign className="w-12 h-12 text-green-400 mb-4 mx-auto" />, text: t('rules.depositMaximum') },
                         { icon: <Settings className="w-12 h-12 text-yellow-400 mb-4 mx-auto" />, text: t('rules.customConditions') },
                         { icon: <TrendingUp className="w-12 h-12 text-purple-400 mb-4 mx-auto" />, text: t('rules.anyTrades') },
-                        { icon: <Clock className="w-12 h-12 text-red-400 mb-4 mx-auto" />, text: t('rules.operateAnytime') },
                         { icon: <Settings className="w-12 h-12 text-teal-400 mb-4 mx-auto" />, text: t('rules.allMarkets') }
                     ].map((rule, index) => (
                         <div key={index} className="relative pl-8 group hover:bg-gray-800 transition duration-300 p-6 rounded-lg border border-gray-700 text-center cursor-pointer">
@@ -44,16 +69,7 @@ const Rules = () => {
                     ))}
                 </div>
 
-                <div className="text-center mt-16">
-                    <h2 className="text-4xl font-bold text-red-500">{t('rules.ddLimitTitle')}</h2>
-                    <p className="text-xl text-white mt-4">{t('rules.ddLimitDescription')}</p>
-                </div>
-                
-                <div className="text-center mt-8 p-6 bg-black/30 rounded-lg border border-red-500 shadow-lg animate-pulse">
-                    <h3 className="text-2xl font-bold text-red-500">{t('rules.solutionTitle')}</h3>
-                    <p className="text-lg text-white mt-4">{t('rules.solutionDescription')}</p>
-                </div>
-                
+               
                 <div className="text-center mt-8 relative group rounded-xl p-6 sm:p-8 border backdrop-blur-sm transform transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-purple-400/20 to-purple-600/20 border-purple-500/30 w-full">
                     <p className="text-lg font-semibold text-white">{t('rules.riskManagement')}</p>
                 </div>
@@ -81,7 +97,9 @@ const Rules = () => {
                         </DialogContent>
                     </Dialog>
                 </div>
-            </div>
+            </div>		
+			
+			
         </section>
     );
 };

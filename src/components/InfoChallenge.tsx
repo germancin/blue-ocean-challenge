@@ -42,17 +42,11 @@ const InfoChallenge = () => {
                     <h4 className="text-2xl font-semibold text-white">{t('infoChallenge.winnerStats')}</h4>
                 </div>
                 
-                <div className="grid md:grid-cols-2 gap-8 mt-12 text-white">
-                    <div className="p-6 bg-black/30 backdrop-blur-xl rounded-lg border border-white/10 shadow-lg">
-                        <BrainCircuit className="w-12 h-12 text-green-400 mx-auto mb-4" />
-                        <h3 className="text-2xl font-semibold">{t('infoChallenge.changeMindset')}</h3>
-                        <p className="text-lg">{t('infoChallenge.noFunding')}</p>
-                    </div>
-                    
+                <div className="grid md:grid-cols-1 gap-8 mt-12 text-white">
+                   
                     <div className="p-6 bg-black/30 backdrop-blur-xl rounded-lg border border-white/10 shadow-lg">
                         <Trophy className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-                        <h3 className="text-2xl font-semibold">{t('infoChallenge.entryCost')}</h3>
-                        <p className="text-lg">{t('infoChallenge.prizePool')}</p>
+                        <h3 className="text-2xl font-semibold">{t('infoChallenge.prizePool')}</h3>
                     </div>
                 </div>
                 
