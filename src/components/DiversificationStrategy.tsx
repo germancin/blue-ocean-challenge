@@ -30,7 +30,7 @@ const DiversificationStrategy = () => {
 				</div>
 				<div className="flex justify-center">
 					{strategies.map((strategy, index) => (
-						<div key={index} className="bg-navy/50 p-8 pt-8 pb-0 rounded-lg border border-white/10 backdrop-blur-sm hover:border-bright-blue/50 transition-all duration-300 flex flex-col" style={{ width: '50%' }}>
+						<div key={index} className="bg-navy/50 p-8 pt-8 pb-0 rounded-lg border border-white/10 backdrop-blur-sm hover:border-bright-blue/50 transition-all duration-300 flex flex-col" style={{ width: '80%' }}>
 							<div className="flex flex-col items-center text-center flex-grow">
 								{strategy.icon}
 								<h3 className="text-2xl font-semibold mb-4 text-bright-blue">{strategy.title}</h3>
