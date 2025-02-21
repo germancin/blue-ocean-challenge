@@ -87,7 +87,6 @@ const Index = () => {
 			<Rules />
 			<InfoChallenge />
 			<PrizeDistributionTable />
-			<DiversificationStrategy />
 			<FAQ />
 			<CallToAction />
 			<Footer />

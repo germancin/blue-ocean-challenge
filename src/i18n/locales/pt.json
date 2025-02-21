@@ -21,11 +21,13 @@
 	"rules": {
 		"sectionTitle": "Regras do Torneio",
 		"depositMinimum": "Depósito mínimo: 50 USD",
-		"depositMaximum": "Depósito máximo: Sem limites",
-		"customConditions": "Você define as regras!",
+		"dropdownMinimum": "DropDown máximo de 45%",
+		"beneficiostitle": "Benefícios",
+		"depositMaximum": "Depósito máximo: Sen limites",
+		"customConditions": "Todos os mercados disponíveis",
 		"anyTrades": "Realize quantas operações quiser",
 		"operateAnytime": "Negocie 24/7",
-		"allMarkets": "Todos os mercados disponíveis",
+		"allMarkets": "Pode depositar as vezes que quiser para não baixar o seu dropdown (DD) para 45%",
 		"ddLimitTitle": "Seu único caminho para o sucesso depende de:",
 		"ddLimitDescription": "Se seu Drawdown (DD) atingir 45%, sua conta será automaticamente desqualificada  do torneio.",
 		"solutionTitle": "PARA CONTINUAR:",
@@ -35,12 +37,12 @@
 	},
 	"infoChallenge": {
 		"sectionTitle": "Torne-se um Trader Vencedor",
-		"participants": "APENAS 150 TRADERS, UMA OPORTUNIDADE ÚNICA!",
-		"chance": "Mais de 38% de chances de ganhar!",
-		"winners": "57 TRADERS SERÃO PREMIADOS!",
-		"best": "Somos a melhor competição de trading do mundo, com as melhores condições de mercado!",
-		"stat98": "Sabemos que 98% dos traders só acumulam perdas.",
-		"twoPercentTitle": "Aqui você pode fazer parte dos 2% vencedores!",
+		"participants": "150 TRADERS",
+		"chance": "",
+		"winners": "57 TRADERS",
+		"best": "38% de hipóteses de ganhar!",
+		"stat98": "",
+		"twoPercentTitle": "Aqui você pode fazer parte",
 		"winnerStats": "das estatísticas vencedoras",
 		"changeMindset": "Mude sua mentalidade!",
 		"noFunding": "Esqueça provas de financiamento impossíveis de alcançar.",
@@ -83,69 +85,71 @@
 		"success": "O sucesso é seu! 💥"
 	},
 	"faq": {
+		"show": "Mostrar",
+		"hide": "Esconder",		
 		"title": "Perguntas Frequentes",
 		"subtitle": "Tem perguntas?",
 		"questions": [
-			{
-				"question": "1. Como posso participar do torneio?",
-				"answer": "É fácil e rápido. Basta **se registrar em nosso site, fazer SUA INSCRIÇÃO de $99 USD e agendar sua reunião com nossa equipe para fazer seu depósito mínimo de $50 USD** e começar a operar com sua estratégia. Não há limites, apenas oportunidades! Clique em **Junte-se ao evento agora** e faça parte dos 150 traders que competirão por prêmios incríveis!"
-			},
-			{
-				"question": "2. Que tipo de estratégias posso usar?",
-				"answer": "Você tem total liberdade! Pode operar em **todos os mercados** disponíveis, 24/7. Seja utilizando estratégias de scalping, swing trading ou de longo prazo, **você decide como OPERAR**. O mais importante é aproveitar cada oportunidade para chegar ao topo!"
-			},
-			{
-				"question": "3. Quantos vencedores haverá e quais prêmios receberão?",
-				"answer": "Haverá **57 vencedores premiados!** Com **mais de 38% de chance de ganhar**, seu esforço pode levá-lo a um grande prêmio. Faça parte desse percentual vencedor!"
-			},
-			{
-				"question": "4. Posso competir com outros traders?",
-				"answer": "Sim! Você estará competindo SOMENTE com **150 traders**. É a oportunidade perfeita para demonstrar suas habilidades e fazer sua conta crescer. Imagine ser um dos **57 sortudos vencedores**. Este é o seu momento!"
-			},
-			{
-				"question": "5. Qual é o depósito mínimo para participar?",
-				"answer": "O depósito mínimo é apenas **$50 USD**. É assim tão acessível entrar neste torneio emocionante! Você pode fazer depósitos **sem limites**, o que lhe dá flexibilidade para aumentar suas oportunidades."
-			},
-			{
-				"question": "6. O que acontece se meu Drawdown (DD) atingir 45%?",
-				"answer": "Se seu DD atingir **45%**, sua conta será automaticamente eliminada do torneio. Mas não se preocupe, **você pode fazer depósitos para continuar no torneio**, desde que não ultrapasse o limite de 45%. **Lembre-se!** Mantenha sua **gestão de risco** sob controle e continue lutando por esses prêmios. Este é o seu momento de brilhar!"
-			},
-			{
-				"question": "7. Posso fazer depósitos durante o torneio?",
-				"answer": "Com certeza! Você tem **total liberdade para fazer depósitos** a qualquer momento, garantindo que seu Drawdown (DD) permaneça dentro do limite de 45%. **Lembre-se, você decide como chegar ao topo!**"
-			},
-			{
-				"question": "8. Por que este torneio é melhor que os outros?",
-				"answer": "Porque **não é um teste de funding, seu dinheiro vai diretamente para o **prêmio em dinheiro!** Além disso, com **38% de chance de ganhar** e um sistema que premia **57 traders**, este torneio foi feito para recompensar os mais dedicados e estratégicos. **Deixe os testes de funding para trás, este torneio foi feito para ganhar!**"
-			},
-			{
-				"question": "9. Quais mercados posso operar durante o torneio?",
-				"answer": "Todos os mercados estão à sua disposição! Não há restrições, você pode operar em **Forex, criptomoedas, ações, índices, commodities, etc.**... O que quiser! Você decide como gerenciar seu risco e maximizar seus lucros."
-			},
-			{
-				"question": "10. O que acontece se eu não encontrar a resposta que estou procurando?",
-				"answer": "Não se preocupe! Clique no botão da **IA** para falar com nossa **Trader Virtual** sobre o torneio. Ou, se preferir, **envie-nos um e-mail** e responderemos pessoalmente para esclarecer qualquer dúvida. Estamos aqui para ajudá-lo o tempo todo!"
-			},
-			{
-				"question": "11. Qual é o valor da inscrição?",
-				"answer": "Uma **taxa única**—participar custa **$99 USD**, valor destinado **ao prêmio total**. Você tem **mais de 35% de chance de estar entre os vencedores**, algo nunca visto antes no mundo do trading!"
-			},
-			{
-				"question": "12. Como posso pagar a inscrição?",
-				"answer": "Super fácil! O pagamento é feito com **USDT (TRC20 - Rede TRON)**. Basta acessar o registro, preencher seus dados, concluir o pagamento e pronto!"
-			},
-			{
-				"question": "13. Quanto tempo dura a competição?",
-				"answer": "Ótima pergunta! A competição terá um período de **3 a 7 dias**, dependendo da edição específica do torneio."
-			},
-			{
-				"question": "14. Quanto tempo demora para receber meu prêmio se eu estiver no ranking dos vencedores?",
-				"answer": "Excelente! Se você estiver entre os **50+ vencedores**, será notificado **em até 48 horas** para a **Cerimônia de Premiação Online**, e nossa equipe entrará em contato para processar seu **pagamento via USDT**."
-			},
-			{
-				"question": "15. O que acontece se meu Drawdown (DD) atingir 45%?",
-				"answer": "🚨 Não manter seu saldo resultará em desclassificação automática, mas você pode fazer depósitos adicionais para continuar na competição!"
-			}
+		{
+			"question": "1. Como posso participar do torneio?",
+			"answer": "É rápido e fácil. Basta **registrar-se no nosso site, pagar sua INSCRIÇÃO de $99 USD e agendar sua reunião com nossa equipe para realizar seu depósito mínimo de $50 USD** e começar a operar com sua estratégia. Sem limites, apenas oportunidades! Clique em Junte-se ao evento agora e faça parte dos 150 traders competindo por prêmios incríveis!"
+		},
+		{
+			"question": "2. Que tipo de estratégias posso usar?",
+			"answer": "Você tem total liberdade! Pode operar em **todos os mercados disponíveis**, 24/7. Seja usando estratégias de scalping, swing trading ou de longo prazo, **você decide como OPERAR**. O importante é aproveitar cada oportunidade para chegar ao topo!"
+		},
+		{
+			"question": "3. Quantos vencedores haverá e quais prêmios receberão?",
+			"answer": "Haverá 57 vencedores premiados! Com **mais de 38% de chance de ganhar**, seu esforço pode te levar a um grande prêmio. Faça parte desse percentual vencedor!"
+		},
+		{
+			"question": "4. Posso competir com outros traders?",
+			"answer": "Sim! Você estará competindo APENAS com **150 traders**. É a oportunidade perfeita para mostrar suas habilidades e fazer sua conta crescer. Imagine ser um dos **57 sortudos vencedores**. Esse é seu momento!"
+		},
+		{
+			"question": "5. Qual é o depósito mínimo para participar?",
+			"answer": "O depósito mínimo é de apenas **$50 USD**. É assim tão acessível participar deste torneio emocionante! Você pode fazer **depósitos ilimitados**, o que te dá flexibilidade para aumentar suas chances."
+		},
+		{
+			"question": "6. O que acontece se meu Drawdown (DD) atingir 45%?",
+			"answer": "Se seu DD atingir **45%**, sua conta será automaticamente removida do torneio. Mas não se preocupe, você ainda pode fazer depósitos para continuar no concurso desde que não ultrapasse 45%. LEMBRE-SE! Mantenha sua **gestão de risco** sob controle e continue lutando por esses prêmios. É seu momento de brilhar!"
+		},
+		{
+			"question": "7. Posso fazer depósitos durante o torneio?",
+			"answer": "Absolutamente! Você tem **total liberdade para fazer depósitos** a qualquer momento, garantindo que seu Drawdown (DD) permaneça dentro do limite de 45%. Lembre-se, você decide como chegar ao topo!"
+		},
+		{
+			"question": "8. Por que este torneio é melhor que outros?",
+			"answer": "Porque não é um teste de financiamento; seu dinheiro vai diretamente para a **premiação**! Além disso, com **38% de chance de ganhar** e um sistema que premia **57 traders**, este torneio foi feito para recompensar os participantes mais dedicados e estratégicos. Esqueça os testes de financiamento; este torneio é feito para ganhar!"
+		},
+		{
+			"question": "9. Quais mercados posso operar durante o torneio?",
+			"answer": "Todos os mercados estão à sua disposição! Sem restrições, você pode operar em **Forex, cripto, ações, índices, commodities, etc.**... o que quiser! Você decide como gerenciar seu risco e maximizar seus lucros."
+		},
+		{
+			"question": "10. O que acontece se eu não encontrar a resposta que procuro?",
+			"answer": "Não se preocupe! Clique no botão de **IA** para falar com nossa **Trader Virtual** sobre o torneio. Ou se preferir, **envie-nos um e-mail** e responderemos pessoalmente para esclarecer quaisquer dúvidas. Estamos aqui para te ajudar a qualquer momento!"
+		},
+		{
+			"question": "11. Qual é o valor da inscrição?",
+			"answer": "Um custo único, a participação custa $99 USD, valor destinado à premiação, dando a você mais de 35% de chance de estar entre os vencedores — algo nunca visto antes no mundo do trading!"
+		},
+		{
+			"question": "12. Qual é o método de pagamento da inscrição?",
+			"answer": "Super fácil! O pagamento é feito com USDT na rede TRC20 (TRON). Após acessar, preencha seus dados, proceda ao pagamento e pronto!"
+		},
+		{
+			"question": "13. Quanto tempo durará a competição?",
+			"answer": "Ótima pergunta! A competição durará entre 3 a 7 dias, dependendo das condições do número da edição do concurso."
+		},
+		{
+			"question": "14. Quanto tempo levará para receber meu prêmio se eu estiver entre os vencedores?",
+			"answer": "Excelente, vamos ver, se você estiver entre os mais de 50 vencedores, levará até 48 horas para ser notificado para a cerimônia de premiação online, e você será contatado por nossa equipe para receber o pagamento—via USDT."
+		},
+		{
+			"question": "15. O que acontece se meu Drawdown (DD) atingir 45%?",
+			"answer": "🚨 Não manter seu saldo resultará em desqualificação automática, mas você pode fazer depósitos adicionais para continuar na competição."
+		}
 		]
 	},
 	"footer": {

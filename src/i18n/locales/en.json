@@ -21,11 +21,13 @@
   "rules": {
     "sectionTitle": "Tournament Rules",
     "depositMinimum": "Minimum deposit: 50 USD",
-    "depositMaximum": "Maximum deposit: No limits",
-    "customConditions": "You set the conditions",
+    "dropdownMinimum": "Maximum DropDown 45%",
+	"beneficiostitle": "Benefits",
+	"depositMaximum": "Maximum deposit: No limits",
+    "customConditions": "All markets at your disposal",
     "anyTrades": "Place the trades you want",
     "operateAnytime": "Trade 24/7",
-    "allMarkets": "All markets at your disposal",
+    "allMarkets": "You can deposit as many times as you want so as not to lower your dropdown (DD) to 45%",
     "ddLimitTitle": "Your path to success depends on:",
     "ddLimitDescription": "If your Drawdown (DD) reaches 45%, your account will be automatically disqualified from the tournament.",
     "solutionTitle": "SOLUTION TO CONTINUE:",
@@ -35,17 +37,17 @@
   },
   "infoChallenge": {
     "sectionTitle": "Become a Winning Trader",
-    "participants": "150 TRADERS, A UNIQUE OPPORTUNITY!",
-    "chance": "Over 38% chance of winning!",
-    "winners": "57 TRADERS WILL BE REWARDED!",
-    "best": "We are the best trading competition in the world with the best market conditions!",
-    "stat98": "We know that 98% of traders only accumulate losses.",
+    "participants": "150 TRADERS",
+    "chance": "",
+    "winners": "57 TRADERS",
+    "best": "A 38% chance of winning!",
+    "stat98": "",
     "twoPercentTitle": "Here, you can be part of the",
     "winnerStats": "winners!",
     "changeMindset": "Change your mindset",
     "noFunding": "Forget about boring and impossible funding challenges.",
     "entryCost": "Entry fee: Only $99 USD",
-    "prizePool": "\"Trading for Traders\". Your money goes directly into the prize pool!",
+    "prizePool": "Your money goes directly into the prize pool!",
     "ctaButton": "CHAT WITH OUR AI TRADER TO KNOW MORE ABOUT THE TOURNAMENT"
   },
   "participation": {
@@ -83,70 +85,72 @@
     "success": "Success is yours! 💥"
   },
   "faq": {
+	"show": "Show",
+	"hide": "Hide",	  
     "title": "FAQ (Frequently Asked Questions)",
     "subtitle": "Have questions?",
-    "questions": [
-      {
-        "question": "1. How can I participate in the tournament?",
-        "answer": "**Register on our website, pay the $99 USD entry fee, and schedule your appointment to make your $50 USD minimum deposit.**"
-      },
-      {
-        "question": "2. What strategies can I use?",
-        "answer": "**You have full freedom! Trade in any available market, 24/7, with your preferred strategy.** "
-      },
-      {
-        "question": "3. How many winners will there be, and what are the prizes?",
-        "answer": "**57 traders will be rewarded!** **Over 38% chance of winning a prize!**"
-      },
-      {
-        "question": "4. Can I compete with other traders?",
-        "answer": "Yes! You will be competing ONLY against **150 traders**. It’s the perfect opportunity to showcase your skills and grow your account. Imagine being one of the **57 lucky winners**. This is your moment!"
-      },
-      {
-        "question": "5. Can I compete against other traders?",
-        "answer": "**Yes! You’ll compete against only 150 traders, ensuring real chances of victory!** "
-      },
-      {
-        "question": "6. What is the minimum deposit required?",
-        "answer": "**Just $50 USD. You can deposit unlimited amounts to stay in the tournament!**"
-      },
-      {
-        "question": "7. Can I add funds during the tournament?",
-        "answer": "**Absolutely! You can make deposits anytime to ensure your DD stays within the limit.**  "
-      },
-      {
-        "question": "8. Why is this tournament better than others?",
-        "answer": "**Because here, your money goes directly into the prize pool. No annoying and impossible funding challenges!**  "
-      },
-      {
-        "question": "9. What markets can I trade during the tournament?",
-        "answer": "**Forex, cryptocurrencies, stocks, indices, commodities, and more!**"
-      },
-      {
-        "question": "10. I can’t find the answer I’m looking for. What should I do?",
-        "answer": "**Chat with our AI agent (Virtual Trader) or send us an email!** "
-      },
-      {
-        "question": "11. What is the entry fee?",
-        "answer": "A **one-time fee**—participation costs **$99 USD**, which goes directly into the **prize pool**. You have **over a 38% chance of being among the winners**, something never seen before in the trading world!"
-      },
-      {
-        "question": "12. How do I pay the entry fee?",
-        "answer": "Super easy! The payment is made using **USDT (TRC20 - TRON Network)**. Once you access the registration, fill in your details, proceed with the payment, and you're all set!"
-      },
-      {
-        "question": "13. How long will the competition last? ",
-        "answer": "**   Great question! The competition will last **between 3 to 7 days**, depending on the specific edition of the tournament."
-      },
-      {
-        "question": "14. How long does it take to receive my prize if I rank among the winners?",
-        "answer": "Excellent question! If you are among the **50+ winners**, you will be notified **within 48 hours** for the **Online Award Ceremony**, and our team will contact you to process your **payment via USDT**."
-      },
-      {
-        "question": "15. What happens if my Drawdown (DD) reaches 45%?",
-        "answer": "🚨 Failure to maintain your balance will result in automatic disqualification, but you can make additional deposits to stay in the competition!"
-      }
-    ]
+	"questions": [
+	{
+		"question": "1. How can I participate in the tournament?",
+		"answer": "It's quick and easy. Just **register on our site, pay your REGISTRATION fee of $99 USD, and schedule your appointment with our team to make your minimum deposit of $50 USD** and start trading with your strategy. No limits, only opportunities! Click on Join the event now and be part of the 150 traders competing for amazing prizes!"
+	},
+	{
+		"question": "2. What type of strategies can I use?",
+		"answer": "You have complete freedom! You can trade in **all available markets**, 24/7. Whether you use scalping, swing trading, or long-term strategies, **you decide how to TRADE**. What's important is that you take advantage of every opportunity to reach the top!"
+	},
+	{
+		"question": "3. How many winners will there be and what prizes will they receive?",
+		"answer": "There will be 57 winners rewarded! With **more than a 38% chance of winning**, your effort can lead you to a great prize. Be part of that winning percentage!"
+	},
+	{
+		"question": "4. Can I compete with other traders?",
+		"answer": "Yes! You'll be competing ONLY with **150 traders**. It's the perfect opportunity to showcase your skills and grow your account. Imagine being one of the **57 lucky winners**. This is your moment!"
+	},
+	{
+		"question": "5. What is the minimum deposit to participate?",
+		"answer": "The minimum deposit is only **$50 USD**. That's how accessible it is to join this exciting tournament! You can make **unlimited deposits**, giving you flexibility to enhance your chances."
+	},
+	{
+		"question": "6. What happens if my Drawdown (DD) reaches 45%?",
+		"answer": "If your DD reaches **45%**, your account will be automatically removed from the tournament. But don't worry, you can still make deposits to remain in the contest as long as you don't exceed 45%. REMEMBER! Keep your **risk management** under control and keep fighting for those prizes. It's your time to shine!"
+	},
+	{
+		"question": "7. Can I make deposits during the tournament?",
+		"answer": "Absolutely! You have **complete freedom to make deposits** at any time, ensuring your Drawdown (DD) remains within the 45% limit. Remember, you decide how to reach the top!"
+	},
+	{
+		"question": "8. Why is this tournament better than others?",
+		"answer": "Because it's not a funding test; your money goes directly into the **prize pool**! Additionally, with a **38% chance of winning**, and a system that rewards **57 traders**, this tournament is designed to reward the most dedicated and strategic participants. Forget funding tests; this tournament is made to win!"
+	},
+	{
+		"question": "9. What markets can I trade during the tournament?",
+		"answer": "All markets are at your disposal! No restrictions, you can trade in **Forex, crypto, stocks, indices, commodities, etc.**... whatever you want! You decide how to manage your risk and maximize your profits."
+	},
+	{
+		"question": "10. What happens if I can't find the answer I'm looking for?",
+		"answer": "Don't worry! Click on the **AI** button to talk to our **Virtual Trader** about the tournament. Or if you prefer, **send us an email**, and we'll respond personally to resolve any questions. We're here to help you at any time!"
+	},
+	{
+		"question": "11. What is the registration fee?",
+		"answer": "A one-time cost, participation costs $99 USD, an amount allocated to the prize pool, giving you more than a 35% chance of being among the winners—something never seen before in the trading world!"
+	},
+	{
+		"question": "12. What is the method to pay the registration fee?",
+		"answer": "Super easy! Payment is made with USDT on the TRC20 (TRON) network. Once you access, fill in your details, proceed to payment, and you're done!"
+	},
+	{
+		"question": "13. How long will the competition last?",
+		"answer": "Great question! The competition will last between 3 to 7 days, depending on the conditions of the contest edition number."
+	},
+	{
+		"question": "14. How long will it take to receive my prize if I rank among the winners?",
+		"answer": "Excellent, let's see, if you're among the more than 50 winners, it will take up to 48 hours to be notified for the online award ceremony, and you will be contacted by our team to receive the payment—via USDT."
+	},
+	{
+		"question": "15. What happens if my Drawdown (DD) reaches 45%?",
+		"answer": "🚨 Not maintaining your balance will result in automatic disqualification, but you can make additional deposits to remain in the competition."
+	}
+	]
   },
   "footer": {
     "rightsReserved": "All rights reserved.",

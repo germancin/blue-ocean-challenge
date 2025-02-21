@@ -85,6 +85,8 @@
     "total": "Total"
   },
   "faq": {
+	"show": "Mostrar",
+	"hide": "Ocultar",
     "title": "Preguntas Frecuentes (FAQ)",
     "subtitle": "¿Tienes preguntas?",
     "questions": [
