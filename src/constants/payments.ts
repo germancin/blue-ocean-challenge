@@ -1,1 +1,1 @@
-export const BASE_PAYMENT_AMOUNT = 2;
+export const BASE_PAYMENT_AMOUNT = 99;
