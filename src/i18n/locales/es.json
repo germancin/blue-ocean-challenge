@@ -1,353 +1,353 @@
 {
-  "nav": {
-    "rules": "Reglas",
-    "prizes": "Premios",
-    "strategy": "Estrategia",
-    "faq": "Preguntas Frecuentes",
-    "joinEvent": "Únete al Evento",
-    "login": "Iniciar Sesión",
-    "logout": "Cerrar Sesión",
-    "profile": "Perfil",
-    "charts": "Gráficos"
-  },
-  "hero": {
-    "tournament": "🏆 Torneo de Trading",
-    "tagline": "150 traders, más de 38% de ganadores, usa tu estrategia y gana con inteligencia",
-    "joinEvent": "Únete al Evento",
-    "dialogTitle": "¡Desbloquea tu potencial de trading hoy! 🚀",
-    "dialogDescription": "Únete a nuestra confiable comunidad de traders. Tus datos están seguros y solo te enviaremos actualizaciones de torneos y noticias esenciales. ✨",
-    "imageAlt": "Interfaz de Plataforma de Trading"
-  },
-  "distributionSectionTitle": "Distribución de Premios",
-  "labels": {
-    "position": "Posición",
-    "winners": "Ganadores",
-    "prize": "Premio",
-    "total": "Total"
-  },
-  "strategy": {
-	"sectionTitle": "¿Qué sucede después de registrarte?",
-	"cryptoTitle": "Después del pago, nuestro equipo se pondrá en contacto contigo para programar el registro de tu cuenta de trading.",
-	"cryptoDescription": "Te ayudamos a configurar tu cuenta de trading con un depósito inicial de $50 USD. Te guiaremos a través de los detalles del torneo para asegurarnos de que estés completamente preparado y maximices tus posibilidades de ganar."
-  },
-  "calltoaction": {
-    "title": "¿Listo para comenzar?",
-    "subtitle": "¡No pierdas esta oportunidad única!",
-    "participate": "Participa ahora",
-    "winners": "Conviértete en uno de los 57 ganadores",
-    "button": "Únete al evento",
-    "success": "¡El éxito es tuyo! 💥"
-  },
-  "rules": {
-    "sectionTitle": "Reglas del Torneo",
-    "depositMinimum": "Depósito mínimo: 50 USD",
-	"dropdownMinimum": "Máximo DropDown 45%",
-	"beneficiostitle": "Beneficios",
-    "depositMaximum": "Depósito máximo: Sin límites",
-    "customConditions": "Todos los mercados",
-    "anyTrades": "Las operaciones que desees",
-    "operateAnytime": "Opera 24/7",
-    "allMarkets": "Puedes depositar las veces que desees para no bajar tu dropdown (DD) al 45%",
-    "ddLimitTitle": "Tu único camino al éxito depende de:",
-    "ddLimitDescription": "Si tu Drawdown (DD) alcanza el 45%, tu cuenta quedará fuera DEL CONCURSO automáticamente.",
-    "solutionTitle": "SOLUCIÓN PARA CONTINUAR:",
-    "solutionDescription": "Puedes realizar depósitos a tu cuenta las veces que sea necesario para mantener tu DD por debajo del límite!!!",
-    "riskManagement": "¡Sigue operando con gestión de riesgo y alcanza el éxito!",
-    "ctaButton": "PARTICIPA YA"
-  },
-  "infoChallenge": {
-    "sectionTitle": "Conviértete en un Trader Ganador",
-    "participants": "150 Traders",
-    "chance": "",
-    "winners": "57  Ganadores",
-    "best": "Un 38% de posibilidad de ganar!",
-    "stat98": "",
-    "twoPercentTitle": "Aquí puedes ser parte de ese",
-    "winnerStats": "de las estadísticas ganadoras",
-    "changeMindset": "Cambia el chip",
-    "noFunding": "Olvídate de tontas pruebas de fondeo",
-    "entryCost": "Costo de inscripción solo por 99 USD",
-    "prizePool": "Aquí tu dinero es para la bolsa de premios",
-    "ctaButton": "Habla con nuestra Trader Virtual"
-  },
-  "participation": {
-    "sectionTitle": "Cómo Participar",
-    "feeTitle": "Valor de Inscripción: $99 USD",
-    "description": "Únete al torneo de trading y comienza a competir por increíbles premios!",
-    "neverSeen": "NUNCA ANTES VISTO",
-    "winningChance": "Más del 38% de participantes van a ganar y ser premiados!",
-    "winnersTableTitle": "Tabla de Ganadores"
-  },
-  "table": {
-    "position": "Posición",
-    "winners": "Ganadores",
-    "prize": "Premio",
-    "total": "Total"
-  },
-  "faq": {
-	"show": "Mostrar",
-	"hide": "Ocultar",
-    "title": "Preguntas Frecuentes (FAQ)",
-    "subtitle": "¿Tienes preguntas?",
-    "questions": [
-      {
-        "question": "1. ¿Cómo puedo participar en el torneo?",
-        "answer": "Es fácil y rápido. Solo **regístrate en nuestro sitio, realiza TU INSCRIPCION de 99 usd y agenda tu cita cita con nuestro equipo para realizar tu depósito mínimo de $50 USD** y empieza a operar con tu estrategia. ¡No hay límites, solo oportunidades! ¡Haz clic en Únete al evento ahora y sé parte de los 150 traders que lucharán por premios increíbles!."
-      },
-      {
-        "question": "2. ¿Qué tipo de estrategias puedo usar?",
-        "answer": "¡Tienes total libertad! Puedes operar en **todos los mercados** disponibles, 24/7. Ya sea que utilices estrategias de scalping, swing trading o de largo plazo, **tú decides cómo OPERAR**. ¡Lo importante es que aproveches cada oportunidad para llegar a la cima!"
-      },
-      {
-        "question": "3. ¿Cuántos ganadores habrá y qué premios recibirán?",
-        "answer": "Habrá ¡57 ganadores serán premiados! Con **más de un 38% de posibilidades de ganar**, tu esfuerzo puede llevarte a un gran premio. ¡Sé parte de ese porcentaje ganador!"
-      },
-      {
-        "question": "4. ¿Puedo competir con otros traders?",
-        "answer": "¡Sí! Estarás compitiendo SOLO con **150 traders**. Es la oportunidad perfecta para demostrar tus habilidades y hacer crecer tu cuenta. Imagina ser uno de los **57 afortunados ganadores**. ¡Este es tu momento!"
-      },
-      {
-        "question": "5. ¿Cuál es el depósito mínimo para participar?",
-        "answer": "El depósito mínimo es solo **$50 USD**. ¡Así de accesible es unirte a este emocionante torneo! Puedes realizar depósitos **sin límites**, lo que te da flexibilidad para mejorar tus oportunidades."
-      },
-      {
-        "question": "6. ¿Qué pasa si mi Drawdown (DD) alcanza el 45%?",
-        "answer": "Si tu DD llega al **45%**, tu cuenta quedará automáticamente fuera del torneo. Pero no te preocupes, ¡puedes realizar depósitos para seguir en e concurso mientras no superes el 45%, REDCUERDA! Mantén tu **gestión de riesgo** bajo control, y continúa luchando por esos premios. ¡Es tu momento de brillar"
-      },
-      {
-        "question": "7. ¿Puedo hacer depósitos durante el torneo?",
-        "answer": "¡Absolutamente! Tienes **total libertad para realizar depósitos** en cualquier momento, asegurando que tu Drawdown (DD) permanezca dentro de los límites del 45%. ¡Recuerda, tú decides cómo llegar a la cima! "
-      },
-      {
-        "question": "8. ¿Por qué este torneo es mejor que otros?",
-        "answer": "¡Porque no es una prueba de fondeo, tu dinero está en juego directamente en la **bolsa de premios**! Además, con un **38% de probabilidades de ganar**, y un sistema que premia a **57 traders**, este torneo está diseñado para recompensar a los más dedicados y estratégicos. ¡Deja atrás las pruebas de fondeo, este torneo está hecho para ganar!"
-      },
-      {
-        "question": "9. ¿Qué mercados puedo operar durante el torneo?",
-        "answer": "¡Todos los mercados están a tu disposición! No hay restricciones, puedes operar en **Forex, criptos, acciones, índices, materias primas, ect.**... ¡Lo que quieras! Tú decides cómo gestionar tu riesgo y maximizar tus ganancias."
-      },
-      {
-        "question": "10. ¿Qué sucede si no encuentro la respuesta que busco?",
-        "answer": "¡No te preocupes! Haz clic en el botón de la **IA** para hablar con nuestra **Trader Virtual** sobre el torneo. O si prefieres, **envíanos un correo** y te responderemos personalmente para resolver cualquier duda. ¡Estamos aquí para ayudarte en todo momento!"
-      },
-      {
-        "question": "11. ¿Cuál es el valor de la inscripción?",
-        "answer": "¡Un costo único, participar tiene un costo de 99 usd, costo destinado ara el Bote de premios, teniendo más de u 35% de posibilidades de ser parte de los ganadores, algo nunca antes visto en el mundo del trading!"
-      },
-      {
-        "question": "12. ¿Cuál es el método para pagar la inscripción?",
-        "answer": "¡Súper sencillo! el pago se realiza con usdt Red TRC20 (TRON) una ves que accedes llenas tus datos y procedes al pago, y Listo!"
-      },
-      {
-        "question": "13. ¿Cuánto tiempo durará la competición?",
-        "answer": "!Una gran pregunta!. La competición tendrá un periodo de 3 a 7 días. dependiendo las condiciones de la edición No. del concurso."
-      },
-      {
-        "question": "14. ¿Cuánto demora que me den mi premio si consigo estar en el Ranking de ganadores?",
-        "answer": "!excelente, vamos a ver, si estás entre los mas de 50 ganadores, tomará hasta 48 horas en que seas notificado para la premiación On-Line, y serás contactado por nuestro equipo para recibir el pago - vía USDT"
-      },
-      {
-		"question": "15. ¿Qué sucede si mi Drawdown (DD) alcanza el 45%?",
-		"answer": "🚨 No mantener tu saldo resultará en descalificación automática, pero puedes realizar depósitos adicionales para seguir en la competencia."
-	  }
-    ]
-  },
-  "footer": {
-    "rightsReserved": "Todos los derechos reservados.",
-    "terms": "Términos y Condiciones",
-    "privacy": "Política de Privacidad",
-    "companyNotice": "Elite Trader Hub es una compañía de educación y evaluación que no recibe depósitos de los clientes ni ofrece servicios financieros a los mismos. Todas las cuentas proporcionadas a los clientes operan en un entorno virtual con fondos virtuales.",
-    "investmentDisclaimer": "Toda la información proporcionada en este sitio web es únicamente con fines educativos en el área de negociación de los mercados financieros y no constituye recomendaciones específicas de inversión, asesoramiento de negociación ni orientación general de inversión. La Compañía no ofrece servicios de inversión en el sentido de MiFID I ni actúa como proveedor de servicios de inversión con licencia (corredor) en el sentido de MiFID II. Todas las operaciones en la plataforma son simuladas con cuentas virtuales, y términos como 'trading' o 'trader' deben entenderse en este contexto.",
-    "technicalSolution": "La solución técnica ofrecida en forma de plataformas, como parte de los servicios de la Compañía, utiliza servicios de terceros. El sitio web es administrado y propiedad de la Compañía, y todo el contenido está protegido por los derechos de autor de la Compañía.",
-    "restrictedCountries": "Países restringidos: Pakistán, Irán, Siria, Myanmar, Bangladesh, Vietnam, Corea del Norte, Rusia, Bielorrusia, Cuba, Líbano, Libia, Sudán, Crimea, Donetsk, Luhansk, EAU."
-  },
-  "subscription": {
-    "nameLabel": "Nombre",
-    "namePlaceholder": "Introduce tu nombre",
-    "nameRequired": "Nombre requerido",
-    "emailLabel": "Correo electrónico",
-    "emailPlaceholder": "Introduce tu correo electrónico",
-    "emailRequired": "Correo electrónico es obligatorio",
-    "emailInvalid": "Dirección de correo electrónico no válida",
-    "termsLabel": "Acepto los ",
-    "termsLink": "Términos y Condiciones",
-    "termsRequired": "Debe aceptar los términos y condiciones"
-  },
-  "subscriptionForm": {
-    "successToastTitle": "¡Ya estás registrado!",
-    "successToastDescription": "¡Inicia sesión para unirte a la acción!",
-    "welcomeEmailToastTitle": "Enviando correo de bienvenida",
-    "welcomeEmailToastDescription": "Estamos enviando tu correo de bienvenida. Revisa tu bandeja de entrada.",
-    "confirmationEmailSuccessTitle": "Correo de bienvenida enviado.",
-    "confirmationEmailSuccessDescription": "Revisa tu correo electrónico para completar el registro.",
-    "confirmationEmailErrorTitle": "Error al enviar el correo.",
-    "confirmationEmailErrorDescription": "No se pudo enviar el correo de confirmación.",
-    "paymentCreationError": "No se pudo crear el registro de pago.",
-    "errorToastTitle": "Error",
-    "errorToastDescription": "Algo salió mal. Por favor, inténtalo de nuevo.",
-    "processing": "Procesando...",
-    "register": "Registrar"
-  },
-  "terms": {
-    "title": "Términos y Condiciones",
-    "sections": {
-      "generalDescriptionTitle": "1. Descripción General del Concurso",
-      "generalDescriptionContent": "Este concurso de trading se organiza como propuesta diferente con una clara oportunidad porcentual de participar para ser ganador.\n\nLos participantes deben tener la edad legal en su jurisdicción para participar.",
-      "eligibilityTitle": "2. Elegibilidad",
-      "eligibilityList": [
-        "Los participantes deben tener al menos 18 años.",
-        "Deben contar con una dirección de correo electrónico válida.",
-        "Deben completar el proceso de registro y pagar la tarifa de inscripción.",
-        "Deben realizar un deposito mínimo de 50 usd con nuestro socio broker, corredor comercial oficial.",
-        "Deben cumplir con todas las leyes y regulaciones locales."
-      ],
-      "contestRulesTitle": "3. Reglas del Concurso",
-      "contestRulesList": [
-        "Aceptar los Términos y condiciones.",
-        "Realizar el pago de la inscripción.",
-        "Agendar la cita para la creación de la cuenta de trading.",
-        "Crea la Cuenta verifica tu identidad, realiza tu deposito mínimo.",
-        "NO infringir la condición de llevar tu Dropdown (DD) al limite del 45%, causa de descalificación automática.",
-        "El trading debe realizarse dentro del período de concurso especificado.",
-        "Solo se permiten los instrumentos de trading designados.",
-        "Los participantes deben usar su propia y única cuenta de trading ASIGNADA con el link de Elite Trader Hub por nuestro socio broker, corredor comercial oficial."
-      ],
-      "prizeDistributionTitle": "4. Distribución de Premios",
-      "prizeDistributionContent": "Los premios se distribuirán según la tabla de clasificaciones finales al momento de terminar el ciclo CALENDARIO del concurso. El organizador se reserva el derecho de verificar todas las actividades de trading antes de distribuir los premios.",
-      "disqualificationTitle": "5. Descalificación",
-      "disqualificationIntro": "El organizador se reserva el derecho de descalificar a cualquier participante que:",
-      "disqualificationList": [
-        "Infrinja las reglas del concurso.",
-        "Proporcione información falsa.",
-        "Participe en prácticas de trading desleales.",
-        "Intente manipular los resultados del concurso.",
-        "Infringir la condición de llevar tu Dropdown (DD) al limite del 45%."
-      ],
-      "liabilityTitle": "6. Politica De Reembolso",
-      "liabilityContent": "Al participar en el Torneo de Trading y/o cualquier actividad relacionada con Elite Trader Hub.co, el participante reconoce y acepta que no se realizarán reembolsos bajo ninguna circunstancia. El pago de la inscripción es final e intransferible, y no se devolverá ni total ni parcialmente, independientemente de los resultados obtenidos en el torneo, la descalificación del participante o cualquier otra situación que pueda surgir durante el evento. \n\n Al completar su inscripción, el participante entiende y acepta que está comprometido con los términos establecidos y que cualquier pago realizado no es sujeto de reembolso.",
-      "limitresponTitle": "7. Limitación de Responsabilidades",
-      "limitresponList": [
-        "El trading en los mercados financieros conlleva un riesgo significativo de pérdida de capital. Los resultados pasados no garantizan resultados futuros. La participación en este torneo y cualquier actividad de trading asociada con él implica el reconocimiento de que las inversiones en instrumentos financieros son inherentemente riesgosas. Usted entiende y acepta que no existe garantía de ganancias y que es posible perder una parte o la totalidad del capital invertido.",
-        "Responsabilidad del Participante: Es responsabilidad exclusiva del participante asegurarse de que cumple con todos los requisitos y regulaciones legales para operar en los mercados financieros según las leyes y normativas de su país de residencia. La Empresa no será responsable de ninguna pérdida derivada de la incapacidad de un participante para cumplir con dichas regulaciones.",
-        "Asociación con Brokers: El participante entiende que Elite Trader Hub.co tiene acuerdos de IB Partnership con diversos brokers. Al participar en este concurso o al abrir una cuenta de trading con dichos brokers, el participante acepta los términos y condiciones de cada broker, incluidos los costos asociados, los términos de negociación, y las comisiones establecidas por el broker. La Empresa no es responsable de ninguna operación, depósito, retiro o problema relacionado con la cuenta de trading del participante en los brokers asociados.",
-        "Cuentas de Trading: La apertura de una cuenta de trading con un depósito inicial mínimo de $50 USD es necesaria para participar en el torneo. El participante reconoce que el monto de la inscripción y los depósitos en la cuenta son su responsabilidad. La Empresa actúa únicamente como intermediario para facilitar el acceso al broker y no tiene control sobre las decisiones de trading ni sobre la ejecución de las operaciones realizadas en las cuentas de los participantes.",
-        "No Garantía de Resultados: Elite Trader Hub.co no garantiza ningún tipo de éxito financiero para los participantes, ni promete un porcentaje específico de ganancias o de probabilidades de éxito. Todos los resultados de trading dependen de factores fuera del control de la Empresa, incluyendo pero no limitándose a las condiciones del mercado, las estrategias utilizadas por el participante y las decisiones de trading.",
-        "Descalificación del Concurso: Los participantes aceptan que Elite Trader Hub.co se reserva el derecho de descalificar a cualquier trader que no cumpla con las reglas del concurso, incluidas las políticas sobre gestión de riesgo y el Drawdown. En particular, si el Drawdown (DD) alcanza el 45%, la cuenta del participante será descalificada del concurso automáticamente, sin derecho a reembolso o compensación.",
-        "Exoneración de Responsabilidad: El participante exime de responsabilidad a Elite Trader Hub.co, sus miembros, socios, afiliados, representantes y colaboradores, de cualquier pérdida financiera, daños, costos o perjuicios derivados de su participación en el torneo o el uso de servicios relacionados con el brokeraje. Esto incluye, pero no se limita a, pérdidas derivadas de decisiones de trading, errores en la ejecución de operaciones, o el incumplimiento de las normativas de trading establecidas por los brokers asociados.",
-        "Confidencialidad y Privacidad: Elite Trader Hub.co se compromete a tratar la información personal y financiera de los participantes con estricta confidencialidad y de acuerdo con nuestras políticas de privacidad. Sin embargo, el participante acepta que los detalles de su cuenta de trading, los resultados del torneo y cualquier otra información relevante podrán ser compartidos con brokers asociados según sea necesario para la ejecución de los servicios.",
-        "Modificaciones del Torneo: Elite Trader Hub.co se reserva el derecho de modificar los términos y condiciones del concurso en cualquier momento, incluyendo el valor de los premios, los requisitos de participación y las reglas de gestión de riesgo. Cualquier cambio será comunicado a los participantes con antelación. La participación continua en el torneo constituye la aceptación de los cambios realizados."
-      ],
-      "termsChangesTitle": "8. Aceptación de los Términos",
-      "termsChangesContent": "Al inscribirse y participar en el torneo de trading, el participante acepta y se compromete a cumplir con todos los términos y condiciones descritos en este descargo de responsabilidad, así como con los términos y condiciones de los brokers asociados. Si en cualquier momento el participante no está de acuerdo con los términos, debe abstenerse de participar en el concurso y/o las actividades relacionadas."
-    }
-  },
-  "paymentCard": {
-    "sections": {
-      "paymentWorks": {
-        "title": "Cómo Funciona el Pago",
-        "items": [
-          {
-            "icon": "Clock",
-            "title": "Tiempo de Confirmación",
-            "description": "Las transacciones en la red TRON (TRC20) son rápidas y, por lo general, se confirman en menos de 1 minuto. Sin embargo, en casos poco frecuentes, pueden tardar hasta 5 minutos dependiendo del tráfico de la red.",
-            "color": "text-blue-600"
-          },
-          {
-            "icon": "Bell",
-            "title": "Notificación Automática",
-            "description": "Una vez que el pago se confirme en la blockchain, recibirás una notificación por correo electrónico con los detalles de tu registro en el torneo.",
-            "color": "text-yellow-600"
-          }
-        ]
-      },
-      "whyUsdt": {
-        "title": "Por Qué Usar USDT",
-        "items": [
-          {
-            "icon": "Shield",
-            "title": "Transacciones Seguras",
-            "description": "Las transacciones en USDT son seguras y se pueden rastrear en la blockchain.",
-            "color": "text-green-600"
-          }
-        ]
-      },
-      "support": {
-        "title": "Política de Soporte",
-        "items": [
-          {
-            "icon": "HelpCircle",
-            "title": "¿Tienes Preguntas?",
-            "description": "Si tienes algún problema con tu transacción, nuestro equipo está aquí para ayudarte. Escríbenos a support@elitetraderhub.com.",
-            "color": "text-purple-600"
-          }
-        ]
-      },
-      "benefits": {
-        "title": "Beneficios de Participar",
-        "items": [
-          {
-            "icon": "Trophy",
-            "title": "Beneficios del Torneo",
-            "description": [
-              "Acceso exclusivo al Elite Trading Tournament, donde podrás ganar premios increíbles.",
-              "Conéctate con una comunidad de traders apasionados.",
-              "Una oportunidad única para poner a prueba tus habilidades en un entorno competitivo."
-            ],
-            "color": "text-indigo-600"
-          }
-        ]
-      }
-    }
-  },
-  "paymentDetailsCard": {
-    "title": "Detalles de Pago",
-    "amountToPay": "Monto a Pagar",
-    "copySuccess": "Cantidad copiada al portapapeles",
-    "copyError": "Error al copiar al portapapeles",
-    "purchaseDetailTitle": "Detalle de la Compra",
-    "purchaseDetailDescription": "Tu pago se procesará de forma segura a través de USDT en la red TRON.",
-    "emailTitle": "Correo Electrónico"
-  },
-  "paymentInstructionsCard": {
-    "title": "Instrucciones de Pago",
-    "copySuccessAddress": "Dirección copiada al portapapeles",
-    "copySuccessAmount": "Cantidad copiada al portapapeles",
-    "copyError": "No se pudo copiar al portapapeles",
-    "sendAmount": "Envía exactamente esta cantidad:",
-    "toAddress": "A esta dirección:",
-    "pendingPayment": "Pago Pendiente",
-    "successfulPayment": "Pago Exitoso",
-    "failedPayment": "Pago Fallido",
-    "securePayment": "Pago Seguro",
-    "encrypted": "Encriptado",
-    "verified": "Verificado"
-  },
-  "nextStep": {
-    "chatTitle": "¡Felicidades! 🎉",
-    "nextStepTitle": "Siguiente Paso",
-    "chatDescription": "Chatea con nuestra Agente IA que te ayudará a crear una cita virtual para abrir tu cuenta en XM.",
-    "paymentSuccessTitle": "¡Felicidades! 🎉",
-    "paymentSuccessMessage": "Has completado exitosamente tu pago y ahora eres parte del torneo de trading con nosotros.",
-    "paymentIdLabel": "ID de Pago:"
-  },
-  "chatWidget": {
-    "getStarted": "Crear mi cita virtual",
-    "inputPlaceholder": "Escribir...",
-    "error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
-    "closeButtonTooltip": "Cerrar",
-    "minimizeButtonTooltip": "Minimizar",
-    "maximizeButtonTooltip": "Maximizar",
-    "sendButtonTooltip": "Enviar",
-    "initialMessage": "¡Bienvenido! Conoce a Sofía, tu asistente virtual."
-  },
-  "chatWidgetHome": {
-    "getStarted": "¡Vamos a chatear!",
-    "inputPlaceholder": "Escribe...",
-    "error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
-    "closeButtonTooltip": "Cerrar",
-    "minimizeButtonTooltip": "Minimizar",
-    "maximizeButtonTooltip": "Maximizar",
-    "sendButtonTooltip": "Enviar",
-    "initialMessage": "¡Bienvenido!"
-  }
+	"nav": {
+		"rules": "Reglas",
+		"prizes": "Premios",
+		"strategy": "Estrategia",
+		"faq": "Preguntas Frecuentes",
+		"joinEvent": "Únete al Evento",
+		"login": "Iniciar Sesión",
+		"logout": "Cerrar Sesión",
+		"profile": "Perfil",
+		"charts": "Gráficos"
+	},
+	"hero": {
+		"tournament": "🏆 Torneo de Trading",
+		"tagline": "¡Usa tu mejor estrategia y gana a lo grande!",
+		"joinEvent": "Únete al Evento",
+		"dialogTitle": "¡Desbloquea tu potencial de trading hoy! 🚀",
+		"dialogDescription": "Únete a nuestra confiable comunidad de traders. Tus datos están seguros y solo te enviaremos actualizaciones de torneos y noticias esenciales. ✨",
+		"imageAlt": "Interfaz de Plataforma de Trading"
+	},
+	"distributionSectionTitle": "Distribución de Premios",
+	"labels": {
+		"position": "Posición",
+		"winners": "Ganadores",
+		"prize": "Premio",
+		"total": "Total"
+	},
+	"strategy": {
+		"sectionTitle": "¿Qué sucede después de registrarte?",
+		"cryptoTitle": "Después del pago, nuestro equipo se pondrá en contacto contigo para programar el registro de tu cuenta de trading.",
+		"cryptoDescription": "Te ayudamos a configurar tu cuenta de trading con un depósito inicial de $50 USD. Te guiaremos a través de los detalles del torneo para asegurarnos de que estés completamente preparado y maximices tus posibilidades de ganar."
+	},
+	"calltoaction": {
+		"title": "¿Listo para comenzar?",
+		"subtitle": "¡No pierdas esta oportunidad única!",
+		"participate": "Participa ahora",
+		"winners": "Conviértete en uno de los 57 ganadores",
+		"button": "Únete al evento",
+		"success": "¡El éxito es tuyo! 💥"
+	},
+	"rules": {
+		"sectionTitle": "Reglas del Torneo",
+		"depositMinimum": "Depósito mínimo: 50 USD",
+		"dropdownMinimum": "Máximo DropDown 45%",
+		"beneficiostitle": "Beneficios",
+		"depositMaximum": "Depósito máximo: Sin límites",
+		"customConditions": "Todos los mercados",
+		"anyTrades": "Las operaciones que desees",
+		"operateAnytime": "Opera 24/7",
+		"allMarkets": "Puedes depositar las veces que desees para no bajar tu dropdown (DD) al 45%",
+		"ddLimitTitle": "Tu único camino al éxito depende de:",
+		"ddLimitDescription": "Si tu Drawdown (DD) alcanza el 45%, tu cuenta quedará fuera DEL CONCURSO automáticamente.",
+		"solutionTitle": "SOLUCIÓN PARA CONTINUAR:",
+		"solutionDescription": "Puedes realizar depósitos a tu cuenta las veces que sea necesario para mantener tu DD por debajo del límite!!!",
+		"riskManagement": "¡Sigue operando con gestión de riesgo y alcanza el éxito!",
+		"ctaButton": "PARTICIPA YA"
+	},
+	"infoChallenge": {
+		"sectionTitle": "Conviértete en un Trader Ganador",
+		"participants": "150 COMERCIANTES",
+		"chance": "",
+		"winners": "Muchos  Ganadores",
+		"best": "¡Multiplica tus oportunidades de ganar!",
+		"stat98": "",
+		"twoPercentTitle": "Aquí puedes ser parte de ese",
+		"winnerStats": "de las estadísticas ganadoras",
+		"changeMindset": "Cambia el chip",
+		"noFunding": "Olvídate de tontas pruebas de fondeo",
+		"entryCost": "Costo de inscripción solo por 99 USD",
+		"prizePool": "Aquí tu dinero es para la bolsa de premios",
+		"ctaButton": "Habla con nuestra Trader Virtual"
+	},
+	"participation": {
+		"sectionTitle": "Cómo Participar",
+		"feeTitle": "Valor de Inscripción: $99 USD",
+		"description": "Únete al torneo de trading y comienza a competir por increíbles premios!",
+		"neverSeen": "NUNCA ANTES VISTO",
+		"winningChance": "Pocos participantes y muchos serán recompensados",
+		"winnersTableTitle": "Tabla de Ganadores"
+	},
+	"table": {
+		"position": "Posición",
+		"winners": "Ganadores",
+		"prize": "Premio",
+		"total": "Total"
+	},
+	"faq": {
+		"show": "Mostrar",
+		"hide": "Ocultar",
+		"title": "Preguntas Frecuentes (FAQ)",
+		"subtitle": "¿Tienes preguntas?",
+		"questions": [
+			{
+				"question": "1. ¿Cómo puedo participar en el torneo?",
+				"answer": "Es fácil y rápido. Solo **regístrate en nuestro sitio, realiza TU INSCRIPCION de 99 usd y agenda tu cita cita con nuestro equipo para realizar tu depósito mínimo de $50 USD** y empieza a operar con tu estrategia. ¡No hay límites, solo oportunidades! ¡Haz clic en Únete al evento ahora y sé parte de los 150 traders que lucharán por premios increíbles!."
+			},
+			{
+				"question": "2. ¿Qué tipo de estrategias puedo usar?",
+				"answer": "¡Tienes total libertad! Puedes operar en **todos los mercados** disponibles, 24/7. Ya sea que utilices estrategias de scalping, swing trading o de largo plazo, **tú decides cómo OPERAR**. ¡Lo importante es que aproveches cada oportunidad para llegar a la cima!"
+			},
+			{
+				"question": "3. ¿Cuántos ganadores habrá y qué premios recibirán?",
+				"answer": "Habrá ¡57 ganadores serán premiados! Con **más de un 38% de posibilidades de ganar**, tu esfuerzo puede llevarte a un gran premio. ¡Sé parte de ese porcentaje ganador!"
+			},
+			{
+				"question": "4. ¿Puedo competir con otros traders?",
+				"answer": "¡Sí! Estarás compitiendo SOLO con **150 traders**. Es la oportunidad perfecta para demostrar tus habilidades y hacer crecer tu cuenta. Imagina ser uno de los **57 afortunados ganadores**. ¡Este es tu momento!"
+			},
+			{
+				"question": "5. ¿Cuál es el depósito mínimo para participar?",
+				"answer": "El depósito mínimo es solo **$50 USD**. ¡Así de accesible es unirte a este emocionante torneo! Puedes realizar depósitos **sin límites**, lo que te da flexibilidad para mejorar tus oportunidades."
+			},
+			{
+				"question": "6. ¿Qué pasa si mi Drawdown (DD) alcanza el 45%?",
+				"answer": "Si tu DD llega al **45%**, tu cuenta quedará automáticamente fuera del torneo. Pero no te preocupes, ¡puedes realizar depósitos para seguir en e concurso mientras no superes el 45%, REDCUERDA! Mantén tu **gestión de riesgo** bajo control, y continúa luchando por esos premios. ¡Es tu momento de brillar"
+			},
+			{
+				"question": "7. ¿Puedo hacer depósitos durante el torneo?",
+				"answer": "¡Absolutamente! Tienes **total libertad para realizar depósitos** en cualquier momento, asegurando que tu Drawdown (DD) permanezca dentro de los límites del 45%. ¡Recuerda, tú decides cómo llegar a la cima! "
+			},
+			{
+				"question": "8. ¿Por qué este torneo es mejor que otros?",
+				"answer": "¡Porque no es una prueba de fondeo, tu dinero está en juego directamente en la **bolsa de premios**! Además, con un **38% de probabilidades de ganar**, y un sistema que premia a **57 traders**, este torneo está diseñado para recompensar a los más dedicados y estratégicos. ¡Deja atrás las pruebas de fondeo, este torneo está hecho para ganar!"
+			},
+			{
+				"question": "9. ¿Qué mercados puedo operar durante el torneo?",
+				"answer": "¡Todos los mercados están a tu disposición! No hay restricciones, puedes operar en **Forex, criptos, acciones, índices, materias primas, ect.**... ¡Lo que quieras! Tú decides cómo gestionar tu riesgo y maximizar tus ganancias."
+			},
+			{
+				"question": "10. ¿Qué sucede si no encuentro la respuesta que busco?",
+				"answer": "¡No te preocupes! Haz clic en el botón de la **IA** para hablar con nuestra **Trader Virtual** sobre el torneo. O si prefieres, **envíanos un correo** y te responderemos personalmente para resolver cualquier duda. ¡Estamos aquí para ayudarte en todo momento!"
+			},
+			{
+				"question": "11. ¿Cuál es el valor de la inscripción?",
+				"answer": "¡Un costo único, participar tiene un costo de 99 usd, costo destinado ara el Bote de premios, teniendo más de u 35% de posibilidades de ser parte de los ganadores, algo nunca antes visto en el mundo del trading!"
+			},
+			{
+				"question": "12. ¿Cuál es el método para pagar la inscripción?",
+				"answer": "¡Súper sencillo! el pago se realiza con usdt Red TRC20 (TRON) una ves que accedes llenas tus datos y procedes al pago, y Listo!"
+			},
+			{
+				"question": "13. ¿Cuánto tiempo durará la competición?",
+				"answer": "!Una gran pregunta!. La competición tendrá un periodo de 3 a 7 días. dependiendo las condiciones de la edición No. del concurso."
+			},
+			{
+				"question": "14. ¿Cuánto demora que me den mi premio si consigo estar en el Ranking de ganadores?",
+				"answer": "!excelente, vamos a ver, si estás entre los mas de 50 ganadores, tomará hasta 48 horas en que seas notificado para la premiación On-Line, y serás contactado por nuestro equipo para recibir el pago - vía USDT"
+			},
+			{
+				"question": "15. ¿Qué sucede si mi Drawdown (DD) alcanza el 45%?",
+				"answer": "🚨 No mantener tu saldo resultará en descalificación automática, pero puedes realizar depósitos adicionales para seguir en la competencia."
+			}
+		]
+	},
+	"footer": {
+		"rightsReserved": "Todos los derechos reservados.",
+		"terms": "Términos y Condiciones",
+		"privacy": "Política de Privacidad",
+		"companyNotice": "Elite Trader Hub es una compañía de educación y evaluación que no recibe depósitos de los clientes ni ofrece servicios financieros a los mismos. Todas las cuentas proporcionadas a los clientes operan en un entorno virtual con fondos virtuales.",
+		"investmentDisclaimer": "Toda la información proporcionada en este sitio web es únicamente con fines educativos en el área de negociación de los mercados financieros y no constituye recomendaciones específicas de inversión, asesoramiento de negociación ni orientación general de inversión. La Compañía no ofrece servicios de inversión en el sentido de MiFID I ni actúa como proveedor de servicios de inversión con licencia (corredor) en el sentido de MiFID II. Todas las operaciones en la plataforma son simuladas con cuentas virtuales, y términos como 'trading' o 'trader' deben entenderse en este contexto.",
+		"technicalSolution": "La solución técnica ofrecida en forma de plataformas, como parte de los servicios de la Compañía, utiliza servicios de terceros. El sitio web es administrado y propiedad de la Compañía, y todo el contenido está protegido por los derechos de autor de la Compañía.",
+		"restrictedCountries": "Países restringidos: Pakistán, Irán, Siria, Myanmar, Bangladesh, Vietnam, Corea del Norte, Rusia, Bielorrusia, Cuba, Líbano, Libia, Sudán, Crimea, Donetsk, Luhansk, EAU."
+	},
+	"subscription": {
+		"nameLabel": "Nombre",
+		"namePlaceholder": "Introduce tu nombre",
+		"nameRequired": "Nombre requerido",
+		"emailLabel": "Correo electrónico",
+		"emailPlaceholder": "Introduce tu correo electrónico",
+		"emailRequired": "Correo electrónico es obligatorio",
+		"emailInvalid": "Dirección de correo electrónico no válida",
+		"termsLabel": "Acepto los ",
+		"termsLink": "Términos y Condiciones",
+		"termsRequired": "Debe aceptar los términos y condiciones"
+	},
+	"subscriptionForm": {
+		"successToastTitle": "¡Ya estás registrado!",
+		"successToastDescription": "¡Inicia sesión para unirte a la acción!",
+		"welcomeEmailToastTitle": "Enviando correo de bienvenida",
+		"welcomeEmailToastDescription": "Estamos enviando tu correo de bienvenida. Revisa tu bandeja de entrada.",
+		"confirmationEmailSuccessTitle": "Correo de bienvenida enviado.",
+		"confirmationEmailSuccessDescription": "Revisa tu correo electrónico para completar el registro.",
+		"confirmationEmailErrorTitle": "Error al enviar el correo.",
+		"confirmationEmailErrorDescription": "No se pudo enviar el correo de confirmación.",
+		"paymentCreationError": "No se pudo crear el registro de pago.",
+		"errorToastTitle": "Error",
+		"errorToastDescription": "Algo salió mal. Por favor, inténtalo de nuevo.",
+		"processing": "Procesando...",
+		"register": "Registrar"
+	},
+	"terms": {
+		"title": "Términos y Condiciones",
+		"sections": {
+			"generalDescriptionTitle": "1. Descripción General del Concurso",
+			"generalDescriptionContent": "Este concurso de trading se organiza como propuesta diferente con una clara oportunidad porcentual de participar para ser ganador.\n\nLos participantes deben tener la edad legal en su jurisdicción para participar.",
+			"eligibilityTitle": "2. Elegibilidad",
+			"eligibilityList": [
+				"Los participantes deben tener al menos 18 años.",
+				"Deben contar con una dirección de correo electrónico válida.",
+				"Deben completar el proceso de registro y pagar la tarifa de inscripción.",
+				"Deben realizar un deposito mínimo de 50 usd con nuestro socio broker, corredor comercial oficial.",
+				"Deben cumplir con todas las leyes y regulaciones locales."
+			],
+			"contestRulesTitle": "3. Reglas del Concurso",
+			"contestRulesList": [
+				"Aceptar los Términos y condiciones.",
+				"Realizar el pago de la inscripción.",
+				"Agendar la cita para la creación de la cuenta de trading.",
+				"Crea la Cuenta verifica tu identidad, realiza tu deposito mínimo.",
+				"NO infringir la condición de llevar tu Dropdown (DD) al limite del 45%, causa de descalificación automática.",
+				"El trading debe realizarse dentro del período de concurso especificado.",
+				"Solo se permiten los instrumentos de trading designados.",
+				"Los participantes deben usar su propia y única cuenta de trading ASIGNADA con el link de Elite Trader Hub por nuestro socio broker, corredor comercial oficial."
+			],
+			"prizeDistributionTitle": "4. Distribución de Premios",
+			"prizeDistributionContent": "Los premios se distribuirán según la tabla de clasificaciones finales al momento de terminar el ciclo CALENDARIO del concurso. El organizador se reserva el derecho de verificar todas las actividades de trading antes de distribuir los premios.",
+			"disqualificationTitle": "5. Descalificación",
+			"disqualificationIntro": "El organizador se reserva el derecho de descalificar a cualquier participante que:",
+			"disqualificationList": [
+				"Infrinja las reglas del concurso.",
+				"Proporcione información falsa.",
+				"Participe en prácticas de trading desleales.",
+				"Intente manipular los resultados del concurso.",
+				"Infringir la condición de llevar tu Dropdown (DD) al limite del 45%."
+			],
+			"liabilityTitle": "6. Politica De Reembolso",
+			"liabilityContent": "Al participar en el Torneo de Trading y/o cualquier actividad relacionada con Elite Trader Hub.co, el participante reconoce y acepta que no se realizarán reembolsos bajo ninguna circunstancia. El pago de la inscripción es final e intransferible, y no se devolverá ni total ni parcialmente, independientemente de los resultados obtenidos en el torneo, la descalificación del participante o cualquier otra situación que pueda surgir durante el evento. \n\n Al completar su inscripción, el participante entiende y acepta que está comprometido con los términos establecidos y que cualquier pago realizado no es sujeto de reembolso.",
+			"limitresponTitle": "7. Limitación de Responsabilidades",
+			"limitresponList": [
+				"El trading en los mercados financieros conlleva un riesgo significativo de pérdida de capital. Los resultados pasados no garantizan resultados futuros. La participación en este torneo y cualquier actividad de trading asociada con él implica el reconocimiento de que las inversiones en instrumentos financieros son inherentemente riesgosas. Usted entiende y acepta que no existe garantía de ganancias y que es posible perder una parte o la totalidad del capital invertido.",
+				"Responsabilidad del Participante: Es responsabilidad exclusiva del participante asegurarse de que cumple con todos los requisitos y regulaciones legales para operar en los mercados financieros según las leyes y normativas de su país de residencia. La Empresa no será responsable de ninguna pérdida derivada de la incapacidad de un participante para cumplir con dichas regulaciones.",
+				"Asociación con Brokers: El participante entiende que Elite Trader Hub.co tiene acuerdos de IB Partnership con diversos brokers. Al participar en este concurso o al abrir una cuenta de trading con dichos brokers, el participante acepta los términos y condiciones de cada broker, incluidos los costos asociados, los términos de negociación, y las comisiones establecidas por el broker. La Empresa no es responsable de ninguna operación, depósito, retiro o problema relacionado con la cuenta de trading del participante en los brokers asociados.",
+				"Cuentas de Trading: La apertura de una cuenta de trading con un depósito inicial mínimo de $50 USD es necesaria para participar en el torneo. El participante reconoce que el monto de la inscripción y los depósitos en la cuenta son su responsabilidad. La Empresa actúa únicamente como intermediario para facilitar el acceso al broker y no tiene control sobre las decisiones de trading ni sobre la ejecución de las operaciones realizadas en las cuentas de los participantes.",
+				"No Garantía de Resultados: Elite Trader Hub.co no garantiza ningún tipo de éxito financiero para los participantes, ni promete un porcentaje específico de ganancias o de probabilidades de éxito. Todos los resultados de trading dependen de factores fuera del control de la Empresa, incluyendo pero no limitándose a las condiciones del mercado, las estrategias utilizadas por el participante y las decisiones de trading.",
+				"Descalificación del Concurso: Los participantes aceptan que Elite Trader Hub.co se reserva el derecho de descalificar a cualquier trader que no cumpla con las reglas del concurso, incluidas las políticas sobre gestión de riesgo y el Drawdown. En particular, si el Drawdown (DD) alcanza el 45%, la cuenta del participante será descalificada del concurso automáticamente, sin derecho a reembolso o compensación.",
+				"Exoneración de Responsabilidad: El participante exime de responsabilidad a Elite Trader Hub.co, sus miembros, socios, afiliados, representantes y colaboradores, de cualquier pérdida financiera, daños, costos o perjuicios derivados de su participación en el torneo o el uso de servicios relacionados con el brokeraje. Esto incluye, pero no se limita a, pérdidas derivadas de decisiones de trading, errores en la ejecución de operaciones, o el incumplimiento de las normativas de trading establecidas por los brokers asociados.",
+				"Confidencialidad y Privacidad: Elite Trader Hub.co se compromete a tratar la información personal y financiera de los participantes con estricta confidencialidad y de acuerdo con nuestras políticas de privacidad. Sin embargo, el participante acepta que los detalles de su cuenta de trading, los resultados del torneo y cualquier otra información relevante podrán ser compartidos con brokers asociados según sea necesario para la ejecución de los servicios.",
+				"Modificaciones del Torneo: Elite Trader Hub.co se reserva el derecho de modificar los términos y condiciones del concurso en cualquier momento, incluyendo el valor de los premios, los requisitos de participación y las reglas de gestión de riesgo. Cualquier cambio será comunicado a los participantes con antelación. La participación continua en el torneo constituye la aceptación de los cambios realizados."
+			],
+			"termsChangesTitle": "8. Aceptación de los Términos",
+			"termsChangesContent": "Al inscribirse y participar en el torneo de trading, el participante acepta y se compromete a cumplir con todos los términos y condiciones descritos en este descargo de responsabilidad, así como con los términos y condiciones de los brokers asociados. Si en cualquier momento el participante no está de acuerdo con los términos, debe abstenerse de participar en el concurso y/o las actividades relacionadas."
+		}
+	},
+	"paymentCard": {
+		"sections": {
+			"paymentWorks": {
+				"title": "Cómo Funciona el Pago",
+				"items": [
+					{
+						"icon": "Clock",
+						"title": "Tiempo de Confirmación",
+						"description": "Las transacciones en la red TRON (TRC20) son rápidas y, por lo general, se confirman en menos de 1 minuto. Sin embargo, en casos poco frecuentes, pueden tardar hasta 5 minutos dependiendo del tráfico de la red.",
+						"color": "text-blue-600"
+					},
+					{
+						"icon": "Bell",
+						"title": "Notificación Automática",
+						"description": "Una vez que el pago se confirme en la blockchain, recibirás una notificación por correo electrónico con los detalles de tu registro en el torneo.",
+						"color": "text-yellow-600"
+					}
+				]
+			},
+			"whyUsdt": {
+				"title": "Por Qué Usar USDT",
+				"items": [
+					{
+						"icon": "Shield",
+						"title": "Transacciones Seguras",
+						"description": "Las transacciones en USDT son seguras y se pueden rastrear en la blockchain.",
+						"color": "text-green-600"
+					}
+				]
+			},
+			"support": {
+				"title": "Política de Soporte",
+				"items": [
+					{
+						"icon": "HelpCircle",
+						"title": "¿Tienes Preguntas?",
+						"description": "Si tienes algún problema con tu transacción, nuestro equipo está aquí para ayudarte. Escríbenos a support@elitetraderhub.com.",
+						"color": "text-purple-600"
+					}
+				]
+			},
+			"benefits": {
+				"title": "Beneficios de Participar",
+				"items": [
+					{
+						"icon": "Trophy",
+						"title": "Beneficios del Torneo",
+						"description": [
+							"Acceso exclusivo al Elite Trading Tournament, donde podrás ganar premios increíbles.",
+							"Conéctate con una comunidad de traders apasionados.",
+							"Una oportunidad única para poner a prueba tus habilidades en un entorno competitivo."
+						],
+						"color": "text-indigo-600"
+					}
+				]
+			}
+		}
+	},
+	"paymentDetailsCard": {
+		"title": "Detalles de Pago",
+		"amountToPay": "Monto a Pagar",
+		"copySuccess": "Cantidad copiada al portapapeles",
+		"copyError": "Error al copiar al portapapeles",
+		"purchaseDetailTitle": "Detalle de la Compra",
+		"purchaseDetailDescription": "Tu pago se procesará de forma segura a través de USDT en la red TRON.",
+		"emailTitle": "Correo Electrónico"
+	},
+	"paymentInstructionsCard": {
+		"title": "Instrucciones de Pago",
+		"copySuccessAddress": "Dirección copiada al portapapeles",
+		"copySuccessAmount": "Cantidad copiada al portapapeles",
+		"copyError": "No se pudo copiar al portapapeles",
+		"sendAmount": "Envía exactamente esta cantidad:",
+		"toAddress": "A esta dirección:",
+		"pendingPayment": "Pago Pendiente",
+		"successfulPayment": "Pago Exitoso",
+		"failedPayment": "Pago Fallido",
+		"securePayment": "Pago Seguro",
+		"encrypted": "Encriptado",
+		"verified": "Verificado"
+	},
+	"nextStep": {
+		"chatTitle": "¡Felicidades! 🎉",
+		"nextStepTitle": "Siguiente Paso",
+		"chatDescription": "Chatea con nuestra Agente IA que te ayudará a crear una cita virtual para abrir tu cuenta en XM.",
+		"paymentSuccessTitle": "¡Felicidades! 🎉",
+		"paymentSuccessMessage": "Has completado exitosamente tu pago y ahora eres parte del torneo de trading con nosotros.",
+		"paymentIdLabel": "ID de Pago:"
+	},
+	"chatWidget": {
+		"getStarted": "Crear mi cita virtual",
+		"inputPlaceholder": "Escribir...",
+		"error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
+		"closeButtonTooltip": "Cerrar",
+		"minimizeButtonTooltip": "Minimizar",
+		"maximizeButtonTooltip": "Maximizar",
+		"sendButtonTooltip": "Enviar",
+		"initialMessage": "¡Bienvenido! Conoce a Sofía, tu asistente virtual."
+	},
+	"chatWidgetHome": {
+		"getStarted": "¡Vamos a chatear!",
+		"inputPlaceholder": "Escribe...",
+		"error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
+		"closeButtonTooltip": "Cerrar",
+		"minimizeButtonTooltip": "Minimizar",
+		"maximizeButtonTooltip": "Maximizar",
+		"sendButtonTooltip": "Enviar",
+		"initialMessage": "¡Bienvenido!"
+	}
 }
