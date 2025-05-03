@@ -349,6 +349,21 @@
 				"subtitle": "Únete a nuestro portafolio élite de traders y gana mientras otros copian tus estrategias exitosas",
 				"cta": "Aplicar Ahora"
 			},
+			"benefits": {
+				"title": "¿Por Qué Unirse a Nuestro Programa de Copy Trading?",
+				"tools": {
+					"title": "Herramientas de Trading Avanzadas",
+					"description": "Accede a herramientas y análisis premium para mejorar tu rendimiento de trading."
+				},
+				"following": {
+					"title": "Aumenta tus Seguidores",
+					"description": "Conectamos traders exitosos con inversores que buscan copiar estrategias rentables."
+				},
+				"income": {
+					"title": "Ingresos Adicionales",
+					"description": "Gana comisiones de seguidores que copian tus operaciones, creando una fuente de ingresos pasivos."
+				}
+			},
 			"howItWorks": {
 				"title": "Cómo Funciona",
 				"steps": [
@@ -373,11 +388,48 @@
 			"featuredTraders": {
 				"title": "Nuestros Traders Destacados",
 				"viewProfile": "Ver Perfil"
+			},
+			"development": {
+				"title": "Desarrollo Profesional de Traders",
+				"subtitle": "No solo te conectamos con seguidores - te ayudamos a convertirte en el mejor trader que puedas ser.",
+				"training": {
+					"title": "Formación Avanzada",
+					"description": "Accede a nuestros programas de formación exclusivos diseñados para mejorar tus habilidades y estrategias de trading."
+				},
+				"mentorship": {
+					"title": "Mentoría",
+					"description": "Emparéjate con traders experimentados que te guiarán para mejorar tu rendimiento."
+				},
+				"riskManagement": {
+					"title": "Gestión de Riesgos",
+					"description": "Aprende técnicas avanzadas de gestión de riesgos para proteger tu capital y el de tus seguidores."
+				},
+				"careerPath": {
+					"title": "Trayectoria Profesional",
+					"description": "Construye una carrera sostenible en trading con nuestro plan de desarrollo a largo plazo."
+				}
+			},
+			"cta": {
+				"title": "¿Listo para Transformar tu Trading en una Carrera?",
+				"subtitle": "Únete a nuestra red élite de traders profesionales y comienza a ganar mientras operas.",
+				"button": "Aplicar Ahora"
 			}
 		},
 		"trader": {
 			"copyButton": "Copiar Operaciones Ahora",
-			"downloadApp": "Descarga el Axi app para comenzar a copiar operaciones",
+			"downloadApp": "Descarga la app Axi para comenzar a copiar operaciones",
+			"performance": {
+				"title": "Rendimiento de Trading",
+				"winRate": "Tasa de Éxito",
+				"monthlyTrades": "Operaciones Mensuales",
+				"avgHolding": "Tiempo Promedio de Retención",
+				"riskLevel": "Nivel de Riesgo",
+				"specialties": "Especialidades de Trading"
+			},
+			"history": {
+				"title": "Historial de Rendimiento",
+				"chartLabel": "Gráfico de Rendimiento de Trading (Retornos Mensuales)"
+			},
 			"howToCopy": {
 				"title": "Cómo Copiar Operaciones",
 				"steps": [
@@ -396,6 +448,48 @@
 				],
 				"cta": "Comienza a Copiar Trading Ahora"
 			},
+			"testimonials": {
+				"title": "Lo Que Dicen Los Seguidores",
+				"items": [
+					{
+						"text": "Seguir a Luis ha transformado completamente mis resultados de trading. Su enfoque consistente y estrategia clara me han ayudado a lograr rendimientos que nunca pensé posibles.",
+						"author": "Carlos M."
+					},
+					{
+						"text": "Lo que más aprecio de Luis es su gestión de riesgos. Incluso durante las caídas del mercado, mi cartera se mantiene estable gracias a su cuidadoso enfoque.",
+						"author": "María T."
+					},
+					{
+						"text": "He estado haciendo copy trading durante años, pero el rendimiento de Luis destaca. Su análisis técnico es preciso, y su comunicación sobre las condiciones del mercado es excelente.",
+						"author": "John D."
+					}
+				]
+			},
+			"faq": {
+				"title": "Preguntas Frecuentes",
+				"questions": [
+					{
+						"question": "¿Cuál es la inversión mínima para copiar operaciones?",
+						"answer": "Recomendamos un mínimo de $1,000 para copiar estrategias de trading de manera efectiva con un tamaño de posición adecuado."
+					},
+					{
+						"question": "¿Con qué frecuencia operan los traders?",
+						"answer": "Esto varía según el trader, pero la mayoría realiza entre 30-50 operaciones al mes, centrándose en configuraciones de calidad."
+					},
+					{
+						"question": "¿Qué mercados se operan?",
+						"answer": "Nuestros traders se centran en varios mercados, incluyendo forex, criptomonedas, acciones y materias primas."
+					},
+					{
+						"question": "¿Qué estilos de trading se utilizan?",
+						"answer": "Los estilos de trading varían desde day trading hasta swing trading, con períodos de mantenimiento que van desde horas hasta semanas."
+					},
+					{
+						"question": "¿Cómo se estructuran las tarifas?",
+						"answer": "Normalmente hay una tarifa de suscripción mensual para copiar operaciones, sin tarifas adicionales por rendimiento."
+					}
+				]
+			},
 			"finalCta": {
 				"title": "¿Listo para Comenzar a Copiar Operaciones Rentables?",
 				"subtitle": "Únete a cientos de seguidores satisfechos que ya se benefician de la experiencia de nuestros traders.",
@@ -403,8 +497,23 @@
 				"videoSection": {
 					"title": "Cómo empezar a hacer Copy Trading con Luis",
 					"howItWorks": "¿Cómo funciona el Copy Trading?",
-					"steps": ["Encuentra a Btc Profit Rocket", "Ajuste el tamaño de sus operaciones y su tolerancia al riesgo", "¡Comience a copiar automáticamente las operaciones!"]
+					"steps": ["Encuentra a Btc Profit Rocket", "Ajusta el tamaño de tus operaciones y tu tolerancia al riesgo", "¡Comienza a copiar operaciones automáticamente!"]
 				}
+			},
+			"luisFernando": {
+				"name": "Luis Fernando",
+				"title": "Trader Profesional de Forex y Criptomonedas",
+				"roi": "+287%",
+				"period": "1 Año",
+				"bio": "Luis Fernando es un trader profesional con más de 8 años de experiencia en los mercados financieros. Especializado en análisis técnico y trading de tendencias, ha desarrollado un sistema de trading consistente que ha generado retornos excepcionales para sus seguidores.",
+				"metrics": {
+					"winRate": "72%",
+					"tradesPerMonth": "35-45",
+					"averageHolding": "2-3 días",
+					"riskLevel": "Moderado"
+				},
+				"specialties": ["Forex", "Criptomonedas", "Índices", "Materias Primas"],
+				"copyButton": "Copiar Operaciones de Luis"
 			}
 		}
 	},

@@ -171,7 +171,7 @@ const LuisFernandoV1Profile = () => {
 
 					<div className="grid md:grid-cols-3 gap-8">
 						{(t("copyTrade.trader.testimonials.items", { returnObjects: true }) as any[]).map((item: any, index: number) => (
-							<div key={index} className="bg-[#001A2C] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
+							<div key={index} className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
 								<div className="flex items-center mb-4">
 									<div className="text-yellow-400 text-xl">★★★★★</div>
 								</div>
@@ -189,26 +189,12 @@ const LuisFernandoV1Profile = () => {
 					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FFFF] drop-shadow-[0_0_8px_rgba(0,255,255,0.5)]">{t("copyTrade.trader.faq.title")}</h2>
 
 					<div className="space-y-6">
-						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
-							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.0.question")}</h3>
-							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.0.answer")}</p>
-						</div>
-						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
-							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.1.question")}</h3>
-							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.1.answer")}</p>
-						</div>
-						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
-							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.2.question")}</h3>
-							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.2.answer")}</p>
-						</div>
-						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
-							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.3.question")}</h3>
-							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.3.answer")}</p>
-						</div>
-						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
-							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.4.question")}</h3>
-							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.4.answer")}</p>
-						</div>
+						{(t("copyTrade.trader.faq.questions", { returnObjects: true }) as any[]).map((item: any, index: number) => (
+							<div key={index} className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
+								<h3 className="text-xl font-semibold mb-2 text-white">{item.question}</h3>
+								<p className="text-gray-300">{item.answer}</p>
+							</div>
+						))}
 					</div>
 				</div>
 			</section>

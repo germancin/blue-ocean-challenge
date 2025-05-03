@@ -190,26 +190,12 @@ const LuisFernandoProfile = () => {
 					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.trader.faq.title")}</h2>
 
 					<div className="space-y-6">
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.0.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.0.answer")}</p>
-						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.1.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.1.answer")}</p>
-						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.2.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.2.answer")}</p>
-						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.3.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.3.answer")}</p>
-						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.4.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.4.answer")}</p>
-						</div>
+						{(t("copyTrade.trader.faq.questions", { returnObjects: true }) as any[]).map((item: any, index: number) => (
+							<div key={index} className="bg-white p-6 rounded-lg shadow-md">
+								<h3 className="text-xl font-semibold mb-2">{item.question}</h3>
+								<p>{item.answer}</p>
+							</div>
+						))}
 					</div>
 				</div>
 			</section>
