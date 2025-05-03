@@ -16,6 +16,7 @@ import I18nEditor from "./pages/I18nEditor";
 import { useAuth } from "./components/AuthProvider";
 import CopyTradeIndex from "./pages/CopyTrade";
 import LuisFernandoProfile from "./pages/CopyTrade/LuisFernando";
+import LuisFernandoV1Profile from "./pages/CopyTrade/LuisFernandoV1";
 
 const queryClient = new QueryClient();
 
@@ -105,6 +106,7 @@ const App = () => {
 							<Route path="/i18n-editor" element={<I18nEditor />} />
 							<Route path="/copy-trade" element={<CopyTradeIndex />} />
 							<Route path="/copy-trade/luis_fernando" element={<LuisFernandoProfile />} />
+							<Route path="/copy-trade/luis_fernando_v1" element={<LuisFernandoV1Profile />} />
 						</Routes>
 					</BrowserRouter>
 				</TooltipProvider>

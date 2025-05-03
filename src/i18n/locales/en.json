@@ -417,6 +417,7 @@
 		},
 		"trader": {
 			"copyButton": "Copy Trades Now",
+			"downloadApp": "Download teh Axi app to start copy trading",
 			"performance": {
 				"title": "Trading Performance",
 				"winRate": "Win Rate",
@@ -496,7 +497,7 @@
 				"videoSection": {
 					"title": "How to start Copy Trading with Luis",
 					"howItWorks": "How does Copy Trading work?",
-					"steps": ["Find a trader to follow", "Adjust your trade size and risk tolerance", "Start copying trades automatically!"]
+					"steps": ["Find to Btc Profit Rocket", "Adjust your trade size and risk tolerance", "Start copying trades automatically!"]
 				}
 			},
 			"luisFernando": {

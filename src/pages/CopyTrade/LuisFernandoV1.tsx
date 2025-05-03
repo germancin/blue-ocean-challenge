@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import CopyTradeNavbar from "../../components/CopyTradeNavbar";
 import Footer from "../../components/Footer";
 
-const LuisFernandoProfile = () => {
+const LuisFernandoV1Profile = () => {
 	const { t } = useTranslation();
 	const [showVideo, setShowVideo] = useState(false);
 
@@ -22,74 +22,73 @@ const LuisFernandoProfile = () => {
 	};
 
 	return (
-		<main className="min-h-screen bg-light-gray">
+		<main className="min-h-screen bg-[#001A2C]">
 			<CopyTradeNavbar />
 
-			{/* Hero Section */}
+			{/* Hero Section - Dark theme with gradient text */}
 			<section className="py-20 px-4 relative text-white">
-				{/* Background Image */}
+				{/* Background Image with dark overlay */}
 				<div
 					className="absolute inset-0 z-0"
 					style={{
 						backgroundImage: 'url("https://elite-trader-hub-imgs.s3.us-east-1.amazonaws.com/hero-bg-rpt.png")',
 						backgroundSize: "cover",
 						backgroundPosition: "center",
+						filter: "brightness(0.4) contrast(1.2)",
 					}}
 				/>
-				{/* Overlay gradient */}
-				<div className="absolute inset-0 bg-gradient-to-r from-blue-600/60 to-indigo-800/60 z-10" />
 
 				{/* Content */}
 				<div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center relative z-20">
 					<div className="md:w-1/2 mb-8 md:mb-0">
-						<h1 className="text-4xl md:text-5xl font-bold mb-4">{performanceData.name}</h1>
-						<p className="text-xl mb-2">{performanceData.title}</p>
-						<div className="text-3xl font-bold text-green-300 mb-6">
+						<h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-[0_0_8px_rgba(0,255,255,0.8)]">{performanceData.name}</h1>
+						<p className="text-xl mb-2 text-[#00FFFF]">{performanceData.title}</p>
+						<div className="text-3xl font-bold text-[#00FF7F] mb-6">
 							{performanceData.roi} ROI ({performanceData.period})
 						</div>
-						<p className="mb-8">{performanceData.bio}</p>
-						<button className="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+						<p className="mb-8 text-gray-300">{performanceData.bio}</p>
+						<button className="bg-[#4169E1] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#3A5FCD] transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
 							{t("copyTrade.trader.luisFernando.copyButton")}
 						</button>
 					</div>
 					<div className="md:w-1/2 flex justify-center">
-						<div className="bg-white p-4 rounded-lg shadow-lg">
+						<div className="bg-[#0F2D3D] p-4 rounded-lg shadow-lg border border-[#00FFFF]/30">
 							<img src="/luis_fernando.png" alt="Luis Fernando" className="w-64 h-64 rounded-lg object-cover" />
 						</div>
 					</div>
 				</div>
 			</section>
 
-			{/* Performance Metrics */}
-			<section className="py-16 px-4">
+			{/* Performance Metrics - Dark theme with neon accents */}
+			<section className="py-16 px-4 bg-[#001A2C]">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.trader.performance.title")}</h2>
+					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FFFF] drop-shadow-[0_0_8px_rgba(0,255,255,0.5)]">{t("copyTrade.trader.performance.title")}</h2>
 
 					<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-						<div className="bg-white p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50">
-							<h3 className="text-lg font-semibold text-gray-600">{t("copyTrade.trader.luisFernando.metrics.winRateLabel")}</h3>
-							<p className="text-3xl font-bold text-blue-600">{performanceData.winRate}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 border border-[#00FFFF]/20">
+							<h3 className="text-lg font-semibold text-gray-300">{t("copyTrade.trader.luisFernando.metrics.winRateLabel")}</h3>
+							<p className="text-3xl font-bold text-[#00FFFF]">{performanceData.winRate}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50">
-							<h3 className="text-lg font-semibold text-gray-600">{t("copyTrade.trader.luisFernando.metrics.tradesPerMonthLabel")}</h3>
-							<p className="text-3xl font-bold text-blue-600">{performanceData.tradesPerMonth}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 border border-[#00FFFF]/20">
+							<h3 className="text-lg font-semibold text-gray-300">{t("copyTrade.trader.luisFernando.metrics.tradesPerMonthLabel")}</h3>
+							<p className="text-3xl font-bold text-[#00FFFF]">{performanceData.tradesPerMonth}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50">
-							<h3 className="text-lg font-semibold text-gray-600">{t("copyTrade.trader.luisFernando.metrics.averageHoldingLabel")}</h3>
-							<p className="text-3xl font-bold text-blue-600">{performanceData.averageHolding}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 border border-[#00FFFF]/20">
+							<h3 className="text-lg font-semibold text-gray-300">{t("copyTrade.trader.luisFernando.metrics.averageHoldingLabel")}</h3>
+							<p className="text-3xl font-bold text-[#00FFFF]">{performanceData.averageHolding}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50">
-							<h3 className="text-lg font-semibold text-gray-600">{t("copyTrade.trader.luisFernando.metrics.riskLevelLabel")}</h3>
-							<p className="text-3xl font-bold text-blue-600">{performanceData.riskLevel}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 border border-[#00FFFF]/20">
+							<h3 className="text-lg font-semibold text-gray-300">{t("copyTrade.trader.luisFernando.metrics.riskLevelLabel")}</h3>
+							<p className="text-3xl font-bold text-[#00FFFF]">{performanceData.riskLevel}</p>
 						</div>
 					</div>
 
-					<div className="mt-12 bg-white p-8 rounded-lg shadow-md text-center">
-						<h3 className="text-2xl font-bold mb-6">{t("copyTrade.trader.luisFernando.metrics.specialtiesLabel")}</h3>
+					<div className="mt-12 bg-[#0F2D3D] p-8 rounded-lg shadow-md text-center border border-[#00FFFF]/20">
+						<h3 className="text-2xl font-bold mb-6 text-[#00FFFF]">{t("copyTrade.trader.luisFernando.metrics.specialtiesLabel")}</h3>
 						<div className="flex flex-wrap gap-3 justify-center">
 							{Array.isArray(performanceData.specialties)
 								? performanceData.specialties.map((specialty: string, index: number) => (
-										<span key={index} className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">
+										<span key={index} className="bg-[#001A2C] text-[#00FF7F] px-4 py-2 rounded-full font-medium border border-[#00FF7F]/30">
 											{specialty}
 										</span>
 								  ))
@@ -99,19 +98,19 @@ const LuisFernandoProfile = () => {
 				</div>
 			</section>
 
-			{/* Trading Chart/Graph Section */}
-			<section className="py-16 px-4 bg-gray-50">
+			{/* Trading Chart/Graph Section - Dark theme */}
+			<section className="py-16 px-4 bg-[#0F2D3D]">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.trader.history.title")}</h2>
+					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FF7F] drop-shadow-[0_0_8px_rgba(0,255,127,0.5)]">{t("copyTrade.trader.history.title")}</h2>
 
-					<div className="bg-white p-6 rounded-lg shadow-md relative">
+					<div className="bg-[#001A2C] p-6 rounded-lg shadow-md relative border border-[#00FFFF]/20">
 						<img src="/lf_mfx.png" alt={`${performanceData.name} ${t("copyTrade.trader.history.chartLabel")}`} className="w-full rounded-lg shadow-sm" />
 
 						<a
 							href="https://www.myfxbook.com/portfolio/btc-profit-rocket/11419775"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="absolute bottom-10 right-10 bg-blue-600 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-700 transition-all duration-300 flex items-center gap-2 shadow-lg"
+							className="absolute bottom-10 right-10 bg-[#4169E1] text-white px-4 py-2 rounded-full font-medium hover:bg-[#3A5FCD] transition-all duration-300 flex items-center gap-2 shadow-lg"
 						>
 							<span>{t("copyTrade.trader.luisFernando.viewOnMyfxbook")}</span>
 							<svg
@@ -134,102 +133,101 @@ const LuisFernandoProfile = () => {
 				</div>
 			</section>
 
-			{/* How to Copy Trade */}
-			<section className="py-16 px-4">
+			{/* How to Copy Trade - Dark theme */}
+			<section className="py-16 px-4 bg-[#001A2C]">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.trader.howToCopy.title")}</h2>
+					<h2 className="text-3xl font-bold text-center mb-12 text-white drop-shadow-[0_0_10px_rgba(255,20,147,0.7)]">{t("copyTrade.trader.howToCopy.title")}</h2>
 
 					<div className="grid md:grid-cols-3 gap-8">
-						<div className="bg-white p-6 rounded-lg shadow-md text-center">
-							<div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">1</div>
-							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.trader.howToCopy.steps.0.title")}</h3>
-							<p>{t("copyTrade.trader.howToCopy.steps.0.description")}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#00FFFF]/20">
+							<div className="bg-[#4169E1] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">1</div>
+							<h3 className="text-xl font-semibold mb-3 text-[#00FFFF]">{t("copyTrade.trader.howToCopy.steps.0.title")}</h3>
+							<p className="text-gray-300">{t("copyTrade.trader.howToCopy.steps.0.description")}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md text-center">
-							<div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">2</div>
-							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.trader.howToCopy.steps.1.title")}</h3>
-							<p>{t("copyTrade.trader.howToCopy.steps.1.description")}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#00FFFF]/20">
+							<div className="bg-[#4169E1] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">2</div>
+							<h3 className="text-xl font-semibold mb-3 text-[#00FFFF]">{t("copyTrade.trader.howToCopy.steps.1.title")}</h3>
+							<p className="text-gray-300">{t("copyTrade.trader.howToCopy.steps.1.description")}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md text-center">
-							<div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">3</div>
-							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.trader.howToCopy.steps.2.title")}</h3>
-							<p>{t("copyTrade.trader.howToCopy.steps.2.description")}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#00FFFF]/20">
+							<div className="bg-[#4169E1] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">3</div>
+							<h3 className="text-xl font-semibold mb-3 text-[#00FFFF]">{t("copyTrade.trader.howToCopy.steps.2.title")}</h3>
+							<p className="text-gray-300">{t("copyTrade.trader.howToCopy.steps.2.description")}</p>
 						</div>
 					</div>
 
 					<div className="mt-12 text-center">
-						<button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+						<button className="bg-[#FF1493] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#FF69B4] transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
 							{t("copyTrade.trader.howToCopy.cta")}
 						</button>
 					</div>
 				</div>
 			</section>
 
-			{/* Testimonials */}
-			<section className="py-16 px-4 bg-gray-50">
+			{/* Testimonials - Dark theme */}
+			<section className="py-16 px-4 bg-[#0F2D3D]">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.trader.testimonials.title")}</h2>
+					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FF7F] drop-shadow-[0_0_8px_rgba(0,255,127,0.5)]">{t("copyTrade.trader.testimonials.title")}</h2>
 
 					<div className="grid md:grid-cols-3 gap-8">
 						{(t("copyTrade.trader.testimonials.items", { returnObjects: true }) as any[]).map((item: any, index: number) => (
-							<div key={index} className="bg-white p-6 rounded-lg shadow-md">
+							<div key={index} className="bg-[#001A2C] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
 								<div className="flex items-center mb-4">
 									<div className="text-yellow-400 text-xl">★★★★★</div>
 								</div>
-								<p className="italic mb-4">"{item.text}"</p>
-								<p className="font-semibold">- {item.author}</p>
+								<p className="italic mb-4 text-gray-300">"{item.text}"</p>
+								<p className="font-semibold text-[#00FFFF]">- {item.author}</p>
 							</div>
 						))}
 					</div>
 				</div>
 			</section>
 
-			{/* FAQ Section */}
-			<section className="py-16 px-4">
+			{/* FAQ Section - Dark theme */}
+			<section className="py-16 px-4 bg-[#001A2C]">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.trader.faq.title")}</h2>
+					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FFFF] drop-shadow-[0_0_8px_rgba(0,255,255,0.5)]">{t("copyTrade.trader.faq.title")}</h2>
 
 					<div className="space-y-6">
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.0.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.0.answer")}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
+							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.0.question")}</h3>
+							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.0.answer")}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.1.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.1.answer")}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
+							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.1.question")}</h3>
+							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.1.answer")}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.2.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.2.answer")}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
+							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.2.question")}</h3>
+							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.2.answer")}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.3.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.3.answer")}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
+							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.3.question")}</h3>
+							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.3.answer")}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.trader.faq.questions.4.question")}</h3>
-							<p>{t("copyTrade.trader.faq.questions.4.answer")}</p>
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
+							<h3 className="text-xl font-semibold mb-2 text-[#00FFFF]">{t("copyTrade.trader.faq.questions.4.question")}</h3>
+							<p className="text-gray-300">{t("copyTrade.trader.faq.questions.4.answer")}</p>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			{/* Call to Action */}
+			{/* Call to Action - Dark theme with gradient */}
 			<section className="py-20 px-4 relative text-white">
-				{/* Background Image - same as hero */}
+				{/* Background Image with dark overlay */}
 				<div
 					className="absolute inset-0 z-0"
 					style={{
 						backgroundImage: 'url("https://elite-trader-hub-imgs.s3.us-east-1.amazonaws.com/hero-bg-rpt.png")',
 						backgroundSize: "cover",
 						backgroundPosition: "center",
+						filter: "brightness(0.3) contrast(1.2)",
 					}}
 				/>
-				{/* Overlay gradient - same as hero */}
-				<div className="absolute inset-0 bg-gradient-to-r from-blue-600/60 to-indigo-800/60 z-10" />
 
 				<div className="max-w-6xl mx-auto relative z-20">
-					<h2 className="text-4xl font-bold text-center mb-12">{t("copyTrade.trader.finalCta.title")}</h2>
+					<h2 className="text-4xl font-bold text-center mb-12 text-[#00FFFF] drop-shadow-[0_0_10px_rgba(65,105,225,0.8)]">{t("copyTrade.trader.finalCta.title")}</h2>
 
 					<div className="flex flex-col md:flex-row items-center gap-8">
 						<div className="md:w-1/2 relative cursor-pointer" onClick={() => setShowVideo(true)}>
@@ -303,4 +301,4 @@ const LuisFernandoProfile = () => {
 	);
 };
 
-export default LuisFernandoProfile;
+export default LuisFernandoV1Profile;
