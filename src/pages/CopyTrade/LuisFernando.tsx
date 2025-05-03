@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import CopyTradeNavbar from "../../components/CopyTradeNavbar";
 import Footer from "../../components/Footer";
@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 const LuisFernandoProfile = () => {
 	const { t } = useTranslation();
 	const [showVideo, setShowVideo] = useState(false);
+	const videoSectionRef = useRef<HTMLDivElement>(null);
 
 	// Sample trading performance data
 	const performanceData = {
@@ -19,6 +20,10 @@ const LuisFernandoProfile = () => {
 		riskLevel: t("copyTrade.trader.luisFernando.metrics.riskLevel"),
 		specialties: t("copyTrade.trader.luisFernando.specialties", { returnObjects: true }),
 		bio: t("copyTrade.trader.luisFernando.bio"),
+	};
+
+	const scrollToVideo = () => {
+		videoSectionRef.current?.scrollIntoView({ behavior: "smooth" });
 	};
 
 	return (
@@ -48,7 +53,10 @@ const LuisFernandoProfile = () => {
 							{performanceData.roi} ROI ({performanceData.period})
 						</div>
 						<p className="mb-8">{performanceData.bio}</p>
-						<button className="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+						<button
+							onClick={scrollToVideo}
+							className="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+						>
 							{t("copyTrade.trader.luisFernando.copyButton")}
 						</button>
 					</div>
@@ -158,7 +166,10 @@ const LuisFernandoProfile = () => {
 					</div>
 
 					<div className="mt-12 text-center">
-						<button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+						<button
+							onClick={scrollToVideo}
+							className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+						>
 							{t("copyTrade.trader.howToCopy.cta")}
 						</button>
 					</div>
@@ -201,7 +212,7 @@ const LuisFernandoProfile = () => {
 			</section>
 
 			{/* Call to Action */}
-			<section className="py-20 px-4 relative text-white">
+			<section ref={videoSectionRef} className="py-20 px-4 relative text-white">
 				{/* Background Image - same as hero */}
 				<div
 					className="absolute inset-0 z-0"

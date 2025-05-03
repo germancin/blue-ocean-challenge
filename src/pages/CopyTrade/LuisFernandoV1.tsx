@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import CopyTradeNavbar from "../../components/CopyTradeNavbar";
 import Footer from "../../components/Footer";
@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 const LuisFernandoV1Profile = () => {
 	const { t } = useTranslation();
 	const [showVideo, setShowVideo] = useState(false);
+	const videoSectionRef = useRef<HTMLDivElement>(null);
 
 	// Sample trading performance data
 	const performanceData = {
@@ -21,20 +22,24 @@ const LuisFernandoV1Profile = () => {
 		bio: t("copyTrade.trader.luisFernando.bio"),
 	};
 
+	const scrollToVideo = () => {
+		videoSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+	};
+
 	return (
 		<main className="min-h-screen bg-[#001A2C]">
 			<CopyTradeNavbar />
 
-			{/* Hero Section - Dark theme with gradient text */}
+			{/* Hero Section - Dark theme with neon accents */}
 			<section className="py-20 px-4 relative text-white">
-				{/* Background Image with dark overlay */}
+				{/* Background Image */}
 				<div
 					className="absolute inset-0 z-0"
 					style={{
 						backgroundImage: 'url("https://elite-trader-hub-imgs.s3.us-east-1.amazonaws.com/hero-bg-rpt.png")',
 						backgroundSize: "cover",
 						backgroundPosition: "center",
-						filter: "brightness(0.4) contrast(1.2)",
+						filter: "brightness(0.3) contrast(1.2)",
 					}}
 				/>
 
@@ -47,7 +52,10 @@ const LuisFernandoV1Profile = () => {
 							{performanceData.roi} ROI ({performanceData.period})
 						</div>
 						<p className="mb-8 text-gray-300">{performanceData.bio}</p>
-						<button className="bg-[#4169E1] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#3A5FCD] transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+						<button
+							onClick={scrollToVideo}
+							className="bg-[#4169E1] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#3A5FCD] transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+						>
 							{t("copyTrade.trader.luisFernando.copyButton")}
 						</button>
 					</div>
