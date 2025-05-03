@@ -293,6 +293,17 @@ const LuisFernandoV1Profile = () => {
 								allowFullScreen
 							></iframe>
 						</div>
+						<div className="mt-6 text-center">
+							<p className="text-white mb-3">{t("copyTrade.trader.downloadApp")}</p>
+							<div className="flex justify-center gap-4 flex-wrap">
+								<a href="https://apps.apple.com/us/app/axi-copy-trading/id1589937901" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105">
+									<img src="https://d2tpnh780x5es.cloudfront.net/rebrand-prod/bjgbj352/ios-app-store.png" alt="Download on App Store" className="h-12" />
+								</a>
+								<a href="https://play.google.com/store/apps/details?id=com.axi.pelican" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105">
+									<img src="https://d2tpnh780x5es.cloudfront.net/rebrand-prod/geoab2o3/google-play.png" alt="Get it on Google Play" className="h-12" />
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			)}
