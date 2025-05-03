@@ -341,5 +341,145 @@
 		"maximizeButtonTooltip": "Maximize",
 		"sendButtonTooltip": "Send",
 		"initialMessage": "Welcome!"
+	},
+	"copyTrade": {
+		"index": {
+			"hero": {
+				"title": "Become a Professional Copy Trader",
+				"subtitle": "Join our elite portfolio of traders and earn while others copy your successful strategies",
+				"cta": "Apply Now"
+			},
+			"benefits": {
+				"title": "Why Join Our Copy Trading Program?",
+				"tools": {
+					"title": "Advanced Trading Tools",
+					"description": "Access premium trading tools and analytics to enhance your trading performance."
+				},
+				"following": {
+					"title": "Grow Your Following",
+					"description": "We connect successful traders with investors looking to copy profitable strategies."
+				},
+				"income": {
+					"title": "Additional Income",
+					"description": "Earn commissions from followers who copy your trades, creating a passive income stream."
+				}
+			},
+			"howItWorks": {
+				"title": "How It Works",
+				"steps": [
+					{
+						"title": "Apply",
+						"description": "Submit your trading history and performance metrics"
+					},
+					{
+						"title": "Get Verified",
+						"description": "Our team reviews your application and trading performance"
+					},
+					{
+						"title": "Onboarding",
+						"description": "Receive your personalized landing page and trading tools"
+					},
+					{
+						"title": "Start Earning",
+						"description": "We connect you with followers and you earn from copied trades"
+					}
+				]
+			},
+			"featuredTraders": {
+				"title": "Our Featured Traders",
+				"viewProfile": "View Profile"
+			},
+			"development": {
+				"title": "Professional Trader Development",
+				"subtitle": "We don't just connect you with followers - we help you become the best trader you can be.",
+				"training": {
+					"title": "Advanced Training",
+					"description": "Access our exclusive training programs designed to enhance your trading skills and strategies."
+				},
+				"mentorship": {
+					"title": "Mentorship",
+					"description": "Get paired with experienced traders who will guide you to improve your performance."
+				},
+				"riskManagement": {
+					"title": "Risk Management",
+					"description": "Learn advanced risk management techniques to protect your capital and your followers."
+				},
+				"careerPath": {
+					"title": "Career Path",
+					"description": "Build a sustainable career in trading with our long-term development plan."
+				}
+			},
+			"cta": {
+				"title": "Ready to Transform Your Trading into a Career?",
+				"subtitle": "Join our elite network of professional traders and start earning while you trade.",
+				"button": "Apply Now"
+			}
+		},
+		"trader": {
+			"copyButton": "Copy Trades Now",
+			"performance": {
+				"title": "Trading Performance",
+				"winRate": "Win Rate",
+				"monthlyTrades": "Monthly Trades",
+				"avgHolding": "Avg. Holding Time",
+				"riskLevel": "Risk Level",
+				"specialties": "Trading Specialties"
+			},
+			"history": {
+				"title": "Performance History",
+				"chartLabel": "Trading Performance Chart (Monthly Returns)"
+			},
+			"howToCopy": {
+				"title": "How to Copy Trades",
+				"steps": [
+					{
+						"title": "Sign Up",
+						"description": "Create your account on EliteTraderHub and complete the verification process."
+					},
+					{
+						"title": "Fund Your Account",
+						"description": "Deposit funds into your trading account. Minimum recommended amount: $1,000."
+					},
+					{
+						"title": "Start Copying",
+						"description": "Select your trader and set your copy trading parameters."
+					}
+				],
+				"cta": "Start Copy Trading Now"
+			},
+			"testimonials": {
+				"title": "What Followers Say"
+			},
+			"faq": {
+				"title": "Frequently Asked Questions",
+				"questions": [
+					{
+						"question": "What is the minimum investment to copy trades?",
+						"answer": "We recommend a minimum of $1,000 to effectively copy trading strategies with proper position sizing."
+					},
+					{
+						"question": "How often do traders trade?",
+						"answer": "This varies by trader, but most make between 30-50 trades per month, focusing on quality setups."
+					},
+					{
+						"question": "What markets are traded?",
+						"answer": "Our traders focus on various markets including forex, cryptocurrencies, stocks, and commodities."
+					},
+					{
+						"question": "What trading styles are used?",
+						"answer": "Trading styles vary from day trading to swing trading, with holding periods ranging from hours to weeks."
+					},
+					{
+						"question": "How are fees structured?",
+						"answer": "There is typically a monthly subscription fee to copy trades, with no additional performance fees."
+					}
+				]
+			},
+			"finalCta": {
+				"title": "Ready to Start Copying Profitable Trades?",
+				"subtitle": "Join hundreds of satisfied followers who are already benefiting from our traders' expertise.",
+				"button": "Get Started Now"
+			}
+		}
 	}
 }

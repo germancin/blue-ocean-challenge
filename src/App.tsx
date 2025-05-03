@@ -1,19 +1,21 @@
-import React from 'react';
-import { Toaster } from '@/components/ui/toaster';
-import { Toaster as Sonner } from '@/components/ui/sonner';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AuthProvider } from './components/AuthProvider';
-import Index from './pages/Index';
-import Payment from './pages/Payment';
-import AuthPage from './pages/Auth';
-import ProfilePage from './pages/Profile';
-import Terms from './pages/Terms';
-import ChartPage from './pages/Chart';
-import NextStep from './pages/NextStep';
-import I18nEditor from './pages/I18nEditor';
-import { useAuth } from './components/AuthProvider';
+import React from "react";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { AuthProvider } from "./components/AuthProvider";
+import Index from "./pages/Index";
+import Payment from "./pages/Payment";
+import AuthPage from "./pages/Auth";
+import ProfilePage from "./pages/Profile";
+import Terms from "./pages/Terms";
+import ChartPage from "./pages/Chart";
+import NextStep from "./pages/NextStep";
+import I18nEditor from "./pages/I18nEditor";
+import { useAuth } from "./components/AuthProvider";
+import CopyTradeIndex from "./pages/CopyTrade";
+import LuisFernandoProfile from "./pages/CopyTrade/LuisFernando";
 
 const queryClient = new QueryClient();
 
@@ -21,10 +23,10 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 	const { user, loading } = useAuth();
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
-	const token = searchParams.get('token');
-	const type = searchParams.get('type');
-	const changePassword = searchParams.get('changePassword');
-	const isPasswordReset = (type === 'recovery' && token) || changePassword === 'true';
+	const token = searchParams.get("token");
+	const type = searchParams.get("type");
+	const changePassword = searchParams.get("changePassword");
+	const isPasswordReset = (type === "recovery" && token) || changePassword === "true";
 
 	if (loading) {
 		return <div>Loading...</div>;
@@ -45,9 +47,9 @@ const RedirectIfAuthenticated = ({ children }: { children: React.ReactNode }) =>
 	const { user, loading } = useAuth();
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
-	const token = searchParams.get('token');
-	const type = searchParams.get('type');
-	const isPasswordReset = type === 'recovery' && token;
+	const token = searchParams.get("token");
+	const type = searchParams.get("type");
+	const isPasswordReset = type === "recovery" && token;
 
 	if (loading) {
 		return <div>Loading...</div>;
@@ -101,6 +103,8 @@ const App = () => {
 								}
 							/>
 							<Route path="/i18n-editor" element={<I18nEditor />} />
+							<Route path="/copy-trade" element={<CopyTradeIndex />} />
+							<Route path="/copy-trade/luis_fernando" element={<LuisFernandoProfile />} />
 						</Routes>
 					</BrowserRouter>
 				</TooltipProvider>
