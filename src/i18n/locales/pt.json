@@ -434,7 +434,7 @@
 				"steps": [
 					{
 						"title": "Cadastre-se",
-						"description": "Crie sua conta no EliteTraderHub e complete o processo de verificação."
+						"description": "Crie sua conta no Axi e complete o processo de verificação."
 					},
 					{
 						"title": "Financie Sua Conta",
@@ -479,6 +479,22 @@
 				"title": "Pronto para Começar a Copiar Operações Lucrativas?",
 				"subtitle": "Junte-se a centenas de seguidores satisfeitos que já estão se beneficiando da expertise de nossos traders.",
 				"button": "Comece Agora"
+			},
+			"luisFernando": {
+				"name": "Luis Fernando",
+				"title": "Especialista em Forex e Cripto",
+				"roi": "+287%",
+				"period": "Últimos 12 meses",
+				"bio": "Com mais de 7 anos de experiência em trading, Luis Fernando desenvolveu uma estratégia única combinando análise técnica com indicadores macroeconômicos. Seu desempenho consistente atraiu centenas de seguidores que se beneficiam de sua abordagem disciplinada ao trading.",
+				"copyButton": "Copiar Operações do Luis",
+				"viewOnMyfxbook": "Ver no MyFXBook",
+				"metrics": {
+					"winRate": "73%",
+					"tradesPerMonth": "42",
+					"averageHolding": "3.2 dias",
+					"riskLevel": "Moderado"
+				},
+				"specialties": ["EUR/USD", "BTC/USD", "ETH/USD", "Ouro"]
 			}
 		}
 	},

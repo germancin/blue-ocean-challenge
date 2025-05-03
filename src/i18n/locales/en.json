@@ -434,7 +434,7 @@
 				"steps": [
 					{
 						"title": "Sign Up",
-						"description": "Create your account on EliteTraderHub and complete the verification process."
+						"description": "Create your account on Axi and complete the verification process."
 					},
 					{
 						"title": "Fund Your Account",
@@ -448,7 +448,21 @@
 				"cta": "Start Copy Trading Now"
 			},
 			"testimonials": {
-				"title": "What Followers Say"
+				"title": "What Followers Say",
+				"items": [
+					{
+						"text": "Following Luis has completely transformed my trading results. His consistent approach and clear strategy have helped me achieve returns I never thought possible.",
+						"author": "Carlos M."
+					},
+					{
+						"text": "What I appreciate most about Luis is his risk management. Even during market downturns, my portfolio remains stable thanks to his careful approach.",
+						"author": "Maria T."
+					},
+					{
+						"text": "I've been copy trading for years, but Luis's performance stands out. His technical analysis is spot on, and his communication about market conditions is excellent.",
+						"author": "John D."
+					}
+				]
 			},
 			"faq": {
 				"title": "Frequently Asked Questions",
@@ -478,7 +492,33 @@
 			"finalCta": {
 				"title": "Ready to Start Copying Profitable Trades?",
 				"subtitle": "Join hundreds of satisfied followers who are already benefiting from our traders' expertise.",
-				"button": "Get Started Now"
+				"button": "Get Started Now",
+				"videoSection": {
+					"title": "How to start Copy Trading with Luis",
+					"howItWorks": "How does Copy Trading work?",
+					"steps": ["Find a trader to follow", "Adjust your trade size and risk tolerance", "Start copying trades automatically!"]
+				}
+			},
+			"luisFernando": {
+				"name": "Luis Fernando",
+				"title": "Forex & Crypto Specialist",
+				"roi": "+287%",
+				"period": "Last 12 months",
+				"bio": "With over 7 years of trading experience, Luis Fernando has developed a unique strategy combining technical analysis with macroeconomic indicators. His consistent performance has attracted hundreds of followers who benefit from his disciplined approach to trading.",
+				"copyButton": "Copy Luis's Trades Now",
+				"viewOnMyfxbook": "View on MyFXBook",
+				"metrics": {
+					"winRate": "73%",
+					"tradesPerMonth": "42",
+					"averageHolding": "3.2 days",
+					"riskLevel": "Moderate",
+					"winRateLabel": "Win Rate",
+					"tradesPerMonthLabel": "Monthly Trades",
+					"averageHoldingLabel": "Avg. Holding Time",
+					"riskLevelLabel": "Risk Level",
+					"specialtiesLabel": "Trading Specialties"
+				},
+				"specialties": ["EUR/USD", "BTC/USD", "ETH/USD", "Gold"]
 			}
 		}
 	},

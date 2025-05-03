@@ -434,7 +434,7 @@
 				"steps": [
 					{
 						"title": "Regístrate",
-						"description": "Crea tu cuenta en EliteTraderHub y completa el proceso de verificación."
+						"description": "Crea tu cuenta en Axi y completa el proceso de verificación."
 					},
 					{
 						"title": "Fondea tu Cuenta",
@@ -448,7 +448,21 @@
 				"cta": "Comienza a Copiar Trading Ahora"
 			},
 			"testimonials": {
-				"title": "Lo que Dicen los Seguidores"
+				"title": "Lo que Dicen los Seguidores",
+				"items": [
+					{
+						"text": "Seguir a Luis ha transformado completamente mis resultados de trading. Su enfoque consistente y estrategia clara me han ayudado a lograr rendimientos que nunca pensé posibles.",
+						"author": "Carlos M."
+					},
+					{
+						"text": "Lo que más aprecio de Luis es su gestión de riesgo. Incluso durante las caídas del mercado, mi cartera permanece estable gracias a su cuidadoso enfoque.",
+						"author": "María T."
+					},
+					{
+						"text": "He estado haciendo copy trading durante años, pero el rendimiento de Luis destaca. Su análisis técnico es preciso, y su comunicación sobre las condiciones del mercado es excelente.",
+						"author": "Juan D."
+					}
+				]
 			},
 			"faq": {
 				"title": "Preguntas Frecuentes",
@@ -478,7 +492,33 @@
 			"finalCta": {
 				"title": "¿Listo para Comenzar a Copiar Operaciones Rentables?",
 				"subtitle": "Únete a cientos de seguidores satisfechos que ya se benefician de la experiencia de nuestros traders.",
-				"button": "Comenzar Ahora"
+				"button": "Comenzar Ahora",
+				"videoSection": {
+					"title": "Cómo empezar a hacer Copy Trading con Luis",
+					"howItWorks": "¿Cómo funciona el Copy Trading?",
+					"steps": ["Encuentre un operador al que seguir", "Ajuste el tamaño de sus operaciones y su tolerancia al riesgo", "¡Comience a copiar automáticamente las operaciones!"]
+				}
+			},
+			"luisFernando": {
+				"name": "Luis Fernando",
+				"title": "Especialista en Forex y Criptomonedas",
+				"roi": "+287%",
+				"period": "Últimos 12 meses",
+				"bio": "Con más de 7 años de experiencia en trading, Luis Fernando ha desarrollado una estrategia única que combina análisis técnico con indicadores macroeconómicos. Su rendimiento constante ha atraído a cientos de seguidores que se benefician de su enfoque disciplinado del trading.",
+				"copyButton": "Copiar Operaciones de Luis",
+				"viewOnMyfxbook": "Ver en MyFXBook",
+				"metrics": {
+					"winRate": "73%",
+					"tradesPerMonth": "42",
+					"averageHolding": "3.2 días",
+					"riskLevel": "Moderado",
+					"winRateLabel": "Tasa de Éxito",
+					"tradesPerMonthLabel": "Operaciones Mensuales",
+					"averageHoldingLabel": "Tiempo Promedio",
+					"riskLevelLabel": "Nivel de Riesgo",
+					"specialtiesLabel": "Especialidades"
+				},
+				"specialties": ["EUR/USD", "BTC/USD", "ETH/USD", "Oro"]
 			}
 		}
 	},
