@@ -141,23 +141,23 @@ const LuisFernandoV1Profile = () => {
 				</div>
 			</section>
 
-			{/* How to Copy Trade - Dark theme */}
-			<section className="py-16 px-4 bg-[#001A2C]">
+			{/* How to Copy Trade - Dark blue theme */}
+			<section className="py-16 px-4 bg-[#001428]">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12 text-white drop-shadow-[0_0_10px_rgba(255,20,147,0.7)]">{t("copyTrade.trader.howToCopy.title")}</h2>
+					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FFFF]">{t("copyTrade.trader.howToCopy.title")}</h2>
 
 					<div className="grid md:grid-cols-3 gap-8">
-						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#00FFFF]/20">
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#FF1493]/20">
 							<div className="bg-[#4169E1] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">1</div>
 							<h3 className="text-xl font-semibold mb-3 text-[#00FFFF]">{t("copyTrade.trader.howToCopy.steps.0.title")}</h3>
 							<p className="text-gray-300">{t("copyTrade.trader.howToCopy.steps.0.description")}</p>
 						</div>
-						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#00FFFF]/20">
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#FF1493]/20">
 							<div className="bg-[#4169E1] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">2</div>
 							<h3 className="text-xl font-semibold mb-3 text-[#00FFFF]">{t("copyTrade.trader.howToCopy.steps.1.title")}</h3>
 							<p className="text-gray-300">{t("copyTrade.trader.howToCopy.steps.1.description")}</p>
 						</div>
-						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#00FFFF]/20">
+						<div className="bg-[#0F2D3D] p-6 rounded-lg shadow-md text-center border border-[#FF1493]/20">
 							<div className="bg-[#4169E1] text-white w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold mx-auto">3</div>
 							<h3 className="text-xl font-semibold mb-3 text-[#00FFFF]">{t("copyTrade.trader.howToCopy.steps.2.title")}</h3>
 							<p className="text-gray-300">{t("copyTrade.trader.howToCopy.steps.2.description")}</p>
@@ -165,41 +165,44 @@ const LuisFernandoV1Profile = () => {
 					</div>
 
 					<div className="mt-12 text-center">
-						<button className="bg-[#FF1493] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#FF69B4] transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+						<button
+							onClick={scrollToVideo}
+							className="bg-[#FF1493] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#FF69B4] transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+						>
 							{t("copyTrade.trader.howToCopy.cta")}
 						</button>
 					</div>
 				</div>
 			</section>
 
-			{/* Testimonials - Dark theme */}
-			<section className="py-16 px-4 bg-[#0F2D3D]">
+			{/* Lo Que Dicen Los Seguidores - Dark purple theme */}
+			<section className="py-16 px-4 bg-[#1A0A2E]">
 				<div className="max-w-6xl mx-auto">
 					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FF7F] drop-shadow-[0_0_8px_rgba(0,255,127,0.5)]">{t("copyTrade.trader.testimonials.title")}</h2>
 
 					<div className="grid md:grid-cols-3 gap-8">
 						{(t("copyTrade.trader.testimonials.items", { returnObjects: true }) as any[]).map((item: any, index: number) => (
-							<div key={index} className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
+							<div key={index} className="bg-[#13082A] p-6 rounded-lg shadow-md border border-[#3D0A4F]">
 								<div className="flex items-center mb-4">
-									<div className="text-yellow-400 text-xl">★★★★★</div>
+									<div className="text-[#FFD700] text-xl">★★★★★</div>
 								</div>
 								<p className="italic mb-4 text-gray-300">"{item.text}"</p>
-								<p className="font-semibold text-[#00FFFF]">- {item.author}</p>
+								<p className="font-semibold text-[#FF69B4]">- {item.author}</p>
 							</div>
 						))}
 					</div>
 				</div>
 			</section>
 
-			{/* FAQ Section - Dark theme */}
+			{/* Preguntas Frecuentes - Dark teal theme */}
 			<section className="py-16 px-4 bg-[#001A2C]">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FFFF] drop-shadow-[0_0_8px_rgba(0,255,255,0.5)]">{t("copyTrade.trader.faq.title")}</h2>
+					<h2 className="text-3xl font-bold text-center mb-12 text-[#00FFFF]">{t("copyTrade.trader.faq.title")}</h2>
 
-					<div className="space-y-6">
+					<div className="space-y-4">
 						{(t("copyTrade.trader.faq.questions", { returnObjects: true }) as any[]).map((item: any, index: number) => (
-							<div key={index} className="bg-[#0F2D3D] p-6 rounded-lg shadow-md border border-[#00FFFF]/20">
-								<h3 className="text-xl font-semibold mb-2 text-white">{item.question}</h3>
+							<div key={index} className="bg-[#002A3A] p-6 rounded-lg shadow-md border border-[#0A2A3A]">
+								<h3 className="text-xl font-semibold mb-2 text-[#00FF7F]">{item.question}</h3>
 								<p className="text-gray-300">{item.answer}</p>
 							</div>
 						))}
@@ -208,7 +211,7 @@ const LuisFernandoV1Profile = () => {
 			</section>
 
 			{/* Call to Action - Dark theme with gradient */}
-			<section className="py-20 px-4 relative text-white">
+			<section ref={videoSectionRef} className="py-20 px-4 relative text-white">
 				{/* Background Image with dark overlay */}
 				<div
 					className="absolute inset-0 z-0"
@@ -233,14 +236,14 @@ const LuisFernandoV1Profile = () => {
 									</div>
 								</div>
 							</div>
-							<h2 className="text-3xl font-bold mt-4">{t("copyTrade.trader.finalCta.videoSection.title")}</h2>
+							<h2 className="text-3xl font-bold mt-4 text-[#00FFFF]">{t("copyTrade.trader.finalCta.videoSection.title")}</h2>
 						</div>
 						<div className="md:w-1/2">
-							<h2 className="text-3xl font-bold mb-6">{t("copyTrade.trader.finalCta.videoSection.howItWorks")}</h2>
-							<ol className="space-y-4 text-lg">
+							<h2 className="text-3xl font-bold mb-6 text-[#00FFFF]">{t("copyTrade.trader.finalCta.videoSection.howItWorks")}</h2>
+							<ol className="space-y-4 text-lg text-gray-300">
 								{(t("copyTrade.trader.finalCta.videoSection.steps", { returnObjects: true }) as string[]).map((step: string, index: number) => (
 									<li key={index} className="flex gap-2">
-										<span className="font-bold">{index + 1}.</span> {step}
+										<span className="font-bold text-[#00FF7F]">{index + 1}.</span> {step}
 									</li>
 								))}
 							</ol>
@@ -261,30 +264,34 @@ const LuisFernandoV1Profile = () => {
 
 			{/* Video Modal */}
 			{showVideo && (
-				<div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4" onClick={() => setShowVideo(false)}>
-					<div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
-						<button className="absolute -top-10 right-0 text-white text-2xl" onClick={() => setShowVideo(false)}>
-							✕
+				<div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+					<div className="relative w-full max-w-4xl">
+						<button onClick={() => setShowVideo(false)} className="absolute -top-12 right-0 text-white hover:text-gray-300 focus:outline-none">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
 						</button>
-						<div className="relative pb-[56.25%] h-0">
+						<div className="aspect-video">
 							<iframe
-								className="absolute top-0 left-0 w-full h-full rounded-lg"
-								src="https://www.youtube.com/embed/9RSEBKCk3tI?autoplay=1"
-								title="Copy Trading Tutorial"
+								width="100%"
+								height="100%"
+								src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+								title="YouTube video player"
+								frameBorder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 								allowFullScreen
 							></iframe>
-						</div>
-						<div className="mt-6 text-center">
-							<p className="text-white mb-3">{t("copyTrade.trader.downloadApp")}</p>
-							<div className="flex justify-center gap-4 flex-wrap">
-								<a href="https://apps.apple.com/us/app/axi-copy-trading/id1589937901" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105">
-									<img src="https://d2tpnh780x5es.cloudfront.net/rebrand-prod/bjgbj352/ios-app-store.png" alt="Download on App Store" className="h-12" />
-								</a>
-								<a href="https://play.google.com/store/apps/details?id=com.axi.pelican" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105">
-									<img src="https://d2tpnh780x5es.cloudfront.net/rebrand-prod/geoab2o3/google-play.png" alt="Get it on Google Play" className="h-12" />
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>
