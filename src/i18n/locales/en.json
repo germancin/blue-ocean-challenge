@@ -481,5 +481,22 @@
 				"button": "Get Started Now"
 			}
 		}
+	},
+	"copyTradeRegistration": {
+		"title": "Apply to Become a Copy Trader",
+		"nameLabel": "Full Name",
+		"nameRequired": "Full name is required",
+		"emailLabel": "Email Address",
+		"emailRequired": "Email is required",
+		"emailInvalid": "Please enter a valid email",
+		"phoneLabel": "Phone Number",
+		"phoneRequired": "Phone number is required",
+		"mfxAccountLabel": "MFX Account Link",
+		"mfxAccountRequired": "MFX account link is required",
+		"register": "Register Now",
+		"submitting": "Submitting...",
+		"successTitle": "Thank You!",
+		"successMessage": "We've received your application. Our team will contact you soon!",
+		"disclaimer": "Your information is secure and will only be used to evaluate your application for our copy trading program."
 	}
 }

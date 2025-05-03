@@ -66,19 +66,19 @@ const LuisFernandoProfile = () => {
 					<h2 className="text-3xl font-bold text-center mb-12">Trading Performance</h2>
 
 					<div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-						<div className="bg-white p-6 rounded-lg shadow-md text-center">
+						<div className="bg-white p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50">
 							<h3 className="text-lg font-semibold text-gray-600">Win Rate</h3>
 							<p className="text-3xl font-bold text-blue-600">{performanceData.winRate}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md text-center">
+						<div className="bg-white p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50">
 							<h3 className="text-lg font-semibold text-gray-600">Monthly Trades</h3>
 							<p className="text-3xl font-bold text-blue-600">{performanceData.tradesPerMonth}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md text-center">
+						<div className="bg-white p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50">
 							<h3 className="text-lg font-semibold text-gray-600">Avg. Holding Time</h3>
 							<p className="text-3xl font-bold text-blue-600">{performanceData.averageHolding}</p>
 						</div>
-						<div className="bg-white p-6 rounded-lg shadow-md text-center">
+						<div className="bg-white p-6 rounded-lg shadow-md text-center transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-blue-50">
 							<h3 className="text-lg font-semibold text-gray-600">Risk Level</h3>
 							<p className="text-3xl font-bold text-blue-600">{performanceData.riskLevel}</p>
 						</div>
@@ -275,11 +275,11 @@ const LuisFernandoProfile = () => {
 								</li>
 							</ol>
 							<div className="flex gap-4 mt-6">
-								<a href="#" className="inline-block">
-									<img src="https://elite-trader-hub-imgs.s3.us-east-1.amazonaws.com/app-store-badge.png" alt="Download on App Store" className="h-10" />
+								<a href="https://apps.apple.com/us/app/axi-copy-trading/id1589937901" target="_blank" rel="noopener noreferrer" className="inline-block">
+									<img src="https://d2tpnh780x5es.cloudfront.net/rebrand-prod/bjgbj352/ios-app-store.png" alt="Download on App Store" className="h-10" />
 								</a>
-								<a href="#" className="inline-block">
-									<img src="https://elite-trader-hub-imgs.s3.us-east-1.amazonaws.com/google-play-badge.png" alt="Get it on Google Play" className="h-10" />
+								<a href="https://play.google.com/store/apps/details?id=com.axi.pelican" target="_blank" rel="noopener noreferrer" className="inline-block">
+									<img src="https://d2tpnh780x5es.cloudfront.net/rebrand-prod/geoab2o3/google-play.png" alt="Get it on Google Play" className="h-10" />
 								</a>
 							</div>
 						</div>

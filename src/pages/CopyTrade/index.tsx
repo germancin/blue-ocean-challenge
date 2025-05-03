@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import CopyTradeNavbar from "../../components/CopyTradeNavbar";
 import Footer from "../../components/Footer";
+import CopyTradeRegistrationDialog from "../../components/CopyTradeRegistrationDialog";
 
 const CopyTradeIndex = () => {
 	const { t } = useTranslation();
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
 	return (
 		<main className="min-h-screen bg-light-gray">
@@ -25,10 +28,13 @@ const CopyTradeIndex = () => {
 
 				{/* Content */}
 				<div className="max-w-6xl mx-auto text-center relative z-20">
-					<h1 className="text-4xl md:text-5xl font-bold mb-6">Become a Professional Copy Trader</h1>
-					<p className="text-xl mb-8">Join our elite portfolio of traders and earn while others copy your successful strategies</p>
-					<button className="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-						Apply Now
+					<h1 className="text-4xl md:text-5xl font-bold mb-6">{t("copyTrade.index.hero.title")}</h1>
+					<p className="text-xl mb-8">{t("copyTrade.index.hero.subtitle")}</p>
+					<button
+						className="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+						onClick={() => setIsDialogOpen(true)}
+					>
+						{t("copyTrade.index.hero.cta")}
 					</button>
 				</div>
 			</section>
@@ -36,20 +42,20 @@ const CopyTradeIndex = () => {
 			{/* Benefits Section */}
 			<section className="py-16 px-4">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">Why Join Our Copy Trading Program?</h2>
+					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.index.benefits.title")}</h2>
 
 					<div className="grid md:grid-cols-3 gap-8">
 						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-3">Advanced Trading Tools</h3>
-							<p>Access premium trading tools and analytics to enhance your trading performance.</p>
+							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.index.benefits.tools.title")}</h3>
+							<p>{t("copyTrade.index.benefits.tools.description")}</p>
 						</div>
 						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-3">Grow Your Following</h3>
-							<p>We connect successful traders with investors looking to copy profitable strategies.</p>
+							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.index.benefits.following.title")}</h3>
+							<p>{t("copyTrade.index.benefits.following.description")}</p>
 						</div>
 						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-3">Additional Income</h3>
-							<p>Earn commissions from followers who copy your trades, creating a passive income stream.</p>
+							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.index.benefits.income.title")}</h3>
+							<p>{t("copyTrade.index.benefits.income.description")}</p>
 						</div>
 					</div>
 				</div>
@@ -58,28 +64,28 @@ const CopyTradeIndex = () => {
 			{/* How It Works Section */}
 			<section className="py-16 px-4 bg-gray-50">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.index.howItWorks.title")}</h2>
 
 					<div className="grid md:grid-cols-4 gap-6">
 						<div className="text-center">
 							<div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
-							<h3 className="text-xl font-semibold mb-2">Apply</h3>
-							<p>Submit your trading history and performance metrics</p>
+							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.index.howItWorks.steps.0.title")}</h3>
+							<p>{t("copyTrade.index.howItWorks.steps.0.description")}</p>
 						</div>
 						<div className="text-center">
 							<div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
-							<h3 className="text-xl font-semibold mb-2">Get Verified</h3>
-							<p>Our team reviews your application and trading performance</p>
+							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.index.howItWorks.steps.1.title")}</h3>
+							<p>{t("copyTrade.index.howItWorks.steps.1.description")}</p>
 						</div>
 						<div className="text-center">
 							<div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
-							<h3 className="text-xl font-semibold mb-2">Onboarding</h3>
-							<p>Receive your personalized landing page and trading tools</p>
+							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.index.howItWorks.steps.2.title")}</h3>
+							<p>{t("copyTrade.index.howItWorks.steps.2.description")}</p>
 						</div>
 						<div className="text-center">
 							<div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">4</div>
-							<h3 className="text-xl font-semibold mb-2">Start Earning</h3>
-							<p>We connect you with followers and you earn from copied trades</p>
+							<h3 className="text-xl font-semibold mb-2">{t("copyTrade.index.howItWorks.steps.3.title")}</h3>
+							<p>{t("copyTrade.index.howItWorks.steps.3.description")}</p>
 						</div>
 					</div>
 				</div>
@@ -88,7 +94,7 @@ const CopyTradeIndex = () => {
 			{/* Featured Traders Section */}
 			<section className="py-16 px-4">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">Our Featured Traders</h2>
+					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.index.featuredTraders.title")}</h2>
 
 					<div className="grid md:grid-cols-3 gap-8">
 						<div className="bg-white p-6 rounded-lg shadow-md">
@@ -96,7 +102,7 @@ const CopyTradeIndex = () => {
 							<h3 className="text-xl font-semibold text-center mb-2">Luis Fernando</h3>
 							<p className="text-center text-green-600 font-semibold mb-4">+287% ROI (1 Year)</p>
 							<a href="/copy-trade/luis_fernando" className="block text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-								View Profile
+								{t("copyTrade.index.featuredTraders.viewProfile")}
 							</a>
 						</div>
 						<div className="bg-white p-6 rounded-lg shadow-md">
@@ -104,7 +110,7 @@ const CopyTradeIndex = () => {
 							<h3 className="text-xl font-semibold text-center mb-2">Sarah Chen</h3>
 							<p className="text-center text-green-600 font-semibold mb-4">+194% ROI (1 Year)</p>
 							<a href="#" className="block text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-								View Profile
+								{t("copyTrade.index.featuredTraders.viewProfile")}
 							</a>
 						</div>
 						<div className="bg-white p-6 rounded-lg shadow-md">
@@ -112,7 +118,7 @@ const CopyTradeIndex = () => {
 							<h3 className="text-xl font-semibold text-center mb-2">Marcus Johnson</h3>
 							<p className="text-center text-green-600 font-semibold mb-4">+215% ROI (1 Year)</p>
 							<a href="#" className="block text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
-								View Profile
+								{t("copyTrade.index.featuredTraders.viewProfile")}
 							</a>
 						</div>
 					</div>
@@ -122,25 +128,25 @@ const CopyTradeIndex = () => {
 			{/* Professional Development Section */}
 			<section className="py-16 px-4 bg-gray-50">
 				<div className="max-w-6xl mx-auto">
-					<h2 className="text-3xl font-bold text-center mb-12">Professional Trader Development</h2>
-					<p className="text-xl text-center mb-8">We don't just connect you with followers - we help you become the best trader you can be.</p>
+					<h2 className="text-3xl font-bold text-center mb-12">{t("copyTrade.index.development.title")}</h2>
+					<p className="text-xl text-center mb-8">{t("copyTrade.index.development.subtitle")}</p>
 
 					<div className="grid md:grid-cols-2 gap-8">
 						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-3">Advanced Training</h3>
-							<p>Access our exclusive training programs designed to enhance your trading skills and strategies.</p>
+							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.index.development.training.title")}</h3>
+							<p>{t("copyTrade.index.development.training.description")}</p>
 						</div>
 						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-3">Mentorship</h3>
-							<p>Get paired with experienced traders who will guide you to improve your performance.</p>
+							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.index.development.mentorship.title")}</h3>
+							<p>{t("copyTrade.index.development.mentorship.description")}</p>
 						</div>
 						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-3">Risk Management</h3>
-							<p>Learn advanced risk management techniques to protect your capital and your followers.</p>
+							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.index.development.riskManagement.title")}</h3>
+							<p>{t("copyTrade.index.development.riskManagement.description")}</p>
 						</div>
 						<div className="bg-white p-6 rounded-lg shadow-md">
-							<h3 className="text-xl font-semibold mb-3">Career Path</h3>
-							<p>Build a sustainable career in trading with our long-term development plan.</p>
+							<h3 className="text-xl font-semibold mb-3">{t("copyTrade.index.development.careerPath.title")}</h3>
+							<p>{t("copyTrade.index.development.careerPath.description")}</p>
 						</div>
 					</div>
 				</div>
@@ -149,15 +155,21 @@ const CopyTradeIndex = () => {
 			{/* Call to Action */}
 			<section className="py-20 px-4 bg-blue-600 text-white">
 				<div className="max-w-4xl mx-auto text-center">
-					<h2 className="text-3xl font-bold mb-6">Ready to Transform Your Trading into a Career?</h2>
-					<p className="text-xl mb-8">Join our elite network of professional traders and start earning while you trade.</p>
-					<button className="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-						Apply Now
+					<h2 className="text-3xl font-bold mb-6">{t("copyTrade.index.cta.title")}</h2>
+					<p className="text-xl mb-8">{t("copyTrade.index.cta.subtitle")}</p>
+					<button
+						className="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+						onClick={() => setIsDialogOpen(true)}
+					>
+						{t("copyTrade.index.cta.button")}
 					</button>
 				</div>
 			</section>
 
 			<Footer />
+
+			{/* Registration Dialog */}
+			<CopyTradeRegistrationDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
 		</main>
 	);
 };

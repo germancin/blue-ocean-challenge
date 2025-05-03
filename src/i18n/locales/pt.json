@@ -341,5 +341,162 @@
 		"maximizeButtonTooltip": "Maximizar",
 		"sendButtonTooltip": "Enviar",
 		"initialMessage": "Bem-vindo!"
+	},
+	"copyTrade": {
+		"index": {
+			"hero": {
+				"title": "Torne-se um Trader de Cópia Profissional",
+				"subtitle": "Junte-se ao nosso portfólio de elite de traders e ganhe enquanto outros copiam suas estratégias bem-sucedidas",
+				"cta": "Inscreva-se Agora"
+			},
+			"benefits": {
+				"title": "Por Que Participar do Nosso Programa de Copy Trading?",
+				"tools": {
+					"title": "Ferramentas Avançadas de Trading",
+					"description": "Acesse ferramentas premium de trading e análises para melhorar seu desempenho."
+				},
+				"following": {
+					"title": "Aumente Seus Seguidores",
+					"description": "Conectamos traders bem-sucedidos com investidores que buscam copiar estratégias lucrativas."
+				},
+				"income": {
+					"title": "Renda Adicional",
+					"description": "Ganhe comissões de seguidores que copiam suas operações, criando uma fonte de renda passiva."
+				}
+			},
+			"howItWorks": {
+				"title": "Como Funciona",
+				"steps": [
+					{
+						"title": "Inscreva-se",
+						"description": "Envie seu histórico de trading e métricas de desempenho"
+					},
+					{
+						"title": "Seja Verificado",
+						"description": "Nossa equipe analisa sua inscrição e desempenho de trading"
+					},
+					{
+						"title": "Integração",
+						"description": "Receba sua página personalizada e ferramentas de trading"
+					},
+					{
+						"title": "Comece a Ganhar",
+						"description": "Conectamos você com seguidores e você ganha com operações copiadas"
+					}
+				]
+			},
+			"featuredTraders": {
+				"title": "Nossos Traders em Destaque",
+				"viewProfile": "Ver Perfil"
+			},
+			"development": {
+				"title": "Desenvolvimento Profissional de Traders",
+				"subtitle": "Não apenas conectamos você com seguidores - ajudamos você a se tornar o melhor trader que pode ser.",
+				"training": {
+					"title": "Treinamento Avançado",
+					"description": "Acesse nossos programas exclusivos de treinamento projetados para aprimorar suas habilidades e estratégias de trading."
+				},
+				"mentorship": {
+					"title": "Mentoria",
+					"description": "Seja pareado com traders experientes que o guiarão para melhorar seu desempenho."
+				},
+				"riskManagement": {
+					"title": "Gestão de Risco",
+					"description": "Aprenda técnicas avançadas de gestão de risco para proteger seu capital e o de seus seguidores."
+				},
+				"careerPath": {
+					"title": "Carreira Profissional",
+					"description": "Construa uma carreira sustentável em trading com nosso plano de desenvolvimento de longo prazo."
+				}
+			},
+			"cta": {
+				"title": "Pronto para Transformar seu Trading em uma Carreira?",
+				"subtitle": "Junte-se à nossa rede de elite de traders profissionais e comece a ganhar enquanto opera.",
+				"button": "Inscreva-se Agora"
+			}
+		},
+		"trader": {
+			"copyButton": "Copiar Operações Agora",
+			"performance": {
+				"title": "Desempenho de Trading",
+				"winRate": "Taxa de Acerto",
+				"monthlyTrades": "Operações Mensais",
+				"avgHolding": "Tempo Médio de Retenção",
+				"riskLevel": "Nível de Risco",
+				"specialties": "Especialidades de Trading"
+			},
+			"history": {
+				"title": "Histórico de Desempenho",
+				"chartLabel": "Gráfico de Desempenho de Trading (Retornos Mensais)"
+			},
+			"howToCopy": {
+				"title": "Como Copiar Operações",
+				"steps": [
+					{
+						"title": "Cadastre-se",
+						"description": "Crie sua conta no EliteTraderHub e complete o processo de verificação."
+					},
+					{
+						"title": "Financie Sua Conta",
+						"description": "Deposite fundos em sua conta de trading. Valor mínimo recomendado: $1.000."
+					},
+					{
+						"title": "Comece a Copiar",
+						"description": "Selecione seu trader e defina seus parâmetros de copy trading."
+					}
+				],
+				"cta": "Comece a Copiar Trading Agora"
+			},
+			"testimonials": {
+				"title": "O Que Dizem os Seguidores"
+			},
+			"faq": {
+				"title": "Perguntas Frequentes",
+				"questions": [
+					{
+						"question": "Qual é o investimento mínimo para copiar operações?",
+						"answer": "Recomendamos um mínimo de $1.000 para copiar efetivamente as estratégias de trading com dimensionamento adequado de posição."
+					},
+					{
+						"question": "Com que frequência os traders operam?",
+						"answer": "Isso varia por trader, mas a maioria faz entre 30-50 operações por mês, focando em configurações de qualidade."
+					},
+					{
+						"question": "Quais mercados são operados?",
+						"answer": "Nossos traders se concentram em vários mercados, incluindo forex, criptomoedas, ações e commodities."
+					},
+					{
+						"question": "Quais estilos de trading são utilizados?",
+						"answer": "Os estilos de trading variam de day trading a swing trading, com períodos de retenção que vão de horas a semanas."
+					},
+					{
+						"question": "Como as taxas são estruturadas?",
+						"answer": "Geralmente há uma taxa de assinatura mensal para copiar operações, sem taxas adicionais de desempenho."
+					}
+				]
+			},
+			"finalCta": {
+				"title": "Pronto para Começar a Copiar Operações Lucrativas?",
+				"subtitle": "Junte-se a centenas de seguidores satisfeitos que já estão se beneficiando da expertise de nossos traders.",
+				"button": "Comece Agora"
+			}
+		}
+	},
+	"copyTradeRegistration": {
+		"title": "Inscreva-se para se Tornar um Copy Trader",
+		"nameLabel": "Nome Completo",
+		"nameRequired": "Nome completo é obrigatório",
+		"emailLabel": "Endereço de Email",
+		"emailRequired": "Email é obrigatório",
+		"emailInvalid": "Por favor, insira um email válido",
+		"phoneLabel": "Número de Telefone",
+		"phoneRequired": "Número de telefone é obrigatório",
+		"mfxAccountLabel": "Link da Conta MFX",
+		"mfxAccountRequired": "Link da conta MFX é obrigatório",
+		"register": "Registrar Agora",
+		"submitting": "Enviando...",
+		"successTitle": "Obrigado!",
+		"successMessage": "Recebemos sua inscrição. Nossa equipe entrará em contato em breve!",
+		"disclaimer": "Suas informações estão seguras e serão usadas apenas para avaliar sua inscrição em nosso programa de copy trading."
 	}
 }
